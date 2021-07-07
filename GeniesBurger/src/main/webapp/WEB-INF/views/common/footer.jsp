@@ -37,7 +37,7 @@
 
 
 <script src="/resources/js/jquery.min.js"></script>
-<script src="/resources/js/jquery-3.6.0.min.js"></script>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script src="/resources/js/jquery-migrate-3.0.1.min.js"></script>
 <script src="/resources/js/popper.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
