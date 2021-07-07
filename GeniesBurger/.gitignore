@@ -50,6 +50,7 @@ local.properties
 target/
 _javaweb/
 # src/main/resources/config/*.properties
+src/main/webapp/WEB-INF/*.xml
 
 # Code Recommenders
 .recommenders/
