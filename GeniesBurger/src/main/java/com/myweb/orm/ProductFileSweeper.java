@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.myweb.domain.ProductFileVO;
-import com.myweb.persistence.productfiles.ProductFileDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Component
 public class ProductFileSweeper {

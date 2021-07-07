@@ -30,8 +30,8 @@
   	</sql>
   
   	<insert id="reg" parameterType="pvo">
-  		insert into tbl_product (pno, title, category, content, price) values
-  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{price})
+  		insert into tbl_product (pno, title, category, content, calorie, price) values
+  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price})
   	</insert>
   	
   	<!-- 페이징 -->
@@ -53,7 +53,7 @@
   	</select> -->
   	
   	<select id="list" resultType="pvo">
-  		select pno, content, title, price from tbl_product
+  		select * from tbl_product
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
@@ -62,7 +62,8 @@
   	
   	<update id="mod" parameterType="pvo">
   		update tbl_product set 
-  		title = #{title}, price = #{price}, content = #{content}, category = #{category}, moddate = sysdate
+  		title = #{title}, price = #{price}, content = #{content}, category = #{category}, 
+  		calorie = #{calorie}, moddate = sysdate, cansale = #{cansale}
   		where pno = #{pno}
   	</update>
   	

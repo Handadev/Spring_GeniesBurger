@@ -21,4 +21,8 @@
  	<delete id="del" parameterType="int">
  		delete <include refid="bc"/>
  	</delete>
+ 	
+ 	<delete id="delfile" parameterType="String">
+ 		delete from tbl_productfile where fuuid = #{fuuid}
+ 	</delete>
   </mapper>
