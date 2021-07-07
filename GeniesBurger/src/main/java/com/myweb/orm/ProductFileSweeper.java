@@ -20,7 +20,7 @@ import com.myweb.persistence.productfiles.ProductFileDAORule;
 @Component
 public class ProductFileSweeper {
 	private static Logger logger = LoggerFactory.getLogger(ProductFileSweeper.class);
-	private final String BASE_PATH = "D:\\_javaweb\\spring\\workspace\\upload\\";
+	private final String BASE_PATH = "C:\\_javaweb\\_spring\\workspace\\upload\\";
 	
 	@Inject
 	private ProductFileDAORule pfdao;

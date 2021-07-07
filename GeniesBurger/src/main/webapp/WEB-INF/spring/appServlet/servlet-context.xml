@@ -18,7 +18,7 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<!-- 2.resolover에서 처리는 해주지만 파일 위치를 접근해야할 필요는 있음. 
 	mapping 코드상 주소체계, location 코드를 쓰면 실제로 접속되는 물리적 위치 -->
-	<resources mapping="/upload/**" location="file:///D:/_javaweb/spring/workspace/upload/" />
+	<resources mapping="/upload/**" location="file:///C:/_javaweb/_spring/workspace/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
