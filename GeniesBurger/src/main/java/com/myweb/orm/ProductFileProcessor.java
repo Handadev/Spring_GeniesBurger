@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myweb.domain.ProductFileVO;
-import com.myweb.persistence.productfiles.ProductFileDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -81,8 +81,8 @@ public class ProductFileProcessor {
 		return false;
 	}
 
-	public int deleteFile(int pno) {
-		return pfdao.delete(pno);
+	public int deleteFile(String fuuid) {
+		return pfdao.delete(fuuid);
 	}
 	
 	
