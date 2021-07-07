@@ -23,7 +23,6 @@
     <link rel="stylesheet" href="/resources/css/flaticon.css">
     <link rel="stylesheet" href="/resources/css/icomoon.css">
     <link rel="stylesheet" href="/resources/css/style.css">
-    <link rel="stylesheet" href="/resources/css/tw.css">
   </head>
   <style>
 @font-face {
@@ -74,6 +73,7 @@ body{
              <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+             <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li>
              <c:choose>
 			<c:when test="${ses.email ne null && ses.email ne '' }">
 				<li class="nav-item"><a href="/member/detail?mno=${ses.mno }" class="nav-link">my page</a></li>
