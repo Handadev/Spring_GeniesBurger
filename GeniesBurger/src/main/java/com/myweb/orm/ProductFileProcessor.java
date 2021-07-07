@@ -26,7 +26,7 @@ public class ProductFileProcessor {
 	private ProductFileDAORule pfdao;
 	
 	public int upload_file(MultipartFile[] files, int pno) {
-		final String UP_DIR = "D:\\_javaweb\\spring\\workspace\\upload";
+		final String UP_DIR = "C:\\_javaweb\\_spring\\workspace\\upload\\";
 		
 		// 파일을 많이 올리면 올릴 수록 관리측으로 좋지 않기 때문에 폴더를 나눈다
 		// ex upload/2012/06/28/uuid_fname.jpg -> 이미지라면 썸네일도 만들어야함 : uuid_th_fname.jpg
