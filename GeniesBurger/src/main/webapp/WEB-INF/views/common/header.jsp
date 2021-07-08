@@ -65,7 +65,7 @@ body{
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
                 <a class="dropdown-item" href="/product/register">상품추가</a>
-              	<a class="dropdown-item" href="/priduct/list">상품리스트</a>
+              	<a class="dropdown-item" href="/product/list">상품리스트</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>

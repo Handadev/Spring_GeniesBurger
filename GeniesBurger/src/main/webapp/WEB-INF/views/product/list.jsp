@@ -3,7 +3,16 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
 
-<table class="table">
+<style>
+.pcontainer {
+	padding-top : 50px;
+	padding-bottom : 50px;
+}
+</style>
+<div class="container-fluid border pcontainer">
+	<div class="container col-sm-9">
+	<h2>상품 목록</h2>
+	<table class="table">
 	<thead>
 		<tr>
 			<th>제품번호</th>
@@ -27,13 +36,13 @@
 						<td>${pvo.sales }</td>
 						<td>
 						<c:choose>
-							<c:when test="${pvo.cansale eq 0 }">
+							<c:when test="${pvo.cansale eq 0}">
 								<span>판매중</span>
 							</c:when>
-							<otherwise>
+							<c:otherwise>
 								<span>일시품절</span>
-							</otherwise>
-						</c:choose> 
+							</c:otherwise>
+						</c:choose>
 						</td>
 						<td>${pvo.regdate }</td>
 						<td>${pvo.moddate }</td>
@@ -44,10 +53,7 @@
 			</tbody>
 			<tfoot>
 				<tr>
-				<!-- 페이징 들어오는 부분 -->
-				<!-- <td colspan="5">
-						<jsp:include page="../common/paging.jsp"/>
-					</td> -->
+			
 				</tr>
 			</tfoot>
 		</c:when>
@@ -62,6 +68,9 @@
 			</tbody>
 		</c:otherwise>
 	</c:choose>
+	</div>
+</div>
+
 </table>
 <form action="/product/remove" method="post" id="rmForm">
 <input type="hidden" name="pno">
