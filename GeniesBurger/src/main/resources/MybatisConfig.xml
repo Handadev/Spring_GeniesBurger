@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<typeAliases>
-		<typeAlias type="com.myweb.domain.CouponVO" alias="cpvo"/>
-		<typeAlias type="com.myweb.domain.CouponPageVO" alias="cpgvo"/>
-		<typeAlias type="com.myweb.domain.CouponListVO" alias="cplvo"/>
-		<typeAlias type="com.myweb.domain.MemberVO" alias="mvo"/>
-		<typeAlias type="com.myweb.domain.PageVO" alias="pgvo"/>
-	</typeAliases>
+   <typeAliases>
+      <typeAlias type="com.myweb.domain.ProductPageVO" alias="ppgvo"/>
+      <typeAlias type="com.myweb.domain.ProductVO" alias="pvo"/>
+      <typeAlias type="com.myweb.domain.ProductStockVO" alias="psvo"/>
+      <typeAlias type="com.myweb.domain.ProductFileVO" alias="pfvo"/>
+      <typeAlias type="com.myweb.domain.MemberVO" alias="mvo"/>
+      <typeAlias type="com.myweb.domain.ReviewVO" alias="rvo"/>
+      <typeAlias type="com.myweb.domain.CartVO" alias="cartvo"/>
+      <typeAlias type="com.myweb.domain.CouponVO" alias="cpvo"/>
+		  <typeAlias type="com.myweb.domain.CouponPageVO" alias="cpgvo"/>
+		  <typeAlias type="com.myweb.domain.CouponListVO" alias="cplvo"/>
+   </typeAliases>
 </configuration>

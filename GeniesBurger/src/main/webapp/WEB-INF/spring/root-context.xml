@@ -39,4 +39,24 @@
    <context:component-scan base-package="com.myweb.orm"/>
    <context:component-scan base-package="com.myweb.service"/>
    <context:component-scan base-package="com.myweb.handler"/>
+	
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

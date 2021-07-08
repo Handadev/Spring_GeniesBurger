@@ -6,8 +6,9 @@ public class ProductVO {
 	private int pno;
 	private String title;
 	private String content;
-	private int category; // 1버거, 2버거세트, 3버거L세트, 4올데이킹, 5올데이킹세트, 6올데이킹L세트, 7사이드 , 8음료
+	private int category; // 1 버거, 2버거세트, 3버거L세트, 4올데이킹, 5올데이킹세트, 6올데이킹L세트, 7사이드 , 8음료
 	private int price;
+	private int calorie;
 	private String regdate;
 	private String moddate;
 	private int sales; // 판매량
@@ -44,6 +45,12 @@ public class ProductVO {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+	public int getCalorie() {
+		return calorie;
+	}
+	public void setCalorie(int calorie) {
+		this.calorie = calorie;
+	}
 	public String getRegdate() {
 		return regdate;
 	}
@@ -74,7 +81,5 @@ public class ProductVO {
 	public void setFlist(List<ProductFileVO> flist) {
 		this.flist = flist;
 	}
-	
-	
 	
 }

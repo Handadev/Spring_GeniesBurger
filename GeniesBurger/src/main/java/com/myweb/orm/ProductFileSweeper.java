@@ -15,12 +15,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.myweb.domain.ProductFileVO;
-import com.myweb.persistence.productfiles.ProductFileDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Component
 public class ProductFileSweeper {
 	private static Logger logger = LoggerFactory.getLogger(ProductFileSweeper.class);
-	private final String BASE_PATH = "D:\\_javaweb\\spring\\workspace\\upload\\";
+	private final String BASE_PATH = "C:\\_javaweb\\_spring\\workspace\\upload\\";
 	
 	@Inject
 	private ProductFileDAORule pfdao;
@@ -37,7 +37,7 @@ public class ProductFileSweeper {
 		
 		List<ProductFileVO> dbFileList = pfdao.selectList(); 
 		for (ProductFileVO fvo : dbFileList) {
-			String file_path = fvo.getSavedir()+"\\"+fvo.getFuuid()+"_";
+			String file_path = fvo.getSavedir()+"\\"+fvo.getPuuid()+"_";
 			String file_name = fvo.getFname();
 			currFiles.add(BASE_PATH+file_path+file_name);
 			currFiles.add(BASE_PATH+file_path+"th_"+file_name);
