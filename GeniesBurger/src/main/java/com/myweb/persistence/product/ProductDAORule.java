@@ -7,8 +7,7 @@ import com.myweb.domain.ProductVO;
 
 public interface ProductDAORule {
 	public int insert(ProductVO pvo); // 추가
-//	public List<ProductVO> selectList(ProductPageVO pgvo); // 리스트 - 페이징,서치
-	public List<ProductVO> selectList(); // 리스트
+	public List<ProductVO> selectList(ProductPageVO ppgvo); // 리스트 - 페이징,서치
 	public ProductVO selectOne(int pno); // detail
 	public int update(ProductVO pvo); 
 	public int delete(int pno);

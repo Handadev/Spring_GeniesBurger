@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
+import com.myweb.handler.ProductPagingHandler;
 import com.myweb.orm.ProductFileProcessor;
 import com.myweb.service.product.ProductServiceRule;
 
@@ -49,8 +51,10 @@ public class ProductController {
 	}
 	
 	@GetMapping("/list")
-	public void list(Model model) {
-		model.addAttribute("product_list", psv.getList());
+	public void list(Model model, ProductPageVO ppgvo) {
+		model.addAttribute("product_list", psv.getList(ppgvo));
+		int totalCount = psv.getTotalCount(ppgvo);
+		model.addAttribute("product_paging", new ProductPagingHandler(totalCount, ppgvo));
 	}
 	
 	
@@ -71,7 +75,6 @@ public class ProductController {
 		if (isMod > 0) {
 			if (files[0].getSize() > 0) {
 				int pno = pvo.getPno();
-				logger.info(">>>>>>>>>>>>>>>>>>pvo.getPno() 깐뜨롤러" +pvo.getPno());
 				isMod = pfp.upload_file(files, pno);
 			}
 		}
