@@ -91,14 +91,13 @@ public class ProductPagingHandler {
 		this.next = next;
 	}
 
-	public ProductPageVO getPgvo() {
+	public ProductPageVO getPpgvo() {
 		return ppgvo;
 	}
 
-	public void setPgvo(ProductPageVO pgvo) {
-		this.ppgvo = pgvo;
+	public void setPpgvo(ProductPageVO ppgvo) {
+		this.ppgvo = ppgvo;
 	}
 
-	
 	
 }
