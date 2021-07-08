@@ -37,7 +37,7 @@ public class ProductFileSweeper {
 		
 		List<ProductFileVO> dbFileList = pfdao.selectList(); 
 		for (ProductFileVO fvo : dbFileList) {
-			String file_path = fvo.getSavedir()+"\\"+fvo.getFuuid()+"_";
+			String file_path = fvo.getSavedir()+"\\"+fvo.getPuuid()+"_";
 			String file_name = fvo.getFname();
 			currFiles.add(BASE_PATH+file_path+file_name);
 			currFiles.add(BASE_PATH+file_path+"th_"+file_name);
