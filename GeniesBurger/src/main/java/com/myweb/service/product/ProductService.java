@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.myweb.domain.ProductFileVO;
 import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
 import com.myweb.persistence.product.ProductDAORule;
@@ -40,11 +41,18 @@ public class ProductService implements ProductServiceRule {
 
 	@Override
 	public ProductVO detail(int pno) {
-		return pdao.selectOne(pno);
+		ProductVO pvo = new ProductVO();
+		pvo = pdao.selectOne(pno);
+		if (pvo != null) {
+			List<ProductFileVO> list = pfdao.selectList(pno);
+			pvo.setFlist(list);
+		}
+		return pvo;
 	}
 
 	@Override
 	public int modify(ProductVO pvo) {
+		logger.info(">>>>>>>>>>>>>>>>>>pvo.getPno()" +pvo.getPno());
 		return pdao.update(pvo);
 	}
 

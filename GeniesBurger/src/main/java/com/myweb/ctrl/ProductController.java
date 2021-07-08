@@ -67,15 +67,16 @@ public class ProductController {
 	@PostMapping("/modify")
 	public String modify(ProductVO pvo, RedirectAttributes reAttr
 					,@RequestParam(name="files", required=false) MultipartFile[] files) {
-		int isMod = psv.register(pvo);
+		int isMod = psv.modify(pvo);
 		if (isMod > 0) {
 			if (files[0].getSize() > 0) {
 				int pno = pvo.getPno();
+				logger.info(">>>>>>>>>>>>>>>>>>pvo.getPno() 깐뜨롤러" +pvo.getPno());
 				isMod = pfp.upload_file(files, pno);
 			}
 		}
 		reAttr.addFlashAttribute("result", isMod > 0 ? "물품 등록 성공" : "물품 삭제 성공");
-		return "redirect:/product/detail";
+		return "redirect:/product/detail?pno=" + pvo.getPno();
 	}
 	
 	@PostMapping("/remove")
@@ -87,7 +88,7 @@ public class ProductController {
 	
 	@ResponseBody
 	@PostMapping("/del_product_file")
-	public String del_product_file(@RequestParam("fuuid") String fuuid) {
+	public String del_product_file(@RequestParam("puuid") String fuuid) {
 		int isDel = pfp.deleteFile(fuuid);
 		return isDel > 0 ? "1" : "0";
 	}

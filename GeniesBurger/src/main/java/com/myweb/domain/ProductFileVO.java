@@ -3,16 +3,16 @@ package com.myweb.domain;
 
 public class ProductFileVO {
 
-	private String fuuid;
+	private String puuid;
 	private String savedir;
 	private String fname;
 	private int pno;
 	
-	public String getFuuid() {
-		return fuuid;
+	public String getPuuid() {
+		return puuid;
 	}
-	public void setFuuid(String fuuid) {
-		this.fuuid = fuuid;
+	public void setPuuid(String puuid) {
+		this.puuid = puuid;
 	}
 	public String getSavedir() {
 		return savedir;

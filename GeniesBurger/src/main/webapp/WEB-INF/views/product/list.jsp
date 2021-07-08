@@ -75,6 +75,7 @@
 <form action="/product/remove" method="post" id="rmForm">
 <input type="hidden" name="pno">
 </form>
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
 	$(document).on("click", ".del-btn", function (e) {
 		e.preventDefault();

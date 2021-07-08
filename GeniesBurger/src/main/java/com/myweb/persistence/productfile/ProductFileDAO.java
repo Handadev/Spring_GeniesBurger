@@ -40,8 +40,8 @@ public class ProductFileDAO implements ProductFileDAORule {
 	}
 
 	@Override // 수정시 파일 삭제
-	public int delete(String fuuid) {
-		return sql.delete(ns+"delfile", fuuid);
+	public int delete(String puuid) {
+		return sql.delete(ns+"delfile", puuid);
 	}
 
 
