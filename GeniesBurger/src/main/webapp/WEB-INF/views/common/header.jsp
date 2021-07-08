@@ -90,7 +90,7 @@ body{
            딜리버리 주문 내역
       </div>
       <div class="col-lg-6">
-                     장바구니
+         <a href="/cart/cart">장바구니</a>
       </div>
     </div>
   </div>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="CartMapper">
+
+	<insert parameterType="cartvo" id="reg">
+		insert into tbl_cart
+		(cartno, title, price, quantity, mno, pno, puuid, savedir, fname)
+		values (seq_cart_cartno.nextval,#{title},#{price},#{quantity},
+		#{mno}, #{pno},#{puuid},#{savedir}, #{fname})
+	</insert>
+
+	<select parameterType="int" id="list" resultType="cartvo">
+		select * from tbl_cart
+	</select>
+
+	<delete parameterType="int" id="del">
+		delete from tbl_cart
+		where cartno=#{cartno}
+	</delete>
+</mapper>
