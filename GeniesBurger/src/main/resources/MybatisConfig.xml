@@ -8,5 +8,6 @@
       <typeAlias type="com.myweb.domain.ProductFileVO" alias="pfvo"/>
       <typeAlias type="com.myweb.domain.MemberVO" alias="mvo"/>
       <typeAlias type="com.myweb.domain.ReviewVO" alias="rvo"/>
+      <typeAlias type="com.myweb.domain.adCommentVO" alias="advo"/>
    </typeAliases>
 </configuration>

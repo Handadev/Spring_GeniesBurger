@@ -48,7 +48,9 @@ public class ReviewController {
 
 	@GetMapping("/list")
 	public void list(Model model) {
-		int pno = 1;
-		model.addAttribute("list",rsv.ReviewList(pno));
+		int rno = 17;
+		model.addAttribute("list", rsv.ReviewList());
+		model.addAttribute("clist", rsv.commentList(rno));
+
 	}
 }
