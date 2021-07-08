@@ -37,6 +37,7 @@ body{
 <!-- Start header / nav  -->
 <body class="goto-here">
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+
        <div class="container">
          <a class="navbar-brand" href="/">Genie's Burger</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" 
@@ -74,6 +75,7 @@ body{
              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
              <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li>
+             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
              <c:choose>
 			<c:when test="${ses.email ne null && ses.email ne '' }">
 				<li class="nav-item"><a href="/member/detail?mno=${ses.mno }" class="nav-link">my page</a></li>

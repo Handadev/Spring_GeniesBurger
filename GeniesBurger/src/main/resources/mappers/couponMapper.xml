@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="CouponMapper">
+  <sql id="search">
+  	<if test="range != null">
+  		<trim prefix="and (" suffix=")">
+  			<choose>
+  				<when test="range == 'ned'.toString()">
+  					to_char(cpno) like '%'||#{keyword}||'%' or
+  					cpname like '%'||#{keyword}||'%' or
+  					to_char(enddate,'YYYY-MM-DD') like '%'||#{keyword}||'%' or
+  					to_char(discount) like '%'||#{keyword}||'%'
+  				</when>
+  				<when test="range == 'no'.toString()">
+  					to_char(cpno) like '%'||#{keyword}||'%'
+  				</when>
+  				<when test="range == 'na'.toString()">
+  					cpname like '%'||#{keyword}||'%'
+  				</when>
+  				<when test="range == 'e'.toString()">
+  					to_char(enddate,'YYYY-MM-DD') like '%'||#{keyword}||'%'
+  				</when>
+  				<when test="range == 'd'.toString()">
+  					to_char(discount) like '%'||#{keyword}||'%'
+  				</when>
+  			</choose>
+  		</trim>
+  	</if>
+  </sql>
+  	<!-- insert -->
+  	<insert id="reg" parameterType="cpvo">
+  		insert into tbl_coupon(cpno, cpname, enddate, discount)
+  		values (seq_coupon_cpno.nextval, #{cpname}, to_date(#{enddate},'YYYY-MM-DD'), #{discount})
+  	</insert>
+	<insert id="issue" parameterType="cplvo">
+		insert into tbl_couponlist(cplno, mno, cpno)
+		values (seq_couponlist_cplno.nextval, #{mno}, #{cpno})
+	</insert>
+  	
+  	<!-- select -->
+  	<select id="list" parameterType="cpgvo" resultType="cpvo">
+ 	<![CDATA[
+ 		select cpno, cpname, enddate, discount
+ 		from (select /*+INDEX_DESC(tbl_coupon pk_coupon)*/
+ 				rownum as rn, cpno, cpname, enddate, discount
+ 				from tbl_coupon where cpno > 0
+ 	]]>
+ 		<include refid="search"/>
+ 	<![CDATA[
+ 				and rownum <= #{pageIndex} * #{countPerPage})
+ 		where rn > (#{pageIndex}-1) * #{countPerPage}
+ 	]]>
+ 	</select>
+  	<select id="tc" parameterType="cpgvo" resultType="int">
+ 	<![CDATA[
+ 		select count(cpno) as cnt from tbl_coupon
+ 		where cpno > 0 
+ 	]]> 
+ 		<include refid="search"></include>
+ 	</select>
+  	<select id="itc" parameterType="cpgvo" resultType="int">
+ 	<![CDATA[
+ 		select count(cplno) as cnt from tbl_couponlist
+ 		where cplno > 0 
+ 	]]> 
+ 		<include refid="search"></include>
+ 	</select>
+  	<select id="detail" parameterType="int" resultType="cpvo">
+  		select * from tbl_coupon where cpno=#{cpno}
+  	</select>
+  	<select id="issueList" resultType="cplvo">
+  		SELECT cpl.cplno, cpl.cpno, cp.cpname, cpl.mno, m.email 
+		FROM TBL_COUPONLIST cpl INNER JOIN TBL_COUPON cp
+		ON cpl.CPNO = cp.CPNO
+		JOIN TBL_MEMBER m 
+		ON cpl.MNO = M.MNO
+		order by cplno desc
+  	</select>
+  	<select id="issueCpList" resultType="cpvo">
+  		select * from tbl_coupon
+  	</select>
+  	
+  	<!-- update -->
+  	<update id="mod" parameterType="cpvo">
+  		update tbl_coupon set cpname=#{cpname}, enddate=#{enddate}, discount=#{discount}
+ 		where cpno=#{cpno}
+  	</update>
+  	
+  	<!-- delete -->
+  	<delete id="del" parameterType="int">
+  		delete from tbl_coupon where cpno=#{cpno}
+  	</delete>
+  	<delete id="cancel" parameterType="int">
+  		delete from tbl_couponlist where cplno=#{cplno}
+  	</delete>
+  	
+  </mapper>
