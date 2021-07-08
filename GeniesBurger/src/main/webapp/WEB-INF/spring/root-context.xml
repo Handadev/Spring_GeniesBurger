@@ -14,7 +14,6 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
-	<!-- 여기서 DB 설정을 한다 -->
 	<context:property-placeholder location="classpath:/config/*.properties"/>
 	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
@@ -36,7 +35,6 @@
    </bean>
    <tx:annotation-driven/>
    <task:annotation-driven/>
-   <!-- db와 연동이 필요한 것들을 올려 놓는다 -->
    <context:component-scan base-package="com.myweb.persistence"/>
    <context:component-scan base-package="com.myweb.orm"/>
    <context:component-scan base-package="com.myweb.service"/>

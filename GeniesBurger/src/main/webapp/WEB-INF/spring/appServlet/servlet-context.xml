@@ -3,9 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:security="http://www.springframework.org/schema/security"
-	xsi:schemaLocation= "http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-4.2.xsd
-		http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
@@ -16,9 +14,6 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<!-- 2.resolover에서 처리는 해주지만 파일 위치를 접근해야할 필요는 있음. 
-	mapping 코드상 주소체계, location 코드를 쓰면 실제로 접속되는 물리적 위치 -->
-	<resources mapping="/upload/**" location="file:///D:/_javaweb/spring/workspace/upload/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -27,16 +22,5 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.myweb.ctrl" />
-	<!-- 3.orm도 컴포넌트 스캐닝도 하겠다고 등록해야 작동함 -->
-	<context:component-scan base-package="com.myweb.orm" />
 	
-	<security:global-method-security pre-post-annotations="enabled"
-   secured-annotations="enabled"/>
-	
-	<!-- 1.디스패처 서블릿이 멀티파트를 인식했을 때, 그걸 처리하기 위해서 멀티파트 resolver를 등록해줘야함-->
-	<beans:bean id="multipartResolver"
-      class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
-   </beans:bean>
-	<!-- bean을 사용하면 컴포넌트 스캔을 사용하지 않아도 자동으로 전부 인스턴스화 해줌
-		component-scan을 사용한 것은 사용자가 직접 @을 사용하여 올림 -->
 </beans:beans>
