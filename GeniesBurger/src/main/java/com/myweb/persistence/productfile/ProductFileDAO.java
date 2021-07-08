@@ -1,4 +1,4 @@
-package com.myweb.persistence.productfiles;
+package com.myweb.persistence.productfile;
 
 import java.util.List;
 
@@ -34,9 +34,14 @@ public class ProductFileDAO implements ProductFileDAORule {
 		return sql.selectList(ns+"allList");
 	}
 	
-	@Override
+	@Override // 상품 삭제시 파일도 삭제
 	public int delete(int pno) {
 		return sql.delete(ns+"del", pno);
+	}
+
+	@Override // 수정시 파일 삭제
+	public int delete(String puuid) {
+		return sql.delete(ns+"delfile", puuid);
 	}
 
 

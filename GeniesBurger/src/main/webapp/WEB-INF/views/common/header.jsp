@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>header/nav</title>
+  <title>Genie's Burger</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
    <!--  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
@@ -37,6 +37,7 @@ body{
 <!-- Start header / nav  -->
 <body class="goto-here">
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+
        <div class="container">
          <a class="navbar-brand" href="/">Genie's Burger</a>
          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" 
@@ -64,8 +65,8 @@ body{
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="dropdown04" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
               <div class="dropdown-menu" aria-labelledby="dropdown04">
-                 <a class="dropdown-item" href="shop.html">Shop</a>
-                 <a class="dropdown-item" href="wishlist.html">Wishlist</a>
+                <a class="dropdown-item" href="/product/register">상품추가</a>
+              	<a class="dropdown-item" href="/product/list">상품리스트</a>
                 <a class="dropdown-item" href="product-single.html">Single Product</a>
                 <a class="dropdown-item" href="checkout.html">Checkout</a>
               </div>
@@ -74,6 +75,7 @@ body{
              <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
              <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
              <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li>
+             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
              <c:choose>
 			<c:when test="${ses.email ne null && ses.email ne '' }">
 				<li class="nav-item"><a href="/member/detail?mno=${ses.mno }" class="nav-link">my page</a></li>
@@ -90,7 +92,7 @@ body{
            딜리버리 주문 내역
       </div>
       <div class="col-lg-6">
-                     장바구니
+         <a href="/cart/cart">장바구니</a>
       </div>
     </div>
   </div>

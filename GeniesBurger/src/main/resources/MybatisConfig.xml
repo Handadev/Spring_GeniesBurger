@@ -9,5 +9,10 @@
       <typeAlias type="com.myweb.domain.MemberVO" alias="mvo"/>
       <typeAlias type="com.myweb.domain.ReviewVO" alias="rvo"/>
       <typeAlias type="com.myweb.domain.adCommentVO" alias="advo"/>
+      <typeAlias type="com.myweb.domain.CartVO" alias="cartvo"/>
+      <typeAlias type="com.myweb.domain.CouponPageVO" alias="cpgvo"/>
+      <typeAlias type="com.myweb.domain.CouponListVO" alias="cplvo"/>
+      <typeAlias type="com.myweb.domain.StockVO" alias="svo"/>
+
    </typeAliases>
 </configuration>
