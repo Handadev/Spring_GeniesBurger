@@ -23,12 +23,13 @@
 						<tbody>
 							<c:forEach items="${cartList }" var="cartList">
 								<tr class="text-center">
-								<td id="pnoVal">pno : ${cartList.pno }</td>
+									<td id="pnoVal">pno : ${cartList.pno }</td>
 									<td class="product-remove">
-									<button type="button" class="btn btn-outline-light outline btn-lg removeBtn" style="width:50px;" data-cartno="${cartList.cartno }">
-									<span class="ion-ios-close">
-									</span>
-									</button>
+										<button type="button"
+											class="btn btn-outline-light outline btn-lg removeBtn"
+											style="width: 50px;" data-cartno="${cartList.cartno }">
+											<span class="ion-ios-close"> </span>
+										</button>
 									</td>
 									<td class="image-prod"><div class="img"
 											style="background-image: url(/resources/images/demo.png);"></div></td>
@@ -52,11 +53,26 @@
 					</table>
 				</div>
 			</div>
+			<div class="col-md-6">
+			<c:forEach items="${cartList }" var="cartList">
+			<c:set var="sum" value="${sum + cartList.price }"/>
+			</c:forEach>
+			총 주문금액 : <c:out value="${sum }"/>원
+			<button type="button" class="btn btn-success">결제하기</button>
+			</div>
 		</div>
 	</div>
 </section>
-<!-- <form action="/cart/remove" id="removeForm" method="post">
-</form> -->
+<form class="" action="/product/register" method="post"
+	enctype="multipart/form-data">
+	<input type="hidden" name="mno" value="${ses.mno }">
+	<input type="hidden" name="pno" value="${pvo.pno }"> 
+	<input type="hidden" name="title" value="${pvo.title }"> 
+	<input type="hidden" name="price" value="${pvo.content }">
+	<input type="hidden" name="calorie" value="${pvo.calorie }"> 
+	<input type="hidden" name="sales" value="${pvo.sales }">
+	<input type="hidden" name="cansale" value="${pvo.cansale }">
+</form>
 <script>
 	$(document).on("click", ".removeBtn", function() {
 		console.log(".removeBtn");

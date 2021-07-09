@@ -5,9 +5,8 @@
 
 	<insert parameterType="cartvo" id="reg">
 		insert into tbl_cart
-		(cartno, title, price, quantity, mno, pno, puuid, savedir, fname)
-		values (seq_cart_cartno.nextval,#{title},#{price},#{quantity},
-		#{mno}, #{pno},#{puuid},#{savedir}, #{fname})
+		(cartno, pno, title, price, mno)
+		values (seq_cart_cartno.nextval, #{pno}, #{title}, #{price}, #{mno})
 	</insert>
 
 	<select parameterType="int" id="list" resultType="cartvo">
