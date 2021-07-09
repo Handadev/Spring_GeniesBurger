@@ -5,12 +5,21 @@
  <insert id="add" parameterType="rvo">
  	insert into tbl_review (rno, pno, rcontent) values(seq_review_rno.nextval, #{pno}, #{rcontent})
  </insert>
+ <insert id="adComm" parameterType="advo">
+		INSERT INTO TBL_ADMINCOMMENT (acno, rno, adcomment) values(seq_adminComment_acno.nextval, #{rno}, #{adcomment})
+	</insert>
  
- <select id="list" parameterType="int" resultType="rvo">
- 	select rcontent, rdate, ruuid, rsavedir, rfname, rftype from tbl_review where pno=#{pno}
+ <select id="list" resultType="rvo">
+ 	SELECT * FROM tbl_review
  </select>
  <select id="curr" resultType="int">
  	select seq_review_rno.currval from dual
+ </select>
+ <select id="adList" parameterType="int" resultType="advo">
+ 	SELECT acno, adcomment, addate, ta.rno
+FROM tbl_review tr INNER JOIN TBL_ADMINCOMMENT ta 
+ON tr.rno = ta.rno
+WHERE ta.rno = #{rno}
  </select>
  
  <delete id="del" parameterType="int">

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myweb.domain.ReviewVO;
+import com.myweb.domain.adCommentVO;
 
 @Component
 public class ReviewDAO implements ReviewDAORule {
@@ -19,7 +20,7 @@ public class ReviewDAO implements ReviewDAORule {
 	private final String NS = "ReviewMapper.";
 
 	@Inject
-	SqlSession sql;
+	private SqlSession sql;
 
 	@Override
 	public int insert(ReviewVO rvo) {
@@ -27,8 +28,8 @@ public class ReviewDAO implements ReviewDAORule {
 	}
 
 	@Override
-	public List<ReviewVO> selectList(int pno) {
-		return sql.selectList(NS + "list", pno);
+	public List<ReviewVO> selectList() {
+		return sql.selectList(NS + "list");
 	}
 
 	@Override
@@ -52,6 +53,16 @@ public class ReviewDAO implements ReviewDAORule {
 	@Override
 	public int insertFile(ReviewVO rvo) {
 		return sql.update(NS + "upImg", rvo);
+	}
+
+	@Override
+	public int adCommentInsert(adCommentVO advo) {
+		return sql.insert(NS + "adComm", advo);
+	}
+
+	@Override
+	public List<adCommentVO> selectList(int rno) {
+		return sql.selectList(NS + "adList", rno);
 	}
 
 }

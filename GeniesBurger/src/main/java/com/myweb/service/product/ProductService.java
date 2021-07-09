@@ -28,15 +28,10 @@ public class ProductService implements ProductServiceRule {
 	public int register(ProductVO pvo) {
 		return pdao.insert(pvo);
 	}
-
-//	@Override
-//	public List<ProductVO> getList(ProductPageVO pgvo) {
-//		return null;
-//	}
 	
 	@Override
-	public List<ProductVO> getList() {
-		return pdao.selectList();
+	public List<ProductVO> getList(ProductPageVO ppgvo) {
+		return pdao.selectList(ppgvo);
 	}
 
 	@Override

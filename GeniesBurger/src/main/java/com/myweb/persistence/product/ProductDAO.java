@@ -25,14 +25,9 @@ public class ProductDAO implements ProductDAORule {
 		return sql.insert(ns+"reg", pvo);
 	}
 
-//	@Override // 리스트 - 페이징,서치
-//	public List<ProductVO> selectList(ProductPageVO pgvo) {
-//		return sql.selectList(ns+"list", pgvo);
-//	}
-	
-	@Override
-	public List<ProductVO> selectList() {
-		return sql.selectList(ns+"list");
+	@Override // 리스트 - 페이징 / 서치 미완성
+	public List<ProductVO> selectList(ProductPageVO ppgvo) {
+		return sql.selectList(ns+"list", ppgvo);
 	}
 	
 	@Override

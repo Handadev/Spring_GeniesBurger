@@ -7,8 +7,7 @@ import com.myweb.domain.ProductVO;
 
 public interface ProductServiceRule {
 	public int register(ProductVO pvo);
-//	public List<ProductVO> getList(ProductPageVO pgvo); // 리스트 - 페이징,서치
-	public List<ProductVO> getList();
+	public List<ProductVO> getList(ProductPageVO ppgvo); // 리스트 - 페이징,서치
 	public ProductVO detail(int pno);
 	public int modify(ProductVO pvo);
 	public int remove(int pno);
