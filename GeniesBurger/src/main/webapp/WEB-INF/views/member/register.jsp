@@ -32,13 +32,12 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-<script src="/resources/js/jquery.min.js"></script>
-<script>
+  
+<!-- <script>
    $(function() {
       $("#checkEmail").on("click", function(e) {
          e.preventDefault();
          let email_val = $("#email").val();
-         console.log(email_val);
          $.ajax({
             url: "/member/checkEmail",
             type: "post",
@@ -55,6 +54,6 @@
          });
       });
    });
-</script>
+</script> -->
 
 <jsp:include page="../common/footer.jsp" />

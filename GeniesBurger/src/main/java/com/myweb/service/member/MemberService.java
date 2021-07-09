@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.MemberVO;
+import com.myweb.domain.MemberPageVO;
 import com.myweb.persistence.member.MemberDAORule;
 
 @Service
@@ -29,8 +30,8 @@ public class MemberService implements MemberServiceRule {
    }
 
    @Override
-   public List<MemberVO> getList() {
-      return mdao.selectList();
+   public List<MemberVO> getList(MemberPageVO mpgvo) {
+      return mdao.selectList(mpgvo);
    }
 
    @Override
@@ -52,5 +53,10 @@ public class MemberService implements MemberServiceRule {
    public int remove(int mno) {
       return mdao.delete(mno);
    }
+
+@Override
+public int getTotalCount(MemberPageVO mpgvo) {
+	return mdao.selectOne(mpgvo);
+}
 
 }

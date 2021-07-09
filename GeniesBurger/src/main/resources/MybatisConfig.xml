@@ -12,7 +12,8 @@
       <typeAlias type="com.myweb.domain.CartVO" alias="cartvo"/>
       <typeAlias type="com.myweb.domain.CouponPageVO" alias="cpgvo"/>
       <typeAlias type="com.myweb.domain.CouponListVO" alias="cplvo"/>
+      <typeAlias type="com.myweb.domain.CouponVO" alias="cpvo"/>
       <typeAlias type="com.myweb.domain.StockVO" alias="svo"/>
-
+   	  <typeAlias type="com.myweb.domain.MemberPageVO" alias="mpgvo"/>
    </typeAliases>
 </configuration>
