@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myweb.domain.ProductFileVO;
-import com.myweb.persistence.productfiles.ProductFileDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -46,7 +46,7 @@ public class ProductFileProcessor {
 			pfvo.setFname(originalFileName);
 			// 암호화하는 것은 java 것을 그대로 쓰거나, 회사에서 사용하는 라이브러니나 알고리즘을 땡겨와서 사용하면 됨
 			UUID uuid = UUID.randomUUID();
-			pfvo.setFuuid(uuid.toString());
+			pfvo.setPuuid(uuid.toString());
 			
 			String fullFileName = uuid.toString() + "_" + originalFileName;
 			File storeFile = new File(folder, fullFileName); // 파일객체이름 생성
@@ -81,8 +81,8 @@ public class ProductFileProcessor {
 		return false;
 	}
 
-	public int deleteFile(int pno) {
-		return pfdao.delete(pno);
+	public int deleteFile(String puuid) {
+		return pfdao.delete(puuid);
 	}
 	
 	

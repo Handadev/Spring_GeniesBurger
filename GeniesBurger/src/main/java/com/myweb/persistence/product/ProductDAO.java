@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
 
@@ -25,14 +26,14 @@ public class ProductDAO implements ProductDAORule {
 		return sql.insert(ns+"reg", pvo);
 	}
 
-//	@Override // 리스트 - 페이징,서치
-//	public List<ProductVO> selectList(ProductPageVO pgvo) {
-//		return sql.selectList(ns+"list", pgvo);
-//	}
+	@Override // 관리자 리스트
+	public List<ProductVO> selectList(ProductPageVO ppgvo) {
+		return sql.selectList(ns+"list", ppgvo);
+	}
 	
-	@Override
-	public List<ProductVO> selectList() {
-		return sql.selectList(ns+"list");
+	@Override // 소비자 리스트
+	public List<ProductVO> selectList(ProductCustomerPageVO pcpgvo) {
+		return sql.selectList(ns+"listcustomer", pcpgvo);
 	}
 	
 	@Override
@@ -55,10 +56,17 @@ public class ProductDAO implements ProductDAORule {
 		return sql.selectOne(ns+"curpno");
 	}
 
-	@Override // 글의 전체 개수 구하기 - 페이징
+	@Override // 관리자 리스트 글의 개수 구하기
 	public int selectOne(ProductPageVO ppgvo) {
 		return sql.selectOne(ns+"totalcount", ppgvo);
 	}
+
+	@Override // 소비자 리스트 글의 개수 구하기
+	public int selectOne(ProductCustomerPageVO pcpgvo) {
+		return sql.selectOne(ns+"totalcountcustomer", pcpgvo);
+	}
+
+	
 
 	/**
 	 * 상품 구매시 카운트 올리기 ns+"salesup" 

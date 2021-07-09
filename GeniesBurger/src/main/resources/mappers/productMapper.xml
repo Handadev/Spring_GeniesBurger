@@ -6,23 +6,18 @@
   		<if test="range != null">
   			<trim prefix="and (" suffix=")">
   				<choose>
-  					<when test="range == 'tcw'.toString()">
+  					<when test="range == 'propri'.toString()">
   						title like '%'||#{keyword}||'%' or
-  						content like '%'||#{keyword}||'%' or
-  						writer like '%'||#{keyword}||'%' 
+  						price like '%'||#{keyword}||'%' 
   					</when>
-  					<when test="range == 't'.toString()">
+  					<when test="range == 'pro'.toString()">
   						title like '%'||#{keyword}||'%'
   					</when>
-  					<when test="range == 'c'.toString()">
-  						content like '%'||#{keyword}||'%'
+  					<when test="range == 'pri'.toString()">
+  						price like '%'||#{keyword}||'%'
   					</when>
-  					<when test="range == 'w'.toString()">
-  						writer like '%'||#{keyword}||'%' 
-  					</when>
-  					<when test="range == 'tc'.toString()">
-  						title like '%'||#{keyword}||'%' or
-  						content like '%'||#{keyword}||'%'
+  					<when test="range == 'category'.toString()">
+  						category like '%'||#{keyword}||'%'
   					</when>
   				</choose>
   			</trim>
@@ -30,19 +25,16 @@
   	</sql>
   
   	<insert id="reg" parameterType="pvo">
-  		insert into tbl_product (pno, title, category, content, price) values
-  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{price})
+  		insert into tbl_product (pno, title, category, content, calorie, price) values
+  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price})
   	</insert>
   	
-  	<!-- 페이징 -->
-  	<!-- where pno > 0 절대적 조건을 선부여해서 sql 처리를 쉽게 한다 -->
-  	<!-- 부등호 <같은 경우 태그로 인식하기 때문에 sql문을 전부 string으로 처리하라는
-  	        명령을 부여하는 것이 좋다 <![CDATA[]]> -->
-<!--   	<select id="list" parameterType="ppgvo" resultType="pvo">
+  	<!-- 관리자 리스트 페이징 서치 -->
+  	<select id="list" parameterType="ppgvo" resultType="pvo">
   		<![CDATA[
-  		select pno, content, title, price
+  		select *
   		from (select /*+INDEX_DESC(tbl_product pk_product)*/
-  			rownum as rn, pno, content, title, price
+  			rownum AS rn , pno, title, price, sales, cansale, regdate, moddate
 			from tbl_product where pno > 0
   		]]>
   		<include refid="search"/>
@@ -50,10 +42,37 @@
   			and rownum <= #{pageIndex}* #{countPerPage})
   		where rn > (#{pageIndex}-1) * #{countPerPage}
   		]]>
-  	</select> -->
+  	</select>
+  	 
+  	<!-- 관리자 리스트 서치토탈 -->
+  	<select id="totalcount" parameterType="ppgvo" resultType="int">
+  		<![CDATA[
+  		select count(pno) as cnt from tbl_product where pno > 0
+  		]]>
+  		<include refid="search"/>
+  	</select>
   	
-  	<select id="list" resultType="pvo">
-  		select pno, content, title, price from tbl_product
+ 	<!-- 소비자 리스트 페이징 서치 -->
+ 	<select id="listcustomer" parameterType="pcpgvo" resultType="pvo">
+  		<![CDATA[
+  		select *
+  		from (select /*+INDEX_DESC(tbl_product pk_product)*/
+  			rownum AS rn , pno, title, price, sales, cansale, regdate, moddate
+			from tbl_product where pno > 0
+  		]]>
+  		<include refid="search"/>
+  		<![CDATA[
+  			and rownum <= #{pageIndex}* #{countPerPage})
+  		where rn > (#{pageIndex}-1) * #{countPerPage}
+  		]]>
+  	</select>
+  	
+	 <!-- 소비자 리스트 서치토탈 -->
+  	<select id="totalcountcustomer" parameterType="pcpgvo" resultType="int">
+  		<![CDATA[
+  		select count(pno) as cnt from tbl_product where pno > 0
+  		]]>
+  		<include refid="search"/>
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
@@ -62,7 +81,8 @@
   	
   	<update id="mod" parameterType="pvo">
   		update tbl_product set 
-  		title = #{title}, price = #{price}, content = #{content}, category = #{category}, moddate = sysdate
+  		title = #{title}, price = #{price}, content = #{content}, category = #{category}, 
+  		calorie = #{calorie}, moddate = sysdate, cansale = #{cansale}
   		where pno = #{pno}
   	</update>
   	
@@ -74,12 +94,6 @@
   		select seq_product_pno.currval from dual
   	</select>
   	
-  	<select id="totalcount" parameterType="ppgvo" resultType="int">
-  		<![CDATA[
-  		select count(pno) as cnt from tbl_product where pno > 0
-  		]]>
-  		<include refid="search"/>
-  	</select>
   	
   	<update id="salesup" parameterType="hashmap">
   		update tbl_product set sales = sales + #{num} where pno = #{pno}

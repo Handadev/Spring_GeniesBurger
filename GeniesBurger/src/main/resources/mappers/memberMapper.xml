@@ -11,13 +11,28 @@
       select count(email) as cnt from tbl_member where email=#{email}
    </select>
    <select id="list" resultType="mvo">
-      select * from tbl_member
+      <![CDATA[
+ 		select rn, mno, email, name, mobile, address, birthday, point 
+ 		from(select /*INDEX_DESC(tbl_member pk_member)*/
+ 			rownum as rn, mno, email, name, mobile, address, birthday, point
+ 			from tbl_member where rownum > 0
+ 			and rownum <= #{pageIndex} * #{countPerPage})
+        	where rn > (#{pageIndex}-1) * #{countPerPage}
+ 		]]>
+   </select>
+   <select id="tc" parameterType="mpgvo" resultType="int">
+      <![CDATA[
+			select count(mno) FROM TBL_MEMBER WHERE mno > 0
+      ]]>  
    </select>
    <select id="login" parameterType="mvo" resultType="mvo">
       select * from tbl_member where email=#{email} and pwd=#{pwd}
    </select>
    <select id="detail" parameterType="int" resultType="mvo">
       select * from tbl_member where mno=#{mno}
+   </select>
+   <select id="issueMList" resultType="mvo">
+   	  select * from tbl_member
    </select>
    
    <update id="mod" parameterType="mvo">

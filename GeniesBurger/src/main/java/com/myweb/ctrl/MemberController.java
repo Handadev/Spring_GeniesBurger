@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.MemberVO;
+import com.myweb.domain.MemberPageVO;
+import com.myweb.handler.MemberPagingHandler;
 import com.myweb.service.member.MemberServiceRule;
 
 @RequestMapping("/member/*")
@@ -83,8 +85,10 @@ public class MemberController {
    }
    
    @GetMapping("/list")
-   public void list(Model model) {
-      model.addAttribute("mList", msv.getList());
+   public void list(Model model, MemberPageVO mpgvo) {
+      model.addAttribute("mList", msv.getList(mpgvo));
+      int totalCount = msv.getTotalCount(mpgvo);
+      model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo));
    }
    
    @ResponseBody
