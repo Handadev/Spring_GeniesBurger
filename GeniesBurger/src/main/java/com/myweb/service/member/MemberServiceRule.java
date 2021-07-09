@@ -14,4 +14,5 @@ public interface MemberServiceRule {
    public int modify(MemberVO mvo);
    public int remove(int mno);
    public int getTotalCount(MemberPageVO mpgvo);
+   public List<MemberVO> getList(); // 쿠폰 발급용 멤버 리스트
 }

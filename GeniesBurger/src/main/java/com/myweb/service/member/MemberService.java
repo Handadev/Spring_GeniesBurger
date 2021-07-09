@@ -59,4 +59,9 @@ public int getTotalCount(MemberPageVO mpgvo) {
 	return mdao.selectOne(mpgvo);
 }
 
+@Override
+public List<MemberVO> getList() { // 쿠폰 발급용 멤버 리스트
+	return mdao.selectList();
+}
+
 }

@@ -10,7 +10,6 @@
   				<when test="range == 'nd'.toString()">
   					to_char(cpno) like '%'||#{keyword}||'%' or
   					cpname like '%'||#{keyword}||'%' or
-  					<!-- to_char(enddate,'YYYY-MM-DD') like '%'||#{keyword}||'%' or -->
   					to_char(discount) like '%'||#{keyword}||'%'
   				</when>
   				<when test="range == 'no'.toString()">
@@ -19,9 +18,6 @@
   				<when test="range == 'na'.toString()">
   					cpname like '%'||#{keyword}||'%'
   				</when>
-  				<!-- <when test="range == 'e'.toString()">
-  					to_char(enddate,'YYYY-MM-DD') like '%'||#{keyword}||'%'
-  				</when> -->
   				<when test="range == 'd'.toString()">
   					to_char(discount) like '%'||#{keyword}||'%'
   				</when>
