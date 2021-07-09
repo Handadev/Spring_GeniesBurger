@@ -59,7 +59,6 @@ public class CouponDummyTest {
 		for (int i = 1; i < 101; i++) {
 		CouponVO cpvo = new CouponVO();
 		cpvo.setCpname(i + "% 할인 쿠폰");
-		cpvo.setEnddate("2021-07-30");
 		cpvo.setDiscount(i);
 		cpdao.insert(cpvo);
 		}
