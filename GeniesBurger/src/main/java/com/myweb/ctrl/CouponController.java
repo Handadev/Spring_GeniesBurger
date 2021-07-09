@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.CouponListVO;
 import com.myweb.domain.CouponPageVO;
 import com.myweb.domain.CouponVO;
-import com.myweb.domain.PageVO;
+import com.myweb.domain.MemberPageVO;
 import com.myweb.handler.CouponPagingHandler;
 import com.myweb.service.coupon.CouponServiceRule;
 import com.myweb.service.member.MemberServiceRule;
@@ -61,9 +60,9 @@ public class CouponController {
 	}
 	
 	@GetMapping("/issue")
-	public void issue(Model model) {
+	public void issue(Model model, MemberPageVO mpgvo) {
 		model.addAttribute("cpList", cpsv.getList());
-		model.addAttribute("mList", msv.getList());
+		model.addAttribute("mList", msv.getList(mpgvo));
 		logger.info("/WEB-INF/views/coupon/issue.jsp");
 	}
 	

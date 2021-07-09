@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.domain.MemberVO;
+import com.myweb.domain.MemberPageVO;
 
 @Repository
 public class MemberDAO implements MemberDAORule {
@@ -30,8 +31,8 @@ public class MemberDAO implements MemberDAORule {
    }
 
    @Override
-   public List<MemberVO> selectList() {
-      return sql.selectList(NS+"list");
+   public List<MemberVO> selectList(MemberPageVO mpgvo) {
+      return sql.selectList(NS+"list", mpgvo);
    }
 
    @Override
@@ -53,5 +54,10 @@ public class MemberDAO implements MemberDAORule {
    public int delete(int mno) {
       return sql.delete(NS+"del", mno);
    }
+
+@Override
+public int selectOne(MemberPageVO mpgvo) {
+	return sql.selectOne(NS+"tc", mpgvo);
+}
 
 }
