@@ -64,7 +64,8 @@
 								<td>${pvo.moddate }</td>
 								<td><a href="/product/modify?pno=${pvo.pno }"
 									class="btn btn-warning">상품수정</a>
-									<button type="button" class="btn btn-danger del-btn">상품삭제</button></td>
+									<button type="button" class="btn btn-danger del-btn">상품삭제</button>
+								</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -118,6 +119,14 @@
 		$("input[name=pno]").val(pno_num);
 		$("#rmForm").submit();
 	});
+</script>
+<script>
+	$(document).on("click", ".cartBtn", function(e){
+		e.preventDefault();
+		let cart_val = $(this).data("cartBtn");
+		console.log(cart_val);
+
+	})
 </script>
 
 <jsp:include page="../common/footer.jsp" />
