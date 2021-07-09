@@ -12,19 +12,17 @@
 		<div class="form-group float-left ml-3">
 	<form action="/coupon/list" class="form-inline">
 		<select class="form-control" name="range">
-			<option value="nd" <c:out value="${pghdl.cpgvo.range eq 'nd' ? 'selected' : '' }"/>>
+			<option value="nd" <c:out value="${cpghdl.cpgvo.range eq 'nd' ? 'selected' : '' }"/>>
 			전체</option>
-			<option value="no" <c:out value="${pghdl.cpgvo.range eq 'no' ? 'selected' : '' }"/>>
+			<option value="no" <c:out value="${cpghdl.cpgvo.range eq 'no' ? 'selected' : '' }"/>>
 			번호</option>
-			<option value="na" <c:out value="${pghdl.cpgvo.range eq 'na' ? 'selected' : '' }"/>>
+			<option value="na" <c:out value="${cpghdl.cpgvo.range eq 'na' ? 'selected' : '' }"/>>
 			이름</option>
-			<%-- <option value="e" <c:out value="${pghdl.cpgvo.range eq 'e' ? 'selected' : '' }"/>>
-			유효기간</option> --%>
-			<option value="d" <c:out value="${pghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
+			<option value="d" <c:out value="${cpghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
 			할인율</option>
 		</select>
 		<input class="form-control" type="text" placeholder="검색어 입력" name="keyword"
-		value='<c:out value="${pghdl.cpgvo.keyword }"/>'>
+		value='<c:out value="${cpghdl.cpgvo.keyword }"/>'>
 		<button type="submit" class="btn btn-success ml-3">검색</button>
 	</form>
 </div>
@@ -42,7 +40,7 @@
 	  		 	 <c:forEach items="${list }" var="cpvo">
 	    		  <tr>
 	     		   <td>${cpvo.cpno }</td>
-	     		   <td><a href="/coupon/detail?cpno=${cpvo.cpno }">${cpvo.cpname }</a></td>
+	     		   <td><a href="/coupon/detail?cpno=${cpvo.cpno }&pageIndex=${cpghdl.cpgvo.pageIndex}&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}">${cpvo.cpname }</a></td>
 	     		   <td>${cpvo.discount }%</td>
 	    		  </tr>
 	    	 	 </c:forEach>
@@ -50,7 +48,7 @@
 	   		 	<tfoot>
     			<tr>
     				<td	colspan="3">
-    					<jsp:include page="../common/CpPaging.jsp"/>
+    					<jsp:include page="paging.jsp"/>
     				</td>
     			</tr>
     		</tfoot>

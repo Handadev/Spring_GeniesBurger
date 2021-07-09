@@ -5,18 +5,13 @@
 <jsp:include page="../adminCommon/nav.jsp" />
 <jsp:include page="../adminCommon/sidebar.jsp" />
 	<div class="container">
-		<h2>Product Modify</h2>
+		<h2>Coupon Modify</h2>
 		<form action="/coupon/modify" method="post" id="modifyForm">
 			<input type="hidden" name="cpno" value="${cpvo.cpno }">
 			<div class="form-group">
 				<label for="cpname">Coupon Name:</label> <input type="text"
 					class="form-control" value="${cpvo.cpname }" id="cpname" name="cpname">
 			</div>
-			<%-- <div class="form-group">
-				<label for="enddate">Coupon 만료 날짜:</label> <input type="date"
-					class="form-control" id="enddate" name="enddate"
-					value="${cpvo.enddate }">
-			</div> --%>
 			<div class="form-group">
 				<label for="discount">Discount:</label> <input type="text"
 					class="form-control" value="${cpvo.discount }" id="discount" name="discount">

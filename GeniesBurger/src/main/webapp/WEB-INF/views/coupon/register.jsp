@@ -11,10 +11,6 @@
 			    <label for="cpname">쿠폰 이름</label>
 			    <input type="text" class="form-control" placeholder="Enter Name" id="cpname" name="cpname">
 			  </div>
-			  <!-- <div class="form-group">
-			    <label for="enddate">쿠폰 유효기간</label>
-			    <input type="date" class="form-control" id="enddate" name="enddate">
-			  </div> -->
 			  <div class="form-group">
 			    <label for="discount">할인(%)</label>
 			    <input type="text" class="form-control" placeholder="Enter Discount" id="discount" name="discount">

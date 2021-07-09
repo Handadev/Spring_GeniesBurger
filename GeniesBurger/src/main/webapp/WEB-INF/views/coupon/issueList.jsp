@@ -9,6 +9,29 @@
 	<h2 class="float-left">발급된 쿠폰 리스트</h2>
 		<a href="/coupon/list" class="btn btn-primary float-right ml-3">쿠폰 목록</a>
 		<a href="/coupon/issue" class="btn btn-primary float-right">쿠폰 발급</a>
+	  <div class="form-group float-left ml-3">
+	<form action="/coupon/issueList" class="form-inline">
+		<select class="form-control" name="range">
+			<option value="all" <c:out value="${cpghdl.cpgvo.range eq 'all' ? 'selected' : '' }"/>>
+			전체</option>
+			<option value="io" <c:out value="${cpghdl.cpgvo.range eq 'io' ? 'selected' : '' }"/>>
+			발급 번호</option>
+			<option value="c" <c:out value="${cpghdl.cpgvo.range eq 'c' ? 'selected' : '' }"/>>
+			쿠폰 번호</option>
+			<option value="cn" <c:out value="${cpghdl.cpgvo.range eq 'cn' ? 'selected' : '' }"/>>
+			쿠폰 이름</option>
+			<option value="m" <c:out value="${cpghdl.cpgvo.range eq 'm' ? 'selected' : '' }"/>>
+			멤버 번호</option>
+			<option value="e" <c:out value="${cpghdl.cpgvo.range eq 'e' ? 'selected' : '' }"/>>
+			이메일</option>
+			<option value="d" <c:out value="${cpghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
+			유효기간</option>
+		</select>
+		<input class="form-control" type="text" placeholder="검색어 입력" name="keyword"
+		value='<c:out value="${cpghdl.cpgvo.keyword }"/>'>
+		<button type="submit" class="btn btn-success ml-3">검색</button>
+	</form>
+</div>
 	  <table class="table table-hover">
 	    <thead>
 	      <tr>
@@ -39,6 +62,13 @@
 	    		  </tr>
 	    		  </c:forEach>
 	   		 	</tbody>
+	   		 	<tfoot>
+    			<tr>
+    				<td	colspan="3">
+    					<jsp:include page="issuePaging.jsp"/>
+    				</td>
+    			</tr>
+    		</tfoot>
 	    	</c:when>
 	    	<c:otherwise>
 	    		<tbody>
