@@ -14,4 +14,5 @@ public interface MemberDAORule {
    public int update(MemberVO mvo);
    public int delete(int mno);
    public int selectOne(MemberPageVO mpgvo);
+public List<MemberVO> selectList(); // 쿠폰 발급용 멤버 리스트
 }

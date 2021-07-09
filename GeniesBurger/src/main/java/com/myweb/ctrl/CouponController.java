@@ -60,9 +60,9 @@ public class CouponController {
 	}
 	
 	@GetMapping("/issue")
-	public void issue(Model model, MemberPageVO mpgvo) {
+	public void issue(Model model) {
 		model.addAttribute("cpList", cpsv.getList());
-		model.addAttribute("mList", msv.getList(mpgvo));
+		model.addAttribute("mList", msv.getList());
 		logger.info("/WEB-INF/views/coupon/issue.jsp");
 	}
 	

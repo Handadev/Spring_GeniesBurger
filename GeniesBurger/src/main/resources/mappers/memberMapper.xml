@@ -31,6 +31,9 @@
    <select id="detail" parameterType="int" resultType="mvo">
       select * from tbl_member where mno=#{mno}
    </select>
+   <select id="issueMList" resultType="mvo">
+   	  select * from tbl_member
+   </select>
    
    <update id="mod" parameterType="mvo">
       update tbl_member set    pwd=#{pwd}, name=#{name}, 

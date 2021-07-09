@@ -60,4 +60,9 @@ public int selectOne(MemberPageVO mpgvo) {
 	return sql.selectOne(NS+"tc", mpgvo);
 }
 
+@Override
+public List<MemberVO> selectList() {
+	return sql.selectList(NS+"issueMList");
+}
+
 }
