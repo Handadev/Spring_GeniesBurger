@@ -16,6 +16,9 @@
   					<when test="range == 'pri'.toString()">
   						price like '%'||#{keyword}||'%'
   					</when>
+  					<when test="range == 'category'.toString()">
+  						category like '%'||#{keyword}||'%'
+  					</when>
   				</choose>
   			</trim>
   		</if>
@@ -26,10 +29,7 @@
   		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price})
   	</insert>
   	
-  	<!-- 페이징 -->
-  	<!-- where pno > 0 절대적 조건을 선부여해서 sql 처리를 쉽게 한다 -->
-  	<!-- 부등호 <같은 경우 태그로 인식하기 때문에 sql문을 전부 string으로 처리하라는
-  	        명령을 부여하는 것이 좋다 <![CDATA[]]> -->
+  	<!-- 관리자 리스트 페이징 서치 -->
   	<select id="list" parameterType="ppgvo" resultType="pvo">
   		<![CDATA[
   		select *
@@ -42,11 +42,38 @@
   			and rownum <= #{pageIndex}* #{countPerPage})
   		where rn > (#{pageIndex}-1) * #{countPerPage}
   		]]>
-  	</select> 
+  	</select>
+  	 
+  	<!-- 관리자 리스트 서치토탈 -->
+  	<select id="totalcount" parameterType="ppgvo" resultType="int">
+  		<![CDATA[
+  		select count(pno) as cnt from tbl_product where pno > 0
+  		]]>
+  		<include refid="search"/>
+  	</select>
   	
-<!--   	<select id="list" resultType="pvo">
-  		select * from tbl_product
-  	</select> -->
+ 	<!-- 소비자 리스트 페이징 서치 -->
+ 	<select id="listcustomer" parameterType="pcpgvo" resultType="pvo">
+  		<![CDATA[
+  		select *
+  		from (select /*+INDEX_DESC(tbl_product pk_product)*/
+  			rownum AS rn , pno, title, price, sales, cansale, regdate, moddate
+			from tbl_product where pno > 0
+  		]]>
+  		<include refid="search"/>
+  		<![CDATA[
+  			and rownum <= #{pageIndex}* #{countPerPage})
+  		where rn > (#{pageIndex}-1) * #{countPerPage}
+  		]]>
+  	</select>
+  	
+	 <!-- 소비자 리스트 서치토탈 -->
+  	<select id="totalcountcustomer" parameterType="pcpgvo" resultType="int">
+  		<![CDATA[
+  		select count(pno) as cnt from tbl_product where pno > 0
+  		]]>
+  		<include refid="search"/>
+  	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
   		select * from tbl_product where pno = #{pno}
@@ -67,13 +94,6 @@
   		select seq_product_pno.currval from dual
   	</select>
   	
-  	<!-- 서치를 위해서 ppgvo를 가져옴 -->
-  	<select id="totalcount" parameterType="ppgvo" resultType="int">
-  		<![CDATA[
-  		select count(pno) as cnt from tbl_product where pno > 0
-  		]]>
-  		<include refid="search"/>
-  	</select>
   	
   	<update id="salesup" parameterType="hashmap">
   		update tbl_product set sales = sales + #{num} where pno = #{pno}

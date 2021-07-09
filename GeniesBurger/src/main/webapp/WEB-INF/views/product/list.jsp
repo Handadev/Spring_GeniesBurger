@@ -26,7 +26,7 @@
 					<option value="pro">제품명</option>
 					<option value="pri">가격</option>
 				</select> <input class=form-control type="text" placeholder="검색어 입력"
-					name="keyword">
+					name="keyword" value="<c:out value='${product_paging.ppgvo.keyword }'/>">
 				<button type="submit" class="btn btn-success">검색</button>
 			</form>
 		</div>

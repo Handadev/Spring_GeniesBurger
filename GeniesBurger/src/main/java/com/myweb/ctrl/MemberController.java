@@ -1,5 +1,7 @@
 package com.myweb.ctrl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -37,16 +39,18 @@ public class MemberController {
    @PostMapping("/modify")
    public String modify(MemberVO mvo, RedirectAttributes reAttr, HttpSession ses) {
       int isUp = msv.modify(mvo);
-      if (isUp > 0) ses.setAttribute("ses", mvo);
+      if (isUp > 0) {
+    	  MemberVO mvo2 = msv.login(mvo);  // 수정된 mvo로 다시 로그인 
+    	  ses.setAttribute("ses", mvo2 );
+    	  }
       reAttr.addFlashAttribute("result", ses.getAttribute("ses") != null ?
             "회원정보 수정 성공~" : "회원정보 수정 실패!");
       return "redirect:/";
-//      return "redirect:/member/list";
    }
    
    @GetMapping("/modify")
    public void modify(@RequestParam("mno") int mno, Model model) {
-      model.addAttribute("mvo", msv.detail(mno));
+	  model.addAttribute("mvo", msv.detail(mno));
    }
    
    @PostMapping("/remove")
@@ -55,8 +59,7 @@ public class MemberController {
       if (isUp > 0) ses.invalidate();
       reAttr.addFlashAttribute("result", isUp > 0 ?
             "회원삭제 성공~" : "회원삭제 실패!");
-      return "redirect:/member/list";
-//      return "redirect:/member/list";
+      return "redirect:/";
    }
    
    @GetMapping("/detail")

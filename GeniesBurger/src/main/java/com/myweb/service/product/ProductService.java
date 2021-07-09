@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductFileVO;
 import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
@@ -29,11 +30,16 @@ public class ProductService implements ProductServiceRule {
 		return pdao.insert(pvo);
 	}
 	
-	@Override
+	@Override // 관리자 상품 리스트
 	public List<ProductVO> getList(ProductPageVO ppgvo) {
 		return pdao.selectList(ppgvo);
 	}
 
+	@Override // 소비자 상품 리스트
+	public List<ProductVO> getList(ProductCustomerPageVO pcpgvo) {
+		return pdao.selectList(pcpgvo);
+	}
+	
 	@Override
 	public ProductVO detail(int pno) {
 		ProductVO pvo = new ProductVO();
@@ -47,7 +53,6 @@ public class ProductService implements ProductServiceRule {
 
 	@Override
 	public int modify(ProductVO pvo) {
-		logger.info(">>>>>>>>>>>>>>>>>>pvo.getPno()" +pvo.getPno());
 		return pdao.update(pvo);
 	}
 
@@ -65,11 +70,15 @@ public class ProductService implements ProductServiceRule {
 		return pdao.selectOne();
 	}
 
-	@Override
+	@Override // 관리자 리스트 글의 개수 구하기
 	public int getTotalCount(ProductPageVO ppgvo) {
 		return pdao.selectOne(ppgvo);
 	}
 
-	
+	@Override // 소비자 리스트 글의 개수 구하기
+	public int getTotalCount(ProductCustomerPageVO pcpgvo) {
+		return pdao.selectOne(pcpgvo);
+	}
+
 
 }
