@@ -7,7 +7,7 @@
 <div class="container p-3 my-3 border" style="text-align: center;">
   <h1><b>${ses.name }님!</b> 반갑습니다</h1>
   <p><a href="/member/modify?mno=${ses.mno }">정보변경 ></a></p>
-  <h3>나의 쿠폰 : 0장</h3>
+  <h3>나의 쿠폰 : ${myCp }장</h3>
 <h3>나의 스탬프 : 0장</h3>
 </div>
 

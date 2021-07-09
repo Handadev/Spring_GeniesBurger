@@ -56,8 +56,8 @@ public class CouponService implements CouponServiceRule {
 	}
 
 	@Override
-	public List<CouponListVO> getIssueList() {
-		return cpdao.selectIssueList();
+	public List<CouponListVO> getIssueList(CouponPageVO cpgvo) {
+		return cpdao.selectIssueList(cpgvo);
 	}
 
 	@Override
@@ -73,6 +73,11 @@ public class CouponService implements CouponServiceRule {
 	@Override
 	public int getIssueTotalCount(CouponPageVO cpgvo) {
 		return cpdao.issueTotalCount(cpgvo);
+	}
+	
+	@Override
+	public int myCoupon(int mno) {
+		return cpdao.myCouponQty(mno);
 	}
 
 }

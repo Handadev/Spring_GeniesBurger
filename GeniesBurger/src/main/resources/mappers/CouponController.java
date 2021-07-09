@@ -1,4 +1,4 @@
-package com.myweb.ctrl;
+package mappers;
 
 import javax.inject.Inject;
 
