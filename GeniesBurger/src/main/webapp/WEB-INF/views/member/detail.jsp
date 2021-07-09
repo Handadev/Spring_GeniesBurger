@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
+<script src="/resources/js/jquery-3.2.1.min.js"></script>
 
 <div class="container p-3 my-3 border" style="text-align: center;">
   <h1><b>${ses.name }님!</b> 반갑습니다</h1>
