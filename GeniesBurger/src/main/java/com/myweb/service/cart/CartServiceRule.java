@@ -8,5 +8,6 @@ public interface CartServiceRule {
 	public int register(CartVO cartvo);
 	public List<CartVO> getList();
 	public int remove(int cartno);
-
+	public int increQty(int cartno, String upqtystr);
+	public int decreQty(int cartno, String downqtystr);
 }

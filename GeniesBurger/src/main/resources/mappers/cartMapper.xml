@@ -10,11 +10,27 @@
 	</insert>
 
 	<select parameterType="int" id="list" resultType="cartvo">
+		<!-- SELECT * 
+		FROM TBL_MEMBER tm INNER JOIN TBL_CART tc 
+		ON tm.MNO = tc.MNO
+		WHERE tm.mno = #{mno}	 -->
+		
 		select * from tbl_cart
+		
 	</select>
 
 	<delete parameterType="int" id="del">
 		delete from tbl_cart
 		where cartno=#{cartno}
 	</delete>
+	
+	<update id="upQty" parameterType="hashmap">
+		update tbl_cart set
+		quantity=quantity + #{upno} where cartno=#{cartno}
+	</update>
+
+	<update id="downQty" parameterType="hashmap">
+		update tbl_cart set
+		quantity=quantity + #{downno} where cartno=#{cartno}
+	</update>
 </mapper>
