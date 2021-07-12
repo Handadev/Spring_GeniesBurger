@@ -7,6 +7,7 @@
 
 <form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
 <input type="hidden" name="pno" value="1">
+</select>
 	<div class="form-group">
 		<label for="price">내용:</label>
 		<input type="text" class="form-control" id="content" name="rcontent" style="width:200pt">

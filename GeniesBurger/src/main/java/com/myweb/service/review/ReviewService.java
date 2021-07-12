@@ -1,5 +1,6 @@
 package com.myweb.service.review;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -26,7 +27,15 @@ public class ReviewService implements ReviewServiceRule {
 
 	@Override
 	public List<ReviewVO> ReviewList() {
-		return rdao.selectList();
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		List<ReviewVO> rlist = rdao.selectList();
+		for (ReviewVO rvo : rlist) {
+			int rno = rvo.getRno();
+			List<adCommentVO> clist = rdao.adCommentList(rno);
+			rvo.setClist(clist);
+			list.add(rvo);
+		}
+		return list;
 	}
 
 	@Override
@@ -45,12 +54,13 @@ public class ReviewService implements ReviewServiceRule {
 	}
 
 	@Override
-	public int adCommentAdd(adCommentVO advo) {
-		return rdao.adCommentInsert(advo);
+	public int adCommentAdd(int rno, String adComment) {
+		return rdao.adCommentInsert(rno, adComment);
 	}
 
 	@Override
-	public List<adCommentVO> commentList(int rno) {
-		return rdao.selectList(rno);
+	public int adCommentUp(int rno, String adComment) {
+		return rdao.adCommentUpdate(rno, adComment);
 	}
+
 }

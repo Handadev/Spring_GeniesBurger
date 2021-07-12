@@ -16,9 +16,7 @@ public interface ReviewServiceRule {
 
 	public int ReviewCurrRno();
 
-	public int adCommentAdd(adCommentVO advo);
-
-	public List<adCommentVO> commentList(int rno);
-
-
+	public int adCommentAdd(int rno, String adComment);
+	
+	public int adCommentUp(int rno, String adComment);
 }
