@@ -2,7 +2,7 @@ package com.myweb.handler;
 
 import org.slf4j.LoggerFactory;
 
-import com.myweb.domain.PageVO;
+import com.myweb.domain.MemberPageVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,11 +13,13 @@ public class MemberPagingHandler {
 	private int fPageIndex; // 현재 페이지네이션의 가장 앞 번호
 	private int lPageIndex; // 현재 페이지네이션의 가장 뒷 번호
 	private boolean pBtn, nBtn; // 앞 뒤 단위로 이동하는 버튼의 생성 여부
-	private PageVO pgvo;
+	private MemberPageVO mpgvo;
 	
 	public MemberPagingHandler() {}
 
-	public MemberPagingHandler(int totalCount, int fPageIndex, int lPageIndex, boolean pBtn, boolean nBtn, PageVO pgvo) {
+	public MemberPagingHandler(int totalCount, MemberPageVO mpgvo) {
+		this.totalCount = totalCount;
+		this.mpgvo = mpgvo;
 		// lastPageIndex logic
 		// 15번을 클릭했다고 가정(페이지네이션)
 		// 15/10.0 = 1.5
@@ -25,12 +27,8 @@ public class MemberPagingHandler {
 		// int(2.0) = 2
 		// 2*10 = 20(last index)
 		// 11~20 까지는 무조건 올림을 하여 last page를 20으로 만들어줌
+		this.lPageIndex = (int)(Math.ceil(mpgvo.getPageIndex() / 10.0)) * 10;
 		this.fPageIndex = this.lPageIndex - 9; 
-		this.lPageIndex = (int)(Math.ceil(pgvo.getPageIndex() / 10.0)) * 10;
-		this.totalCount = totalCount;
-		this.pBtn = pBtn;
-		this.nBtn = nBtn;
-		this.pgvo = pgvo;
 		
 		// 데이터 베이스에서 가져온 실제 글의 갯수를 기준으로 만들어져야 하는
 		// last page의 번호
@@ -52,11 +50,11 @@ public class MemberPagingHandler {
 		logger.info("글의 총 갯수 :" + this.totalCount +
 					"// 첫번째 페이지 : " + this.fPageIndex +
 					"// 마지막 페이지 : " + this.lPageIndex +
-					"// 검색범위 : " + pgvo.getRange() + 
-					"// 현재 페이지네이션 : " + pgvo.getPageIndex()+
+					"// 검색범위 : " + mpgvo.getRange() + 
+					"// 현재 페이지네이션 : " + mpgvo.getPageIndex()+
 					"// 마지막 페이지 : " + this.lPageIndex +
-					"// 검색범위 : " + pgvo.getRange() +
-					"// 검색어" + pgvo.getKeyword());
+					"// 검색범위 : " + mpgvo.getRange() +
+					"// 검색어" + mpgvo.getKeyword());
 	}
 
 	public int getTotalCount() {
@@ -99,13 +97,14 @@ public class MemberPagingHandler {
 		this.nBtn = nBtn;
 	}
 
-	public PageVO getPgvo() {
-		return pgvo;
+	public MemberPageVO getMpgvo() {
+		return mpgvo;
 	}
 
-	public void setPgvo(PageVO pgvo) {
-		this.pgvo = pgvo;
+	public void setMpgvo(MemberPageVO mpgvo) {
+		this.mpgvo = mpgvo;
 	}
+
 	
 	
 	

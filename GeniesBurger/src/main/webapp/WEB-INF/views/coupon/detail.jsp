@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../adminCommon/header.jsp" />
+<jsp:include page="../adminCommon/nav.jsp" />
+<jsp:include page="../adminCommon/sidebar.jsp" />
 	<div class="container">
 		<h2 class="float-left">쿠폰 정보</h2>
-		<a href="/coupon/list" class="btn btn-primary float-right">목록으로</a>
+		<a href="/coupon/list?pageIndex=${cpgvo.pageIndex}&countPerPage=${cpgvo.countPerPage}&range=${cpgvo.range}&keyword=${cpgvo.keyword}" class="btn btn-primary float-right">목록으로</a>
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -21,11 +23,6 @@
 				<tr>
 					<td>쿠폰 이름</td>
 					<td>${cpvo.cpname }</td>
-				</tr>
-				<tr>
-					<td>쿠폰 유효기간</td>
-					<c:set var="enddate" value="${cpvo.enddate }"></c:set>
-					<td>${fn:substring(enddate,-1, 11)}</td>
 				</tr>
 				<tr>
 					<td>할인율(%)</td>
@@ -50,4 +47,4 @@
 			</tfoot>
 		</table>
 	</div>
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../adminCommon/footer.jsp" />

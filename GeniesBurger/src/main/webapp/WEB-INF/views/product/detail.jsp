@@ -78,11 +78,18 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><a href="/product/modify?pno=${pvo.pno }"
-					class="btn btn-warning">EDIT</a>
-					<button type="button" class="btn btn-danger del-btn">DEL</button></td>
+				<td colspan="2"><a href="/product/modify?pno=${pvo.pno }" class="btn btn-warning">EDIT</a>
+					<button type="button" class="btn btn-danger del-btn">DEL</button>
+					<button type="button" class="btn btn-success" id="addCartBtn">ADD TO CART</button>
+				</td>
 			</tr>
 		</table>
+		<form action="/cart/register" method="post" id="cartForm">
+			<input type="hidden" name="pno" value="${pvo.pno }">
+			<input type="hidden" name="title" value="${pvo.title }">
+			<input type="hidden" name="price" value="${pvo.price }">
+			<input type="hidden" name="mno" value="${ses.mno }">
+		</form>
 	</div>
 </div>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
@@ -96,6 +103,14 @@
 		$("input[name=pno]").val(pno_num);
 		$("#rmForm").submit();
 	});
+</script>
+<!-- 장바구니 스크립트 -->
+<script>
+ $("#addCartBtn").on("click", function(e){
+	e.preventDefault();
+	console.log(this);
+	$("#cartForm").submit();
+ });
 </script>
 
 <jsp:include page="../common/footer.jsp" />

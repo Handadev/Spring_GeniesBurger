@@ -1,5 +1,6 @@
 package com.myweb.service.product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -7,11 +8,16 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductFileVO;
 import com.myweb.domain.ProductPageVO;
+import com.myweb.domain.ProductStockVO;
 import com.myweb.domain.ProductVO;
+import com.myweb.domain.StockVO;
 import com.myweb.persistence.product.ProductDAORule;
+import com.myweb.persistence.product_stock.ProductStockDAORule;
 import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Service
@@ -24,21 +30,26 @@ public class ProductService implements ProductServiceRule {
 	@Inject
 	private ProductFileDAORule pfdao;
 	
-	@Override
-	public int register(ProductVO pvo) {
-		return pdao.insert(pvo);
-	}
-
-//	@Override
-//	public List<ProductVO> getList(ProductPageVO pgvo) {
-//		return null;
-//	}
+	@Inject
+	private ProductStockDAORule psdao;
+	
+	
 	
 	@Override
-	public List<ProductVO> getList() {
-		return pdao.selectList();
+	public int register(ProductVO pvo) {
+		return pdao.insert(pvo) > 0  ? 1 : 0;
+	}
+	
+	@Override // 관리자 상품 리스트
+	public List<ProductVO> getList(ProductPageVO ppgvo) {
+		return pdao.selectList(ppgvo);
 	}
 
+	@Override // 소비자 상품 리스트
+	public List<ProductVO> getList(ProductCustomerPageVO pcpgvo) {
+		return pdao.selectList(pcpgvo);
+	}
+	
 	@Override
 	public ProductVO detail(int pno) {
 		ProductVO pvo = new ProductVO();
@@ -52,15 +63,16 @@ public class ProductService implements ProductServiceRule {
 
 	@Override
 	public int modify(ProductVO pvo) {
-		logger.info(">>>>>>>>>>>>>>>>>>pvo.getPno()" +pvo.getPno());
 		return pdao.update(pvo);
 	}
 
 	@Override 
 	public int remove(int pno) {
-		int isDel = pdao.delete(pno);
+		int isDel = 1;
+		isDel *= pdao.delete(pno);
+		isDel *= psdao.delete(pno);
 		if (isDel > 0) {
-			isDel = pfdao.delete(pno);
+			isDel *= pfdao.delete(pno);
 		}
 		return isDel;
 	}
@@ -70,11 +82,20 @@ public class ProductService implements ProductServiceRule {
 		return pdao.selectOne();
 	}
 
-	@Override
+	@Override // 관리자 리스트 글의 개수 구하기
 	public int getTotalCount(ProductPageVO ppgvo) {
 		return pdao.selectOne(ppgvo);
 	}
 
-	
+	@Override // 소비자 리스트 글의 개수 구하기
+	public int getTotalCount(ProductCustomerPageVO pcpgvo) {
+		return pdao.selectOne(pcpgvo);
+	}
+
+	@Override
+	public List<StockVO> getList() {
+		return pdao.selectList();
+	}
+
 
 }

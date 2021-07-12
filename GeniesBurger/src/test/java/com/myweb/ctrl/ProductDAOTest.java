@@ -24,18 +24,19 @@ public class ProductDAOTest {
 	@Inject
 	private ProductDAORule pdao;
 	
-//	@Test
-//	public void productRegister() throws Exception {
-//		for (int i = 0; i < 10; i++) {
-//			ProductVO pvo = new ProductVO();
-//			pvo.setTitle("상품 이름"+i);
-//			pvo.setContent("상품 텍스트"+i);
-//			pvo.setPrice(10000);
-//			pvo.setCategory(1);
-//			pdao.insert(pvo);
-//			
-//		}
-//	}
+	@Test
+	public void productRegister() throws Exception {
+		for (int i = 0; i < 30; i++) {
+			ProductVO pvo = new ProductVO();
+			pvo.setTitle("상품 이름"+i);
+			pvo.setContent("상품 텍스트"+i);
+			pvo.setPrice(10000);
+			pvo.setCategory(1);
+			pvo.setCalorie(100);
+			pdao.insert(pvo);
+			
+		}
+	}
 	
 //	@Test
 //	public void productUpdate() throws Exception {
