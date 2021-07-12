@@ -17,9 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myweb.domain.CartVO;
 import com.myweb.domain.MemberVO;
+import com.myweb.domain.ProductVO;
 import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.member.MemberServiceRule;
 
@@ -31,6 +34,12 @@ public class CartController {
    @Inject
    private CartServiceRule cartsv;
    
+   @PostMapping("/register")
+	public String register(CartVO cartvo, RedirectAttributes reAttr) {
+		int isUp = cartsv.register(cartvo);
+		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 삭제 성공");
+		return "redirect:/product/list";
+	}
    @ResponseBody
    @DeleteMapping(value="/{cartno}", produces = MediaType.TEXT_PLAIN_VALUE)
    public ResponseEntity<String> remove(@PathVariable("cartno")int cartno){
@@ -38,15 +47,6 @@ public class CartController {
       return cartsv.remove(cartno) > 0 ? 
             new ResponseEntity<String>("1", HttpStatus.OK)
             : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-   }
-
-   
-   @PostMapping("/remove")
-   public String remove(@RequestParam("cartno") int cartno, RedirectAttributes reAttr) {
-      int isUp = cartsv.remove(cartno);
-//      reAttr.addFlashAttribute("result", isUp > 0 ?
-//            "회원삭제 성공~" : "회원삭제 실패!");
-      return "redirect:/cart/list";
    }
    
    @GetMapping("/cart")

@@ -43,7 +43,7 @@ body {
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
-	font-size: 20px;
+	font-size: 15px;
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 	padding-left: 20px;
@@ -64,9 +64,12 @@ body {
 	height: 100px;
 	line-height: 100px;
 	vertical-align: middle;
-	background-color: #000000;
     color: #ffffff;
     font-size: 25px;
+    background-image: url(resources/icons/button5.jpg);
+}
+#logo{
+	margin-left: 170px;
 }
 </style>
 
@@ -75,8 +78,9 @@ body {
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
 		id="ftco-navbar">
 		<div class="container">
-		<!-- <div class="logo" style="background-image: url('/resources/icons/logo.png')"> -->
-			<a class="navbar-brand" href="/"><img src="/resources/icons/logo.png" style="width:100px; height:100px;"/></a>
+			<a class="navbar-brand" href="/" id="logo">
+			<img src="/resources/icons/logo.png" style="width:70px; height:70px;"/>
+			</a>
 		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#ftco-nav" aria-controls="ftco-nav"
@@ -114,7 +118,7 @@ body {
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item"><a href="/review/list" class="nav-link">reviewTest</a></li>
+					<li class="nav-item"><a href="/review/list" class="nav-link">Review Test</a></li>
              <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
 					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
 					<c:choose>
@@ -138,14 +142,13 @@ body {
 					</c:choose>
 				</ul>
 			</div>
-		</div>
 	</nav>
 	<div>
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
-				<div class="col">딜리버리 주문 내역</div>
+				<div class="col" id="navOrder">딜리버리 주문 내역</div>
 				<div class="col">
-					<a href="/cart/cart">장바구니</a>
+					<a href="/cart/cart" id="navCart">장바구니</a>
 				</div>
 			</div>
 		</div>

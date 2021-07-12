@@ -15,8 +15,10 @@ public interface CouponServiceRule {
 	public int getTotalCount(CouponPageVO cpgvo);
 	// Coupon Issue
 	public int issue(CouponListVO cplvo);
-	public List<CouponListVO> getIssueList();
+//	public List<CouponListVO> getIssueList();
+	public List<CouponListVO> getIssueList(CouponPageVO cpgvo);
 	public List<CouponVO> getList(); // 발급용 쿠폰 리스트
 	public int cancel(int cplno);
 	public int getIssueTotalCount(CouponPageVO cpgvo);
+	public int myCoupon(int mno);
 }
