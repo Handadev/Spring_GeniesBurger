@@ -1,6 +1,8 @@
 package com.myweb.persistence.cart;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -32,6 +34,22 @@ public class CartDAO implements CartDAORule {
 	@Override
 	public int delete(int cartno) {
 		return sql.delete(NS+"del", cartno);
+	}
+
+	@Override
+	public int upQty(int cartno, int upqtystr) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cartno", cartno);
+		map.put("upno", upqtystr);
+		return sql.update(NS+"upQty", map);
+	}
+
+	@Override
+	public int downQty(int cartno, int downqtystr) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cartno", cartno);
+		map.put("downno", downqtystr);
+		return sql.update(NS+"downQty", map);
 	}
 
 }

@@ -33,4 +33,14 @@ public class CartService implements CartServiceRule {
 		return cartdao.delete(cartno);
 	}
 
+	@Override
+	public int increQty(int cartno, String upqtystr) {
+		return cartdao.upQty(cartno, Integer.parseInt(upqtystr));
+	}
+
+	@Override
+	public int decreQty(int cartno, String downqtystr) {
+		return cartdao.downQty(cartno, Integer.parseInt(downqtystr));
+	}
+
 }
