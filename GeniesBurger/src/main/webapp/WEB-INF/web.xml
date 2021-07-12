@@ -29,7 +29,7 @@
 		<load-on-startup>1</load-on-startup>
 		<!-- 멀티파트 사용하려면 여기 등록해줘야함  -->
 		<multipart-config>
-			<location>C:\\Java_program\\_spring\\workspace\\upload</location>
+			<location>C:\\_javaweb\\_spring\\workspace\\upload</location>
 			<!-- 개당 사이즈 - 총 사이즈 - 검증 기준 -->
 			<max-file-size>1048576</max-file-size>
 			<max-request-size>10485760</max-request-size>

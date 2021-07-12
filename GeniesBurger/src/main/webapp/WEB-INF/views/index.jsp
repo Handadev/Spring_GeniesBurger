@@ -8,7 +8,23 @@
 }
 </style>
 
-<!-- 메뉴 상단이미지 삭제 -->
+<!-- 메뉴 상단 이미지 -->
+<div class="hero-wrap hero-bread"
+	style="background-image: url('/resources/images/bg_1.jpg')">
+	<div class="container">
+		<div
+			class="row no-gutters slider-text align-items-center justify-content-center">
+			<div class="col-md-9 ftco-animate text-center">
+				<p class="breadcrumbs">
+					<span class="mr-2"><a href="index.html">Home</a></span> <span>Products</span>
+				</p>
+				<h1 class="mb-0 bread">Products</h1>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- 메뉴 상단 이미지 끝 -->
+
 <section class="ftco-section">
 	<div class="container">
 		<!-- 상품 분류 선택 -->

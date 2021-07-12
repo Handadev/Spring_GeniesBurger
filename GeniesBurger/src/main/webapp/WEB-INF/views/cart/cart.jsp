@@ -58,7 +58,7 @@
 			<c:set var="sum" value="${sum + cartList.price }"/>
 			</c:forEach>
 			총 주문금액 : <c:out value="${sum }"/>원
-			<button type="button" class="btn btn-success" id="orderBtn">결제하기</button>
+			<button type="button" class="btn btn-success">결제하기</button>
 			</div>
 		</div>
 	</div>
@@ -73,7 +73,6 @@
 	<input type="hidden" name="sales" value="${pvo.sales }">
 	<input type="hidden" name="cansale" value="${pvo.cansale }">
 </form>
-<!-- 삭제 스크립트 -->
 <script>
 	$(document).on("click", ".removeBtn", function() {
 		console.log(".removeBtn");
@@ -95,12 +94,6 @@
 	         location.reload();
 	      });
 	}
-</script>
-<!-- 결제 스크립트 -->
-<script>
-	$("#orderBtn").on("click", function(){
-		console.log(this);
-	})
 </script>
 
 <jsp:include page="../common/footer.jsp" />
