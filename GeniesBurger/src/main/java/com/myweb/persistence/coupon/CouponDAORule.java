@@ -15,8 +15,9 @@ public interface CouponDAORule {
 	public int totalCount(CouponPageVO cpgvo); // 페이징 totalcount
 	// Coupon Issue
 	public int issueInsert(CouponListVO cplvo); // 쿠폰 발급
-	public List<CouponListVO> selectIssueList(); // 발급된 쿠폰 리스트
+	public List<CouponListVO> selectIssueList(CouponPageVO cpgvo); // 발급된 쿠폰 리스트
 	public List<CouponVO> selectList(); // 발급용 쿠폰 리스트
 	public int cancel(int cplno);
 	public int issueTotalCount(CouponPageVO cpgvo);
+	public int myCouponQty(int mno);
 }
