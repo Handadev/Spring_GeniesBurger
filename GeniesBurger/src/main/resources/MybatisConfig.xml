@@ -17,10 +17,5 @@
       <typeAlias type="com.myweb.domain.CouponVO" alias="cpvo"/>
       <typeAlias type="com.myweb.domain.StockVO" alias="svo"/>
    	  <typeAlias type="com.myweb.domain.MemberPageVO" alias="mpgvo"/>
-      <typeAlias type="com.myweb.domain.ProductVO" alias="pvo"/>
-      <typeAlias type="com.myweb.domain.ProductPageVO" alias="ppgvo"/>
-       <typeAlias type="com.myweb.domain.ProductCustomerPageVO" alias="pcpgvo"/>
-      <typeAlias type="com.myweb.domain.ProductStockVO" alias="psvo"/>
-      <typeAlias type="com.myweb.domain.ProductFileVO" alias="pfvo"/>
    </typeAliases>
 </configuration>
