@@ -26,6 +26,8 @@
 			이메일</option>
 			<option value="d" <c:out value="${cpghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
 			유효기간</option>
+			<option value="s" <c:out value="${cpghdl.cpgvo.range eq 's' ? 'selected' : '' }"/>>
+			할인율</option>
 		</select>
 		<input class="form-control" type="text" placeholder="검색어 입력" name="keyword"
 		value='<c:out value="${cpghdl.cpgvo.keyword }"/>'>
@@ -40,6 +42,7 @@
 	        <th>쿠폰 이름</th>
 	        <th>멤버 번호</th>
 	        <th>이메일</th>
+	        <th>할인율(%)</th>
 	        <th>유효기간</th>
 	        <th>발급 취소</th>
 	      </tr>
@@ -55,6 +58,7 @@
 	     		   <td>${cplvo.cpname }</td>
 	     		   <td>${cplvo.mno }</td>
 	     		   <td>${cplvo.email }</td>
+	     		   <td>${cplvo.discount }%</td>
 	     		   <td>${fn:substring(enddate,-1, 11)}</td>
 	     		   <td>
 	     		   <button type="button" id="cancelBtn" data-cplno="${cplvo.cplno }" class="btn btn-primary">취소</button>
@@ -64,7 +68,7 @@
 	   		 	</tbody>
 	   		 	<tfoot>
     			<tr>
-    				<td	colspan="3">
+    				<td	colspan="7">
     					<jsp:include page="issuePaging.jsp"/>
     				</td>
     			</tr>
@@ -73,7 +77,7 @@
 	    	<c:otherwise>
 	    		<tbody>
 	    			<tr>
-	    				<td colspan="6" class="text-center">
+	    				<td colspan="7" class="text-center">
 	    					<h3>발급한 쿠폰이 없습니다.</h3>
 	    				</td>
 	    			</tr>
