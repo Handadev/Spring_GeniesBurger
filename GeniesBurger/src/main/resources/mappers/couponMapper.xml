@@ -106,9 +106,9 @@
   	</select>
   	<select id="issueList" parameterType="cpgvo" resultType="cplvo">
     <![CDATA[
-  		SELECT cplno, cpno, cpname, mno, email, enddate 
+  		SELECT cplno, cpno, cpname, mno, email, enddate, discount
  	    from(SELECT /*+INDEX_DESC(tbl_couponlist pk_couponlist)*/
- 	    rownum AS rn, cpl.cplno AS cplno, cpl.cpno AS cpno, cp.cpname AS cpname, cpl.mno AS mno, m.email AS email, enddate 
+ 	    rownum AS rn, cpl.cplno AS cplno, cpl.cpno AS cpno, cp.cpname AS cpname, cpl.mno AS mno, m.email AS email, enddate, discount
 		FROM TBL_COUPONLIST cpl INNER JOIN TBL_COUPON cp
 		ON cpl.CPNO = cp.CPNO
 		JOIN TBL_MEMBER m 
