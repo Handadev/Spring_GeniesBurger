@@ -1,10 +1,13 @@
 package com.myweb.domain;
 
+import java.util.List;
+
 public class StockVO {
 	private int sno;
 	private String sname;
 	private int stock_qty;
 	private String shelf_life;
+	private String stock_regdate;
 	
 	public int getSno() {
 		return sno;
@@ -29,6 +32,13 @@ public class StockVO {
 	}
 	public void setShelf_life(String shelf_life) {
 		this.shelf_life = shelf_life;
+	}
+	
+	public String getStock_regdate() {
+		return stock_regdate;
+	}
+	public void setStock_regdate(String stock_regdate) {
+		this.stock_regdate = stock_regdate;
 	}
 	
 	@Override

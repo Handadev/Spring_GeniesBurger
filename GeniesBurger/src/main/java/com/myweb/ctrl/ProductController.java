@@ -15,10 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.ProductPageVO;
+import com.myweb.domain.ProductStockVO;
 import com.myweb.domain.ProductVO;
+import com.myweb.domain.StockVO;
 import com.myweb.handler.ProductPagingHandler;
 import com.myweb.orm.ProductFileProcessor;
 import com.myweb.service.product.ProductServiceRule;
+import com.myweb.service.product_stock.ProductStockServiceRule;
 
 @RequestMapping("/product/*")
 @Controller
@@ -29,21 +32,26 @@ public class ProductController {
 	private ProductServiceRule psv;
 	
 	@Inject
+	private ProductStockServiceRule pssv;
+	
+	@Inject
 	private ProductFileProcessor pfp;
 	
 	@GetMapping("/register")
-	public void register() {
-		
+	public void register(Model model) {
+		model.addAttribute("stock_list", psv.getList());
 	}
 	
 	@PostMapping("/register")
-	public String register(ProductVO pvo, RedirectAttributes reAttr
+	public String register(ProductVO pvo, ProductStockVO psvo, RedirectAttributes reAttr
 						,@RequestParam(name="files", required=false) MultipartFile[] files) {
+		logger.info("StockVO svo = "+ psvo.getSname());
 		int isUp = psv.register(pvo);
 		if (isUp > 0) {
+			int pno = psv.getCurrPno();
+			isUp *= pssv.register(psvo, pno);
 			if (files[0].getSize() > 0) {
-				int pno = psv.getCurrPno();
-				isUp = pfp.upload_file(files, pno);
+				isUp *= pfp.upload_file(files, pno);
 			}
 		}
 		reAttr.addFlashAttribute("result", isUp > 0 ? "물품 등록 성공" : "물품 삭제 성공");
@@ -84,7 +92,7 @@ public class ProductController {
 	
 	@PostMapping("/remove")
 	public String remove(@RequestParam("pno") int pno, RedirectAttributes reAttr) {
-		int isDel = psv.remove(pno); // 상품 삭제와 함께 사진도 삭제
+		int isDel = psv.remove(pno); // 상품 삭제와 함께 사진, product_sock도 삭제
 		reAttr.addFlashAttribute("result", isDel > 0 ? "상품 삭제 완료" : "상품 삭제 실패");
 		return "redirect:/product/list";
 	}
