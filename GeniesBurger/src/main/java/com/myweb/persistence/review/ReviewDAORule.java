@@ -22,7 +22,10 @@ public interface ReviewDAORule {
 
 	public int insertFile(ReviewVO rvo);
 
-	public int adCommentInsert(adCommentVO advo);
 
-	public List<adCommentVO> selectList(int rno);
+	public List<adCommentVO> adCommentList(int rno);
+
+	public int adCommentInsert(int rno, String adComment);
+
+	public int adCommentUpdate(int rno, String adComment);
 }
