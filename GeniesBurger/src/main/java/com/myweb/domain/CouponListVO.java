@@ -7,6 +7,8 @@ public class CouponListVO {
 	private int mno;
 	private String email;
 	private String enddate;
+	private int discount;
+	
 	public int getCplno() {
 		return cplno;
 	}
@@ -42,5 +44,11 @@ public class CouponListVO {
 	}
 	public void setEnddate(String enddate) {
 		this.enddate = enddate;
+	}
+	public int getDiscount() {
+		return discount;
+	}
+	public void setDiscount(int discount) {
+		this.discount = discount;
 	}
 }

@@ -4,22 +4,25 @@
 <div class="row mt-5">
 	<div class="col text-center">
 		<div class="block-27">
-			<ul>
+			<ul style="list-style-type: none; ">
 				<c:if test="${cpghdl.prev }">
-					<li><a
-						href="/coupon/list?pageIndex=${cpghdl.firstPageIndex-1 }&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}">
-							Prev</a></li>
+					<li style="float: left; "><a
+						href="/coupon/list?pageIndex=${cpghdl.firstPageIndex-1 }&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}"
+						style="margin-left: 10px; ">
+							&#60;</a></li>
 				</c:if>
 				<c:forEach begin="${cpghdl.firstPageIndex }"
 					end="${cpghdl.lastPageIndex }" var="i">
-					<li class="${cpghdl.cpgvo.pageIndex == i ? 'active' : '' }"><a
-						href="/coupon/list?pageIndex=${i }&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}">
+					<li style="float: left; " class="${cpghdl.cpgvo.pageIndex == i ? 'active' : '' }" ><a
+						href="/coupon/list?pageIndex=${i }&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}"
+						style="margin-left: 10px; ">
 							${i }</a></li>
 				</c:forEach>
 				<c:if test="${cpghdl.next }">
-					<li><a
-						href="/coupon/list?pageIndex=${cpghdl.lastPageIndex+1 }&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}">
-							Next</a></li>
+					<li style="float: left; "><a
+						href="/coupon/list?pageIndex=${cpghdl.lastPageIndex+1 }&countPerPage=${cpghdl.cpgvo.countPerPage}&range=${cpghdl.cpgvo.range}&keyword=${cpghdl.cpgvo.keyword}"
+						style="margin-left: 10px; ">
+							&#62;</a></li>
 				</c:if>
 			</ul>
 		</div>
