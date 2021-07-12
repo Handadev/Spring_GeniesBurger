@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
+import com.myweb.domain.StockVO;
 
 @Repository
 public class ProductDAO implements ProductDAORule {
@@ -64,6 +65,11 @@ public class ProductDAO implements ProductDAORule {
 	@Override // 소비자 리스트 글의 개수 구하기
 	public int selectOne(ProductCustomerPageVO pcpgvo) {
 		return sql.selectOne(ns+"totalcountcustomer", pcpgvo);
+	}
+
+	@Override // 상품 등록시 재고 리스트 받아오기
+	public List<StockVO> selectList() {
+		return sql.selectList(ns+"stocklist");
 	}
 
 	

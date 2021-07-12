@@ -107,14 +107,14 @@ body {
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
 							<a class="dropdown-item" href="/product/register">상품추가</a> <a
-								class="dropdown-item" href="/priduct/list">상품리스트</a> <a
+								class="dropdown-item" href="/product/list">상품리스트</a> <a
 								class="dropdown-item" href="product-single.html">Single
 								Product</a> <a class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li>
+					<li class="nav-item"><a href="/review/list" class="nav-link">reviewTest</a></li>
              <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
 					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
 					<c:choose>
