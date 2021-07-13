@@ -10,13 +10,10 @@
 	</insert>
 
 	<select parameterType="int" id="list" resultType="cartvo">
-		<!-- SELECT * 
-		FROM TBL_MEMBER tm INNER JOIN TBL_CART tc 
-		ON tm.MNO = tc.MNO
-		WHERE tm.mno = #{mno}	 -->
-		
-		select * from tbl_cart
-		
+		select *
+		from TBL_CART tc INNER JOIN TBL_PRODUCTFILE tp 
+		on tc.PNO = tp.PNO
+		<!-- select * from tbl_cart -->
 	</select>
 
 	<delete parameterType="int" id="del">

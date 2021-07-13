@@ -62,7 +62,7 @@ public class ReviewDAO implements ReviewDAORule {
 
 	@Override
 	public int adCommentInsert(int rno, String adComment) {
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rno", (Integer)rno);
 		map.put("adcomment", adComment);
 		return sql.insert(NS + "acReg",map);
@@ -70,7 +70,7 @@ public class ReviewDAO implements ReviewDAORule {
 
 	@Override
 	public int adCommentUpdate(int rno, String adComment) {
-		Map<String, Object> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rno", (Integer)rno);
 		map.put("adcomment", adComment);
 		return sql.update(NS + "acUp", map);
