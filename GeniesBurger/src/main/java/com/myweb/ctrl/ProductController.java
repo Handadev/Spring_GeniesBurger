@@ -38,8 +38,9 @@ public class ProductController {
 	private ProductFileProcessor pfp;
 	
 	@GetMapping("/register")
-	public void register(Model model) {
+	public void register(Model model, ProductVO pvo) {
 		model.addAttribute("stock_list", psv.getList());
+		model.addAttribute("single_list", psv.getList(pvo));
 	}
 	
 	@PostMapping("/register")

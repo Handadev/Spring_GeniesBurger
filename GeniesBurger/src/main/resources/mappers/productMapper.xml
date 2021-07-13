@@ -25,8 +25,8 @@
   	</sql>
   
   	<insert id="reg" parameterType="pvo">
-  		insert into tbl_product (pno, title, category, content, calorie, price) values
-  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price})
+  		insert into tbl_product (pno, title, category, content, calorie, price, relate_pno) values
+  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price}, #{relate_pno})
   	</insert>
   	
   	<!-- 관리자 리스트 페이징 서치 -->
@@ -75,13 +75,32 @@
   		<include refid="search"/>
   	</select>
   	
-  	<select id="detail" parameterType="int" resultType="pvo">
-  		select * from tbl_product where pno = #{pno}
+
+	<!-- 추가된 상품의 pno 가져오기 사진 / 상품-재고 추가용 -->
+  	<select id="curpno" resultType="int">
+  		select seq_product_pno.currval from dual
+  	</select>
+  	
+  	<!-- 세트 메뉴구성을 위한 단품 리스트 -->
+  	<select id="singlemenu" resultType="pvo">
+  		select pno, title, category from tbl_product where category = 1 or category = 4
   	</select>
   	
   	<!-- 상품 등록시 재고 리스트 가져오기 후에 stockmapper로 옮기기-->
   	<select id="stocklist" resultType="svo">
   		select sno, sname from tbl_stock
+  	</select>
+  	
+  	<!-- 소비자 - 단품 or 세트선택 화면리스트 -->
+  	<select id="selectmenu" parameterType="int" resultType="pfdto">
+  		select p.pno, title, content, price, category, relate_pno, puuid, savedir, fname
+		from tbl_product p inner join tbl_productfile pf
+		on p.pno = pf.pno
+		where p.pno = #{pno} or relate_pno = #{pno}
+  	</select>
+  	
+  	<select id="detail" parameterType="int" resultType="pvo">
+  		select * from tbl_product where pno = #{pno}
   	</select>
   	
   	<update id="mod" parameterType="pvo">
@@ -95,9 +114,6 @@
   		delete from tbl_product where pno = #{pno}
   	</delete>
   	
-  	<select id="curpno" resultType="int">
-  		select seq_product_pno.currval from dual
-  	</select>
   	
   	<update id="salesup" parameterType="hashmap">
   		update tbl_product set sales = sales + #{num} where pno = #{pno}

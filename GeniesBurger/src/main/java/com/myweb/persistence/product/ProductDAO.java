@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myweb.domain.ProductAndFileDTO;
 import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
@@ -35,6 +36,16 @@ public class ProductDAO implements ProductDAORule {
 	@Override // 소비자 리스트
 	public List<ProductVO> selectList(ProductCustomerPageVO pcpgvo) {
 		return sql.selectList(ns+"listcustomer", pcpgvo);
+	}
+	
+	@Override // 세트 메뉴구성을 위한 단품 리스트
+	public List<ProductVO> selectList(ProductVO pvo) {
+		return sql.selectList(ns+"singlemenu", pvo);
+	}
+	
+	@Override // 소비자 - 단품 or 세트선택 화면리스트
+	public List<ProductAndFileDTO> selectList(int pno) {
+		return sql.selectList(ns+"selectmenu", pno);
 	}
 	
 	@Override
@@ -71,6 +82,10 @@ public class ProductDAO implements ProductDAORule {
 	public List<StockVO> selectList() {
 		return sql.selectList(ns+"stocklist");
 	}
+
+
+
+	
 
 	
 
