@@ -8,12 +8,12 @@
 		<h2>쿠폰 등록</h2>
 			<form action="/coupon/register" id="registForm" method="post">
 			  <div class="form-group">
-			    <label for="cpname">쿠폰 이름</label>
-			    <input type="text" class="form-control" placeholder="Enter Name" id="cpname" name="cpname">
+			    <label for="cpname">쿠폰명</label>
+			    <input type="text" class="form-control" placeholder="쿠폰명을 입력하세요." id="cpname" name="cpname">
 			  </div>
 			  <div class="form-group">
-			    <label for="discount">할인(%)</label>
-			    <input type="text" class="form-control" placeholder="Enter Discount" id="discount" name="discount">
+			    <label for="discount">할인율(%)</label>
+			    <input type="text" class="form-control" placeholder="할인율을 입력하세요." id="discount" name="discount">
 			  </div>
 			  <div class="form-group">
 				  <button type="button" id="couponSbmBtn" class="btn btn-primary">등록</button>
@@ -28,10 +28,10 @@
 			var discount = $("#discount").val();
 
 			if (cpname == "" || cpname == null) {
-				alert("쿠폰 이름을 입력해주세요.");
+				alert("쿠폰명을 입력해주세요.");
 				$("#cpname").focus();
 			} else if (discount == "" || discount == null) {
-				alert("할인 내용을 입력해주세요.");
+				alert("할인율을 입력해주세요.");
 				$("#discount").focus();
 			} else {
 				document.getElementById("registForm").submit();

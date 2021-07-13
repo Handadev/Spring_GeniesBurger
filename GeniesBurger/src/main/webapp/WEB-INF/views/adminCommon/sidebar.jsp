@@ -22,7 +22,7 @@
 						data-feather="tag" class="feather-icon"></i><span
 						class="hide-menu">매출 상세 확인</span></a></li>
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="app-chat.html" aria-expanded="false"><i
+					href="/stockOrder/list" aria-expanded="false"><i
 						data-feather="message-square" class="feather-icon"></i><span
 						class="hide-menu">주문 목록</span></a></li>
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
