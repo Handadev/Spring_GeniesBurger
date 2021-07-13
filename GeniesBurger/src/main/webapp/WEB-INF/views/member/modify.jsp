@@ -67,16 +67,30 @@
 		}
 	};
 	
-   $("#confirmPwd").blur(function() {
-		  let firstPwd = $("#pwd").val(); 
-		  let secondPwd = $("#confirmPwd").val();
-		  if (firstPwd == secondPwd) {
+	let firstPwd = '';
+	let secondPwd = '';
+	
+	$("#pwd").keyup(function() {
+		  firstPwd = $("#pwd").val(); 
+		  secondPwd = $("#confirmPwd").val();
+		  if (firstPwd == '' && secondPwd == '') {
+			  $("#confirmMessage").text("비밀번호를 입력하세요!").css({"color": "blue", "font-size": "15px"});
+		  } else if (firstPwd == secondPwd) {
 			  $("#confirmMessage").text("비밀번호가 일치합니다!").css({"color": "green", "font-size": "15px"});
-			  $("#submitBtn").attr("disabled", false);
 		  } else {
 			  $("#confirmMessage").text("비밀번호가 일치하지 않습니다!").css({"color": "red", "font-size": "15px"});
-			  $("#confirmPwd").focus();
-			  $("#submitBtn").attr("disabled", true);
+		  }
+	   });
+	   
+	   $("#confirmPwd").keyup(function() {
+		  firstPwd = $("#pwd").val(); 
+		  secondPwd = $("#confirmPwd").val();
+		  if (firstPwd == '' && secondPwd == '') {
+			  $("#confirmMessage").text("비밀번호를 입력하세요!").css({"color": "blue", "font-size": "15px"});
+		  } else if (firstPwd == secondPwd) {
+			  $("#confirmMessage").text("비밀번호가 일치합니다!").css({"color": "green", "font-size": "15px"});
+		  } else {
+			  $("#confirmMessage").text("비밀번호가 일치하지 않습니다!").css({"color": "red", "font-size": "15px"});
 		  }
 	   });
 	   
@@ -89,7 +103,9 @@
 		   });
 		   if(isEmpty) {
 		       alert('값을 전부 입력하세요!');
-		   } else {
+		   } else if (firstPwd != secondPwd) {
+			   alert('비밀번호를 확인하세요!');
+		   }  else {
 			   $("#modifyForm").submit();
 		   }
 	   });	
