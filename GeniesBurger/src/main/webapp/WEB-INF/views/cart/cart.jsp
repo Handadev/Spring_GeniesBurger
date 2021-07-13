@@ -3,7 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<style>
+  .modal {
+    min-width: 100%;
+    min-height: 100%;
+  }
 
+  .modal-title {
+    margin: auto;
+  }
+
+  .modal-body {
+    text-align: center; 
+  }
+
+  .modal-img {
+    margin: 10px;
+  }
+
+  .checkBtn {
+    margin-top: 15px;
+    width: 90%;
+  }
+  .modal-select{
+  width: 50%;
+  margin: 0;
+  padding: 0;   
+  float: left; 
+  }
+  .modal-select:active{
+    color: #ff0000;
+  }
+  .img{
+  	width: 120px;
+  	height: 120px;
+  }
+</style>
 
 <section class="ftco-section ftco-cart">
 	<div class="container">
@@ -35,8 +70,11 @@
 													<span class="ion-ios-close"> </span>
 												</button>
 											</td>
-											<td class="image-prod"><div class="img"
-													style="background-image: url(/resources/images/demo.png);"></div></td>
+											<td class="image-prod">
+											<!-- <div class="img" style="background-image: url(/resources/images/demo.png);"></div> -->
+											<img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
+											
+											</td>
 											<td class="cartno">
 												<h3>cartno</h3>
 												<p>${cartList.cartno }</p>
@@ -72,14 +110,17 @@
 						<c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
 					</c:if>
 				</c:forEach>
+				<c:if test="${ses.mno != null}">
 				총 주문금액 :
-				<c:out value="${sum }" />
-				원
-				<button type="button" class="btn btn-success" id="orderBtn">결제하기</button>
+				<c:out value="${sum }" /> 원
+				<button type="button" class="btn btn-primary" 
+				data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
+				</c:if>
 			</div>
 		</div>
 	</div>
 </section>
+<!-- 카트 담기 -->
 <form class="" action="/product/register" method="post"
 	enctype="multipart/form-data">
 	<input type="hidden" name="mno" value="${ses.mno }"> <input
@@ -90,6 +131,34 @@
 		type="hidden" name="sales" value="${pvo.sales }"> <input
 		type="hidden" name="cansale" value="${pvo.cansale }">
 </form>
+<!-- Modal -->
+   <div class="container">
+       <!-- Modal -->
+    <div class="modal fade" id="orderBtn">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">선택해주세요</h4>
+          </div>
+
+          <!-- Modal body -->
+          <div class="modal-body">
+            <div class="modal-select" class="modal-img">
+              <img src="/resources/icons/delivery_logo.png" style="width:200px; height:180px;" class="modal-img" />
+              <p>매장식사</p>
+            </div>
+            <div class="modal-select">
+            <img src="/resources/icons/package_logo.png" style="width:200px; height:180px;" class="modal-img" />
+            <p>포장주문</p>
+          </div>
+            <button type="button" class="btn btn-dark checkBtn">확인</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 <!-- 삭제 스크립트 -->
 <script>
 	$(document).on("click", ".removeBtn", function() {

@@ -84,6 +84,7 @@
 <script>
 	$(document).on("click", "#fileTrigger", function() {
 		$("#files").click();
+		console.log("fileTrigger");
 	});
 	
 	let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
@@ -116,8 +117,8 @@
 				li += '<i class="fa fa-times-rectangle" style="font-size:24px;color:red"></i>';
 				li += fobj.name+'<span class="badge badge-danger badge-pill">';
 				$("button[type=submit]").attr("disabled", true);
-				let fileSize = fobj.size / 1024;
 			}
+				let fileSize = fobj.size / 1024;
 				fileSize = parseInt(fileSize);
 				li += fileSize.toFixed(2) + 'KB</span></li>';
 				fileZone.append(li);

@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.CartVO;
+import com.myweb.domain.ProductFileVO;
 import com.myweb.persistence.cart.CartDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Service
 public class CartService implements CartServiceRule {
