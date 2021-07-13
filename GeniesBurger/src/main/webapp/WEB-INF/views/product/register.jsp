@@ -30,6 +30,22 @@
 			</div>
 
 			<div class="form-group">
+				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno"
+					class="form-control">
+					<option value="">연동할 상품명 선택</option>
+					<c:forEach items="${single_list }" var="pvo">
+						<option value="${pvo.pno }">
+							<c:choose>
+								<c:when test="${pvo.category eq 1}">버거 단품</c:when>
+								<c:otherwise>올데이세일 단품</c:otherwise>
+							</c:choose>
+						 - ${pvo.title }
+						</option>
+					</c:forEach>
+				</select>
+			</div>
+
+			<div class="form-group">
 				<label for="title">제품명:</label> <input type="text"
 					class="form-control" id="title" placeholder="Enter title"
 					name="title">
@@ -83,7 +99,7 @@
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
 	$(document).on("click", "#fileTrigger", function() {
-		$("#files").click();
+		$("input[name=files]").click();
 	});
 	
 	let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
@@ -116,8 +132,8 @@
 				li += '<i class="fa fa-times-rectangle" style="font-size:24px;color:red"></i>';
 				li += fobj.name+'<span class="badge badge-danger badge-pill">';
 				$("button[type=submit]").attr("disabled", true);
-				let fileSize = fobj.size / 1024;
 			}
+				let fileSize = fobj.size / 1024;
 				fileSize = parseInt(fileSize);
 				li += fileSize.toFixed(2) + 'KB</span></li>';
 				fileZone.append(li);
