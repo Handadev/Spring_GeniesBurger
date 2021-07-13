@@ -67,7 +67,7 @@ public class MemberController {
    @GetMapping("/detail")
    public void detail(@RequestParam("mno") int mno, Model model) {
       model.addAttribute("mvo", msv.detail(mno));
-      model.addAttribute("myCp", cpsv.myCoupon(mno));
+      model.addAttribute("myCpList", cpsv.myCouponList(mno));
    }
    
    @PostMapping("/login")

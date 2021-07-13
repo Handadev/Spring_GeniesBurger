@@ -77,7 +77,7 @@ public class CouponDAO implements CouponDAORule{
 	}
 	
 	@Override
-	public int myCouponQty(int mno) {
-		return SQL.selectOne(NS + "myCp", mno);
+	public List<CouponListVO> myCouponList(int mno) {
+		return SQL.selectList(NS + "myCpList", mno);
 	}
 }

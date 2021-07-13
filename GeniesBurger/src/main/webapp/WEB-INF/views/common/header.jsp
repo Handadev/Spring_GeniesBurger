@@ -28,13 +28,21 @@
 
 </head>
 <style>
+* {
+	margin: 0; 
+	padding: 0;
+} 
+
 @font-face {
 	font-family: 'Maplestory Light';
 	src: url("resources/fonts/Maplestory Light.ttf");
 }
 
 body {
+    margin: auto;
 	font-family: 'Maplestory Light';
+    /* background-color: black;
+    width: 65%; */
 }
 .ftco-navbar-light {
 	background: #dc3545 !important;

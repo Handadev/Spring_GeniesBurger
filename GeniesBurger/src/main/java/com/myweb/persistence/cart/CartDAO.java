@@ -1,6 +1,8 @@
 package com.myweb.persistence.cart;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -18,20 +20,48 @@ public class CartDAO implements CartDAORule {
 
 	@Inject
 	private SqlSession sql;
-	
+
 	@Override
 	public int insert(CartVO cartvo) {
-		return sql.insert(NS+"reg", cartvo);
+		return sql.insert(NS + "reg", cartvo);
 	}
 
 	@Override
 	public List<CartVO> selectList() {
-		return sql.selectList(NS+"list");
+		return sql.selectList(NS + "list");
 	}
 
 	@Override
 	public int delete(int cartno) {
-		return sql.delete(NS+"del", cartno);
+		return sql.delete(NS + "del", cartno);
+	}
+
+	@Override
+	public int upQty(int cartno, int upqtystr) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cartno", cartno);
+		map.put("upno", upqtystr);
+		return sql.update(NS + "upQty", map);
+	}
+
+	@Override
+	public int downQty(int cartno, int downqtystr) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cartno", cartno);
+		map.put("downno", downqtystr);
+		return sql.update(NS + "downQty", map);
+	}
+
+	@Override
+	public int dupleProduct(int pno) {
+		return sql.selectOne(NS + "dupleProduct", pno);
+	}
+
+	@Override
+	public int upQtyDuple(int pno) {
+		int isUp = sql.update(NS + "upQtyDuple", pno);
+		logger.info("DAO upQtyDuple : " + isUp);
+		return isUp;
 	}
 
 }

@@ -56,13 +56,24 @@ public class ReviewDAO implements ReviewDAORule {
 	}
 
 	@Override
-	public int adCommentInsert(adCommentVO advo) {
-		return sql.insert(NS + "adComm", advo);
+	public List<adCommentVO> adCommentList(int rno) {
+		return sql.selectList(NS + "clist", rno);
 	}
 
 	@Override
-	public List<adCommentVO> selectList(int rno) {
-		return sql.selectList(NS + "adList", rno);
+	public int adCommentInsert(int rno, String adComment) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rno", (Integer)rno);
+		map.put("adcomment", adComment);
+		return sql.insert(NS + "acReg",map);
+	}
+
+	@Override
+	public int adCommentUpdate(int rno, String adComment) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rno", (Integer)rno);
+		map.put("adcomment", adComment);
+		return sql.update(NS + "acUp", map);
 	}
 
 }

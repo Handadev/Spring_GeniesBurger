@@ -2,6 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="MemberMapper">
+	<sql id="search">
+		<if test="range != null">
+			<trim prefix="and (" suffix=")">
+				<choose>
+					<when test="range == 'en'.toString()">
+						email like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'e'.toString()">
+						email like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'n'.toString()">
+						name like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'm'.toString()">
+						mobile like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'a'.toString()">
+						address like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</if>
+	</sql>
    <insert id="reg" parameterType="mvo">
       insert into tbl_member(mno, email, pwd, name, mobile, address, birthday)
       values (seq_member_mno.nextval, #{email}, #{pwd}, #{name}, #{mobile}, #{address}, #{birthday})
@@ -16,6 +39,9 @@
  		from(select /*INDEX_DESC(tbl_member pk_member)*/
  			rownum as rn, mno, email, name, mobile, address, birthday, point
  			from tbl_member where rownum > 0
+ 		]]>
+ 			<include refid="search"></include>
+		<![CDATA[		
  			and rownum <= #{pageIndex} * #{countPerPage})
         	where rn > (#{pageIndex}-1) * #{countPerPage}
  		]]>

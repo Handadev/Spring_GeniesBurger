@@ -99,7 +99,8 @@
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
 	$(document).on("click", "#fileTrigger", function() {
-		$("input[name=files]").click();
+		$("#files").click();
+		console.log("fileTrigger");
 	});
 	
 	let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");

@@ -7,6 +7,25 @@
 <section class="ftco-section ftco-cart">
 	<div class="container">
 		<div class="row">
+			<div class="col" style="margin-bottom: 10px;">
+				<form action="/member/list" class="form-inline justify-content-end">
+					<select class="form-control" name="range">
+						<option value="en"
+							<c:out value="${pghdl.mpgvo.range eq 'en' ? 'selected' : '' }"/>>Email+Name</option>
+						<option value="e"
+							<c:out value="${pghdl.mpgvo.range eq 'e' ? 'selected' : '' }"/>>Email</option>
+						<option value="n"
+							<c:out value="${pghdl.mpgvo.range eq 'n' ? 'selected' : '' }"/>>Name</option>
+						<option value="m"
+							<c:out value="${pghdl.mpgvo.range eq 'm' ? 'selected' : '' }"/>>Mobile</option>
+						<option value="a"
+							<c:out value="${pghdl.mpgvo.range eq 'a' ? 'selected' : '' }"/>>Address</option>
+					</select>&nbsp;&nbsp;<input class="form-control" type="text"
+						placeholder="검색어 입력" name="keyword"
+						value="${pghdl.mpgvo.keyword }"> &nbsp;&nbsp;
+					<button type="submit" class="btn btn-success">검색</button>
+				</form>
+			</div>
 			<div class="col-md-12 ftco-animate">
 				<div class="cart-list">
 					<table class="table">
@@ -44,7 +63,7 @@
 						<tfoot>
 					</table>
 				</div>
-					<jsp:include page="paging.jsp" />
+				<jsp:include page="paging.jsp" />
 			</div>
 		</div>
 	</div>

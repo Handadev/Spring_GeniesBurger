@@ -15,9 +15,9 @@
 			<option value="nd" <c:out value="${cpghdl.cpgvo.range eq 'nd' ? 'selected' : '' }"/>>
 			전체</option>
 			<option value="no" <c:out value="${cpghdl.cpgvo.range eq 'no' ? 'selected' : '' }"/>>
-			번호</option>
+			쿠폰 번호</option>
 			<option value="na" <c:out value="${cpghdl.cpgvo.range eq 'na' ? 'selected' : '' }"/>>
-			이름</option>
+		       쿠폰명</option>
 			<option value="d" <c:out value="${cpghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
 			할인율</option>
 		</select>
@@ -30,7 +30,7 @@
 	    <thead>
 	      <tr>
 	        <th>쿠폰 번호</th>
-	        <th>쿠폰 이름</th>
+	        <th>쿠폰명</th>
 	        <th>할인율(%)</th>
 	      </tr>
 	    </thead>
