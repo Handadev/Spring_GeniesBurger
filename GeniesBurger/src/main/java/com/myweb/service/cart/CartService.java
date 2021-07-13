@@ -9,7 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.CartVO;
+import com.myweb.domain.ProductFileVO;
 import com.myweb.persistence.cart.CartDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Service
 public class CartService implements CartServiceRule {
@@ -31,6 +33,31 @@ public class CartService implements CartServiceRule {
 	@Override
 	public int remove(int cartno) {
 		return cartdao.delete(cartno);
+	}
+
+	@Override
+	public int increQty(int cartno, String upqtystr) {
+		return cartdao.upQty(cartno, Integer.parseInt(upqtystr));
+	}
+
+	@Override
+	public int decreQty(int cartno, String downqtystr) {
+		int isUp = cartdao.downQty(cartno, Integer.parseInt(downqtystr));
+		logger.info("decreQty : " + isUp);
+		
+		return isUp;
+	}
+
+	@Override
+	public boolean dupleCheck(int pno) {
+		return cartdao.dupleProduct(pno) > 0 ? true : false;
+	}
+
+	@Override
+	public int increRegister(int pno) {
+		int isUp = cartdao.upQtyDuple(pno);
+		logger.info("service increReg : " + isUp);
+		return isUp;
 	}
 
 }

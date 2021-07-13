@@ -79,6 +79,11 @@
   		select * from tbl_product where pno = #{pno}
   	</select>
   	
+  	<!-- 상품 등록시 재고 리스트 가져오기 후에 stockmapper로 옮기기-->
+  	<select id="stocklist" resultType="svo">
+  		select sno, sname from tbl_stock
+  	</select>
+  	
   	<update id="mod" parameterType="pvo">
   		update tbl_product set 
   		title = #{title}, price = #{price}, content = #{content}, category = #{category}, 
@@ -93,7 +98,6 @@
   	<select id="curpno" resultType="int">
   		select seq_product_pno.currval from dual
   	</select>
-  	
   	
   	<update id="salesup" parameterType="hashmap">
   		update tbl_product set sales = sales + #{num} where pno = #{pno}

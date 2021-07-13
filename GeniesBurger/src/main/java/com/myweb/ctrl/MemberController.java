@@ -1,7 +1,5 @@
 package com.myweb.ctrl;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myweb.domain.MemberVO;
 import com.myweb.domain.MemberPageVO;
 import com.myweb.handler.MemberPagingHandler;
+import com.myweb.service.coupon.CouponServiceRule;
 import com.myweb.service.member.MemberServiceRule;
 
 @RequestMapping("/member/*")
@@ -28,6 +27,9 @@ public class MemberController {
 
    @Inject
    private MemberServiceRule msv;
+   
+   @Inject
+   private CouponServiceRule cpsv;
    
    @GetMapping("/logout")
    public String logout(RedirectAttributes reAttr, HttpSession ses) {
@@ -65,6 +67,7 @@ public class MemberController {
    @GetMapping("/detail")
    public void detail(@RequestParam("mno") int mno, Model model) {
       model.addAttribute("mvo", msv.detail(mno));
+      model.addAttribute("myCpList", cpsv.myCouponList(mno));
    }
    
    @PostMapping("/login")

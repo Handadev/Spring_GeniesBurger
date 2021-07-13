@@ -57,8 +57,8 @@ public class CouponDAO implements CouponDAORule{
 	}
 
 	@Override
-	public List<CouponListVO> selectIssueList() {
-		return SQL.selectList(NS + "issueList");
+	public List<CouponListVO> selectIssueList(CouponPageVO cpgvo) {
+		return SQL.selectList(NS + "issueList", cpgvo);
 	}
 
 	@Override
@@ -75,5 +75,9 @@ public class CouponDAO implements CouponDAORule{
 	public int issueTotalCount(CouponPageVO cpgvo) {
 		return SQL.selectOne(NS + "itc", cpgvo);
 	}
-
+	
+	@Override
+	public List<CouponListVO> myCouponList(int mno) {
+		return SQL.selectList(NS + "myCpList", mno);
+	}
 }

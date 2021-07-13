@@ -1,5 +1,7 @@
 package com.myweb.domain;
 
+import java.util.List;
+
 public class ReviewVO {
 	private int rno;
 	private int pno;
@@ -10,6 +12,7 @@ public class ReviewVO {
 	private String rsavedir;
 	private String rfname;
 	private int rftype;
+	private List<adCommentVO> clist;
 
 	public int getRno() {
 		return rno;
@@ -17,6 +20,14 @@ public class ReviewVO {
 
 	public void setRno(int rno) {
 		this.rno = rno;
+	}
+
+	public List<adCommentVO> getClist() {
+		return clist;
+	}
+
+	public void setClist(List<adCommentVO> clist) {
+		this.clist = clist;
 	}
 
 	public int getPno() {

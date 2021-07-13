@@ -7,7 +7,7 @@
 <jsp:include page="../adminCommon/sidebar.jsp" />
 	<div class="container">
 		<h2 class="float-left">쿠폰 정보</h2>
-		<a href="/coupon/list" class="btn btn-primary float-right">목록으로</a>
+		<a href="/coupon/list?pageIndex=${cpgvo.pageIndex}&countPerPage=${cpgvo.countPerPage}&range=${cpgvo.range}&keyword=${cpgvo.keyword}" class="btn btn-primary float-right">목록으로</a>
 		<table class="table table-striped table-bordered">
 			<thead>
 				<tr>
@@ -21,7 +21,7 @@
 					<td>${cpvo.cpno }</td>
 				</tr>
 				<tr>
-					<td>쿠폰 이름</td>
+					<td>쿠폰명</td>
 					<td>${cpvo.cpname }</td>
 				</tr>
 				<tr>

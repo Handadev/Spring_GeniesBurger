@@ -1,18 +1,24 @@
 package com.myweb.ctrl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myweb.domain.ReviewVO;
+import com.myweb.domain.adCommentVO;
 import com.myweb.orm.ReviewFileProcessor;
 import com.myweb.service.review.ReviewServiceRule;
 
@@ -48,9 +54,20 @@ public class ReviewController {
 
 	@GetMapping("/list")
 	public void list(Model model) {
-		int rno = 17;
 		model.addAttribute("list", rsv.ReviewList());
-		model.addAttribute("clist", rsv.commentList(rno));
+	}
 
+	@ResponseBody
+	@PostMapping("/addAdComment")
+	public String acRegister(@RequestParam("rno") int rno, @RequestParam("adComment") String adComment) {
+		int isUp = rsv.adCommentAdd(rno, adComment);
+		return isUp > 0 ? "1" : "0";
+	}
+
+	@ResponseBody
+	@PostMapping("/acUpdate")
+	public String acUpdate(@RequestParam("rno") int rno, @RequestParam("adComment") String adComment) {
+		int isUp = rsv.adCommentUp(rno, adComment);
+		return isUp > 0 ? "1" : "0";
 	}
 }

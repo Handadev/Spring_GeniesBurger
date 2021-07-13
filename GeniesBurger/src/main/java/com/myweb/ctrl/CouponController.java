@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +22,7 @@ import com.myweb.domain.CouponListVO;
 import com.myweb.domain.CouponPageVO;
 import com.myweb.domain.CouponVO;
 import com.myweb.domain.MemberPageVO;
+import com.myweb.domain.PageVO;
 import com.myweb.handler.CouponPagingHandler;
 import com.myweb.service.coupon.CouponServiceRule;
 import com.myweb.service.member.MemberServiceRule;
@@ -44,12 +46,11 @@ public class CouponController {
 	}
 	
 	@GetMapping("/issueList")
-	public void issueList(Model model) {
-		model.addAttribute("issueList", cpsv.getIssueList());
-		/*
-		 * int totalCount = cpsv.getIssueTotalCount(cpgvo); model.addAttribute("pghdl",
-		 * new CouponPagingHandler(totalCount, cpgvo));
-		 */
+	public void issueList(Model model, CouponPageVO cpgvo) {
+		model.addAttribute("issueList", cpsv.getIssueList(cpgvo));
+		 int totalCount = cpsv.getIssueTotalCount(cpgvo); 
+		 model.addAttribute("cpghdl", new CouponPagingHandler(totalCount, cpgvo));
+		 
 	}
 	
 	@PostMapping("/issue")
@@ -82,7 +83,8 @@ public class CouponController {
 	}
 	
 	@GetMapping({"/detail", "/modify"})
-	public void detail(Model model, @RequestParam("cpno") int cpno) {
+	public void detail(Model model, @RequestParam("cpno") int cpno,
+			@ModelAttribute("cpgvo") CouponPageVO cpgvo) {
 		model.addAttribute("cpvo", cpsv.detail(cpno));
 	}
 	
@@ -90,7 +92,7 @@ public class CouponController {
 	public void list(Model model, CouponPageVO cpgvo) {
 		model.addAttribute("list", cpsv.getList(cpgvo));
 		int totalCount = cpsv.getTotalCount(cpgvo);
-		model.addAttribute("pghdl", new CouponPagingHandler(totalCount, cpgvo));
+		model.addAttribute("cpghdl", new CouponPagingHandler(totalCount, cpgvo));
 	}
 	
 	@PostMapping("/register")
