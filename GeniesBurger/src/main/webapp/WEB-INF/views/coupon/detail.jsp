@@ -21,7 +21,7 @@
 					<td>${cpvo.cpno }</td>
 				</tr>
 				<tr>
-					<td>쿠폰 이름</td>
+					<td>쿠폰명</td>
 					<td>${cpvo.cpname }</td>
 				</tr>
 				<tr>
