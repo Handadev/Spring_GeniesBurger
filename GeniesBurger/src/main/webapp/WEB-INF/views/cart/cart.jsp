@@ -61,8 +61,8 @@
 								<c:choose>
 									<c:when test="${ses.mno == cartList.mno }">
 										<tr class="text-center">
-											<%-- <td id="pnoVal">pno : ${cartList.pno }</td>
-											<td id="mno_val">mno : ${cartList.mno }</td> --%>
+											<td id="pnoVal">pno : ${cartList.pno }</td>
+											<%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
 											<td class="product-remove">
 												<button type="button"
 													class="btn btn-outline-light outline btn-lg removeBtn"
@@ -71,7 +71,6 @@
 												</button>
 											</td>
 											<td class="image-prod">
-											<!-- <div class="img" style="background-image: url(/resources/images/demo.png);"></div> -->
 											<img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
 											
 											</td>
@@ -87,9 +86,7 @@
 													<button type="button" class="ion-ios-arrow-down downQtyBtn"
 														data-downqty="${cartList.cartno }" data-down="-1"></button>
 													&nbsp;&nbsp;
-													<p>
-														<b>${cartList.quantity }</b>
-													</p>
+														<p data-qtydata="${cartList.quantity }" class="qtyclass">${cartList.quantity }</p>
 													&nbsp;&nbsp;
 													<button type="button" class="ion-ios-arrow-up upQtyBtn"
 														data-upqty="${cartList.cartno }" data-up="1"></button>
@@ -194,9 +191,15 @@
 		console.log(this);
 		let downqty_val = $(this).data("downqty");
 		let downqty_val2 = $(this).data("down");
+		let qtyData = $(".qtyclass").data("qtydata");
+		console.log("qtyData : " + qtyData);
 		console.log("downqty_val : " + downqty_val);
 		console.log("downqty_val2 : " + downqty_val2);
+		if(qtyData == 1){
+			alert("더 이상 감소가 불가능합니다.");
+		}else{
 		downqty_cart(downqty_val, downqty_val2);
+		}
 	});
 	function downqty_cart(downqty, downqty2) {
 		$.ajax({
@@ -238,6 +241,7 @@
 			location.reload();
 		});
 	}
+	
 </script>
 
 <jsp:include page="../common/footer.jsp" />
