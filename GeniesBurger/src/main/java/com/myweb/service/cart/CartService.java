@@ -42,7 +42,22 @@ public class CartService implements CartServiceRule {
 
 	@Override
 	public int decreQty(int cartno, String downqtystr) {
-		return cartdao.downQty(cartno, Integer.parseInt(downqtystr));
+		int isUp = cartdao.downQty(cartno, Integer.parseInt(downqtystr));
+		logger.info("decreQty : " + isUp);
+		
+		return isUp;
+	}
+
+	@Override
+	public boolean dupleCheck(int pno) {
+		return cartdao.dupleProduct(pno) > 0 ? true : false;
+	}
+
+	@Override
+	public int increRegister(int pno) {
+		int isUp = cartdao.upQtyDuple(pno);
+		logger.info("service increReg : " + isUp);
+		return isUp;
 	}
 
 }

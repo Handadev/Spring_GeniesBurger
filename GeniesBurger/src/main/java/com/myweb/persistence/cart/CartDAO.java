@@ -20,20 +20,20 @@ public class CartDAO implements CartDAORule {
 
 	@Inject
 	private SqlSession sql;
-	
+
 	@Override
 	public int insert(CartVO cartvo) {
-		return sql.insert(NS+"reg", cartvo);
+		return sql.insert(NS + "reg", cartvo);
 	}
 
 	@Override
 	public List<CartVO> selectList() {
-		return sql.selectList(NS+"list");
+		return sql.selectList(NS + "list");
 	}
 
 	@Override
 	public int delete(int cartno) {
-		return sql.delete(NS+"del", cartno);
+		return sql.delete(NS + "del", cartno);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class CartDAO implements CartDAORule {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("cartno", cartno);
 		map.put("upno", upqtystr);
-		return sql.update(NS+"upQty", map);
+		return sql.update(NS + "upQty", map);
 	}
 
 	@Override
@@ -49,7 +49,19 @@ public class CartDAO implements CartDAORule {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("cartno", cartno);
 		map.put("downno", downqtystr);
-		return sql.update(NS+"downQty", map);
+		return sql.update(NS + "downQty", map);
+	}
+
+	@Override
+	public int dupleProduct(int pno) {
+		return sql.selectOne(NS + "dupleProduct", pno);
+	}
+
+	@Override
+	public int upQtyDuple(int pno) {
+		int isUp = sql.update(NS + "upQtyDuple", pno);
+		logger.info("DAO upQtyDuple : " + isUp);
+		return isUp;
 	}
 
 }
