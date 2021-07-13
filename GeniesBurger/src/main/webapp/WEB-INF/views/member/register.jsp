@@ -40,6 +40,14 @@
   </form>
   
 <script>
+	let isAllowed = false;
+	let firstPwd = '';
+	let secondPwd = '';
+	
+	$("#email").on("change", function() {
+		isAllowed = false;
+	});
+	
    $(function() {
       $("#checkEmail").on("click", function(e) {
          e.preventDefault();
@@ -50,34 +58,46 @@
             data: {email: email_val}
          }).done(function(result) {
             if(parseInt(result)==0){
-            	$("#submitBtn").attr("disabled", false);
                alert("사용 가능한 이메일입니다!");
+               isAllowed = true;
                $("#pwd").focus();
             }else{
-               $("#email").val("");
                $("#email").focus();
                alert("중복되는 이메일입니다!");
-               $("#submitBtn").attr("disabled", true);
             }
          });
       });
    });
    
-   $("#confirmPwd").blur(function() {
-	  let firstPwd = $("#pwd").val(); 
-	  let secondPwd = $("#confirmPwd").val();
-	  if (firstPwd == secondPwd) {
+   $("#pwd").keyup(function() {
+	  firstPwd = $("#pwd").val(); 
+	  secondPwd = $("#confirmPwd").val();
+	  if (firstPwd == '' && secondPwd == '') {
+		  $("#confirmMessage").text("비밀번호를 입력하세요!").css({"color": "blue", "font-size": "15px"});
+	  } else if (firstPwd == secondPwd) {
 		  $("#confirmMessage").text("비밀번호가 일치합니다!").css({"color": "green", "font-size": "15px"});
-		  $("#submitBtn").attr("disabled", false);
 	  } else {
 		  $("#confirmMessage").text("비밀번호가 일치하지 않습니다!").css({"color": "red", "font-size": "15px"});
-		  $("#confirmPwd").focus();
-		  $("#submitBtn").attr("disabled", true);
+	  }
+   });
+   
+   $("#confirmPwd").keyup(function() {
+	  firstPwd = $("#pwd").val(); 
+	  secondPwd = $("#confirmPwd").val();
+	  if (firstPwd == '' && secondPwd == '') {
+		  $("#confirmMessage").text("비밀번호를 입력하세요!").css({"color": "blue", "font-size": "15px"});
+	  } else if (firstPwd == secondPwd) {
+		  $("#confirmMessage").text("비밀번호가 일치합니다!").css({"color": "green", "font-size": "15px"});
+	  } else {
+		  $("#confirmMessage").text("비밀번호가 일치하지 않습니다!").css({"color": "red", "font-size": "15px"});
 	  }
    });
    
    $("#submitBtn").click(function() {
 	   let isEmpty = false;
+	   firstPwd = $("#pwd").val(); 
+       secondPwd = $("#confirmPwd").val();
+       
 	   $('#registerForm').find('input[type!="hidden"]').each(function(){
 	       if(!$(this).val()) {
 	    	   isEmpty = true;
@@ -85,8 +105,12 @@
 	   });
 	   if(isEmpty) {
 	       alert('값을 전부 입력하세요!');
+	   } else if (!isAllowed) {
+		   alert('이메일 중복여부를 확인하세요!');
+	   } else if (firstPwd != secondPwd) {
+		   alert('비밀번호를 확인하세요!');
 	   } else {
-		   $("#registerForm").submit();
+		   $("#registerForm").submit();		   
 	   }
    });
 </script>

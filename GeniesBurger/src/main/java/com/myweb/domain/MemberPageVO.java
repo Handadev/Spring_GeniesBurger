@@ -11,9 +11,20 @@ public class MemberPageVO {
 		this(1, 10);
 	}
 	
+	public MemberPageVO(String range, String keyword) {
+		this.range = range;
+		this.keyword = keyword;
+	}
+
 	public MemberPageVO(int pageIndex, int countPerPage) {
 		this.pageIndex = pageIndex;
 		this.countPerPage = countPerPage;
+	}
+	
+	public MemberPageVO(String range, String keyword, int pageIndex) {
+		this.range = range;
+		this.keyword = keyword;
+		this.pageIndex = pageIndex;
 	}
 
 	public MemberPageVO(String range, String keyword, int pageIndex, int countPerPage) {
