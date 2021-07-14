@@ -21,7 +21,7 @@ public class CartService implements CartServiceRule {
 	private CartDAORule cartdao;
 	
 	@Override
-	public int register(CartVO cartvo, int mno) {
+	public int register(CartVO cartvo) {
 		return cartdao.insert(cartvo);
 	}
 
