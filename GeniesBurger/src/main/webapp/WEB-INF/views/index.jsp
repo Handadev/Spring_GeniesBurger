@@ -56,17 +56,17 @@
 			<div class="col-md-10 mb-5 text-center float-left">
 				<ul class="product-category">
 					<li><a href="/"
-						class="${product_paging.pcpgvo.range == '' ? 'active' : '' } total">전체</a></li>
+						class="total">전체</a></li>
 					<li><a href="/?range=category&keyword=1"
-						class="${product_paging.pcpgvo.keyword == 1 ? 'active' : '' }">버거</a></li>
+						class="burger">버거</a></li>
 					<li><a href="/?range=category&keyword=2"
-						class="${product_paging.pcpgvo.keyword == 2 ? 'active' : '' }">버거세트</a></li>
+						class="set">버거세트</a></li>
 					<li><a href="/?range=category&keyword=4"
-						class="${product_paging.pcpgvo.keyword == 4 ? 'active' : '' }">올데이킹</a></li>
+						class="allday">올데이킹</a></li>
 					<li><a href="/?range=category&keyword=7"
-						class="${product_paging.pcpgvo.keyword == 7 ? 'active' : '' }">사이드</a></li>
+						class="side">사이드</a></li>
 					<li><a href="/?range=category&keyword=8"
-						class="${product_paging.pcpgvo.keyword == 8 ? 'active' : '' }">음료</a></li>
+						class="beverage">음료</a></li>
 				</ul>
 				<form action="/">
 					<input type="hidden" name="range" value="pro"> <input
@@ -175,15 +175,30 @@
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
-	let range_val = '<c:out value="${product_paging.pcpgvo.range}"/>';
-	if (!range_val) {
-		$(".total").addClass("active");
+	let keyword_val = '<c:out value="${product_paging.pcpgvo.keyword}"/>';
+	console.log(keyword_val + " = keyword");
+	switch (keyword_val) {
+		case "":
+			$(".total").addClass("active");
+			break;
+		case "1":
+			$(".burger").addClass("active");
+			break;
+		case "2":
+			$(".set").addClass("active");
+			break;
+		case "4":
+			$(".allday").addClass("active");
+			break;
+		case "7":
+			$(".side").addClass("active");
+			break;
+		case "8":
+			$(".beverage").addClass("active");
+			break;
 	}
-
-	console.log("냠냠");
 	
 	$(document).on("click", ".product", function() {
-		console.log("눌림");
 		let pno_val = $(this).data("pno");
 		console.log(pno_val);
 		get_menu(pno_val);

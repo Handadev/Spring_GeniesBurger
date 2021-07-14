@@ -26,7 +26,7 @@
   
   	<insert id="reg" parameterType="pvo">
   		insert into tbl_product (pno, title, category, content, calorie, price, relate_pno) values
-  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price}, #{relate_pno})
+  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price}, #{relate_pno, jdbcType=INTEGER })
   	</insert>
   	
   	<!-- 관리자 리스트 페이징 서치 -->
@@ -97,6 +97,7 @@
 		from tbl_product p inner join tbl_productfile pf
 		on p.pno = pf.pno
 		where p.pno = #{pno} or relate_pno = #{pno}
+		order by category desc
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
