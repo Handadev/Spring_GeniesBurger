@@ -7,9 +7,6 @@
 <title>Genie's Burger</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"> -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/resources/css/open-iconic-bootstrap.min.css">
@@ -23,7 +20,6 @@
 <link rel="stylesheet" href="/resources/css/jquery.timepicker.css">
 <link rel="stylesheet" href="/resources/css/flaticon.css">
 <link rel="stylesheet" href="/resources/css/icomoon.css">
-<link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/style.css">
 
 </head>
@@ -41,11 +37,10 @@
 body {
     margin: auto;
 	font-family: 'Maplestory Light';
-    /* background-color: black;
-    width: 65%; */
 }
+
 .ftco-navbar-light {
-	background: #dc3545 !important;
+	background: #e31212 !important;
 	z-index: 3;
 	padding: 0;
 }
@@ -61,16 +56,13 @@ body {
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	opacity: 1 !important;
-}
-
-.ftco-navbar-light .navbar-brand {
-	color: #000;
+	color: #ffffff !important;
 }
 
 #navBtn{
 	text-align: center;
-	height: 100px;
-	line-height: 100px;
+	height: 120px;
+	line-height: 120px;
 	vertical-align: middle;
     color: #ffffff;
     font-size: 25px;
@@ -79,6 +71,13 @@ body {
 #logo{
 	margin-left: 170px;
 }
+#logo-text{
+	color: white;
+}
+.navbar-nav>li{
+	margin-top: 20px;
+    height: 100px;
+    }
 </style>
 
 <!-- Start header / nav  -->
@@ -88,6 +87,7 @@ body {
 		<div class="container">
 			<a class="navbar-brand" href="/" id="logo">
 			<img src="/resources/icons/logo.png" style="width:70px; height:70px;"/>
+			<span id="logo-text">지니스버거</span>
 			</a>
 		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -126,8 +126,8 @@ body {
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item"><a href="/review/list" class="nav-link">Review Test</a></li>
-             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
+					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
+             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
 					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
 					<c:choose>
 						<c:when test="${ses.email eq 'admin@admin.com' }">

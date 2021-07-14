@@ -23,7 +23,7 @@
 					</select>&nbsp;&nbsp;<input class="form-control" type="text"
 						placeholder="검색어 입력" name="keyword"
 						value="${pghdl.mpgvo.keyword }"> &nbsp;&nbsp;
-					<button type="submit" class="btn btn-success">검색</button>
+					<button type="submit" class="btn btn-danger">검색</button>
 				</form>
 			</div>
 			<div class="col-md-12 ftco-animate">
