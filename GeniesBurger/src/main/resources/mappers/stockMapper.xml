@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StockMapper">
+
+	<insert id="reg" parameterType="svo">
+		insert into tbl_stock(sno, sname, stock_qty, shelf_life, isburger) values
+		(seq_stock_sno.nextval, #{sname}, #{stock_qty}, #{shelf_life}, #{isburger})
+	</insert>
+	
+	<select id="list" resultType="svo">
+		select * from tbl_stock
+	</select>
+	<select id="totalCntList" resultType="svo">
+		select sname, sum(stock_qty) AS stock_qty
+		from tbl_stock group by sname
+	</select>
+	<select id="oneList" parameterType="String" resultType="svo">
+		select sno, sname, stock_qty, TO_CHAR(shelf_life, 'YYYY-MM-DD') as shelf_life, TO_CHAR(STOCK_REGDATE, 'YYYY-MM-DD') as stock_regdate from tbl_stock where sname=#{sname} order by shelf_life
+	</select>
+	
+	<update id="mod" parameterType="svo">
+ 		update tbl_stock set stock_qty=#{stock_qty} where sno=#{sno}
+ 	</update>
+	<update id="upsq" parameterType="hashmap">
+ 		update tbl_stock set stock_qty = stock_qty + #{qty} where sno=#{sno}
+ 	</update>
+	
+	<delete id="del" parameterType="int">
+ 		delete from tbl_stock where sno=#{sno}
+ 	</delete>
+ 	<delete id="delAll" parameterType="String">
+ 		delete from tbl_stock where sname=#{sname}
+ 	</delete>
+</mapper>
