@@ -38,10 +38,15 @@
 	-font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
 		"Liberation Mono", "Courier New", monospace;
 }
+@font-face {
+	font-family: 'Maplestory Light';
+	src: url("../fonts/Maplestory Light.ttf");
+}
 
 *, *::before, *::after {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	font-family: 'Maplestory Light';
 }
 
 html {
@@ -58,9 +63,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav,
 
 body {
 	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-		"Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
-		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	/* font-family: 'Maplestory Light'; */
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
@@ -68,6 +71,27 @@ body {
 	text-align: left;
 	background-color: #fff;
 }
+
+#navBtn{
+	text-align: center;
+	height: 100px;
+	line-height: 100px;
+	vertical-align: middle;
+    color: #ffffff;
+    font-size: 25px;
+    background-image: url(../icons/nav2.jpg);
+}
+#logo{
+	margin-left: 170px;
+}
+#logo-text{
+	color: white;
+}
+.navbar-nav>li{
+	margin-top: 20px;
+    height: 100px;
+    }
+
 
 [tabindex="-1"]:focus {
 	outline: 0 !important;
@@ -2534,6 +2558,7 @@ textarea.form-control {
 }
 
 .btn {
+	border-radius: 1px;
 	display: inline-block;
 	font-weight: 400;
 	color: #212529;
@@ -10097,7 +10122,7 @@ body {
 	font-size: 15px;
 	line-height: 1.8;
 	font-weight: 400;
-	color: gray;
+	color: black;
 }
 
 body.menu-show {
@@ -10154,7 +10179,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .ftco-navbar-light {
-	background: transparent !important;
+	background: #e31212 !important;
 	z-index: 3;
 	padding: 0;
 }
@@ -10195,7 +10220,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
-	font-size: 11px;
+	font-size: 15px;
 	padding-top: 1.5rem;
 	padding-bottom: 1.5rem;
 	padding-left: 20px;
@@ -10205,6 +10230,7 @@ h1, h2, h3, h4, h5, .h1, .h2, .h3, .h4, .h5 {
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	opacity: 1 !important;
+	color: #ffffff !important;
 }
 
 .ftco-navbar-light .navbar-nav>.nav-item>.nav-link:hover {
@@ -11819,7 +11845,7 @@ textarea.form-control {
 }
 
 .ftco-section {
-	padding: 6em 0;
+	padding: 2em;
 	position: relative;
 }
 

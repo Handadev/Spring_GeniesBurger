@@ -13,7 +13,6 @@
 		select *
 		from TBL_CART tc INNER JOIN TBL_PRODUCTFILE tp 
 		on tc.PNO = tp.PNO
-		<!-- select * from tbl_cart -->
 	</select>
 	
 	<!-- 수량 중복확인 -->
