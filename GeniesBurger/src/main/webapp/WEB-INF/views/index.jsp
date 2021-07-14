@@ -72,7 +72,7 @@
 					<input type="hidden" name="range" value="pro"> <input
 						class="form-control" type="text" placeholder="찾으시는 제품명을 입력하세요"
 						name="keyword">
-					<button type="submit" class="btn btn-success float-right">검색</button>
+					<button type="submit" class="btn btn-danger float-right">검색</button>
 				</form>
 			</div>
 		</div>
