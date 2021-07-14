@@ -43,10 +43,10 @@ public class CartController {
 	public String register(CartVO cartvo, @RequestParam("pno") int pno, RedirectAttributes reAttr, HttpSession ses) {
 		boolean isExist = cartsv.dupleCheck(pno);
 		if(isExist) {
-			int isUp = cartsv.increRegister(pno);
+			int isUp = cartsv.increRegister(pno, mno);
 			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 수량증가 성공" : "카트 수량증가 실패");
 		}else {
-			int isUp = cartsv.register(cartvo);
+			int isUp = cartsv.register(cartvo, mno);
 		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
 		}
 		return "redirect:/product/list";

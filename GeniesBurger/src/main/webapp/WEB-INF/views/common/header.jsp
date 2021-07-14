@@ -7,9 +7,6 @@
 <title>Genie's Burger</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<!--  <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"> -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/resources/css/open-iconic-bootstrap.min.css">
@@ -24,9 +21,8 @@
 <link rel="stylesheet" href="/resources/css/flaticon.css">
 <link rel="stylesheet" href="/resources/css/icomoon.css">
 <link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/tw.css">
 
-</head>
 <style>
 * {
 	margin: 0; 
@@ -41,11 +37,10 @@
 body {
     margin: auto;
 	font-family: 'Maplestory Light';
-    /* background-color: black;
-    width: 65%; */
 }
+
 .ftco-navbar-light {
-	background: #dc3545 !important;
+	background: #e31212 !important;
 	z-index: 3;
 	padding: 0;
 }
@@ -61,26 +56,33 @@ body {
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	opacity: 1 !important;
-}
-
-.ftco-navbar-light .navbar-brand {
-	color: #000;
+	color: #ffffff !important;
 }
 
 #navBtn{
 	text-align: center;
+	margin: auto;
 	height: 100px;
 	line-height: 100px;
 	vertical-align: middle;
     color: #ffffff;
     font-size: 25px;
-    background-image: url(resources/icons/button5.jpg);
+    background-image: url(resources/icons/nav2.jpg);
 }
 #logo{
 	margin-left: 170px;
 }
+#logo-text{
+	color: white;
+}
+.navbar-nav>li{
+	margin-top: 20px;
+    height: 100px;
+}
 </style>
 
+
+</head>
 <!-- Start header / nav  -->
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -88,6 +90,9 @@ body {
 		<div class="container">
 			<a class="navbar-brand" href="/" id="logo">
 			<img src="/resources/icons/logo.png" style="width:70px; height:70px;"/>
+			<span id="logo-text">
+			<strong>지니스버거</strong>
+			</span>
 			</a>
 		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -126,8 +131,8 @@ body {
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-					<li class="nav-item"><a href="/review/list" class="nav-link">Review Test</a></li>
-             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
+					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
+             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
 					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
 					<c:choose>
 						<c:when test="${ses.email eq 'admin@admin.com' }">
@@ -154,9 +159,15 @@ body {
 	<div>
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
-				<div class="col" id="navOrder">딜리버리 주문 내역</div>
 				<div class="col">
-					<a href="/cart/cart" id="navCart">장바구니</a>
+				<a href="/cart/cart" id="navOrder">
+				<strong>딜리버리 주문 내역</strong>
+				</a>
+				</div>
+				<div class="col">
+					<a href="/cart/cart" id="navCart">
+					<strong>장바구니</strong>
+					</a>
 				</div>
 			</div>
 		</div>

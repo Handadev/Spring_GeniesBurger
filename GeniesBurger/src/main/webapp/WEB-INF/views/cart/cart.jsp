@@ -61,7 +61,7 @@
 								<c:choose>
 									<c:when test="${ses.mno == cartList.mno }">
 										<tr class="text-center">
-											<td id="pnoVal">pno : ${cartList.pno }</td>
+											<%-- <td id="pnoVal">pno : ${cartList.pno }</td> --%>
 											<%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
 											<td class="product-remove">
 												<button type="button"
@@ -110,7 +110,7 @@
 				<c:if test="${ses.mno != null}">
 				총 주문금액 :
 				<c:out value="${sum }" /> 원
-				<button type="button" class="btn btn-primary" 
+				<button type="button" class="btn btn-danger" 
 				data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
 				</c:if>
 			</div>

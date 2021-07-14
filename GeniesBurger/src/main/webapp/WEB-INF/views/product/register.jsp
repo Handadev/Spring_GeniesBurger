@@ -30,7 +30,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno"
+				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno" id="box"
 					class="form-control">
 					<option value="0">연동할 상품명 선택</option>
 					<c:forEach items="${single_list }" var="pvo">
@@ -142,7 +142,6 @@
 	});
 </script>
 <script>
-	
 	let stockval_arr = $("#stock option").map(function() {return $(this).val()});
 	let stocktext_arr = $("#stock option").map(function() {return $(this).text()});
 	console.log(stockval_arr);
@@ -184,6 +183,12 @@
 		
 	});
 	
+	
+	$("#box").change(function() {
+		let valval = $(this).val();
+		console.log("alkdfjasdlkj = "+valval);
+		
+	});
 </script>
 
 <jsp:include page="../common/footer.jsp" />

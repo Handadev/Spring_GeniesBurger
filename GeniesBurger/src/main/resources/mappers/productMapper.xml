@@ -26,7 +26,7 @@
   
   	<insert id="reg" parameterType="pvo">
   		insert into tbl_product (pno, title, category, content, calorie, price, relate_pno) values
-  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price}, #{relate_pno})
+  		(seq_product_pno.nextval, #{title}, #{category}, #{content}, #{calorie}, #{price}, #{relate_pno, jdbcType=INTEGER })
   	</insert>
   	
   	<!-- 관리자 리스트 페이징 서치 -->
@@ -34,7 +34,7 @@
   		<![CDATA[
   		select *
   		from (select /*+INDEX_DESC(tbl_product pk_product)*/
-  			rownum AS rn , pno, title, price, sales, cansale, regdate, moddate
+  			rownum AS rn , pno, title, price, category, sales, cansale, regdate, moddate
 			from tbl_product where pno > 0
   		]]>
   		<include refid="search"/>
@@ -57,7 +57,7 @@
   		<![CDATA[
   		select *
   		from (select /*+INDEX_DESC(tbl_product pk_product)*/
-  			rownum AS rn , pno, title, price, sales, cansale, regdate, moddate
+  			rownum AS rn , pno, title, price, category, sales, cansale, regdate, moddate
 			from tbl_product where pno > 0
   		]]>
   		<include refid="search"/>
@@ -92,11 +92,21 @@
   	</select>
   	
   	<!-- 소비자 - 단품 or 세트선택 화면리스트 -->
-  	<select id="selectmenu" parameterType="int" resultType="pfdto">
+  	<select id="selectmenu" parameterType="hashmap" resultType="pfdto">
   		select p.pno, title, content, price, category, relate_pno, puuid, savedir, fname
 		from tbl_product p inner join tbl_productfile pf
-		on p.pno = pf.pno
-		where p.pno = #{pno} or relate_pno = #{pno}
+		on p.pno = pf.pno where p.pno > 0
+		<trim prefix="and">
+			<choose>
+				<when test="category == 1">
+					p.pno = #{pno} or relate_pno = #{pno}
+				</when>
+				<otherwise>
+					relate_pno = (select relate_pno from tbl_product WHERE pno = #{pno})
+				</otherwise>
+			</choose>
+		</trim>
+		order by category desc
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">

@@ -1,6 +1,8 @@
 package com.myweb.persistence.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -44,8 +46,11 @@ public class ProductDAO implements ProductDAORule {
 	}
 	
 	@Override // 소비자 - 단품 or 세트선택 화면리스트
-	public List<ProductAndFileDTO> selectList(int pno) {
-		return sql.selectList(ns+"selectmenu", pno);
+	public List<ProductAndFileDTO> selectList(int pno, int category) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("category", category);
+		return sql.selectList(ns+"selectmenu", map);
 	}
 	
 	@Override

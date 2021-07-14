@@ -1,118 +1,29 @@
------------------------10_member------------------------
--- 오라클 접속 방법
+---------------------setting------------------------
 conn system/oracle
 
--- springuser 아이디 만들고 비번은 oracle
-create user springuser identified by oracle;
+create user geniesburger identified by 0915;
 
---
-grant resource, connect to springuser;
+grant resource, connect to geniesburger;
 
-conn springuser/oracle;
+conn geniesburger/0915;
 
--- 모든 테이블 보여줌
 select * from tab;
 
--- oracle 에선 varchar2라고 함
--- timestamp 말고 sysdate라고 함
-create table tbl_member (
-email varchar2(100),
-pwd varchar2(1000) not null,
-nickname varchar2(100) not null,
-regdate date default sysdate);
-
-alter table tbl_member add constraint pk_member
-primary key(email);
-
-desc tbl_member;
------------------------20_product------------------------
-create table tbl_product (
-pno number(10),
-title varchar2(200) not null,
-content varchar2(4000) not null,
-writer varchar2(100) not null,
-price number(7,2) default 0.0,
-regdate date default sysdate,
-moddate date default sysdate,
-readcount number(10) default 0,
-cmtqty number(10) default 0,
-constraint pk_product primary key(pno)
-);
--- oracle auto_increment를 해주는 테이블이 따로 있음
--- sequence라는 객체임 옵션으로 늘어나는 숫자를 정해줄 수 있음
--- nocache 보통 테스트로 20정도 까지 숫자를 잡아놓는 경우가 있음 그래서 처음에 만들었을 때 21으로 시작하는 경우가 있음
-
-create sequence seq_product_pno
-start with 1
-increment by 1
-nocycle nocache;
-
-insert into tbl_product (pno, title, content, writer) values
-(seq_product_pno.nextval, 'test title', 'test content', 'admin@admin.com');
-
--- 지금 몇 번이 들어가 있는지 확인할 때 / max(pno) as pno 하면 최근 값을 구할 수 있다
-select seq_product_pno.currval from dual;
-
------------------------30_comment------------------------
-create table tbl_comment (
-cno number(10),
-pno number(10) not null,
-writer varchar2(100) not null,
-content varchar2(1000) not null,
-regdate date default sysdate,
-constraint pk_comment primary key(cno)
+-----------------------재고-------------------------
+create table tbl_stock (
+sno number(11),
+sname varchar2(100) not null,
+stock_qty number(11) not null,
+shelf_life date not null,
+stock_regdate date default sysdate,
+isburger number(2) DEFAULT 0,
+constraint pk_stock primary key(sno)
 );
 
--- pno fk 설정
-
-alter table tbl_comment
-add constraint fk_comment_pno
-foreign key(pno) references tbl_product(pno);
-
-create sequence seq_comment_cno
+create sequence seq_stock_sno
 start with 1
 increment by 1
 nocycle nocache;
 
------------------------40_fileupload------------------------
-create table tbl_files (
--- 스프링 id 랜덤화기능 있음, 100이상은 꼭해야함
-uuid varchar2(200),
-savedir varchar2(200) not null,
--- 파일 이름 이것도 랜덤화 되기 때문에 500이상은 되어야함
-fname varchar2(1000) not null,
-ftype number(1) default 0,
-pno number(10),
-constraint pk_files primary key(uuid)
-);
-
-alter table tbl_files add constraint fk_file_pno
-foreign key (pno) references tbl_product (pno);
-
------------------------50_search------------------------
-drop sequence seq_product_pno;
-drop sequence seq_product_cno;
-delete from tbl_product;
-delete from tbl_comment;
-delete from tbl_member;
-delete from tbl_files;
-
-create sequence seq_product_pno
-start with 1
-increment by 1
-nocycle nocache;
-
-create sequence seq_product_pno
-start with 1
-increment by 1
-nocycle nocache;
-
------------------------70_aop------------------------
--- pno 각 번호에 댓글 개수 동기화
-update tbl_product set cmtqty =
-(select count(cno) from tbl_comment where tbl_comment.pno = tbl_product.pno);
-
------------------------80_security------------------------
-alter table tbl_member add auth varchar2(10) default 'MEM';
-alter table tbl_member add enabled number(1) default 1;
-alter table tbl_member add failcnt number(1) default 0;
+drop sequence seq_stock_sno;
+drop table tbl_stock;

@@ -49,4 +49,20 @@ public class StockDAO implements StockDAORule {
 		return sql.delete(NS + "del", sno);
 	}
 
+	@Override
+	public List<StockVO> selectOneList(String sname) {
+		return sql.selectList(NS + "oneList", sname);
+	}
+
+	@Override
+	public List<StockVO> selectTotalCntList() {
+		return sql.selectList(NS + "totalCntList");
+	}
+
+	@Override
+	public int deleteAll(String sname) {
+		return sql.delete(NS + "delAll", sname);
+	}
+
+
 }

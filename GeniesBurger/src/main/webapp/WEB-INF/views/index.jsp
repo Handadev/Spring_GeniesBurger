@@ -46,6 +46,10 @@
 #price {
 	color: red;
 }
+#indexSearch{
+	margin-top:5px;
+	margin-right:25px;
+}
 </style>
 
 <!-- 메뉴 상단이미지 삭제 -->
@@ -54,25 +58,27 @@
 		<!-- 상품 분류 선택 -->
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center float-left">
-				<ul class="product-category">
+				<strong style="font-size:2em;">메뉴선택</strong>
+				<ul class="product-category" style="margin-top:30px;">
+					<li>
 					<li><a href="/"
-						class="${product_paging.pcpgvo.range == '' ? 'active' : '' } total">전체</a></li>
+						class="total">전체</a></li>
 					<li><a href="/?range=category&keyword=1"
-						class="${product_paging.pcpgvo.keyword == 1 ? 'active' : '' }">버거</a></li>
+						class="burger">버거</a></li>
 					<li><a href="/?range=category&keyword=2"
-						class="${product_paging.pcpgvo.keyword == 2 ? 'active' : '' }">버거세트</a></li>
+						class="set">버거세트</a></li>
 					<li><a href="/?range=category&keyword=4"
-						class="${product_paging.pcpgvo.keyword == 4 ? 'active' : '' }">올데이킹</a></li>
+						class="allday">올데이킹</a></li>
 					<li><a href="/?range=category&keyword=7"
-						class="${product_paging.pcpgvo.keyword == 7 ? 'active' : '' }">사이드</a></li>
+						class="side">사이드</a></li>
 					<li><a href="/?range=category&keyword=8"
-						class="${product_paging.pcpgvo.keyword == 8 ? 'active' : '' }">음료</a></li>
+						class="beverage">음료</a></li>
 				</ul>
 				<form action="/">
 					<input type="hidden" name="range" value="pro"> <input
-						class="form-control" type="text" placeholder="찾으시는 제품명을 입력하세요"
+						class="form-control  float-left" type="text" placeholder="찾으시는 제품명을 입력하세요"
 						name="keyword">
-					<button type="submit" class="btn btn-success float-right">검색</button>
+					<button type="submit" class="btn btn-danger" id="indexSearch">검색</button>
 				</form>
 			</div>
 		</div>
@@ -85,7 +91,7 @@
 				<c:when test="${product_list.size() ne 0 }">
 					<c:forEach items="${product_list }" var="pvo">
 						<div class="col-md-6 col-lg-3 ftco-animate">
-							<div class="product" data-toggle="modal" data-target="#sigle_set_modal" id="product" data-pno="${pvo.pno }">
+							<div class="product" data-toggle="modal" data-target="#sigle_set_modal" id="product" data-pno="${pvo.pno }" data-category="${pvo.category }">
 								<img class="img-fluid"
 									src="/resources/images/product-1.jpg" alt="Colorlib Template" />
 									<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
@@ -175,21 +181,36 @@
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
-	let range_val = '<c:out value="${product_paging.pcpgvo.range}"/>';
-	if (!range_val) {
-		$(".total").addClass("active");
+	let keyword_val = '<c:out value="${product_paging.pcpgvo.keyword}"/>';
+	console.log(keyword_val + " = keyword");
+	switch (keyword_val) {
+		case "":
+			$(".total").addClass("active");
+			break;
+		case "1":
+			$(".burger").addClass("active");
+			break;
+		case "2":
+			$(".set").addClass("active");
+			break;
+		case "4":
+			$(".allday").addClass("active");
+			break;
+		case "7":
+			$(".side").addClass("active");
+			break;
+		case "8":
+			$(".beverage").addClass("active");
+			break;
 	}
-
-	console.log("냠냠");
 	
 	$(document).on("click", ".product", function() {
-		console.log("눌림");
 		let pno_val = $(this).data("pno");
-		console.log(pno_val);
-		get_menu(pno_val);
+		let category_val = $(this).data("category");
+		get_menu(pno_val, category_val);
 	});
-	function get_menu(pno_val) {
-		$.getJSON("/select/"+pno_val+".json", function(result) {
+	function get_menu(pno, category) {
+		$.getJSON("/select/"+pno+"/"+category+".json", function(result) {
 			console.log(result);
 			menu_list(result);
 		}).fail(function(err){

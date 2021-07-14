@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="email">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-      <button type="button" class="btn btn-success btn-sm" id="checkEmail">중복확인</button>
+      <button type="button" class="btn btn-danger btn-sm" id="checkEmail">중복확인</button>
     </div>
     <div class="form-group">
       <label for="pwd">Password:</label>
@@ -36,7 +36,7 @@
       <label for="birth day">Birth day:</label>
       <input type="date" class="form-control" id="birthday" placeholder="Enter birth day" name="birthday">
     </div>
-    <button type="button" class="btn btn-primary" id="submitBtn">Submit</button>
+    <button type="button" class="btn btn-danger" id="submitBtn">Submit</button>
   </form>
   
 <script>

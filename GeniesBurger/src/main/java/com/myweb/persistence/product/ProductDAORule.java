@@ -13,7 +13,7 @@ public interface ProductDAORule {
 	public List<ProductVO> selectList(ProductPageVO ppgvo); // 관리자 상품 리스트
 	public List<ProductVO> selectList(ProductCustomerPageVO pcpvo); // 소비자 상품 리스트
 	public List<ProductVO> selectList(ProductVO pvo); // 세트 메뉴구성을 위한 단품 리스트
-	public List<ProductAndFileDTO> selectList(int pno); // 소비자 - 단품 or 세트선택 화면리스트
+	public List<ProductAndFileDTO> selectList(int pno, int category); // 소비자 - 단품 or 세트선택 화면리스트
 	public ProductVO selectOne(int pno); // detail
 	public int update(ProductVO pvo); 
 	public int delete(int pno);

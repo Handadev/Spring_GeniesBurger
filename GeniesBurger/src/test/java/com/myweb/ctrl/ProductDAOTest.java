@@ -33,8 +33,8 @@ public class ProductDAOTest {
 			pvo.setPrice(10000);
 			pvo.setCategory(1);
 			pvo.setCalorie(100);
-			pdao.insert(pvo);
 			
+			pdao.insert(pvo);
 		}
 	}
 	

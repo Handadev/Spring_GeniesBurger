@@ -89,4 +89,6 @@ public class ProductVO {
 		this.flist = flist;
 	}
 	
+	
+	
 }

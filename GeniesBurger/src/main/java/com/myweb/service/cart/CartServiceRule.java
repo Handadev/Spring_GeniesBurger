@@ -5,7 +5,7 @@ import java.util.List;
 import com.myweb.domain.CartVO;
 
 public interface CartServiceRule {
-	public int register(CartVO cartvo);
+	public int register(CartVO cartvo, int mno);
 	public List<CartVO> getList();
 	public int remove(int cartno);
 	public int increQty(int cartno, String upqtystr);
