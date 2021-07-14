@@ -14,7 +14,7 @@ public interface ProductServiceRule {
 	public List<ProductVO> getList(ProductPageVO ppgvo); // 관리자 리스트
 	public List<ProductVO> getList(ProductCustomerPageVO pcpvo); // 소비자 리스트 
 	public List<ProductVO> getList(ProductVO pvo); // 상품등록시 세트 메뉴구성을 위한 단품 리스트
-	public List<ProductAndFileDTO> getProductList(int pno); // 소비자 - 단품 or 세트선택 화면리스트
+	public List<ProductAndFileDTO> getProductList(int pno, int category); // 소비자 - 단품 or 세트선택 화면리스트
 	public ProductVO detail(int pno);
 	public int modify(ProductVO pvo);
 	public int remove(int pno);

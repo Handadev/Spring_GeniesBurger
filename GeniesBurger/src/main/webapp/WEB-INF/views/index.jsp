@@ -85,7 +85,7 @@
 				<c:when test="${product_list.size() ne 0 }">
 					<c:forEach items="${product_list }" var="pvo">
 						<div class="col-md-6 col-lg-3 ftco-animate">
-							<div class="product" data-toggle="modal" data-target="#sigle_set_modal" id="product" data-pno="${pvo.pno }">
+							<div class="product" data-toggle="modal" data-target="#sigle_set_modal" id="product" data-pno="${pvo.pno }" data-category="${pvo.category }">
 								<img class="img-fluid"
 									src="/resources/images/product-1.jpg" alt="Colorlib Template" />
 									<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
@@ -200,11 +200,11 @@
 	
 	$(document).on("click", ".product", function() {
 		let pno_val = $(this).data("pno");
-		console.log(pno_val);
-		get_menu(pno_val);
+		let category_val = $(this).data("category");
+		get_menu(pno_val, category_val);
 	});
-	function get_menu(pno_val) {
-		$.getJSON("/select/"+pno_val+".json", function(result) {
+	function get_menu(pno, category) {
+		$.getJSON("/select/"+pno+"/"+category+".json", function(result) {
 			console.log(result);
 			menu_list(result);
 		}).fail(function(err){

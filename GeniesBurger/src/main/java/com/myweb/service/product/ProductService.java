@@ -57,8 +57,8 @@ public class ProductService implements ProductServiceRule {
 	}
 	
 	@Override // 소비자 - 단품 or 세트선택 화면리스트
-	public List<ProductAndFileDTO> getProductList(int pno) {
-		return pdao.selectList(pno);
+	public List<ProductAndFileDTO> getProductList(int pno, int category) {
+		return pdao.selectList(pno, category);
 	}
 
 	
