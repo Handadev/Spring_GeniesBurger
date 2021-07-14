@@ -1,6 +1,7 @@
 package com.myweb.service.stock;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -41,6 +42,21 @@ public class StockService implements StockServiceRule {
 	@Override
 	public int remove(int sno) {
 		return sdao.delete(sno);
+	}
+
+	@Override
+	public List<StockVO> getOneList(String sname) {
+		return sdao.selectOneList(sname);
+	}
+
+	@Override
+	public List<StockVO> getTotalCntList() {
+		return sdao.selectTotalCntList();
+	}
+
+	@Override
+	public int removeAll(String sname) {
+		return sdao.deleteAll(sname);
 	}
 
 }

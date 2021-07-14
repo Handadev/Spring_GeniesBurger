@@ -21,14 +21,21 @@
 					href="ticket-list.html" aria-expanded="false"><i
 						data-feather="tag" class="feather-icon"></i><span
 						class="hide-menu">매출 상세 확인</span></a></li>
+						
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
 					href="/stockOrder/list" aria-expanded="false"><i
 						data-feather="message-square" class="feather-icon"></i><span
 						class="hide-menu">주문 목록</span></a></li>
+						
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="app-calendar.html" aria-expanded="false"><i
+					href="/stock/presentList" aria-expanded="false"><i
 						data-feather="calendar" class="feather-icon"></i><span
-						class="hide-menu">재고 현황</span></a></li>
+						class="hide-menu">재고 관리</span></a></li>
+						
+				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
+					href="" aria-expanded="false"><i
+						data-feather="calendar" class="feather-icon"></i><span
+						class="hide-menu">입고 현황</span></a></li>
 
 				<li class="list-divider"></li>
 				<li class="nav-small-cap"><span class="hide-menu">메뉴 관리</span></li>
@@ -83,37 +90,4 @@
 <!-- Page wrapper  -->
 <!-- ============================================================== -->
 <div class="page-wrapper">
-
-	<!-- ============================================================== -->
-	<!-- Bread crumb and right sidebar toggle -->
-	<!-- ============================================================== -->
-	<div class="page-breadcrumb">
-		<div class="row">
-			<div class="col-7 align-self-center">
-				<h3
-					class="page-title text-truncate text-dark font-weight-medium mb-1">Good
-					Morning Jason!</h3>
-				<div class="d-flex align-items-center">
-					<nav aria-label="breadcrumb">
-						<ol class="breadcrumb m-0 p-0">
-							<li class="breadcrumb-item"><a href="index.html">Dashboard</a>
-							</li>
-						</ol>
-					</nav>
-				</div>
-			</div>
-			<div class="col-5 align-self-center">
-				<div class="customize-input float-right">
-					<select
-						class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
-						<option selected>Aug 19</option>
-						<option value="1">July 19</option>
-						<option value="2">Jun 19</option>
-					</select>
-				</div>
-			</div>
-		</div>
-	</div>
-	<!-- ============================================================== -->
-	<!-- End Bread crumb and right sidebar toggle -->
-	<!-- ============================================================== -->
+	
