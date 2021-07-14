@@ -44,4 +44,9 @@
 		update tbl_cart set
 		quantity=quantity + 1 where pno=#{pno}
 	</update>
+	
+	<!-- 결제창에서 해당하는 mno의 카트정보 가져오기 -->
+	<select id="pay" parameterType="int" resultType="cartvo">
+		select * from tbl_cart where mno=#{mno}
+	</select>
 </mapper>

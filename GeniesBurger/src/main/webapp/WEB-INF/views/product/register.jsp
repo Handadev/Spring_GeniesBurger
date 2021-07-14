@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno"
 					class="form-control">
-					<option value="">연동할 상품명 선택</option>
+					<option value="0">연동할 상품명 선택</option>
 					<c:forEach items="${single_list }" var="pvo">
 						<option value="${pvo.pno }">
 							<c:choose>

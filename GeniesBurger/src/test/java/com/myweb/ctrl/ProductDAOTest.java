@@ -55,11 +55,11 @@ public class ProductDAOTest {
 //		
 //	}
 	
-	@Test
-	public void productDetail() throws Exception {
-		ProductVO pvo = pdao.selectOne(30);
-		logger.info("pvo3"+pvo);
-	}
+//	@Test
+//	public void productDetail() throws Exception {
+//		ProductVO pvo = pdao.selectOne(30);
+//		logger.info("pvo3"+pvo);
+//	}
 
 //	@Test
 //	public void productRemove() throws Exception {

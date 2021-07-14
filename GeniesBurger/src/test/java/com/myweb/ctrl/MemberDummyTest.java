@@ -22,28 +22,31 @@ public class MemberDummyTest {
    @Inject
    private MemberDAORule mdao;
 
-   @Test
-   public void insertMemberTest() throws Exception {
-      MemberVO mvo = new MemberVO();
-      mvo.setEmail("tester02@tester.com");
-      mvo.setPwd("1111");
-      mvo.setName("tester02");
-      mvo.setMobile("01033338888");
-      mvo.setAddress("광주");
-      mvo.setBirthday("2021-07-07");
-      mdao.insert(mvo);
-   }
-
 //   @Test
-//   public void insertMembersTest() throws Exception {
-//      for (int i = 0; i < 128; i++) {
-//         MemberVO mvo = new MemberVO();
-//         mvo.setEmail("tester"+i+"@tester.com");
-//         mvo.setPwd("1111");
-//         mvo.setNickname("tester"+i);
-//         mdao.insert(mvo);
-//      }
+//   public void insertMemberTest() throws Exception {
+//      MemberVO mvo = new MemberVO();
+//      mvo.setEmail("tester02@tester.com");
+//      mvo.setPwd("1111");
+//      mvo.setName("tester02");
+//      mvo.setMobile("01033338888");
+//      mvo.setAddress("광주");
+//      mvo.setBirthday("2021-07-07");
+//      mdao.insert(mvo);
 //   }
+
+   @Test
+   public void insertMembersTest() throws Exception {
+      for (int i = 1; i < 31; i++) {
+         MemberVO mvo = new MemberVO();
+         mvo.setEmail("tester"+i+"@tester.com");
+         mvo.setPwd("1111");
+         mvo.setName("TESTER"+i);
+         mvo.setMobile("01011112222");
+         mvo.setAddress("TEXAS");
+         mvo.setBirthday("2021-07-07");
+         mdao.insert(mvo);
+      }
+   }
 
 //   @Test
 //   public void selectMemberTest() throws Exception {

@@ -60,4 +60,9 @@ public class CartService implements CartServiceRule {
 		return isUp;
 	}
 
+	@Override
+	public CartVO payment(int mno) {
+		return cartdao.selectOne(mno);
+	}
+
 }

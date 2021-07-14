@@ -109,7 +109,12 @@
  $("#addCartBtn").on("click", function(e){
 	e.preventDefault();
 	console.log(this);
-	$("#cartForm").submit();
+	if ($("input[name=mno]").val() == '') {
+		alert("먼저 로그인을 해야합니다!");
+		location.replace("/member/login");
+	} else {
+		$("#cartForm").submit();
+	}
  });
 </script>
 

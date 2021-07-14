@@ -117,17 +117,6 @@
 		</div>
 	</div>
 </section>
-<!-- 카트 담기 -->
-<form class="" action="/product/register" method="post"
-	enctype="multipart/form-data">
-	<input type="hidden" name="mno" value="${ses.mno }"> <input
-		type="hidden" name="pno" value="${pvo.pno }"> <input
-		type="hidden" name="title" value="${pvo.title }"> <input
-		type="hidden" name="price" value="${pvo.content }"> <input
-		type="hidden" name="calorie" value="${pvo.calorie }"> <input
-		type="hidden" name="sales" value="${pvo.sales }"> <input
-		type="hidden" name="cansale" value="${pvo.cansale }">
-</form>
 <!-- Modal -->
    <div class="container">
        <!-- Modal -->
@@ -143,14 +132,15 @@
           <!-- Modal body -->
           <div class="modal-body">
             <div class="modal-select" class="modal-img">
-              <img src="/resources/icons/delivery_logo.png" style="width:200px; height:180px;" class="modal-img" />
-              <p>매장식사</p>
+              <img src="/resources/icons/for_here.jpg" style="width:200px; height:200px;" class="modal-img" />
+              <p><b>매장식사</b></p>
             </div>
             <div class="modal-select">
-            <img src="/resources/icons/package_logo.png" style="width:200px; height:180px;" class="modal-img" />
-            <p>포장주문</p>
+            <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
+            <p><b>포장주문</b></p>
           </div>
-            <button type="button" class="btn btn-dark checkBtn">확인</button>
+          	<a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
+            <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
       </div>

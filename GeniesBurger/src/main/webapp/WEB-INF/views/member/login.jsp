@@ -7,11 +7,13 @@
 <form action="/member/login" method="post">
   <div class="form-group">
     <label for="email">Email address:</label>
-    <input type="email" class="form-control" placeholder="Enter email" id="email" name="email">
+    <input type="email" class="form-control" placeholder="Enter email" id="email" name="email"
+    value="tester1@tester.com">
   </div>
   <div class="form-group">
     <label for="pwd">Password:</label>
-    <input type="password" class="form-control" placeholder="Enter password" id="pwd" name="pwd">
+    <input type="password" class="form-control" placeholder="Enter password" id="pwd" name="pwd"
+    value="1111">
   </div>
   <div class="form-group form-check">
     <label class="form-check-label">
