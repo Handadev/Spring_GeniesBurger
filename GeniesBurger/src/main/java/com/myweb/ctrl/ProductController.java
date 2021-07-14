@@ -44,9 +44,8 @@ public class ProductController {
 	}
 	
 	@PostMapping("/register")
-	public String register(ProductVO pvo, ProductStockVO psvo, RedirectAttributes reAttr
-						,@RequestParam(name="files", required=false) MultipartFile[] files) {
-		logger.info("StockVO svo = "+ psvo.getSname());
+	public String register(ProductStockVO psvo, RedirectAttributes reAttr
+						,@RequestParam(name="files", required=false) MultipartFile[] files, ProductVO pvo) {
 		int isUp = psv.register(pvo);
 		if (isUp > 0) {
 			int pno = psv.getCurrPno();
