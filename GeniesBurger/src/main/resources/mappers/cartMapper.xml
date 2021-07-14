@@ -5,17 +5,43 @@
 
 	<insert parameterType="cartvo" id="reg">
 		insert into tbl_cart
-		(cartno, title, price, quantity, mno, pno, puuid, savedir, fname)
-		values (seq_cart_cartno.nextval,#{title},#{price},#{quantity},
-		#{mno}, #{pno},#{puuid},#{savedir}, #{fname})
+		(cartno, pno, title, price, mno)
+		values (seq_cart_cartno.nextval, #{pno}, #{title}, #{price}, #{mno})
 	</insert>
 
 	<select parameterType="int" id="list" resultType="cartvo">
-		select * from tbl_cart
+		select *
+		from TBL_CART tc INNER JOIN TBL_PRODUCTFILE tp 
+		on tc.PNO = tp.PNO
+		<!-- select * from tbl_cart -->
+	</select>
+	
+	<!-- 수량 중복확인 -->
+	<select id="dupleProduct" parameterType="int" resultType="int">
+		SELECT count(pno) 
+		FROM TBL_CART WHERE pno=#{pno}
 	</select>
 
 	<delete parameterType="int" id="del">
 		delete from tbl_cart
 		where cartno=#{cartno}
 	</delete>
+	
+	<!-- 수량 증가  -->
+	<update id="upQty" parameterType="hashmap">
+		update tbl_cart set
+		quantity=quantity + #{upno} where cartno=#{cartno}
+	</update>
+
+	<!-- 수량 감소 -->
+	<update id="downQty" parameterType="hashmap">
+		update tbl_cart set
+		quantity=quantity + #{downno} where cartno=#{cartno}
+	</update>
+
+	<!-- 장바구니에 상품이 중복될 떄 수량만 증가 -->	
+	<update id="upQtyDuple" parameterType="int">
+		update tbl_cart set
+		quantity=quantity + 1 where pno=#{pno}
+	</update>
 </mapper>

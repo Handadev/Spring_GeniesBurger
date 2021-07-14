@@ -1,5 +1,6 @@
 package com.myweb.service.review;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -9,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.ReviewVO;
+import com.myweb.domain.adCommentVO;
 import com.myweb.persistence.review.ReviewDAORule;
 
 @Service
@@ -24,8 +26,16 @@ public class ReviewService implements ReviewServiceRule {
 	}
 
 	@Override
-	public List<ReviewVO> ReviewList(int pno) {
-		return rdao.selectList(pno);
+	public List<ReviewVO> ReviewList() {
+		List<ReviewVO> list = new ArrayList<ReviewVO>();
+		List<ReviewVO> rlist = rdao.selectList();
+		for (ReviewVO rvo : rlist) {
+			int rno = rvo.getRno();
+			List<adCommentVO> clist = rdao.adCommentList(rno);
+			rvo.setClist(clist);
+			list.add(rvo);
+		}
+		return list;
 	}
 
 	@Override
@@ -41,6 +51,16 @@ public class ReviewService implements ReviewServiceRule {
 	@Override
 	public int ReviewCurrRno() {
 		return rdao.selectOne();
+	}
+
+	@Override
+	public int adCommentAdd(int rno, String adComment) {
+		return rdao.adCommentInsert(rno, adComment);
+	}
+
+	@Override
+	public int adCommentUp(int rno, String adComment) {
+		return rdao.adCommentUpdate(rno, adComment);
 	}
 
 }

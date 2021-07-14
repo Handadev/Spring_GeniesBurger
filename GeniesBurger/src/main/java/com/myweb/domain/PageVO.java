@@ -11,6 +11,11 @@ public class PageVO {
 		this(1, 10);
 	}
 	
+	public PageVO(String range, String keyword) {
+		this.range = range;
+		this.keyword = keyword;
+	}
+
 	public PageVO(int pageIndex, int countPerPage) {
 		this.pageIndex = pageIndex;
 		this.countPerPage = countPerPage;

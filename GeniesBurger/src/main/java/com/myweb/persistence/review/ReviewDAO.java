@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import com.myweb.domain.ReviewVO;
+import com.myweb.domain.adCommentVO;
 
 @Component
 public class ReviewDAO implements ReviewDAORule {
@@ -19,7 +20,7 @@ public class ReviewDAO implements ReviewDAORule {
 	private final String NS = "ReviewMapper.";
 
 	@Inject
-	SqlSession sql;
+	private SqlSession sql;
 
 	@Override
 	public int insert(ReviewVO rvo) {
@@ -27,8 +28,8 @@ public class ReviewDAO implements ReviewDAORule {
 	}
 
 	@Override
-	public List<ReviewVO> selectList(int pno) {
-		return sql.selectList(NS + "list", pno);
+	public List<ReviewVO> selectList() {
+		return sql.selectList(NS + "list");
 	}
 
 	@Override
@@ -52,6 +53,27 @@ public class ReviewDAO implements ReviewDAORule {
 	@Override
 	public int insertFile(ReviewVO rvo) {
 		return sql.update(NS + "upImg", rvo);
+	}
+
+	@Override
+	public List<adCommentVO> adCommentList(int rno) {
+		return sql.selectList(NS + "clist", rno);
+	}
+
+	@Override
+	public int adCommentInsert(int rno, String adComment) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rno", (Integer)rno);
+		map.put("adcomment", adComment);
+		return sql.insert(NS + "acReg",map);
+	}
+
+	@Override
+	public int adCommentUpdate(int rno, String adComment) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rno", (Integer)rno);
+		map.put("adcomment", adComment);
+		return sql.update(NS + "acUp", map);
 	}
 
 }

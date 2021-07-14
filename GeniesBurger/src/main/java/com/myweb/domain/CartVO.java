@@ -1,5 +1,7 @@
 package com.myweb.domain;
 
+import java.util.List;
+
 public class CartVO {
 	private int cartno;
 	private String title;
@@ -10,6 +12,31 @@ public class CartVO {
 	private String puuid;
 	private String savedir;
 	private String fname;
+	
+
+	public String getPuuid() {
+		return puuid;
+	}
+
+	public void setPuuid(String puuid) {
+		this.puuid = puuid;
+	}
+
+	public String getSavedir() {
+		return savedir;
+	}
+
+	public void setSavedir(String savedir) {
+		this.savedir = savedir;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
 
 	public int getCartno() {
 		return cartno;
@@ -57,37 +84,6 @@ public class CartVO {
 
 	public void setPno(int pno) {
 		this.pno = pno;
-	}
-
-	public String getPuuid() {
-		return puuid;
-	}
-
-	public void setPuuid(String puuid) {
-		this.puuid = puuid;
-	}
-
-	public String getSavedir() {
-		return savedir;
-	}
-
-	public void setSavedir(String savedir) {
-		this.savedir = savedir;
-	}
-
-	public String getFname() {
-		return fname;
-	}
-
-	public void setFname(String fname) {
-		this.fname = fname;
-	}
-
-	@Override
-	public String toString() {
-		return "CartVO [cartno=" + cartno + ", title=" + title + ", price=" + price + ", quantity=" + quantity
-				+ ", mno=" + mno + ", pno=" + pno + ", puuid=" + puuid + ", savedir=" + savedir + ", fname=" + fname
-				+ "]";
 	}
 
 }

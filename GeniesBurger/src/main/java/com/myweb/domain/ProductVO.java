@@ -13,6 +13,7 @@ public class ProductVO {
 	private String moddate;
 	private int sales; // 판매량
 	private int cansale; // 일시품절용 - 0 판매 가능 / 1 판매 불가
+	private int relate_pno; // 세트 상품 구성을 위한 단품 번호
 	private List<ProductFileVO> flist;
 	
 	public int getPno() {
@@ -75,11 +76,19 @@ public class ProductVO {
 	public void setCansale(int cansale) {
 		this.cansale = cansale;
 	}
+	public int getRelate_pno() {
+		return relate_pno;
+	}
+	public void setRelate_pno(int relate_pno) {
+		this.relate_pno = relate_pno;
+	}
 	public List<ProductFileVO> getFlist() {
 		return flist;
 	}
 	public void setFlist(List<ProductFileVO> flist) {
 		this.flist = flist;
 	}
+	
+	
 	
 }

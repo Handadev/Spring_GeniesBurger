@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StockOrderMapper">
+ 	<sql id="search">
+	  	<if test="range != null">
+	  		<trim prefix="and (" suffix=")">
+	  			<choose>
+	  				<when test="range == 'all'.toString()">
+	  					to_char(ono) like '%'||#{keyword}||'%' or
+	  					sname like '%'||#{keyword}||'%' or
+	  					to_char(order_qty) like '%'||#{keyword}||'%' or
+	  					to_char(order_date,'YYYY-MM-DD') like '%'||#{keyword}||'%'
+	  				</when>
+	  				<when test="range == 'no'.toString()">
+	  					to_char(ono) like '%'||#{keyword}||'%'
+	  				</when>
+	  				<when test="range == 'na'.toString()">
+	  					sname like '%'||#{keyword}||'%'
+	  				</when>
+	  				<when test="range == 'q'.toString()">
+	  					to_char(order_qty) like '%'||#{keyword}||'%'
+	  				</when>
+	  				<when test="range == 'd'.toString()">
+	  					to_char(order_date,'YYYY-MM-DD') like '%'||#{keyword}||'%'
+	  				</when>
+	  			</choose>
+	  		</trim>
+	  	</if>
+    </sql>
+	<insert id="od" parameterType="sovo">
+		insert into tbl_stock_order(ono, sname, order_qty, order_date)
+		values (seq_stock_order_ono.nextval, #{sname}, #{order_qty}, sysdate)
+	</insert>
+	
+	<select id="odList" resultType="sovo">
+	<![CDATA[
+		select ono, sname, order_qty, order_date
+ 		from (select /*+INDEX_DESC(tbl_stock_order pk_stock_order)*/
+ 				rownum as rn, ono, sname, order_qty, order_date
+ 				from tbl_stock_order where ono > 0
+ 	]]>
+ 		<include refid="search"/>
+ 	<![CDATA[
+ 				and rownum <= #{pageIndex} * #{countPerPage})
+ 		where rn > (#{pageIndex}-1) * #{countPerPage}
+ 	]]>
+	</select>
+	<select id="tc" parameterType="cpgvo" resultType="int">
+ 	<![CDATA[
+ 		select count(ono) as cnt from tbl_stock_order
+ 		where ono > 0 
+ 	]]> 
+ 		<include refid="search"></include>
+ 	</select>
+</mapper>

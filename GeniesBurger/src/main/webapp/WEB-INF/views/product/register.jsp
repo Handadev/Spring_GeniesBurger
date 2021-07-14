@@ -15,7 +15,7 @@
 			enctype="multipart/form-data">
 
 			<div class="form-group">
-				<label for="title">Category:</label> <select name="category"
+				<label for="title">상품 품목:</label> <select name="category"
 					class="form-control">
 					<option value="">상품 품목선택</option>
 					<option value="1">버거</option>
@@ -30,32 +30,47 @@
 			</div>
 
 			<div class="form-group">
-				<label for="title">Title:</label> <input type="text"
+				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno" id="box"
+					class="form-control">
+					<option value="0">연동할 상품명 선택</option>
+					<c:forEach items="${single_list }" var="pvo">
+						<option value="${pvo.pno }">
+							<c:choose>
+								<c:when test="${pvo.category eq 1}">버거 단품</c:when>
+								<c:otherwise>올데이세일 단품</c:otherwise>
+							</c:choose>
+						 - ${pvo.title }
+						</option>
+					</c:forEach>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="title">제품명:</label> <input type="text"
 					class="form-control" id="title" placeholder="Enter title"
 					name="title">
 			</div>
 
 			<div class="form-group">
-				<label for="content">Content:</label> <input type="text"
+				<label for="content">제품설명:</label> <input type="text"
 					class="form-control" id="content" placeholder="Enter content"
 					name="content">
 			</div>
 
 			<div class="form-group">
-				<label for="price">Price:</label> <input type="number"
+				<label for="price">가격:</label> <input type="number"
 					class="form-control" id="price" placeholder="Enter price"
 					name="price">
 			</div>
 
 			<div class="form-group">
-				<label for="price">Calorie:</label> <input type="number"
+				<label for="price">칼로리:</label> <input type="number"
 					class="form-control" id="price" placeholder="Enter calorie"
 					name="calorie">
 			</div>
 
-
 			<div class="form-group">
-				<label for="price">Files:</label> <input type="file"
+				<label for="price">사진파일:</label> <input type="file"
 					class="form-control" id="files" name="files" multiple
 					style="display: none;">
 				<button type="button"
@@ -65,6 +80,18 @@
 			<div class="form-group">
 				<ul class="list-group" id="fileZone"></ul>
 			</div>
+			
+			<div class="form-group">
+				<button type="button" class="btn btn-info float-right addstock">재고 추가</button>
+				<label for="stock">재고 연동:</label> 
+				<select id="stock" name="sname" class="form-control">
+					<option value="">재고 선택</option>
+					<c:forEach items="${stock_list }" var="svo">
+					<option value="${svo.sname }">${svo.sno } - ${svo.sname }</option>
+					</c:forEach>
+				</select>
+				<div id="stockZone"></div>
+			</div>
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
 	</div>
@@ -73,6 +100,7 @@
 <script>
 	$(document).on("click", "#fileTrigger", function() {
 		$("#files").click();
+		console.log("fileTrigger");
 	});
 	
 	let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
@@ -111,6 +139,55 @@
 				li += fileSize.toFixed(2) + 'KB</span></li>';
 				fileZone.append(li);
 		}
+	});
+</script>
+<script>
+	let stockval_arr = $("#stock option").map(function() {return $(this).val()});
+	let stocktext_arr = $("#stock option").map(function() {return $(this).text()});
+	console.log(stockval_arr);
+	console.log(stocktext_arr);
+
+	
+	let stockList = [];
+	function StockObj(val, text) {
+		this.val = val;
+		this.text = text;
+	}
+	$(document).on("click", ".addstock", function() {
+		stockList.length = 0;
+		for (let i = 0; i < stockval_arr.length; i++) {
+			for (let j = 0; j < stocktext_arr.length; j++) {
+				if (i == j) {
+					let stock = new StockObj(stockval_arr[i], stocktext_arr[j]);
+					console.log(stockval_arr[i]);
+					stockList.push(stock);
+				}
+			}
+		}
+		console.log("stockArr = "+ stockList);
+		
+		let stockZone = $("#stockZone");
+		let select_html = "";
+		select_html += '<select name="sname" class="form-control">';
+		for (let obj of stockList) {
+			for (let key in obj) {
+				if (key == 'val') {
+					select_html += '<option value="'+obj[key]+'">';
+				} else {
+					select_html += obj[key]+'</option>';
+				}
+			}
+		}
+		select_html += '</select>';
+		stockZone.append(select_html); 
+		
+	});
+	
+	
+	$("#box").change(function() {
+		let valval = $(this).val();
+		console.log("alkdfjasdlkj = "+valval);
+		
 	});
 </script>
 
