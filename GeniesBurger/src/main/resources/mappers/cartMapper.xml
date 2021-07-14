@@ -13,13 +13,12 @@
 		select *
 		from TBL_CART tc INNER JOIN TBL_PRODUCTFILE tp 
 		on tc.PNO = tp.PNO
-		<!-- select * from tbl_cart -->
 	</select>
 	
 	<!-- 수량 중복확인 -->
 	<select id="dupleProduct" parameterType="int" resultType="int">
 		SELECT count(pno) 
-		FROM TBL_CART WHERE pno=#{pno}
+		FROM TBL_CART WHERE pno=#{pno} and mno=#{mno}
 	</select>
 
 	<delete parameterType="int" id="del">

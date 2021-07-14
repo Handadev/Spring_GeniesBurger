@@ -21,8 +21,8 @@
 <link rel="stylesheet" href="/resources/css/flaticon.css">
 <link rel="stylesheet" href="/resources/css/icomoon.css">
 <link rel="stylesheet" href="/resources/css/style.css">
+<link rel="stylesheet" href="/resources/css/tw.css">
 
-</head>
 <style>
 * {
 	margin: 0; 
@@ -61,12 +61,13 @@ body {
 
 #navBtn{
 	text-align: center;
-	height: 120px;
-	line-height: 120px;
+	margin: auto;
+	height: 100px;
+	line-height: 100px;
 	vertical-align: middle;
     color: #ffffff;
     font-size: 25px;
-    background-image: url(resources/icons/button5.jpg);
+    background-image: url(resources/icons/nav2.jpg);
 }
 #logo{
 	margin-left: 170px;
@@ -77,9 +78,11 @@ body {
 .navbar-nav>li{
 	margin-top: 20px;
     height: 100px;
-    }
+}
 </style>
 
+
+</head>
 <!-- Start header / nav  -->
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -87,7 +90,9 @@ body {
 		<div class="container">
 			<a class="navbar-brand" href="/" id="logo">
 			<img src="/resources/icons/logo.png" style="width:70px; height:70px;"/>
-			<span id="logo-text">지니스버거</span>
+			<span id="logo-text">
+			<strong>지니스버거</strong>
+			</span>
 			</a>
 		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -154,9 +159,15 @@ body {
 	<div>
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
-				<div class="col" id="navOrder">딜리버리 주문 내역</div>
 				<div class="col">
-					<a href="/cart/cart" id="navCart">장바구니</a>
+				<a href="/cart/cart" id="navOrder">
+				<strong>딜리버리 주문 내역</strong>
+				</a>
+				</div>
+				<div class="col">
+					<a href="/cart/cart" id="navCart">
+					<strong>장바구니</strong>
+					</a>
 				</div>
 			</div>
 		</div>

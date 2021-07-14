@@ -118,7 +118,7 @@
 	</div>
 </section>
 <!-- 카트 담기 -->
-<form class="" action="/product/register" method="post"
+<%-- <form class="" action="/product/register" method="post"
 	enctype="multipart/form-data">
 	<input type="hidden" name="mno" value="${ses.mno }"> <input
 		type="hidden" name="pno" value="${pvo.pno }"> <input
@@ -127,7 +127,7 @@
 		type="hidden" name="calorie" value="${pvo.calorie }"> <input
 		type="hidden" name="sales" value="${pvo.sales }"> <input
 		type="hidden" name="cansale" value="${pvo.cansale }">
-</form>
+</form> --%>
 <!-- Modal -->
    <div class="container">
        <!-- Modal -->

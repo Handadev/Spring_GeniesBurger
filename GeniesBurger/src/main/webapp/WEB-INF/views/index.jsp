@@ -46,6 +46,10 @@
 #price {
 	color: red;
 }
+#indexSearch{
+	margin-top:5px;
+	margin-right:25px;
+}
 </style>
 
 <!-- 메뉴 상단이미지 삭제 -->
@@ -54,7 +58,9 @@
 		<!-- 상품 분류 선택 -->
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center float-left">
-				<ul class="product-category">
+				<strong style="font-size:2em;">메뉴선택</strong>
+				<ul class="product-category" style="margin-top:30px;">
+					<li>
 					<li><a href="/"
 						class="total">전체</a></li>
 					<li><a href="/?range=category&keyword=1"
@@ -70,9 +76,9 @@
 				</ul>
 				<form action="/">
 					<input type="hidden" name="range" value="pro"> <input
-						class="form-control" type="text" placeholder="찾으시는 제품명을 입력하세요"
+						class="form-control  float-left" type="text" placeholder="찾으시는 제품명을 입력하세요"
 						name="keyword">
-					<button type="submit" class="btn btn-danger float-right">검색</button>
+					<button type="submit" class="btn btn-danger" id="indexSearch">검색</button>
 				</form>
 			</div>
 		</div>
