@@ -10,6 +10,7 @@ public interface CartServiceRule {
 	public int remove(int cartno);
 	public int increQty(int cartno, String upqtystr);
 	public int decreQty(int cartno, String downqtystr);
-	public boolean dupleCheck(int pno, int mno);
-	public int increRegister(int pno, int mno);
+	public boolean dupleCheck(int pno);
+	public int increRegister(int pno);
+	public CartVO payment(int mno);
 }

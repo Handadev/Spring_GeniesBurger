@@ -68,4 +68,9 @@ public class CartDAO implements CartDAORule {
 		return sql.update(NS + "upQtyDuple", map);
 	}
 
+	@Override
+	public CartVO selectOne(int mno) {
+		return sql.selectOne(NS+"pay", mno);
+	}
+
 }

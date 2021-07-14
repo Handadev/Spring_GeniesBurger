@@ -1,6 +1,7 @@
 package com.myweb.ctrl;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,10 +30,18 @@ public class CartController {
    @Inject
    private CartServiceRule cartsv;
    
+   @GetMapping("/payment")
+   public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
+	   CartVO cvo = cartsv.payment(mno);
+	   if (cvo != null) {
+		   model.addAttribute("cvo", cvo);
+	   }
+   }
+   
    
    @PostMapping("/register")
-	public String register(CartVO cartvo, @RequestParam("pno") int pno, @RequestParam("mno") int mno, RedirectAttributes reAttr) {
-		boolean isExist = cartsv.dupleCheck(pno, mno);
+	public String register(CartVO cartvo, @RequestParam("pno") int pno, RedirectAttributes reAttr, HttpSession ses) {
+		boolean isExist = cartsv.dupleCheck(pno);
 		if(isExist) {
 			int isUp = cartsv.increRegister(pno, mno);
 			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 수량증가 성공" : "카트 수량증가 실패");
