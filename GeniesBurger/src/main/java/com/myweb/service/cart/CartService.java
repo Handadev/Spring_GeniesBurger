@@ -49,15 +49,30 @@ public class CartService implements CartServiceRule {
 	}
 
 	@Override
-	public boolean dupleCheck(int pno) {
-		return cartdao.dupleProduct(pno) > 0 ? true : false;
+	public boolean dupleCheck(int pno, int mno) {
+		return cartdao.dupleProduct(pno, mno) > 0 ? true : false;
 	}
 
 	@Override
-	public int increRegister(int pno) {
-		int isUp = cartdao.upQtyDuple(pno);
+	public int increRegister(int pno, int mno) {
+		int isUp = cartdao.upQtyDuple(pno, mno);
 		logger.info("service increReg : " + isUp);
 		return isUp;
+	}
+
+	@Override
+	public CartVO payment(int mno) {
+		return cartdao.selectOne(mno);
+	}
+
+	@Override
+	public int removeWithMno(int mno) {
+		return cartdao.deleteWithMno(mno);
+	}
+
+	@Override
+	public List<CartVO> getOrderList(int mno) {
+		return cartdao.selectOrderList(mno);
 	}
 
 }

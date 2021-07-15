@@ -4,23 +4,23 @@
 <mapper namespace="StockMapper">
 
 	<insert id="reg" parameterType="svo">
-		insert into tbl_stock(sno, sname, stock_qty, shelf_life) values
-		(seq_stock_sno.nextval, #{sname}, #{stock_qty}, #{shelf_life})
+		insert into tbl_stock(sno, sname, stock_qty, shelf_life, isburger) values
+		(seq_stock_sno.nextval, #{sname}, #{stock_qty}, #{shelf_life}, #{isburger})
 	</insert>
 	
 	<select id="list" resultType="svo">
-		select * from tbl_stock;
+		select * from tbl_stock
 	</select>
-	<select id="totalCnt" parameterType="String" resultType="int">
-		select sname, sum(stock_qty) AS qty_cnt
-		from tbl_stock group by sname having sname=#{sname};
+	<select id="totalCntList" resultType="svo">
+		select sname, sum(stock_qty) AS stock_qty
+		from tbl_stock group by sname
 	</select>
-	<select id="cntList" parameterType="String" resultType="svo">
-		select sname, sum(stock_qty) AS qty_cnt, shelf_life
-		from tbl_stock group by shelf_life, sname having sname=#{sname};
+	<select id="oneList" parameterType="String" resultType="svo">
+		select sno, sname, stock_qty, TO_CHAR(shelf_life, 'YYYY-MM-DD') as shelf_life, TO_CHAR(STOCK_REGDATE, 'YYYY-MM-DD') as stock_regdate from tbl_stock where sname=#{sname} order by shelf_life
 	</select>
+	
 	<update id="mod" parameterType="svo">
- 		update tbl_stock set sname=#{sname}, stock_qty=#{stock_qty}, shelf_life=#{shelf_life} where sno=#{sno}
+ 		update tbl_stock set stock_qty=#{stock_qty} where sno=#{sno}
  	</update>
 	<update id="upsq" parameterType="hashmap">
  		update tbl_stock set stock_qty = stock_qty + #{qty} where sno=#{sno}
@@ -28,5 +28,8 @@
 	
 	<delete id="del" parameterType="int">
  		delete from tbl_stock where sno=#{sno}
+ 	</delete>
+ 	<delete id="delAll" parameterType="String">
+ 		delete from tbl_stock where sname=#{sname}
  	</delete>
 </mapper>

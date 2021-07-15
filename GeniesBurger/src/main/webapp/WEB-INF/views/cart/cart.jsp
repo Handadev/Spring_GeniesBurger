@@ -49,11 +49,10 @@
 						<thead class="thead-primary">
 							<tr class="text-center">
 								<th>&nbsp;</th>
+								<th>상품</th>
+								<th>수량</th>
+								<th>가격</th>
 								<th>&nbsp;</th>
-								<th>cartno</th>
-								<th>Product name</th>
-								<th>Quantity</th>
-								<th>Price</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -63,20 +62,13 @@
 										<tr class="text-center">
 											<%-- <td id="pnoVal">pno : ${cartList.pno }</td> --%>
 											<%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
-											<td class="product-remove">
-												<button type="button"
-													class="btn btn-outline-light outline btn-lg removeBtn"
-													style="width: 50px;" data-cartno="${cartList.cartno }">
-													<span class="ion-ios-close"> </span>
-												</button>
-											</td>
+											<%-- <td class="cartno">
+												<h3>cartno</h3>
+												<p>${cartList.cartno }</p>
+											</td> --%>
 											<td class="image-prod">
 											<img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
 											
-											</td>
-											<td class="cartno">
-												<h3>cartno</h3>
-												<p>${cartList.cartno }</p>
 											</td>
 											<td class="product-name">
 												<h3>${cartList.title }</h3>
@@ -93,6 +85,12 @@
 												</div>
 											</td>
 											<td class="price">₩ ${cartList.price }</td>
+											<td class="product-remove">
+												<button type="button"
+													class="btn-sm btn-danger removeBtn detailBtn"
+													style="width: 50px;" data-cartno="${cartList.cartno }">삭제
+												</button>
+											</td>
 										</tr>
 									</c:when>
 								</c:choose>
@@ -101,7 +99,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div style="font-size:2em; margin-top:30px; text-align: center; width:100%">
 				<c:forEach items="${cartList }" var="cartList">
 					<c:if test="${ses.mno == cartList.mno }">
 						<c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
@@ -109,25 +107,15 @@
 				</c:forEach>
 				<c:if test="${ses.mno != null}">
 				총 주문금액 :
-				<c:out value="${sum }" /> 원
-				<button type="button" class="btn btn-danger" 
+				<c:out value="${sum }"/>원
+				<br>
+				<button type="button" class="btn-lg btn-danger" style="width:280px"
 				data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
 				</c:if>
 			</div>
 		</div>
 	</div>
 </section>
-<!-- 카트 담기 -->
-<form class="" action="/product/register" method="post"
-	enctype="multipart/form-data">
-	<input type="hidden" name="mno" value="${ses.mno }"> <input
-		type="hidden" name="pno" value="${pvo.pno }"> <input
-		type="hidden" name="title" value="${pvo.title }"> <input
-		type="hidden" name="price" value="${pvo.content }"> <input
-		type="hidden" name="calorie" value="${pvo.calorie }"> <input
-		type="hidden" name="sales" value="${pvo.sales }"> <input
-		type="hidden" name="cansale" value="${pvo.cansale }">
-</form>
 <!-- Modal -->
    <div class="container">
        <!-- Modal -->
@@ -143,14 +131,15 @@
           <!-- Modal body -->
           <div class="modal-body">
             <div class="modal-select" class="modal-img">
-              <img src="/resources/icons/delivery_logo.png" style="width:200px; height:180px;" class="modal-img" />
-              <p>매장식사</p>
+              <img src="/resources/icons/for_here.jpg" style="width:200px; height:200px;" class="modal-img" />
+              <p><b>매장식사</b></p>
             </div>
             <div class="modal-select">
-            <img src="/resources/icons/package_logo.png" style="width:200px; height:180px;" class="modal-img" />
-            <p>포장주문</p>
+            <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
+            <p><b>포장주문</b></p>
           </div>
-            <button type="button" class="btn btn-dark checkBtn">확인</button>
+          	<a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
+            <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
       </div>

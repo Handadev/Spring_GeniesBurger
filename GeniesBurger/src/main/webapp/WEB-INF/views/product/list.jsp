@@ -15,10 +15,14 @@
 .pagination {
 	display: inline-flex; 
 }
+p{
+	font-size:2em;
+	color:black;
+}
 </style>
 <div class="container-fluid border pcontainer">
 	<div class="container col-sm-9">
-		<h2 class="float-left">상품 목록</h2>
+		<p class="float-left">상품 목록<p>
 		<div class="form-group float-right">
 			<form action="/product/list" class="form-inline">
 				<select class="form-control" name="range">
@@ -27,7 +31,7 @@
 					<option value="pri">가격</option>
 				</select> <input class=form-control type="text" placeholder="검색어 입력"
 					name="keyword" value="<c:out value='${product_paging.ppgvo.keyword }'/>">
-				<button type="submit" class="btn btn-success">검색</button>
+				<button type="submit" class="btn-lg btn-success">검색</button>
 			</form>
 		</div>
 		<table class="table">
@@ -49,7 +53,8 @@
 						<c:forEach items="${product_list }" var="pvo">
 							<tr>
 								<td>${pvo.pno }</td>
-								<td><a href="/product/detail?pno=${pvo.pno }">${pvo.title }</a></td>
+								<td><a href="/product/detail?pno=${pvo.pno }"
+								style="color:black">${pvo.title }</a></td>
 								<td>${pvo.price }</td>
 								<td>${pvo.sales }</td>
 								<td><c:choose>

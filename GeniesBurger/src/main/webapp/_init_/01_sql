@@ -75,35 +75,18 @@ sname varchar2(100),
 pno number(11)
 );
 
------------------------상품_재고-------------------------
-DROP TABLE tbl_stock_order;
-DROP SEQUENCE seq_stock_order_ono;
-
-CREATE TABLE tbl_stock_order(
-ono NUMBER(11),
-sname varchar2(100) NOT NULL,
-order_qty NUMBER(11) NOT NULL,
-order_date DATE DEFAULT sysdate,
-CONSTRAINT pk_stock_order PRIMARY KEY(ono)
-);
-
-CREATE SEQUENCE seq_stock_order_ono
-START WITH 1
-INCREMENT BY 1
-nocycle nocache;
-
-
 -----------------------카트-------------------------
 DROP SEQUENCE seq_cart_cartno;
 DROP TABLE tbl_cart;
 
 create table tbl_cart(
 cartno number(11),
+pno number(11) not null,
+imgfile varchar(2000) not null, // product imgfile
 title varchar2(100) not null,
 price number(11) not null,
-quantity number(11) default 1,
-mno number(11) not null,
-pno number(11) not null,
+quantity int(11) default 1,
+mno number(11) not null
 constraint pk_cart primary key(cartno)
 );
 
@@ -128,6 +111,7 @@ start with 1
 increment by 1
 nocycle nocache;
 
+
 -----------------------쿠폰리스트-------------------------
 DROP SEQUENCE seq_couponlist_cplno;
 DROP TABLE TBL_COUPONLIST;
@@ -139,8 +123,6 @@ cpno number(11),
 enddate DATE,
 constraint pk_couponlist primary key(cplno)
 );
-
-
 
 create sequence seq_couponlist_cplno
 start with 1
@@ -187,22 +169,20 @@ INCREMENT BY 1
 nocycle nocache;
 
 -----------------------재고-------------------------
-drop sequence seq_stock_sno;
-drop table tbl_stock;
+DROP TABLE tbl_stock_order;
+DROP SEQUENCE seq_stock_order_ono;
 
-create table tbl_stock (
-sno number(11),
-sname varchar2(100) not null,
-stock_qty number(11) not null,
-shelf_life date not null,
-stock_regdate date default sysdate,
-isburger number(2) DEFAULT 0,
-constraint pk_stock primary key(sno)
+CREATE TABLE tbl_stock_order(
+ono NUMBER(11),
+sname varchar2(100) NOT NULL,
+order_qty NUMBER(11) NOT NULL,
+order_date DATE DEFAULT sysdate,
+CONSTRAINT pk_stock_order PRIMARY KEY(ono)
 );
 
-create sequence seq_stock_sno
-start with 1
-increment by 1
+CREATE SEQUENCE seq_stock_order_ono
+START WITH 1
+INCREMENT BY 1
 nocycle nocache;
 
 --------------------소비자 버거 추가 재료-----------------------

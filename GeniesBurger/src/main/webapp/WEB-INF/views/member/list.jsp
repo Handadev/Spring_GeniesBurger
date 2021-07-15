@@ -9,6 +9,7 @@
 		<div class="row">
 			<div class="col" style="margin-bottom: 10px;">
 				<form action="/member/list" class="form-inline justify-content-end">
+				<p style="font-size:2em; margin-right:600px;">ADMIN PAGE</p>
 					<select class="form-control" name="range">
 						<option value="en"
 							<c:out value="${pghdl.mpgvo.range eq 'en' ? 'selected' : '' }"/>>Email+Name</option>
@@ -23,7 +24,7 @@
 					</select>&nbsp;&nbsp;<input class="form-control" type="text"
 						placeholder="검색어 입력" name="keyword"
 						value="${pghdl.mpgvo.keyword }"> &nbsp;&nbsp;
-					<button type="submit" class="btn btn-danger">검색</button>
+					<button type="submit" class="btn-sm btn-danger detailBtn">검색</button>
 				</form>
 			</div>
 			<div class="col-md-12 ftco-animate">
@@ -54,7 +55,7 @@
 									<td>${mList.point }</td>
 									<td>
 										<button type="button"
-											class="btn btn-outline-light outline btn-lg removeBtn"
+											class="btn-sm btn-danger removeBtn detailBtn"
 											data-mno="${mList.mno }">삭제</button>
 									</td>
 								</tr>

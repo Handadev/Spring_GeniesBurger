@@ -19,7 +19,13 @@
 		height: 100%;
 	}
 }
-
+#menu-strong{
+	font-size:2em;
+	color:black;
+}
+.product-category{
+	margin-top:20px;
+}
 .modal-dialog {
 	display: inline-block;
 	text-align: left;
@@ -65,6 +71,11 @@
 	text-align: center;
 }
 
+#indexSearch{
+	margin-top:5px;
+	margin-right:25px;
+}
+
 </style>
 
 <!-- 메뉴 상단이미지 삭제 -->
@@ -73,6 +84,7 @@
 		<!-- 상품 분류 선택 -->
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center float-left">
+			<strong id="menu-strong">메뉴</strong>
 				<ul class="product-category">
 					<li><a href="/"
 						class="total">전체</a></li>
@@ -89,9 +101,9 @@
 				</ul>
 				<form action="/">
 					<input type="hidden" name="range" value="pro"> <input
-						class="form-control" type="text" placeholder="찾으시는 제품명을 입력하세요"
+						class="form-control float-left" type="text" placeholder="찾으시는 제품명을 입력하세요"
 						name="keyword">
-					<button type="submit" class="btn btn-danger float-right">검색</button>
+					<button type="submit" class="btn-lg btn-danger" style="margin-right:100px;">검색</button>
 				</form>
 			</div>
 		</div>

@@ -9,23 +9,22 @@
 	<h2 class="float-left">재고 주문 내역</h2>
 		<a href="/stockOrder/register" class="btn btn-primary float-right">주문하기</a>
 	<div class="form-group float-left ml-3">
-		<form action="/stockOrder/list" class="form-inline">
+	<form action="/stockOrder/dateList" class="form-inline">
+			<input type="date" class="float-left mr-3" name="order_date" value="${spghdl.sopgvo.order_date }">
 			<select class="form-control" name="range">
-				<option value="all" <c:out value="${spghdl.cpgvo.range eq 'nd' ? 'selected' : '' }"/>>
+				<option value="all" <c:out value="${spghdl.sopgvo.range eq 'nd' ? 'selected' : '' }"/>>
 				전체</option>
-				<option value="no" <c:out value="${spghdl.cpgvo.range eq 'no' ? 'selected' : '' }"/>>
+				<option value="no" <c:out value="${spghdl.sopgvo.range eq 'no' ? 'selected' : '' }"/>>
 				주문 번호</option>
-				<option value="na" <c:out value="${spghdl.cpgvo.range eq 'na' ? 'selected' : '' }"/>>
+				<option value="na" <c:out value="${spghdl.sopgvo.range eq 'na' ? 'selected' : '' }"/>>
 				재고명</option>
-				<option value="q" <c:out value="${spghdl.cpgvo.range eq 'q' ? 'selected' : '' }"/>>
+				<option value="q" <c:out value="${spghdl.sopgvo.range eq 'q' ? 'selected' : '' }"/>>
 				주문 수량</option>
-				<option value="d" <c:out value="${spghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
-				주문일</option>
 			</select>
 			<input class="form-control" type="text" placeholder="검색어 입력" name="keyword"
-			value='<c:out value="${spghdl.cpgvo.keyword }"/>'>
-			<button type="submit" class="btn btn-success ml-3">검색</button>
-		</form>
+			value='<c:out value="${spghdl.sopgvo.keyword }"/>'>
+			<button type="submit" class="btn btn-success">검색</button>
+			</form>
 	</div> 
 	  <table class="table table-hover">
 	    <thead>
@@ -37,9 +36,9 @@
 	      </tr>
 	    </thead>
 	    <c:choose>
-	    	<c:when test="${list.size() ne 0 }">
+	    	<c:when test="${dateList.size() ne 0 }">
 	    		<tbody>
-	  		 	 <c:forEach items="${list }" var="sovo">
+	  		 	 <c:forEach items="${dateList }" var="sovo">
 	    		  <tr>
 	     		   <td>${sovo.ono }</td>
 	     		   <td>${sovo.sname }</td>
@@ -60,7 +59,7 @@
 	    		<tbody>
 	    			<tr>
 	    				<td colspan="4" class="text-center">
-	    					<h3>주문된 재고가 없습니다.</h3>
+	    					주문한 재고가 없습니다.
 	    				</td>
 	    			</tr>
 	    		</tbody>
