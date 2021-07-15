@@ -1,6 +1,8 @@
 package com.myweb.persistence.product;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -9,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myweb.domain.ProductAndFileDTO;
 import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductPageVO;
 import com.myweb.domain.ProductVO;
@@ -17,62 +20,82 @@ import com.myweb.domain.StockVO;
 @Repository
 public class ProductDAO implements ProductDAORule {
 	private static Logger logger = LoggerFactory.getLogger(ProductDAO.class);
-	private final String ns = "ProductMapper.";
+	private final String NS = "ProductMapper.";
 	
 	@Inject
 	private SqlSession sql;
 	
 	@Override
 	public int insert(ProductVO pvo) {
-		return sql.insert(ns+"reg", pvo);
+		return sql.insert(NS+"reg", pvo);
 	}
 
 	@Override // 관리자 리스트
 	public List<ProductVO> selectList(ProductPageVO ppgvo) {
-		return sql.selectList(ns+"list", ppgvo);
+		return sql.selectList(NS+"list", ppgvo);
 	}
 	
 	@Override // 소비자 리스트
 	public List<ProductVO> selectList(ProductCustomerPageVO pcpgvo) {
-		return sql.selectList(ns+"listcustomer", pcpgvo);
+		return sql.selectList(NS+"listcustomer", pcpgvo);
+	}
+	
+	@Override // 세트 메뉴구성을 위한 단품 리스트
+	public List<ProductVO> selectList(ProductVO pvo) {
+		return sql.selectList(NS+"singlemenu", pvo);
+	}
+	
+	@Override // 소비자 - 단품 or 세트선택 화면리스트
+	public List<ProductAndFileDTO> selectList(int pno, int category) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("category", category);
+		return sql.selectList(NS+"selectmenu", map);
+	}
+	
+	@Override // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지 
+	public ProductAndFileDTO selectOne(int pno, int category) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("category", category);
+		return sql.selectOne(NS+"wantLarger", map);
 	}
 	
 	@Override
 	public ProductVO selectOne(int pno) {
-		return sql.selectOne(ns+"detail", pno);
+		return sql.selectOne(NS+"detail", pno);
 	}
 
 	@Override
 	public int update(ProductVO pvo) {
-		return sql.update(ns+"mod", pvo);
+		return sql.update(NS+"mod", pvo);
 	}
 
 	@Override
 	public int delete(int pno) {
-		return sql.delete(ns+"del", pno);
+		return sql.delete(NS+"del", pno);
 	}
 
 	@Override // 사진추가를 위한 현재 pno
 	public int selectOne() {
-		return sql.selectOne(ns+"curpno");
+		return sql.selectOne(NS+"curpno");
 	}
 
 	@Override // 관리자 리스트 글의 개수 구하기
 	public int selectOne(ProductPageVO ppgvo) {
-		return sql.selectOne(ns+"totalcount", ppgvo);
+		return sql.selectOne(NS+"totalcount", ppgvo);
 	}
 
 	@Override // 소비자 리스트 글의 개수 구하기
 	public int selectOne(ProductCustomerPageVO pcpgvo) {
-		return sql.selectOne(ns+"totalcountcustomer", pcpgvo);
+		return sql.selectOne(NS+"totalcountcustomer", pcpgvo);
 	}
 
 	@Override // 상품 등록시 재고 리스트 받아오기
 	public List<StockVO> selectList() {
-		return sql.selectList(ns+"stocklist");
+		return sql.selectList(NS+"stocklist");
 	}
 
-	
 
 	/**
 	 * 상품 구매시 카운트 올리기 ns+"salesup" 

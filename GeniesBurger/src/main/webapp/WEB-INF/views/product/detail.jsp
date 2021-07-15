@@ -12,7 +12,7 @@
 					<td colspan="2">
 						<ul class="list-group" id="fileZone">
 							<c:forEach items="${pvo.flist }" var="fvo">
-								<img src="/upload/${fvo.savedir }/${fvo.puuid}_${fvo.fname}">
+								<img src="/upload/${fvo.savedir }/${fvo.puuid}_${fvo.fname}" alt="display none">
 								<span class="badge badge-success badge-pill">${fvo.fname }</span>
 							</c:forEach>
 						</ul>
@@ -109,7 +109,12 @@
  $("#addCartBtn").on("click", function(e){
 	e.preventDefault();
 	console.log(this);
-	$("#cartForm").submit();
+	if ($("input[name=mno]").val() == '') {
+		alert("먼저 로그인을 해야합니다!");
+		location.replace("/member/login");
+	} else {
+		$("#cartForm").submit();
+	}
  });
 </script>
 

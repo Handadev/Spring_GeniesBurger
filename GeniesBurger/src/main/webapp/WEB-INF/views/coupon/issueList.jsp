@@ -19,7 +19,7 @@
 			<option value="c" <c:out value="${cpghdl.cpgvo.range eq 'c' ? 'selected' : '' }"/>>
 			쿠폰 번호</option>
 			<option value="cn" <c:out value="${cpghdl.cpgvo.range eq 'cn' ? 'selected' : '' }"/>>
-			쿠폰 이름</option>
+			쿠폰명</option>
 			<option value="m" <c:out value="${cpghdl.cpgvo.range eq 'm' ? 'selected' : '' }"/>>
 			멤버 번호</option>
 			<option value="e" <c:out value="${cpghdl.cpgvo.range eq 'e' ? 'selected' : '' }"/>>
@@ -39,7 +39,7 @@
 	      <tr>
 	      	<th>발급 번호</th>
 	        <th>쿠폰 번호</th>
-	        <th>쿠폰 이름</th>
+	        <th>쿠폰명</th>
 	        <th>멤버 번호</th>
 	        <th>이메일</th>
 	        <th>할인율(%)</th>

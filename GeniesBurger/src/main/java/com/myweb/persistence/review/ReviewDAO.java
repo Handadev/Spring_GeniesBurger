@@ -66,7 +66,6 @@ public class ReviewDAO implements ReviewDAORule {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("rno", (Integer) rno);
 		map.put("adcomment", adComment);
-
 		return sql.insert(NS + "acReg", map);
 	}
 

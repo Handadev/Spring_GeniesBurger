@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myweb.domain.ProductAndFileDTO;
 import com.myweb.domain.ProductCustomerPageVO;
 import com.myweb.domain.ProductFileVO;
 import com.myweb.domain.ProductPageVO;
@@ -48,6 +49,21 @@ public class ProductService implements ProductServiceRule {
 	@Override // 소비자 상품 리스트
 	public List<ProductVO> getList(ProductCustomerPageVO pcpgvo) {
 		return pdao.selectList(pcpgvo);
+	}
+	
+	@Override // 상품등록시 세트 메뉴구성을 위한 단품 리스트
+	public List<ProductVO> getList(ProductVO pvo) {
+		return pdao.selectList(pvo);
+	}
+	
+	@Override // 소비자 - 단품 or 세트선택 화면리스트
+	public List<ProductAndFileDTO> getProductList(int pno, int category) {
+		return pdao.selectList(pno, category);
+	}
+
+	@Override // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지
+	public ProductAndFileDTO getLargerProduct(int pno, int category) {
+		return pdao.selectOne(pno, category);
 	}
 	
 	@Override

@@ -7,10 +7,11 @@
 	padding-top : 50px;
 	padding-bottom : 50px;
 }
+
 </style>
 <div class="container-fluid border pcontainer">
 	<div class="container col-sm-4">
-		<h2>상품 등록</h2>
+		<p style="font-size:2em;">상품 등록</p>
 		<form class="" action="/product/register" method="post"
 			enctype="multipart/form-data">
 
@@ -26,6 +27,22 @@
 					<option value="6">올데이할인 버거 라지 세트</option>
 					<option value="7">사이드</option>
 					<option value="8">음료</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno" id="box"
+					class="form-control">
+					<option value="0">연동할 상품명 선택</option>
+					<c:forEach items="${single_list }" var="pvo">
+						<option value="${pvo.pno }">
+							<c:choose>
+								<c:when test="${pvo.category eq 1}">버거 단품</c:when>
+								<c:otherwise>올데이세일 단품</c:otherwise>
+							</c:choose>
+						 - ${pvo.title }
+						</option>
+					</c:forEach>
 				</select>
 			</div>
 
@@ -58,7 +75,7 @@
 					class="form-control" id="files" name="files" multiple
 					style="display: none;">
 				<button type="button"
-					class="btn btn-outline-info btn-block col-sm-6" id="fileTrigger">사진
+					class="btn-lg btn-outline-info btn-block col-sm-6" id="fileTrigger">사진
 					업로드</button>
 			</div>
 			<div class="form-group">
@@ -66,7 +83,8 @@
 			</div>
 			
 			<div class="form-group">
-				<button type="button" class="btn btn-info float-right addstock">재고 추가</button>
+				<button type="button" class="btn-sm btn-info float-right addstock"
+				style="margin-bottom:5px">재고 추가</button>
 				<label for="stock">재고 연동:</label> 
 				<select id="stock" name="sname" class="form-control">
 					<option value="">재고 선택</option>
@@ -76,7 +94,7 @@
 				</select>
 				<div id="stockZone"></div>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn-lg btn-danger">추가</button>
 		</form>
 	</div>
 </div>
@@ -84,6 +102,7 @@
 <script>
 	$(document).on("click", "#fileTrigger", function() {
 		$("#files").click();
+		console.log("fileTrigger");
 	});
 	
 	let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
@@ -116,8 +135,8 @@
 				li += '<i class="fa fa-times-rectangle" style="font-size:24px;color:red"></i>';
 				li += fobj.name+'<span class="badge badge-danger badge-pill">';
 				$("button[type=submit]").attr("disabled", true);
-				let fileSize = fobj.size / 1024;
 			}
+				let fileSize = fobj.size / 1024;
 				fileSize = parseInt(fileSize);
 				li += fileSize.toFixed(2) + 'KB</span></li>';
 				fileZone.append(li);
@@ -125,7 +144,6 @@
 	});
 </script>
 <script>
-	
 	let stockval_arr = $("#stock option").map(function() {return $(this).val()});
 	let stocktext_arr = $("#stock option").map(function() {return $(this).text()});
 	console.log(stockval_arr);
@@ -167,6 +185,12 @@
 		
 	});
 	
+	
+	$("#box").change(function() {
+		let valval = $(this).val();
+		console.log("alkdfjasdlkj = "+valval);
+		
+	});
 </script>
 
 <jsp:include page="../common/footer.jsp" />

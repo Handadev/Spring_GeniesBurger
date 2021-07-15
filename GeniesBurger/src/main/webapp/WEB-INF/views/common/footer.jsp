@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!-- Start footer -->
-
 <footer class="ftco-footer ftco-section">
   <div class="container">
   <div id="warning">

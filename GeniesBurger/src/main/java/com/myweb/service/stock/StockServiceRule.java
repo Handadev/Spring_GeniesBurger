@@ -1,6 +1,7 @@
 package com.myweb.service.stock;
 
 import java.util.List;
+import java.util.Map;
 
 import com.myweb.domain.StockVO;
 
@@ -10,4 +11,7 @@ public interface StockServiceRule {
 	public int modify(StockVO svo);
 	public int modifyStockQty(int sno, int qty);
 	public int remove(int sno);
+	public List<StockVO> getOneList(String sname);
+	public List<StockVO> getTotalCntList();
+	public int removeAll(String sname);
 }
