@@ -87,7 +87,7 @@
 				<select id="stock" name="sname" class="form-control">
 					<option value="">재고 선택</option>
 					<c:forEach items="${stock_list }" var="svo">
-					<option value="${svo.sname }">${svo.sno } - ${svo.sname }</option>
+					<option value="${svo.sname }">${svo.sname }</option>
 					</c:forEach>
 				</select>
 				<div id="stockZone"></div>
