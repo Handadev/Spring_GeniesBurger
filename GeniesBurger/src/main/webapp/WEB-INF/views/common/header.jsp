@@ -23,65 +23,6 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="stylesheet" href="/resources/css/tw.css">
 
-<style>
-* {
-	margin: 0; 
-	padding: 0;
-} 
-
-@font-face {
-	font-family: 'Maplestory Light';
-	src: url("resources/fonts/Maplestory Light.ttf");
-}
-
-body {
-    margin: auto;
-	font-family: 'Maplestory Light';
-}
-
-.ftco-navbar-light {
-	background: #e31212 !important;
-	z-index: 3;
-	padding: 0;
-}
-
-.ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
-	font-size: 15px;
-	padding-top: 1.5rem;
-	padding-bottom: 1.5rem;
-	padding-left: 20px;
-	padding-right: 20px;
-	font-weight: 400;
-	color: #000000;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	opacity: 1 !important;
-	color: #ffffff !important;
-}
-
-#navBtn{
-	text-align: center;
-	margin: auto;
-	height: 100px;
-	line-height: 100px;
-	vertical-align: middle;
-    color: #ffffff;
-    font-size: 25px;
-    background-image: url(resources/icons/nav2.jpg);
-}
-#logo{
-	margin-left: 170px;
-}
-#logo-text{
-	color: white;
-}
-.navbar-nav>li{
-	margin-top: 20px;
-    height: 100px;
-}
-</style>
-
-
 </head>
 <!-- Start header / nav  -->
 <body class="goto-here">
@@ -90,9 +31,7 @@ body {
 		<div class="container">
 			<a class="navbar-brand" href="/" id="logo">
 			<img src="/resources/icons/logo.png" style="width:70px; height:70px;"/>
-			<span id="logo-text">
-			<strong>지니스버거</strong>
-			</span>
+			<span id="logo-text" style="margin-left:20px">지니스버거</span>
 			</a>
 		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -101,7 +40,7 @@ body {
 				<span class="oi oi-menu"></span> Menu
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
+				<ul class="navbar-nav ml-auto" style="margin-right:100px">
 					<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
 					<!-- <li class="nav-item active"><a href="/member/login" class="nav-link">Login</a></li> -->
 					<li class="nav-item dropdown"><c:choose>
