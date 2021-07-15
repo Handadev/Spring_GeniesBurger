@@ -7,10 +7,11 @@
 	padding-top : 50px;
 	padding-bottom : 50px;
 }
+
 </style>
 <div class="container-fluid border pcontainer">
 	<div class="container col-sm-4">
-		<h2>상품 등록</h2>
+		<p style="font-size:2em;">상품 등록</p>
 		<form class="" action="/product/register" method="post"
 			enctype="multipart/form-data">
 
@@ -74,7 +75,7 @@
 					class="form-control" id="files" name="files" multiple
 					style="display: none;">
 				<button type="button"
-					class="btn btn-outline-info btn-block col-sm-6" id="fileTrigger">사진
+					class="btn-lg btn-outline-info btn-block col-sm-6" id="fileTrigger">사진
 					업로드</button>
 			</div>
 			<div class="form-group">
@@ -82,7 +83,8 @@
 			</div>
 			
 			<div class="form-group">
-				<button type="button" class="btn btn-info float-right addstock">재고 추가</button>
+				<button type="button" class="btn-sm btn-info float-right addstock"
+				style="margin-bottom:5px">재고 추가</button>
 				<label for="stock">재고 연동:</label> 
 				<select id="stock" name="sname" class="form-control">
 					<option value="">재고 선택</option>
@@ -92,7 +94,7 @@
 				</select>
 				<div id="stockZone"></div>
 			</div>
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn-lg btn-danger">추가</button>
 		</form>
 	</div>
 </div>

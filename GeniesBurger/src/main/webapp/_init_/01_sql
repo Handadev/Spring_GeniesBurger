@@ -73,6 +73,7 @@ constraint pkfiles primary key(puuid)
 
 -----------------------상품_재고-------------------------
 DROP TABLE tbl_product_stock;
+
 create table tbl_product_stock (
 sname varchar2(100),
 pno number(11)
@@ -203,7 +204,7 @@ isburger number(2) DEFAULT 0,
 constraint pk_stock primary key(sno)
 );
 
-create sequence seq_stock_sno
+create sequence seq_coupon_cpno
 start with 1
 increment by 1
 nocycle nocache;

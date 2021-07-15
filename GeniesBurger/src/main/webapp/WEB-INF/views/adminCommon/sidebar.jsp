@@ -11,7 +11,7 @@
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav">
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="index.html" aria-expanded="false"><i data-feather="home"
+					href="#" aria-expanded="false"><i data-feather="home"
 						class="feather-icon"></i><span class="hide-menu">Dashboard</span></a></li>
 				<li class="list-divider"></li>
 				<li class="nav-small-cap"><span class="hide-menu">매출 /
@@ -23,9 +23,14 @@
 						class="hide-menu">매출 상세 확인</span></a></li>
 						
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/stockOrder/list" aria-expanded="false"><i
+					href="/stockOrder/dateList" aria-expanded="false"><i
 						data-feather="message-square" class="feather-icon"></i><span
 						class="hide-menu">주문 목록</span></a></li>
+        
+        <li class="sidebar-item"><a class="sidebar-link sidebar-link"
+					href="/stockOrder/register" aria-expanded="false"><i
+						data-feather="calendar" class="feather-icon"></i><span
+						class="hide-menu">재고 주문</span></a></li>
 						
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
 					href="/stock/presentList" aria-expanded="false"><i
@@ -36,6 +41,7 @@
 					href="/stock/stock_regList" aria-expanded="false"><i
 						data-feather="calendar" class="feather-icon"></i><span
 						class="hide-menu">입고 현황</span></a></li>
+
 
 				<li class="list-divider"></li>
 				<li class="nav-small-cap"><span class="hide-menu">메뉴 관리</span></li>

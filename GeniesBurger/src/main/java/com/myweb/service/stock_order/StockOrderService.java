@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.CouponPageVO;
+import com.myweb.domain.StockOrderPageVO;
 import com.myweb.domain.StockOrderVO;
 import com.myweb.persistence.stock_order.StockOrderDAORule;
 
@@ -25,14 +26,15 @@ public class StockOrderService implements StockOrderServiceRule {
 	}
 
 	@Override
-	public List<StockOrderVO> getList(CouponPageVO cpgvo) {
-		return sodao.selectList(cpgvo);
+	public int getTotalCount(StockOrderPageVO sopgvo) {
+		return sodao.totalCount(sopgvo);
 	}
 
 	@Override
-	public int getTotalCount(CouponPageVO cpgvo) {
-		return sodao.totalCount(cpgvo);
+	public List<StockOrderVO> dateList(StockOrderPageVO sopgvo) {
+		return sodao.selectDateList(sopgvo);
 	}
+
 
 
 }

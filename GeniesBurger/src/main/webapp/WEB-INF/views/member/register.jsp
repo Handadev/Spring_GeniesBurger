@@ -1,44 +1,67 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
-
-  <h2>Member Register</h2>
-  <form action="/member/register" method="post" id="registerForm">
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-      <button type="button" class="btn btn-danger btn-sm" id="checkEmail">중복확인</button>
-    </div>
-    <div class="form-group">
-      <label for="pwd">Password:</label>
-      <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pwd">
-    </div>
-    <div class="form-group">
-		<label for="confirmPwd">Confirm Password:</label> <input type="password"
-			class="form-control" id="confirmPwd" placeholder="Repeat password">
+<style>
+.regInput{
+  margin: auto;
+	/* border:none; */
+  width: 40%;
+  margin-top: 20px;
+  background-size: cover;
+  background-repeat: repeat-x;
+}
+.container-login{
+	margin-top: 30px;
+  text-align: center;
+}
+.input-btn-block{
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 1px;
+  width: 40%;
+}
+</style>
+<div class="container container-login">
+	<p style="font-size: 2em">회원가입</p>
+	<form action="/member/register" method="post" id="registerForm">
+		<div class="form-group">
+			<input type="email" class="form-control regInput" id="email"
+				placeholder="Enter email" name="email">
+			<button type="button"
+				class="btn btn-danger btn-block input-btn-block" id="checkEmail">중복확인</button>
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control regInput" id="pwd"
+				placeholder="Enter password" name="pwd">
+		</div>
+		<div class="form-group">
+			<input type="password" class="form-control regInput" id="confirmPwd"
+				placeholder="Repeat password">
 			<p id="confirmMessage"></p>
-	</div>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
-    </div>
-    <div class="form-group">
-      <label for="mobile">Mobile:</label>
-      <input type="text" class="form-control" id="mobile" placeholder="Enter mobile" name="mobile">
-    </div>
-    <div class="form-group">
-      <label for="address">Address:</label>
-      <input type="text" class="form-control" id="address" placeholder="Enter address" name="address">
-    </div>
-    <div class="form-group">
-      <label for="birth day">Birth day:</label>
-      <input type="date" class="form-control" id="birthday" placeholder="Enter birth day" name="birthday">
-    </div>
-    <button type="button" class="btn btn-danger" id="submitBtn">Submit</button>
-  </form>
-  
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control regInput" id="name"
+				placeholder="Enter name" name="name">
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control regInput" id="mobile"
+				placeholder="Enter mobile" name="mobile">
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control regInput" id="address"
+				placeholder="Enter address" name="address">
+		</div>
+		<div class="form-group">
+			<input type="date" class="form-control regInput" id="birthday"
+				placeholder="Enter birth day" name="birthday">
+		</div>
+		<button type="button" class="btn-block btn-danger input-btn-block"
+			id="submitBtn">Submit</button>
+	</form>
+</div>
+
 <script>
 	let isAllowed = false;
 	let firstPwd = '';

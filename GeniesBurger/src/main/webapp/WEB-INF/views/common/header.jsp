@@ -8,6 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+
 <link rel="stylesheet"
 	href="/resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/animate.css">
@@ -23,63 +24,6 @@
 <link rel="stylesheet" href="/resources/css/style.css">
 
 </head>
-<style>
-* {
-	margin: 0; 
-	padding: 0;
-} 
-
-@font-face {
-	font-family: 'Maplestory Light';
-	src: url("resources/fonts/Maplestory Light.ttf");
-}
-
-body {
-    margin: auto;
-	font-family: 'Maplestory Light';
-}
-
-.ftco-navbar-light {
-	background: #e31212 !important;
-	z-index: 3;
-	padding: 0;
-}
-
-.ftco-navbar-light .navbar-nav>.nav-item>.nav-link {
-	font-size: 15px;
-	padding-top: 1.5rem;
-	padding-bottom: 1.5rem;
-	padding-left: 20px;
-	padding-right: 20px;
-	font-weight: 400;
-	color: #000000;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-	opacity: 1 !important;
-	color: #ffffff !important;
-}
-
-#navBtn{
-	text-align: center;
-	height: 120px;
-	line-height: 120px;
-	vertical-align: middle;
-    color: #ffffff;
-    font-size: 25px;
-    background-image: url(resources/icons/button5.jpg);
-}
-#logo{
-	margin-left: 170px;
-}
-#logo-text{
-	color: white;
-}
-.navbar-nav>li{
-	margin-top: 20px;
-    height: 100px;
-    }
-</style>
-
 <!-- Start header / nav  -->
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -87,7 +31,7 @@ body {
 		<div class="container">
 			<a class="navbar-brand" href="/" id="logo">
 			<img src="/resources/icons/logo.png" style="width:70px; height:70px;"/>
-			<span id="logo-text">지니스버거</span>
+			<span id="logo-text" style="margin-left:20px">지니스버거</span>
 			</a>
 		</div>
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -96,7 +40,7 @@ body {
 				<span class="oi oi-menu"></span> Menu
 			</button>
 			<div class="collapse navbar-collapse" id="ftco-nav">
-				<ul class="navbar-nav ml-auto">
+				<ul class="navbar-nav ml-auto" style="margin-right:100px">
 					<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
 					<!-- <li class="nav-item active"><a href="/member/login" class="nav-link">Login</a></li> -->
 					<li class="nav-item dropdown"><c:choose>
@@ -109,8 +53,8 @@ body {
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">login</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="/member/login">Login</a> <a
-										class="dropdown-item" href="/member/register">Register</a>
+									<a class="dropdown-item" href="/member/login">Login</a>
+									<a class="dropdown-item" href="/member/register">Register</a>
 								</div>
 							</c:otherwise>
 						</c:choose></li>
@@ -127,8 +71,7 @@ body {
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
-             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
-					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
+          <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
 					<c:choose>
 						<c:when test="${ses.email eq 'admin@admin.com' }">
 							<li class="nav-item dropdown"><a
@@ -137,9 +80,10 @@ body {
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">ADMIN</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">my
-										page</a> <a class="dropdown-item" href="/member/list">admin
-										page</a>
+									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
+									my page</a> 
+									<a class="dropdown-item" href="/member/list">admin page</a>
+									<a class="dropdown-item" href="/cart/purchaseList">purchase page</a>
 								</div>
 						</c:when>
 						<c:when test="${ses.email ne null && ses.email ne '' }">
@@ -154,9 +98,15 @@ body {
 	<div>
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
-				<div class="col" id="navOrder">딜리버리 주문 내역</div>
 				<div class="col">
-					<a href="/cart/cart" id="navCart">장바구니</a>
+				<a href="/cart/cart" id="navOrder">
+				<strong>딜리버리 주문 내역</strong>
+				</a>
+				</div>
+				<div class="col">
+					<a href="/cart/cart" id="navCart">
+					<strong>장바구니</strong>
+					</a>
 				</div>
 			</div>
 		</div>
