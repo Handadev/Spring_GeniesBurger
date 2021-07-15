@@ -50,11 +50,12 @@ public class HomeController {
 	}
 	
 	@ResponseBody
-	@GetMapping(value = "/select/{pno}",
+	@GetMapping(value = "/select/{pno}/{category}",
 				produces= {MediaType.APPLICATION_ATOM_XML_VALUE,
 						MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<List<ProductAndFileDTO>> select (@PathVariable("pno") int pno) {
+	public ResponseEntity<List<ProductAndFileDTO>> select (@PathVariable("pno") int pno,
+															@PathVariable("category") int category) {
 		
-		return new ResponseEntity<List<ProductAndFileDTO>>(psv.getProductList(pno), HttpStatus.OK);
+		return new ResponseEntity<List<ProductAndFileDTO>>(psv.getProductList(pno, category), HttpStatus.OK);
 	}
 }

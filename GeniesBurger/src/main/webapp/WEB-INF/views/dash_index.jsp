@@ -6,6 +6,39 @@
 <jsp:include page="adminCommon/sidebar.jsp" />
 
 <!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+	<div class="row">
+		<div class="col-7 align-self-center">
+			<h3
+				class="page-title text-truncate text-dark font-weight-medium mb-1">Good
+				Morning Jason!</h3>
+			<div class="d-flex align-items-center">
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb m-0 p-0">
+						<li class="breadcrumb-item"><a href="index.html">Dashboard</a>
+						</li>
+					</ol>
+				</nav>
+			</div>
+		</div>
+		<div class="col-5 align-self-center">
+			<div class="customize-input float-right">
+				<select
+					class="custom-select custom-select-set form-control bg-white border-0 custom-shadow custom-radius">
+					<option selected>Aug 19</option>
+					<option value="1">July 19</option>
+					<option value="2">Jun 19</option>
+				</select>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
 <div class="container-fluid">
@@ -347,7 +380,8 @@
 									<td class="border-top-0 px-2 py-4">
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
-												<img src="/resources/assets/images/users/widget-table-pic1.jpg"
+												<img
+													src="/resources/assets/images/users/widget-table-pic1.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
@@ -384,7 +418,8 @@
 									<td class="px-2 py-4">
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
-												<img src="/resources/assets/images/users/widget-table-pic2.jpg"
+												<img
+													src="/resources/assets/images/users/widget-table-pic2.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
@@ -416,7 +451,8 @@
 									<td class="px-2 py-4">
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
-												<img src="/resources/assets/images/users/widget-table-pic3.jpg"
+												<img
+													src="/resources/assets/images/users/widget-table-pic3.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
@@ -450,7 +486,8 @@
 									<td class="px-2 py-4">
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
-												<img src="/resources/assets/images/users/widget-table-pic4.jpg"
+												<img
+													src="/resources/assets/images/users/widget-table-pic4.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">

@@ -24,7 +24,6 @@
 <link rel="stylesheet" href="/resources/css/tw.css">
 
 </head>
-
 <!-- Start header / nav  -->
 <body class="goto-here">
 	<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light"
@@ -99,9 +98,15 @@
 	<div>
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
-				<div class="col" id="navOrder">딜리버리 주문 내역</div>
 				<div class="col">
-					<a href="/cart/cart" id="navCart">장바구니</a>
+				<a href="/cart/cart" id="navOrder">
+				<strong>딜리버리 주문 내역</strong>
+				</a>
+				</div>
+				<div class="col">
+					<a href="/cart/cart" id="navCart">
+					<strong>장바구니</strong>
+					</a>
 				</div>
 			</div>
 		</div>

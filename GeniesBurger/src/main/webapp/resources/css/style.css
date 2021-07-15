@@ -11862,8 +11862,8 @@ textarea.form-control {
 }
 
 .ftco-footer {
-	font-size: 14px;
-	padding: 7em 0;
+	font-size: 18px;
+	padding: 3em 0;
 	color: #000000;
 }
 
@@ -13145,3 +13145,8 @@ stroke-dashoffset
 -136px;
 }
 }
+
+* {
+	margin: 0; 
+	padding: 0;
+} 

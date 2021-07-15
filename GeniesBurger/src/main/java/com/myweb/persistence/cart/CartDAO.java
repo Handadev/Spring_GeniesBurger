@@ -53,15 +53,24 @@ public class CartDAO implements CartDAORule {
 	}
 
 	@Override
-	public int dupleProduct(int pno) {
-		return sql.selectOne(NS + "dupleProduct", pno);
+	public int dupleProduct(int pno, int mno) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		return sql.selectOne(NS + "dupleProduct", map);
 	}
 
 	@Override
-	public int upQtyDuple(int pno) {
-		int isUp = sql.update(NS + "upQtyDuple", pno);
-		logger.info("DAO upQtyDuple : " + isUp);
-		return isUp;
+	public int upQtyDuple(int pno, int mno) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("mno", mno);
+		return sql.update(NS + "upQtyDuple", map);
+	}
+
+	@Override
+	public CartVO selectOne(int mno) {
+		return sql.selectOne(NS+"pay", mno);
 	}
 
 }
