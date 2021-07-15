@@ -50,7 +50,6 @@ public class CouponController {
 		model.addAttribute("issueList", cpsv.getIssueList(cpgvo));
 		 int totalCount = cpsv.getIssueTotalCount(cpgvo); 
 		 model.addAttribute("cpghdl", new CouponPagingHandler(totalCount, cpgvo));
-		 
 	}
 	
 	@PostMapping("/issue")
