@@ -46,6 +46,12 @@
 	
 	<!-- 결제창에서 해당하는 mno의 카트정보 가져오기 -->
 	<select id="pay" parameterType="int" resultType="cartvo">
-		select * from tbl_cart where mno=#{mno}
+		select * from tbl_cart tc inner join tbl_productfile tp 
+		on tc.pno = tp.pno where tc.mno = #{mno}
 	</select>
+	
+	<!-- 결제완료후 해당멤버의 카트 비우기(mno) -->
+	<delete id="complete" parameterType="int">
+		delete from tbl_cart where mno=#{mno}
+	</delete>
 </mapper>

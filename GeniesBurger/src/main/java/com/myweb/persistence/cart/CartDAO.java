@@ -73,4 +73,9 @@ public class CartDAO implements CartDAORule {
 		return sql.selectOne(NS+"pay", mno);
 	}
 
+	@Override
+	public int deleteWithMno(int mno) {
+		return sql.delete(NS+"complete", mno);
+	}
+
 }
