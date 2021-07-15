@@ -33,8 +33,8 @@ public class ProductDAOTest {
 			pvo.setPrice(10000);
 			pvo.setCategory(1);
 			pvo.setCalorie(100);
-			pdao.insert(pvo);
 			
+			pdao.insert(pvo);
 		}
 	}
 	
@@ -55,11 +55,11 @@ public class ProductDAOTest {
 //		
 //	}
 	
-	@Test
-	public void productDetail() throws Exception {
-		ProductVO pvo = pdao.selectOne(30);
-		logger.info("pvo3"+pvo);
-	}
+//	@Test
+//	public void productDetail() throws Exception {
+//		ProductVO pvo = pdao.selectOne(30);
+//		logger.info("pvo3"+pvo);
+//	}
 
 //	@Test
 //	public void productRemove() throws Exception {

@@ -1,6 +1,7 @@
 package com.myweb.ctrl;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,14 +39,14 @@ public class ProductController {
 	private ProductFileProcessor pfp;
 	
 	@GetMapping("/register")
-	public void register(Model model) {
+	public void register(Model model, ProductVO pvo) {
 		model.addAttribute("stock_list", psv.getList());
+		model.addAttribute("single_list", psv.getList(pvo));
 	}
 	
 	@PostMapping("/register")
-	public String register(ProductVO pvo, ProductStockVO psvo, RedirectAttributes reAttr
-						,@RequestParam(name="files", required=false) MultipartFile[] files) {
-		logger.info("StockVO svo = "+ psvo.getSname());
+	public String register(ProductStockVO psvo, RedirectAttributes reAttr
+						,@RequestParam(name="files", required=false) MultipartFile[] files, ProductVO pvo) {
 		int isUp = psv.register(pvo);
 		if (isUp > 0) {
 			int pno = psv.getCurrPno();

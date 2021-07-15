@@ -1,6 +1,7 @@
 package com.myweb.ctrl;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,11 +30,26 @@ public class CartController {
    @Inject
    private CartServiceRule cartsv;
    
+   @GetMapping("/payment")
+   public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
+	   CartVO cvo = cartsv.payment(mno);
+	   if (cvo != null) {
+		   model.addAttribute("cvo", cvo);
+	   }
+   }
+   
    
    @PostMapping("/register")
-	public String register(CartVO cartvo, RedirectAttributes reAttr) {
-		int isUp = cartsv.register(cartvo);
-		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 삭제 성공");
+	public String register(CartVO cartvo, @RequestParam("pno") int pno, 
+			@RequestParam("mno") int mno, RedirectAttributes reAttr, HttpSession ses) {
+		boolean isExist = cartsv.dupleCheck(pno, mno);
+		if(isExist) {
+			int isUp = cartsv.increRegister(pno, mno);
+			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 수량증가 성공" : "카트 수량증가 실패");
+		}else {
+			int isUp = cartsv.register(cartvo);
+		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
+		}
 		return "redirect:/product/list";
 	}
 

@@ -61,8 +61,8 @@
 								<c:choose>
 									<c:when test="${ses.mno == cartList.mno }">
 										<tr class="text-center">
-											<%-- <td id="pnoVal">pno : ${cartList.pno }</td>
-											<td id="mno_val">mno : ${cartList.mno }</td> --%>
+											<%-- <td id="pnoVal">pno : ${cartList.pno }</td> --%>
+											<%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
 											<td class="product-remove">
 												<button type="button"
 													class="btn btn-outline-light outline btn-lg removeBtn"
@@ -71,7 +71,6 @@
 												</button>
 											</td>
 											<td class="image-prod">
-											<!-- <div class="img" style="background-image: url(/resources/images/demo.png);"></div> -->
 											<img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
 											
 											</td>
@@ -87,9 +86,7 @@
 													<button type="button" class="ion-ios-arrow-down downQtyBtn"
 														data-downqty="${cartList.cartno }" data-down="-1"></button>
 													&nbsp;&nbsp;
-													<p>
-														<b>${cartList.quantity }</b>
-													</p>
+														<p data-qtydata="${cartList.quantity }" class="qtyclass">${cartList.quantity }</p>
 													&nbsp;&nbsp;
 													<button type="button" class="ion-ios-arrow-up upQtyBtn"
 														data-upqty="${cartList.cartno }" data-up="1"></button>
@@ -113,24 +110,13 @@
 				<c:if test="${ses.mno != null}">
 				총 주문금액 :
 				<c:out value="${sum }" /> 원
-				<button type="button" class="btn btn-primary" 
+				<button type="button" class="btn btn-danger" 
 				data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
 				</c:if>
 			</div>
 		</div>
 	</div>
 </section>
-<!-- 카트 담기 -->
-<form class="" action="/product/register" method="post"
-	enctype="multipart/form-data">
-	<input type="hidden" name="mno" value="${ses.mno }"> <input
-		type="hidden" name="pno" value="${pvo.pno }"> <input
-		type="hidden" name="title" value="${pvo.title }"> <input
-		type="hidden" name="price" value="${pvo.content }"> <input
-		type="hidden" name="calorie" value="${pvo.calorie }"> <input
-		type="hidden" name="sales" value="${pvo.sales }"> <input
-		type="hidden" name="cansale" value="${pvo.cansale }">
-</form>
 <!-- Modal -->
    <div class="container">
        <!-- Modal -->
@@ -146,14 +132,15 @@
           <!-- Modal body -->
           <div class="modal-body">
             <div class="modal-select" class="modal-img">
-              <img src="/resources/icons/delivery_logo.png" style="width:200px; height:180px;" class="modal-img" />
-              <p>매장식사</p>
+              <img src="/resources/icons/for_here.jpg" style="width:200px; height:200px;" class="modal-img" />
+              <p><b>매장식사</b></p>
             </div>
             <div class="modal-select">
-            <img src="/resources/icons/package_logo.png" style="width:200px; height:180px;" class="modal-img" />
-            <p>포장주문</p>
+            <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
+            <p><b>포장주문</b></p>
           </div>
-            <button type="button" class="btn btn-dark checkBtn">확인</button>
+          	<a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
+            <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
       </div>
@@ -194,9 +181,15 @@
 		console.log(this);
 		let downqty_val = $(this).data("downqty");
 		let downqty_val2 = $(this).data("down");
+		let qtyData = $(".qtyclass").data("qtydata");
+		console.log("qtyData : " + qtyData);
 		console.log("downqty_val : " + downqty_val);
 		console.log("downqty_val2 : " + downqty_val2);
+		if(qtyData == 1){
+			alert("더 이상 감소가 불가능합니다.");
+		}else{
 		downqty_cart(downqty_val, downqty_val2);
+		}
 	});
 	function downqty_cart(downqty, downqty2) {
 		$.ajax({
@@ -238,6 +231,7 @@
 			location.reload();
 		});
 	}
+	
 </script>
 
 <jsp:include page="../common/footer.jsp" />
