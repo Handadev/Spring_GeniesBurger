@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col" style="margin-bottom: 10px;">
 				<form action="/member/list" class="form-inline justify-content-end">
-				<p style="font-size:2em; margin-right:600px;">ADMIN PAGE</p>
+				<p style="font-size:2em; margin-right:450px;">TOTAL PUCHASE PAGE</p>
 					<select class="form-control" name="range">
 						<option value="en"
 							<c:out value="${pghdl.mpgvo.range eq 'en' ? 'selected' : '' }"/>>Email+Name</option>
@@ -53,11 +53,6 @@
 									<td>${mList.address }</td>
 									<td>${mList.birthday }</td>
 									<td>${mList.point }</td>
-									<td>
-										<button type="button"
-											class="btn-sm btn-danger removeBtn detailBtn"
-											data-mno="${mList.mno }">삭제</button>
-									</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -68,20 +63,6 @@
 			</div>
 		</div>
 	</div>
-
-
 </section>
-<form action="/member/remove" method="post" id="removeForm">
-	<input type="hidden" name="mno">
-</form>
-<script>
-	$(document).on("click", ".removeBtn", function(e) {
-		e.preventDefault();
-		let mno_val = $(this).data("mno");
-		console.log("mno_val : " + mno_val);
-		$("input[name=mno]").val(mno_val);
-		$("#removeForm").submit();
-	});
-</script>
 
 <jsp:include page="../common/footer.jsp" />

@@ -56,7 +56,7 @@ public class ProductFileProcessor {
 				
 				if(isImageFile(storeFile)) {
 					File thumbnail = new File(folder, uuid.toString() + "_th_" + originalFileName);
-					Thumbnails.of(storeFile).size(250, 250).toFile(thumbnail); // Thumbnailator 라이브러리
+					Thumbnails.of(storeFile).size(350, 350).toFile(thumbnail); // Thumbnailator 라이브러리
 				}
 			} catch (IllegalStateException e) {
 				e.printStackTrace();

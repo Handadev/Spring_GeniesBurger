@@ -13,7 +13,7 @@
 	</select>
 	<select id="totalCntList" resultType="svo">
 		select sname, sum(stock_qty) AS stock_qty
-		from tbl_stock group by sname
+		from tbl_stock group by sname order by sname
 	</select>
 	<select id="oneList" parameterType="String" resultType="svo">
 		select sno, sname, stock_qty, TO_CHAR(shelf_life, 'YYYY-MM-DD') as shelf_life, TO_CHAR(STOCK_REGDATE, 'YYYY-MM-DD') as stock_regdate from tbl_stock where sname=#{sname} order by shelf_life

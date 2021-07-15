@@ -2,8 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../adminCommon/header.jsp" />
-<jsp:include page="../adminCommon/sidebar.jsp" />
 <jsp:include page="../adminCommon/nav.jsp" />
+<jsp:include page="../adminCommon/sidebar.jsp" />
 <style>
 .list-group-item span {
 	float: left;
@@ -33,10 +33,6 @@
 	cursor: pointer;
 }
 
-#delete, #modify {
-	
-}
-
 #delete:hover, #modify:hover {
 	cursor: pointer;
 	color: skyblue;
@@ -47,11 +43,6 @@ label {
 }
 </style>
 
-
-<!-- ============================================================== -->
-<!-- Page wrapper  -->
-<!-- ============================================================== -->
-<div class="page-wrapper">
 	<!-- ============================================================== -->
 	<!-- Bread crumb and right sidebar toggle -->
 	<!-- ============================================================== -->
@@ -145,10 +136,6 @@ label {
 	<!-- ============================================================== -->
 	<!-- End Container fluid  -->
 	<!-- ============================================================== -->
-</div>
-<!-- ============================================================== -->
-<!-- End Wrapper -->
-<!-- ============================================================== -->
 <!-- The Modal -->
 <div class="modal" id="modifyModal">
 	<div class="modal-dialog">

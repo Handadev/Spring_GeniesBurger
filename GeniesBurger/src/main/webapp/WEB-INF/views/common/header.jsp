@@ -8,6 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+
 <link rel="stylesheet"
 	href="/resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/animate.css">
@@ -52,8 +53,8 @@
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">login</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="/member/login">Login</a> <a
-										class="dropdown-item" href="/member/register">Register</a>
+									<a class="dropdown-item" href="/member/login">Login</a>
+									<a class="dropdown-item" href="/member/register">Register</a>
 								</div>
 							</c:otherwise>
 						</c:choose></li>
@@ -70,8 +71,7 @@
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
-             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
-					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
+          <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
 					<c:choose>
 						<c:when test="${ses.email eq 'admin@admin.com' }">
 							<li class="nav-item dropdown"><a
@@ -80,9 +80,10 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">ADMIN</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">my
-										page</a> <a class="dropdown-item" href="/member/list">admin
-										page</a>
+									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
+									my page</a> 
+									<a class="dropdown-item" href="/member/list">admin page</a>
+									<a class="dropdown-item" href="/cart/purchaseList">purchase page</a>
 								</div>
 						</c:when>
 						<c:when test="${ses.email ne null && ses.email ne '' }">

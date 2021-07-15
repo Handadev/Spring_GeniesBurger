@@ -109,7 +109,7 @@ img{
 			</div>
 		</div>
 	</c:forEach>
-	<jsp:include page="reviewFooter.jsp"></jsp:include>
+	<jsp:include page="myReviewFooter.jsp"></jsp:include>
 </div>
 
 <script src="/resources/js/jquery.min.js"></script>

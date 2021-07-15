@@ -26,8 +26,9 @@ $("#img").click(function() {
 		location.replace("/member/login");
 	} else {
 		$.ajax({
-			url: "/cart/mno/"+mno_val,
-			type: "delete"
+			url: "/cart/mno/",
+			type: "post",
+			data:{mno:mno_val}
 		}).done(function(result) {
 			alert("이용해주셔서 감사합니다~");
 			location.replace("/");
