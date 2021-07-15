@@ -7,6 +7,7 @@
 
 <form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
 <input type="hidden" name="pno" value="1">
+<input type="hidden" name="email" value="${ses.email }">
 </select>
 	<div class="form-group">
 		<label for="price">내용:</label>

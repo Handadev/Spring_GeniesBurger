@@ -8,6 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+
 <link rel="stylesheet"
 	href="/resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/animate.css">
@@ -70,7 +71,7 @@
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
-             <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
+          <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
 					<c:choose>
 						<c:when test="${ses.email eq 'admin@admin.com' }">
 							<li class="nav-item dropdown"><a
