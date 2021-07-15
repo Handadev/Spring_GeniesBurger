@@ -14,4 +14,5 @@ public interface CartServiceRule {
 	public int increRegister(int pno, int mno);
 	public CartVO payment(int mno);
 	public int removeWithMno(int mno);
+	public List<CartVO> getOrderList(int mno);
 }
