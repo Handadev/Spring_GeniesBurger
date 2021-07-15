@@ -111,6 +111,7 @@ start with 1
 increment by 1
 nocycle nocache;
 
+
 -----------------------쿠폰리스트-------------------------
 DROP SEQUENCE seq_couponlist_cplno;
 DROP TABLE TBL_COUPONLIST;
@@ -122,8 +123,6 @@ cpno number(11),
 enddate DATE,
 constraint pk_couponlist primary key(cplno)
 );
-
-
 
 create sequence seq_couponlist_cplno
 start with 1

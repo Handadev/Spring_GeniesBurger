@@ -40,7 +40,7 @@ public class ProductFileSweeper {
 			String file_path = fvo.getSavedir()+"\\"+fvo.getPuuid()+"_";
 			String file_name = fvo.getFname();
 			currFiles.add(BASE_PATH+file_path+file_name);
-			currFiles.add(BASE_PATH+file_path+"th_"+file_name);
+			currFiles.add(BASE_PATH+file_path+"_th_"+file_name);
 			
 		}
 		for (String files : currFiles) {
