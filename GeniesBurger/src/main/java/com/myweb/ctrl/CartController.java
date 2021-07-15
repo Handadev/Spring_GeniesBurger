@@ -122,4 +122,9 @@ public class CartController {
 	public void list(Model model) {
 		model.addAttribute("cartList", cartsv.getList());
 	}
+	
+	@GetMapping("/purchaseList")
+	public void purchaseList() {
+		
+	}
 }
