@@ -69,8 +69,8 @@ public class CartDAO implements CartDAORule {
 	}
 
 	@Override
-	public CartVO selectOne(int mno) {
-		return sql.selectOne(NS+"pay", mno);
+	public List<CartVO> selectList(int mno) {
+		return sql.selectList(NS+"pay", mno);
 	}
 
 	@Override

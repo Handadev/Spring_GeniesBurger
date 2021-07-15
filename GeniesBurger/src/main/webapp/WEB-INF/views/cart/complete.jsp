@@ -3,15 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<style>
+div {
+	text-align: center;
+}
+.order {
+	font-size: 50px;
+}
+.orderNum {
+	font-size: 30px;
+	color: red;
+}
+#ranNum {
+	font-size: 200px;
+	color: red;
+	line-height: 200px;
+}
+.receipt {
+	font-size: 30px;
+}
+.img {
+	width: 500px;
+}
+#mno {
+	display: none;
+}
+</style>
 
 <div class="container p-3 my-3 border">
-	<span>주문이 완료되었습니다!</span><br>
-	<span>주문번호</span><br>
-	<span id="ranNum"></span><br>
-	<span>신용카드를 뽑은 후</span><br>
-	<span>출력된 영수증을 받아가세요!</span>
+	<span class="order">주문이 완료되었습니다!</span><br><br>
+	<span class="orderNum">주문번호</span><br>
+	<span id="ranNum"></span><br><br>
+	<span class="receipt">신용카드를 뽑은 후</span><br>
+	<span class="receipt">출력된 영수증을 받아가세요!</span><br><br><br>
 	<span id="mno">${ses.mno }</span>	
 	<img src="/resources/images/complete.png" class="img" id="img">
+	<br><br><br><br><br><br><br>
 </div>
 
 <script>

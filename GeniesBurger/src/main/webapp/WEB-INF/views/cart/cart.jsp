@@ -8,19 +8,15 @@
     min-width: 100%;
     min-height: 100%;
   }
-
   .modal-title {
     margin: auto;
   }
-
   .modal-body {
     text-align: center; 
   }
-
   .modal-img {
     margin: 10px;
   }
-
   .checkBtn {
     margin-top: 15px;
     width: 90%;
@@ -93,6 +89,18 @@
 											</td>
 										</tr>
 									</c:when>
+									<c:when test="${ses.mno eq '' || ses.mno eq null}">
+										<script>
+											alert("먼저 로그인을 하셔야 합니다!");
+											location.replace("/member/login");
+										</script>
+									</c:when>
+									<c:when test="${cartList.price eq null }">
+										<script>
+											alert("장바구니에 담긴 상품이 없습니다!");
+											location.replace("/product/list");
+										</script>
+									</c:when>
 								</c:choose>
 							</c:forEach>
 						</tbody>
@@ -130,21 +138,48 @@
 
           <!-- Modal body -->
           <div class="modal-body">
-            <div class="modal-select" class="modal-img">
+            <div class="modal-select" id="background1">
+               <div id="check1" style="position: absolute;"></div>
               <img src="/resources/icons/for_here.jpg" style="width:200px; height:200px;" class="modal-img" />
               <p><b>매장식사</b></p>
             </div>
-            <div class="modal-select">
+            <div class="modal-select" id="background2">
+               <div id="check2" style="position: absolute;"></div>
             <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
             <p><b>포장주문</b></p>
-          </div>
-          	<a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
-            <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
+            </div>
+             <div id="confirmBtn"><a class="btn btn-dark checkBtn" style="color: white;">확인</a></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+<!-- Modal 이미지 겹치기 스크립트 -->
+<script>
+let check = false;
+
+$(document).on("click", "#background1", function() {
+   let html = "<div style='position: relative; top: 50px; left:50px;'><img src='/resources/icons/check.png' style='width:150px'/></div>";
+   $("#check1").html(html);
+   $("#check2").html("");
+   check = true;
+});
+
+$(document).on("click", "#background2", function() {
+   let html = "<div style='position: relative; top: 50px; left:50px;'><img src='/resources/icons/check.png' style='width:150px'/></div>";
+   $("#check2").html(html);
+   $("#check1").html("");
+   check = true;
+});
+
+$(document).on("click",".checkBtn",function() {
+   if(check == true) {
+      $(".checkBtn").attr("href", '/cart/payment?mno='+${ses.mno });
+   } else {
+      alert("항목을 선택하세요!");
+   }
+});
+</script>
 <!-- 삭제 스크립트 -->
 <script>
 	$(document).on("click", ".removeBtn", function() {
@@ -198,10 +233,8 @@
 				downqty_key : downqty2
 			}
 		}).done(function(result) {
-			alert("수량 감소 성공");
 			location.reload();
 		}).fail(function(err) {
-			alert("수량 감소 실패");
 			location.reload();
 		});
 	}
@@ -223,14 +256,11 @@
 				upqty_key : upqty2
 			}
 		}).done(function(result) {
-			alert("수량 증가 성공");
 			location.reload();
 		}).fail(function(err) {
-			alert("수량 증가 실패");
 			location.reload();
 		});
 	}
-	
 </script>
 
 <jsp:include page="../common/footer.jsp" />

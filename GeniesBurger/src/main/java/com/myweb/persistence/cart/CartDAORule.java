@@ -12,7 +12,7 @@ public interface CartDAORule {
 	public int downQty(int cartno, int downqtystr); // 카트 수량 감소
 	public int dupleProduct(int pno, int mno);
 	public int upQtyDuple(int pno, int mno);
-	public CartVO selectOne(int mno);
+	public List<CartVO> selectList(int mno);
 	public int deleteWithMno(int mno);
 	public List<CartVO> selectOrderList(int mno);
 }
