@@ -64,6 +64,13 @@ public class StockController {
 		view.setViewName("/stock/stock_present");
 		return view;
 	}
+	
+	@GetMapping("/stock_regList")
+	public ModelAndView regList() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/stock/stock_regList");
+		return view;
+	}
 
 //	@GetMapping(value = "/list", produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
 //			MediaType.APPLICATION_JSON_UTF8_VALUE })

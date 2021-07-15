@@ -14,24 +14,24 @@ import com.myweb.domain.ProductStockVO;
 @Repository
 public class ProductStockDAO implements ProductStockDAORule {
 	private static Logger logger = LoggerFactory.getLogger(ProductStockDAO.class);
-	private final String ns = "ProductStockMapper.";
+	private final String NS = "ProductStockMapper.";
 	
 	@Inject
 	private SqlSession sql;
 	
 	@Override
 	public int insert(List<ProductStockVO> pslist) {
-		return sql.insert(ns+"reg", pslist);
+		return sql.insert(NS+"reg", pslist);
 	}
 
 	@Override
 	public List<ProductStockVO> selectList(int pno) {
-		return sql.selectList(ns+"list", pno);
+		return sql.selectList(NS+"list", pno);
 	}
 
 	@Override
 	public int delete(int pno) {
-		return sql.delete(ns+"del", pno);
+		return sql.delete(NS+"del", pno);
 	}
 
 }

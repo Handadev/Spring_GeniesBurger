@@ -34,7 +34,7 @@ start with 1
 increment by 1
 nocycle nocache;
 
-(mno => seq_member_mno.nextval)
+--(mno => seq_member_mno.nextval)--
 
 -----------------------상품-------------------------
 DROP SEQUENCE seq_product_pno;
@@ -61,6 +61,8 @@ increment by 1
 nocycle nocache;
 
 -----------------------상품 이미지-------------------------
+DROP TABLE tbl_productfile;
+
 create table tbl_productfile (
 puuid varchar2(200),
 savedir varchar2(200) not null,
@@ -70,6 +72,8 @@ constraint pkfiles primary key(puuid)
 );
 
 -----------------------상품_재고-------------------------
+DROP TABLE tbl_product_stock;
+
 create table tbl_product_stock (
 sname varchar2(100),
 pno number(11)
@@ -81,16 +85,31 @@ DROP TABLE tbl_cart;
 
 create table tbl_cart(
 cartno number(11),
-pno number(11) not null,
-imgfile varchar(2000) not null, // product imgfile
 title varchar2(100) not null,
 price number(11) not null,
-quantity int(11) default 1,
-mno number(11) not null
+quantity number(11) default 1,
+mno number(11) not null,
+pno number(11) not null,
 constraint pk_cart primary key(cartno)
 );
 
 create sequence seq_cart_cartno
+start with 1
+increment by 1
+nocycle nocache;
+
+-----------------------상품 주문내역-------------------------
+DROP SEQUENCE seq_purchase_purno;
+DROP TABLE tbl_purchase;
+
+CREATE table tbl_purchase(
+   purno number(11),
+   mno number(11),
+   cartno number(11),
+   regdate DATE DEFAULT sysdate,
+   constraint pk_purchase primary key(purno)
+);
+create sequence seq_purchase_purno
 start with 1
 increment by 1
 nocycle nocache;
@@ -131,8 +150,8 @@ increment by 1
 nocycle nocache;
 
 -----------------------리뷰-------------------------
-drop table tbl_review;
 drop sequence seq_review_rno;
+drop table tbl_review;
 
 create table tbl_review(
 rno number(10),
@@ -147,20 +166,22 @@ rftype number(1) default 0,
 constraint pk_rno primary key(rno)
 );
 
------------------------관리자 댓글-------------------------
-drop table tbl_admincomment;
-drop sequence seq_admincomment_acno;
-
 create sequence seq_review_rno
 start with 1
 increment by 1
 nocycle nocache;
 
+-----------------------관리자 댓글-------------------------
+drop sequence seq_adcomment_acno;
+drop table tbl_admincomment;
+
+
+
 CREATE TABLE TBL_ADMINCOMMENT (
 acno number(10),
 rno number(10) NOT NULL,
 adcomment varchar2(1000) NOT null,
-addate DATE DEFAULT sysdate NOT NULL
+addate DATE DEFAULT sysdate NOT NULL,
 CONSTRAINT pk_acno PRIMARY key(acno)
 );
 
@@ -170,8 +191,27 @@ INCREMENT BY 1
 nocycle nocache;
 
 -----------------------재고-------------------------
-DROP TABLE tbl_stock_order;
+drop sequence seq_stock_sno;
+drop table tbl_stock;
+
+create table tbl_stock (
+sno number(11),
+sname varchar2(100) not null,
+stock_qty number(11) not null,
+shelf_life date not null,
+stock_regdate date default sysdate,
+isburger number(2) DEFAULT 0,
+constraint pk_stock primary key(sno)
+);
+
+create sequence seq_coupon_cpno
+start with 1
+increment by 1
+nocycle nocache;
+
+-----------------------재고 주문-------------------------
 DROP SEQUENCE seq_stock_order_ono;
+DROP TABLE tbl_stock_order;
 
 CREATE TABLE tbl_stock_order(
 ono NUMBER(11),
@@ -187,6 +227,8 @@ INCREMENT BY 1
 nocycle nocache;
 
 --------------------소비자 버거 추가 재료-----------------------
+DROP TABLE tbl_add_extra;
+
 CREATE TABLE tbl_add_extra (
 aeno NUMBER(11),
 mno number(11),

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
@@ -31,8 +31,15 @@
     color: #ff0000;
   }
   .img{
-  	width: 120px;
-  	height: 120px;
+     width: 120px;
+     height: 120px;
+  }
+  .btn-center-div{
+    text-align: center;
+    margin:auto;
+  }
+  .downQtyBtn, .upQtyBtn{
+     width:30px;
   }
 </style>
 
@@ -149,6 +156,7 @@
             <p><b>포장주문</b></p>
             </div>
              <div id="confirmBtn"><a class="btn btn-dark checkBtn" style="color: white;">확인</a></div>
+
           </div>
         </div>
       </div>
@@ -182,31 +190,31 @@ $(document).on("click",".checkBtn",function() {
 </script>
 <!-- 삭제 스크립트 -->
 <script>
-	$(document).on("click", ".removeBtn", function() {
-		console.log(this);
-		let cartno_val = $(this).data("cartno");
-		console.log("cartno_val : " + cartno_val);
-		remove_cart(cartno_val);
-	});
+   $(document).on("click", ".removeBtn", function() {
+      console.log(this);
+      let cartno_val = $(this).data("cartno");
+      console.log("cartno_val : " + cartno_val);
+      remove_cart(cartno_val);
+   });
 
-	function remove_cart(cartno) {
-		$.ajax({
-			url : "/cart/" + cartno,
-			type : "delete"
-		}).done(function(result) {
-			alert("카트 삭제 성공");
-			location.reload();
-		}).fail(function(err) {
-			alert("카트 삭제 실패");
-			location.reload();
-		});
-	}
+   function remove_cart(cartno) {
+      $.ajax({
+         url : "/cart/" + cartno,
+         type : "delete"
+      }).done(function(result) {
+         alert("카트 삭제 성공");
+         location.reload();
+      }).fail(function(err) {
+         alert("카트 삭제 실패");
+         location.reload();
+      });
+   }
 </script>
 <!-- 결제 스크립트 -->
 <script>
-	$("#orderBtn").on("click", function() {
-		console.log(this);
-	})
+   $("#orderBtn").on("click", function() {
+      console.log(this);
+   })
 </script>
 <!-- Quantity 스크립트 -->
 <script>
@@ -264,22 +272,3 @@ $(document).on("click",".checkBtn",function() {
 </script>
 
 <jsp:include page="../common/footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
