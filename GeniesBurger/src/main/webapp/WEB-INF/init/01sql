@@ -81,12 +81,11 @@ DROP TABLE tbl_cart;
 
 create table tbl_cart(
 cartno number(11),
-pno number(11) not null,
-imgfile varchar(2000) not null, // product imgfile
 title varchar2(100) not null,
 price number(11) not null,
-quantity int(11) default 1,
-mno number(11) not null
+quantity number(11) default 1,
+mno number(11) not null,
+pno number(11) not null,
 constraint pk_cart primary key(cartno)
 );
 
@@ -202,4 +201,21 @@ constraint pk_extra primary key(aeno)
 create sequence seq_add_extra_aeno
 start with 1
 increment by 1
+nocycle nocache;
+
+------------------ 재고 주문 --------------------
+DROP TABLE tbl_stock_order;
+DROP SEQUENCE seq_stock_order_ono;
+
+CREATE TABLE tbl_stock_order(
+ono NUMBER(11),
+sname varchar2(100) NOT NULL,
+order_qty NUMBER(11) NOT NULL,
+order_date DATE DEFAULT sysdate,
+CONSTRAINT pk_stock_order PRIMARY KEY(ono)
+);
+
+CREATE SEQUENCE seq_stock_order_ono
+START WITH 1
+INCREMENT BY 1
 nocycle nocache;
