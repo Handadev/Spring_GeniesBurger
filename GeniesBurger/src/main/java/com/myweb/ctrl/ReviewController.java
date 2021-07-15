@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.myweb.domain.ReviewPageVO;
 import com.myweb.domain.ReviewVO;
 import com.myweb.domain.adCommentVO;
+import com.myweb.handler.ReviewPagingHandler;
 import com.myweb.orm.ReviewFileProcessor;
 import com.myweb.service.review.ReviewServiceRule;
 
@@ -53,8 +55,10 @@ public class ReviewController {
 	}
 
 	@GetMapping("/list")
-	public void list(Model model) {
-		model.addAttribute("list", rsv.ReviewList());
+	public void list(Model model, ReviewPageVO rpgvo) {
+		model.addAttribute("list", rsv.ReviewList(rpgvo));
+		int totalCount = rsv.getTotalCount();
+		model.addAttribute("rpghdl", new ReviewPagingHandler(totalCount, rpgvo));
 	}
 
 	@ResponseBody
@@ -70,4 +74,12 @@ public class ReviewController {
 		int isUp = rsv.adCommentUp(rno, adComment);
 		return isUp > 0 ? "1" : "0";
 	}
+
+	@GetMapping("/myReview")
+	public void myReview(Model model, @RequestParam("email") String email, ReviewPageVO rpgvo) {
+		model.addAttribute("list", rsv.getMyReview(email, rpgvo));
+		int totalCount = rsv.getMyTotalCount(email);
+		model.addAttribute("rpghdl", new ReviewPagingHandler(totalCount, rpgvo));
+	}
+
 }

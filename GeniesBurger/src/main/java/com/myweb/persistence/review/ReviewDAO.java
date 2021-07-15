@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.myweb.domain.ReviewPageVO;
 import com.myweb.domain.ReviewVO;
 import com.myweb.domain.adCommentVO;
 
@@ -28,8 +29,8 @@ public class ReviewDAO implements ReviewDAORule {
 	}
 
 	@Override
-	public List<ReviewVO> selectList() {
-		return sql.selectList(NS + "list");
+	public List<ReviewVO> selectList(ReviewPageVO rpgvo) {
+		return sql.selectList(NS + "list", rpgvo);
 	}
 
 	@Override
@@ -62,18 +63,40 @@ public class ReviewDAO implements ReviewDAORule {
 
 	@Override
 	public int adCommentInsert(int rno, String adComment) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("rno", (Integer)rno);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rno", (Integer) rno);
 		map.put("adcomment", adComment);
-		return sql.insert(NS + "acReg",map);
+
+		return sql.insert(NS + "acReg", map);
 	}
 
 	@Override
 	public int adCommentUpdate(int rno, String adComment) {
-		Map<String, Object> map = new HashMap<>();
-		map.put("rno", (Integer)rno);
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("rno", (Integer) rno);
 		map.put("adcomment", adComment);
 		return sql.update(NS + "acUp", map);
+	}
+
+	@Override
+	public List<ReviewVO> getMyReview(String email, ReviewPageVO rpgvo) {
+		int countPerPage = rpgvo.getCountPerPage();
+		int pageIndex = rpgvo.getPageIndex();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("email", (String) email);
+		map.put("countPerPage", (Integer) countPerPage);
+		map.put("pageIndex", (Integer) pageIndex);
+		return sql.selectList(NS + "myReview", map);
+	}
+
+	@Override
+	public int selectTotalCount() {
+		return sql.selectOne(NS + "tc");
+	}
+
+	@Override
+	public int selectMyTotalCount(String email) {
+		return sql.selectOne(NS + "myTc", email);
 	}
 
 }

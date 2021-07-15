@@ -11,6 +11,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Amatic+SC:400,700&display=swap" rel="stylesheet"> -->
 <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
+
 <link rel="stylesheet"
 	href="/resources/css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="/resources/css/animate.css">
@@ -117,7 +118,7 @@ body {
 						</div></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
 					<li class="nav-item"><a href="/review/list" class="nav-link">Review Test</a></li>
              <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon(TEST)</a></li>
 					<!-- <li class="nav-item"><a href="/review/list" class="nav-link">리뷰 테스트 페이지</a></li> -->
