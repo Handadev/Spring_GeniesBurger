@@ -117,18 +117,20 @@
      <!-- 발급된 쿠폰 리스트 -->
      <select id="issueList" parameterType="cpgvo" resultType="cplvo">
     <![CDATA[
-        SELECT cplno, cpno, cpname, mno, email, enddate, discount
-        from(SELECT /*+INDEX_DESC(tbl_couponlist pk_couponlist)*/
-        rownum AS rn, cpl.cplno AS cplno, cpl.cpno AS cpno, cp.cpname AS cpname, cpl.mno AS mno, m.email AS email, enddate, discount
+    SELECT rownum, cplno, cpno, cpname, mno, email, enddate, discount
+	 FROM (SELECT rownum AS rn, cplno, cpno, cpname, mno, email, enddate, discount
+        from(SELECT
+        cpl.cplno AS cplno, cpl.cpno AS cpno, cp.cpname AS cpname, cpl.mno AS mno, m.email AS email, enddate, discount
       FROM TBL_COUPONLIST cpl INNER JOIN TBL_COUPON cp
       ON cpl.CPNO = cp.CPNO
       JOIN TBL_MEMBER m 
       ON cpl.MNO = m.MNO where cplno > 0
-   ]]>
+    ]]>
        <include refid="issueSearch"/>
     <![CDATA[
-      and rownum <= #{pageIndex} * #{countPerPage})
-       where rn > (#{pageIndex}-1) * #{countPerPage} ORDER BY cplno desc
+      ORDER BY cplno desc)
+      where rownum <= #{pageIndex} * #{countPerPage})
+      where rn > (#{pageIndex}-1) * #{countPerPage}
    ]]>
      </select>
      <!-- 쿠폰 발급을 위한 리스트 -->

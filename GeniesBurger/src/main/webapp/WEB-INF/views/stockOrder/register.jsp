@@ -17,7 +17,7 @@
 			  </div>
 			  <div class="form-group">
 				  <button type="button" id="stockOdBtn" class="btn btn-primary">주문</button>
-				  <a href="/stockOrder/list" class="btn btn-primary float-right">목록으로</a>
+				  <a href="/stockOrder/dateList" class="btn btn-primary float-right">목록으로</a>
 			  </div>
 			</form>
 		</div>
