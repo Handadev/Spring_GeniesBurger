@@ -2,24 +2,55 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
+<style>
+.title {
+	padding: 50px 320px 20px 0px;
+	}
+.img {
+	float: right;
+	width: 260px;
+	height: 170px;
+	}
+span {
+	position: relative;
+	font-size: 30px;
+	color: black;
+	font-weight: bold;
+	}
+.menu_wrap {
+	width: 920px;
+	height: 170px;
+	}
+.redFont {
+	color: red;
+	}
+	#sum {
+	font-size:50px;
+	}
+</style>
 
-<div class="container p-3 my-3 border" style="text-align: center;">
-	<h1>결제화면이지롱</h1><br>
-	
-	<h1>${cvo.title }</h1>
-	<h1>${cvo.price }원</h1>
-	<h1>수량 : ${cvo.quantity }</h1>
-	<c:set var="sum" value="${sum + (cvo.price * cvo.quantity)}" />
-	<c:set var="dc" value="1000" />
-	<h1>합계금액 : ${sum }</h1><br><br>
-	
-	<h1>주문금액 : ${sum }</h1>
-	<h1>할인금액 : ${dc }</h1>
-	<h1>총 결제금액 : ${sum-dc }</h1>
+<div class="container p-3 my-3 border">
+	<div class="menu_wrap">
+		<span class="title">${cvo.title }</span><br>
+		<span class="redFont">${cvo.price }원</span>
+		<img class="img" src="/upload/${cvo.savedir }/${cvo.puuid}_${cvo.fname}" alt="display none">
+	</div>
+	<div class="sum_wrap">
+		<br><br><br><span>수량</span><span style="float: right;">${cvo.quantity }</span><br>
+		<c:set var="sum" value="${sum + (cvo.price * cvo.quantity)}" />
+		<c:set var="dc" value="1000" />
+		<span>합계금액</span><span class="redFont" style="float: right;">${sum }</span>
+	</div>
+</div>
 
-	<button class="btn btn-warning">취소</button>
-	<button class="btn btn-danger">결제</button>
-	<p>결제버튼을 누르면 결제수단으로 넘어감</p>
+<div class="container p-3 my-3 border">
+	<span>주문금액</span><span style="float: right;">${sum }</span><br>
+	<span>할인금액</span><span style="float: right;">${dc }</span><br>
+	<span id="sum">총 결제금액</span><span class="redFont" id="sum" style="float: right;">${sum-dc }</span>
+</div>
+<div class="container p-3 my-3 border">
+	<a href="/" class="btn btn-warning">취소</a>
+	<a href="/cart/method" class="btn btn-danger">결제</a>
 </div>
 
 <jsp:include page="../common/footer.jsp" />
