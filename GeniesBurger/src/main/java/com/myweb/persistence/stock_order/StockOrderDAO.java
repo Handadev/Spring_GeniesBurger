@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.domain.CouponPageVO;
+import com.myweb.domain.StockOrderPageVO;
 import com.myweb.domain.StockOrderVO;
 import com.myweb.domain.StockVO;
 
@@ -27,13 +28,13 @@ public class StockOrderDAO implements StockOrderDAORule {
 	}
 
 	@Override
-	public List<StockOrderVO> selectList(CouponPageVO cpgvo) {
-		return SQL.selectList(NS + "odList", cpgvo);
+	public int totalCount(StockOrderPageVO sopgvo) {
+		return SQL.selectOne(NS + "tc", sopgvo);
 	}
 
 	@Override
-	public int totalCount(CouponPageVO cpgvo) {
-		return SQL.selectOne(NS + "tc", cpgvo);
+	public List<StockOrderVO> selectDateList(StockOrderPageVO sopgvo) {
+		return SQL.selectList(NS + "dateOdList", sopgvo);
 	}
 
 }

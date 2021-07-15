@@ -30,6 +30,15 @@ public class CartController {
    @Inject
    private CartServiceRule cartsv;
    
+   @GetMapping("/complete")
+   public void complete() {}
+   
+   @GetMapping("/creditcard")
+   public void creditcard() {}
+   
+   @GetMapping("/method")
+   public void method() {} 
+   
    @GetMapping("/payment")
    public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
 	   CartVO cvo = cartsv.payment(mno);
@@ -37,7 +46,6 @@ public class CartController {
 		   model.addAttribute("cvo", cvo);
 	   }
    }
-   
    
    @PostMapping("/register")
 	public String register(CartVO cartvo, @RequestParam("pno") int pno, 
@@ -82,11 +90,19 @@ public class CartController {
             : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
    }
    
-   @GetMapping("/totalList")
-   public void list() {
-	   
+   @ResponseBody
+   @DeleteMapping(value="/mno/{mno}", produces=MediaType.TEXT_PLAIN_VALUE)
+   public ResponseEntity<String> removeWithMno(@PathVariable("mno") int mno) {
+	   logger.info(">>>>>>>>>> mno" + mno);
+	   return cartsv.removeWithMno(mno) > 0 ?
+			   new ResponseEntity<String>("1", HttpStatus.OK)
+			   : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
    }
    
+   @GetMapping("/totalList")
+   public void list() {
+   }
+     
    @GetMapping("/cart")
    public void list(Model model) {
       model.addAttribute("cartList", cartsv.getList());

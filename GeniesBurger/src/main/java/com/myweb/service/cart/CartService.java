@@ -65,4 +65,9 @@ public class CartService implements CartServiceRule {
 		return cartdao.selectOne(mno);
 	}
 
+	@Override
+	public int removeWithMno(int mno) {
+		return cartdao.deleteWithMno(mno);
+	}
+
 }

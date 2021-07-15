@@ -13,4 +13,5 @@ public interface CartDAORule {
 	public int dupleProduct(int pno, int mno);
 	public int upQtyDuple(int pno, int mno);
 	public CartVO selectOne(int mno);
+	public int deleteWithMno(int mno);
 }
