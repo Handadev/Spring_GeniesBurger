@@ -21,7 +21,6 @@
 <link rel="stylesheet" href="/resources/css/flaticon.css">
 <link rel="stylesheet" href="/resources/css/icomoon.css">
 <link rel="stylesheet" href="/resources/css/style.css">
-<link rel="stylesheet" href="/resources/css/tw.css">
 
 </head>
 <!-- Start header / nav  -->
@@ -53,8 +52,8 @@
 									data-toggle="dropdown" aria-haspopup="true"
 									aria-expanded="false">login</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="/member/login">Login</a> <a
-										class="dropdown-item" href="/member/register">Register</a>
+									<a class="dropdown-item" href="/member/login">Login</a>
+									<a class="dropdown-item" href="/member/register">Register</a>
 								</div>
 							</c:otherwise>
 						</c:choose></li>
@@ -81,9 +80,10 @@
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">ADMIN</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
-									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">my
-										page</a> <a class="dropdown-item" href="/member/list">admin
-										page</a>
+									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
+									my page</a> 
+									<a class="dropdown-item" href="/member/list">admin page</a>
+									<a class="dropdown-item" href="/cart/totalList">purchase page</a>
 								</div>
 						</c:when>
 						<c:when test="${ses.email ne null && ses.email ne '' }">

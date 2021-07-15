@@ -99,6 +99,10 @@ public class CartController {
 			   : new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
    }
    
+   @GetMapping("/totalList")
+   public void list() {
+   }
+     
    @GetMapping("/cart")
    public void list(Model model) {
       model.addAttribute("cartList", cartsv.getList());
