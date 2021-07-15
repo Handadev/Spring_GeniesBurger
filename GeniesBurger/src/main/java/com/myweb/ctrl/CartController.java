@@ -55,10 +55,9 @@ public class CartController {
 
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
-		CartVO cvo = cartsv.payment(mno);
-    model.addAttribute("myCpList", cpsv.myCouponList(mno));
-		if (cvo != null) {
-			model.addAttribute("cvo", cvo);
+		List<CartVO> list = cartsv.payment(mno);
+		if (list != null) {
+			model.addAttribute("list", list);
 		}
 	}
 
@@ -101,12 +100,12 @@ public class CartController {
 		return cartsv.remove(cartno) > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-
+	
 	@ResponseBody
 	@PostMapping(value = "/mno/", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String removeWithMno(@RequestParam("mno") int mno) {
 		logger.info(">>> mno : " + mno);
-		List<CartVO> cartvo = cartsv.getOrderList(mno);
+		List<CartVO> cartvo = cartsv.getOrderList(mno);  //삭제전
 		logger.info(">>> cartvo : " + cartvo);
 		int isUp = 0;
 		int isUp2 = 0;
@@ -118,7 +117,7 @@ public class CartController {
 			}
 		}
 		if (isUp > 0) {
-			isUp2 = cartsv.removeWithMno(mno);
+			isUp2 = cartsv.removeWithMno(mno);  //삭제후
 		}
 		return isUp2 > 0 ? "redirect:/" : "/cart/complete";
 	}

@@ -61,8 +61,8 @@ public class CartService implements CartServiceRule {
 	}
 
 	@Override
-	public CartVO payment(int mno) {
-		return cartdao.selectOne(mno);
+	public List<CartVO> payment(int mno) {
+		return cartdao.selectList(mno);
 	}
 
 	@Override
