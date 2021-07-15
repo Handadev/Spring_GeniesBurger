@@ -46,7 +46,7 @@ public class HomeController {
 		model.addAttribute("product_list", psv.getList(pcpgvo));
 		int totalCount = psv.getTotalCount(pcpgvo);
 		model.addAttribute("product_paging", new ProductCustomerPagingHandler(totalCount, pcpgvo));
-		return "dash_index";
+		return "index";
 	}
 	
 	@ResponseBody
