@@ -49,11 +49,10 @@
 						<thead class="thead-primary">
 							<tr class="text-center">
 								<th>&nbsp;</th>
+								<th>상품</th>
+								<th>수량</th>
+								<th>가격</th>
 								<th>&nbsp;</th>
-								<th>cartno</th>
-								<th>Product name</th>
-								<th>Quantity</th>
-								<th>Price</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -63,20 +62,13 @@
 										<tr class="text-center">
 											<%-- <td id="pnoVal">pno : ${cartList.pno }</td> --%>
 											<%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
-											<td class="product-remove">
-												<button type="button"
-													class="btn btn-outline-light outline btn-lg removeBtn"
-													style="width: 50px;" data-cartno="${cartList.cartno }">
-													<span class="ion-ios-close"> </span>
-												</button>
-											</td>
+											<%-- <td class="cartno">
+												<h3>cartno</h3>
+												<p>${cartList.cartno }</p>
+											</td> --%>
 											<td class="image-prod">
 											<img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
 											
-											</td>
-											<td class="cartno">
-												<h3>cartno</h3>
-												<p>${cartList.cartno }</p>
 											</td>
 											<td class="product-name">
 												<h3>${cartList.title }</h3>
@@ -93,6 +85,12 @@
 												</div>
 											</td>
 											<td class="price">₩ ${cartList.price }</td>
+											<td class="product-remove">
+												<button type="button"
+													class="btn-sm btn-danger removeBtn detailBtn"
+													style="width: 50px;" data-cartno="${cartList.cartno }">삭제
+												</button>
+											</td>
 										</tr>
 									</c:when>
 								</c:choose>
@@ -101,7 +99,7 @@
 					</table>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div style="font-size:2em; margin-top:30px; text-align: center; width:100%">
 				<c:forEach items="${cartList }" var="cartList">
 					<c:if test="${ses.mno == cartList.mno }">
 						<c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
@@ -109,8 +107,9 @@
 				</c:forEach>
 				<c:if test="${ses.mno != null}">
 				총 주문금액 :
-				<c:out value="${sum }" /> 원
-				<button type="button" class="btn btn-danger" 
+				<c:out value="${sum }"/>원
+				<br>
+				<button type="button" class="btn-lg btn-danger" style="width:280px"
 				data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
 				</c:if>
 			</div>
