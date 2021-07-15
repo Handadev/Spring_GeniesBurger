@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.myweb.domain.CartVO;
 import com.myweb.domain.PurchaseVO;
 import com.myweb.service.cart.CartServiceRule;
+import com.myweb.service.coupon.CouponServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
 
 @RequestMapping("/cart/*")
@@ -34,6 +35,9 @@ public class CartController {
 	@Inject
 	private CartServiceRule cartsv;
 
+  @Inject
+  private CouponServiceRule cpsv;
+    
 	@Inject
 	private PurchaseServiceRule pursv;
 
@@ -52,6 +56,7 @@ public class CartController {
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
 		CartVO cvo = cartsv.payment(mno);
+    model.addAttribute("myCpList", cpsv.myCouponList(mno));
 		if (cvo != null) {
 			model.addAttribute("cvo", cvo);
 		}
