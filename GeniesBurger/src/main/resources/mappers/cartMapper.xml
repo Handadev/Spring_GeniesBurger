@@ -54,4 +54,9 @@
 	<delete id="complete" parameterType="int">
 		delete from tbl_cart where mno=#{mno}
 	</delete>
+	
+	<!-- 결제완료 후 주문내역 가져오기 -->
+	<select id="ol" parameterType="int" resultType="cartvo">
+		SELECT * FROM tbl_cart WHERE mno=#{mno}
+	</select>
 </mapper>

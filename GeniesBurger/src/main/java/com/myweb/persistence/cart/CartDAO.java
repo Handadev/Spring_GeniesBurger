@@ -78,4 +78,9 @@ public class CartDAO implements CartDAORule {
 		return sql.delete(NS+"complete", mno);
 	}
 
+	@Override
+	public List<CartVO> selectOrderList(int mno) {
+		return sql.selectList(NS+"ol", mno);
+	}
+
 }
