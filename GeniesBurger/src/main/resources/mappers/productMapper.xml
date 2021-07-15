@@ -91,22 +91,45 @@
   		select sno, sname from tbl_stock
   	</select>
   	
-  	<!-- 소비자 - 단품 or 세트선택 화면리스트 -->
+  	<!-- 소비자 - 단품 or 세트 or 라지세트 선택 화면리스트 -->
+  	<!-- 사이드나 음료는 그냥 해당 제품이 나옴 -->
   	<select id="selectmenu" parameterType="hashmap" resultType="pfdto">
   		select p.pno, title, content, price, category, relate_pno, puuid, savedir, fname
 		from tbl_product p inner join tbl_productfile pf
 		on p.pno = pf.pno where p.pno > 0
 		<trim prefix="and">
 			<choose>
-				<when test="category == 1">
+				<when test="category == 1 or category == 4">
 					p.pno = #{pno} or relate_pno = #{pno}
 				</when>
-				<otherwise>
+				<when test="category == 2 or category == 5">
 					relate_pno = (select relate_pno from tbl_product WHERE pno = #{pno})
+				</when>
+				<otherwise>
+					p.pno = #{pno}
 				</otherwise>
 			</choose>
 		</trim>
 		order by category desc
+  	</select>
+  	
+  	<!-- 소비자  - 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸겠냐는 모달 -->
+  	<!-- 사이드나 음료는 그냥 해당 제품이 나옴 -->
+  	<select id="wantLarger" parameterType="hashmap" resultType="pfdto">
+  		select p.pno, title, content, price, category, relate_pno, puuid, savedir, fname
+		from tbl_product p inner join tbl_productfile pf
+		on p.pno = pf.pno 
+		where p.pno > 0 
+		<trim prefix="and">
+			<choose>
+				<when test="category == 1 or category == 4">
+					relate_pno = #{pno} and category = #{category} + 1
+				</when>
+				<when test="category == 2 or category == 5">
+					relate_pno = (select relate_pno from tbl_product WHERE pno = #{pno}) and category = #{category} + 1
+				</when>
+			</choose>
+		</trim>
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
