@@ -230,16 +230,53 @@ nocycle nocache;
 DROP TABLE tbl_add_extra;
 
 CREATE TABLE tbl_add_extra (
-aeno NUMBER(11),
+aeno number(11),
 mno number(11),
 pno number(11),
-sno number(11),
+price number(11),
 sname varchar2(100),
-qty number(11),
 constraint pk_extra primary key(aeno)
 );
 
 create sequence seq_add_extra_aeno
+start with 1
+increment by 1
+nocycle nocache;
+
+------------------ 재고 주문 --------------------
+DROP TABLE tbl_stock_order;
+DROP SEQUENCE seq_stock_order_ono;
+
+CREATE TABLE tbl_stock_order(
+ono NUMBER(11),
+sname varchar2(100) NOT NULL,
+order_qty NUMBER(11) NOT NULL,
+order_date DATE DEFAULT sysdate,
+CONSTRAINT pk_stock_order PRIMARY KEY(ono)
+);
+
+CREATE SEQUENCE seq_stock_order_ono
+START WITH 1
+INCREMENT BY 1
+nocycle nocache;
+
+
+------------------ 상품 주문 내역 --------------------
+DROP TABLE TBL_PURCHASE;
+
+CREATE table tbl_purchase(
+   purno number(11),
+   mno number(11),
+   cartno number(11),
+   pno number(11),
+   title varchar2(100),
+   price number(11),
+   quantity number(11),
+   regdate DATE DEFAULT sysdate,
+   constraint pk_purchase primary key(purno)
+);
+
+create sequence seq_purchase_purno
 start with 1
 increment by 1
 nocycle nocache;

@@ -8,6 +8,7 @@ import com.myweb.domain.StockVO;
 public interface StockServiceRule {
 	public int register(StockVO svo);
 	public List<StockVO> getList();
+	public List<StockVO> getBurgerStockList();
 	public int modify(StockVO svo);
 	public int modifyStockQty(int sno);
 	public int remove(int sno);
