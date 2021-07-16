@@ -32,13 +32,6 @@ public class StockController {
 	@Inject
 	private StockServiceRule ssv;
 
-	@RequestMapping(value = "/sno/{sno}/qty/{qty}", method = { RequestMethod.PATCH,
-			RequestMethod.PUT }, consumes = MediaType.TEXT_PLAIN_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
-	public ResponseEntity<String> modifyStockQty(@PathVariable("sno") int sno, @PathVariable("qty") int qty) {
-		return ssv.modifyStockQty(sno, qty) > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
-				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
-
 	@RequestMapping(value = "/{sno}", method = { RequestMethod.PATCH,
 			RequestMethod.PUT }, consumes = "application/json", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> modify(@PathVariable("sno") int sno, @RequestBody StockVO svo) {

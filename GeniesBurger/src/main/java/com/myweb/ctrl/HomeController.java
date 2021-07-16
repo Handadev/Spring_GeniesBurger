@@ -58,4 +58,9 @@ public class HomeController {
 		
 		return new ResponseEntity<List<ProductAndFileDTO>>(psv.getProductList(pno, category), HttpStatus.OK);
 	}
+	
+	@GetMapping("/dash_index")
+	public void register() {
+		logger.info("/WEB-INF/views/dash_index.jsp");
+	}
 }

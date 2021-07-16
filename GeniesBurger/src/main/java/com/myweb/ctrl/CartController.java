@@ -45,12 +45,13 @@ public class CartController {
 
 	@Inject
 	private PurchaseServiceRule pursv;
-
+	
 	@Inject
 	private ProductStockServiceRule pssv;
-
+	
 	@Inject
 	private StockServiceRule ssv;
+	
 
 	@GetMapping("/complete")
 	public void complete() {
@@ -67,7 +68,7 @@ public class CartController {
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
 		List<CartVO> list = cartsv.payment(mno);
-//		model.addAttribute("myCpList", cpsv.myCouponList(mno));
+		model.addAttribute("myCpList", cpsv.myCouponList(mno));
 		if (list != null) {
 			model.addAttribute("list", list);
 		}
@@ -121,6 +122,7 @@ public class CartController {
 		logger.info(">>> cartvo : " + cartvo);
 		int isUp = 0;
 		int isUp2 = 0;
+		int isUp3 = 0;
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
 				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
@@ -128,9 +130,17 @@ public class CartController {
 						cartvo.get(i).getQuantity());
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
+				int pno = cartvo.get(i).getPno();
+				List<ProductStockVO> productStockList = pssv.getList(pno);
+				for (int t = 0; t < productStockList.size(); t++) {
+					String sname = productStockList.get(t).getSname();
+					int sno = ssv.getUpsqSno(sname);
+					isUp3 = ssv.modifyStockQty(sno);
+					isUp3 *= isUp3;
+				}
 			}
 		}
-		if (isUp > 0) {
+		if (isUp > 0 && isUp3 > 0) {
 			isUp2 = cartsv.removeWithMno(mno);
 		}
 		return isUp2 > 0 ? "redirect:/" : "/cart/complete";

@@ -33,7 +33,7 @@ public class ProductStockService implements ProductStockServiceRule{
 
 	@Override
 	public List<ProductStockVO> getList(int pno) {
-		return null;
+		return psdao.selectList(pno);
 	}
 
 	@Override

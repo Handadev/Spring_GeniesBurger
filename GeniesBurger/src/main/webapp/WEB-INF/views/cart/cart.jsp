@@ -144,7 +144,7 @@
             <p><b>포장주문</b></p>
             </div>
              <a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
-            <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
+             <div id="confirmBtn"><a class="btn btn-dark checkBtn" style="color: white;">확인</a></div>
           </div>
         </div>
       </div>
@@ -264,21 +264,3 @@ $(document).on("click", "#background2", function() {
 </script>
 
 <jsp:include page="../common/footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

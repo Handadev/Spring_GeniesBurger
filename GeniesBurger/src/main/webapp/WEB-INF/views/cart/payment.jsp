@@ -185,9 +185,9 @@ a {
 	</div>
 	<div class="total_pay02">
 		<p>${total }원</p>
-		<p>${dc }원</p>
+		<p id="price">${dc }원</p>
 		<hr>
-		<p id="sum">${total-dc }원</p>
+		<p id="price">${total }원</p>
 	</div>
 </div>
 <div class="container whole">
@@ -195,14 +195,14 @@ a {
 		<a href="/">취소</a>
 	</div>
 	<div class="right">
-		<a href="/cart/method">결제</a>
+		<a href="/cart/method" id="paymentBtn>결제</a>
 	</div>
-	<div class="container coupon">
-		쿠폰사용하기
-		<button type="button" class="btn-sm btn-danger" data-toggle="modal"
-			data-target="#couponModal">쿠폰 선택</button>
-	</div>
+	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
+	쿠폰사용하기</div>
+
 </div>
+
+<!-- Coupon Modal -->
 <div class="modal fade" id="couponModal">
 	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 		<div class="modal-content">
@@ -242,12 +242,12 @@ a {
 $("#selectCp").on("click", function() {
 	let couponVal = $("#coupon option:selected").attr("value");
 	let cplno = $("#cplno").val();
-	let sum = $("#summ").text();
-	let salePrice = Math.floor(sum * (couponVal*(0.01)));
-	let price = sum - salePrice;
+	let total = $("#total").text();
+	let dcPrice = Math.floor(total * (couponVal*(0.01)));
+	let price = total - dcPrice;
 	console.log(couponVal);
 	$("#dc").val(couponVal);
-	$("#dc").html(salePrice);
+	$("#dc").html(dcPrice);
 	$("#price").html(price);
 	$("#paymentBtn").data("cplno", cplno);
 	$("#couponModal").modal("hide");
