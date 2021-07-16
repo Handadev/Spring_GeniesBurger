@@ -61,7 +61,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@ResponseBody // 소비자 - 단품 or 세트선택 화면리스트
+	@ResponseBody
 	@GetMapping(value = "/select/{pno}/{category}",
 				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
 							MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -78,6 +78,7 @@ public class HomeController {
 	public ResponseEntity<ProductAndFileDTO> getLargerOne (@PathVariable("pno") int pno,
 																@PathVariable("category") int category) {
 		return new ResponseEntity<ProductAndFileDTO>(psv.getLargerProduct(pno, category), HttpStatus.OK);
+
 	}
 	
 	@ResponseBody // 버거 재료 선택 화면

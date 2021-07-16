@@ -1,11 +1,14 @@
 package com.myweb.service.purchase;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.myweb.domain.MemberPageVO;
 import com.myweb.domain.PurchaseVO;
 import com.myweb.persistence.purchase.PurchaseDAORule;
 
@@ -20,5 +23,26 @@ public class PurchaseService implements PurchaseServiceRule {
 	public int register(PurchaseVO purvo) {
 		return pdao.insert(purvo);
 	}
+
+	@Override
+	public List<PurchaseVO> getList(MemberPageVO mpgvo) {
+		return pdao.selectList(mpgvo);
+	}
+	
+	@Override
+	public List<PurchaseVO> getList(MemberPageVO mpgvo, int mno) {
+		return pdao.selectList(mpgvo, mno);
+	}
+
+	@Override
+	public int getTotalCount(MemberPageVO mpgvo) {
+		return pdao.getTotalCount(mpgvo);
+	}
+
+	@Override
+	public int getTotalCount(MemberPageVO mpgvo, int mno) {
+		return pdao.getTotalCount(mpgvo, mno);
+	}
+
 
 }

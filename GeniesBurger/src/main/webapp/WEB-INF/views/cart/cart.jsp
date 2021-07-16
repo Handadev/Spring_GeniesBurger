@@ -8,19 +8,15 @@
     min-width: 100%;
     min-height: 100%;
   }
-
   .modal-title {
     margin: auto;
   }
-
   .modal-body {
     text-align: center; 
   }
-
   .modal-img {
     margin: 10px;
   }
-
   .checkBtn {
     margin-top: 15px;
     width: 90%;
@@ -260,7 +256,6 @@ $(document).on("click", "#background2", function() {
          location.reload();
       });
    }
-   
 </script>
 
 <jsp:include page="../common/footer.jsp" />

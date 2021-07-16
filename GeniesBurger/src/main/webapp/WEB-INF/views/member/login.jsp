@@ -30,7 +30,7 @@ p {
 	<form action="/member/login" method="post">
 		<div class="form-group">
 			<input type="email" class="form-control" placeholder="아이디(이메일)"
-				id="email" name="email" value="admin@admin.com"> <input
+				id="email" name="email" value="tester1@tester.com"> <input
 				type="password" class="form-control" placeholder="비밀번호" id="pwd"
 				name="pwd" value="1111">
 		</div>

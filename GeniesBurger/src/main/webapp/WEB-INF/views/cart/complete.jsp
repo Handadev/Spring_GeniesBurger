@@ -1,17 +1,56 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../payCommon/header_04.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
+<style>
+* {
+    font-size: 22px;
+  }
+
+.box {
+    border: none;
+    width: 850px;
+    height: 740px;
+    margin: auto;
+  }
+
+.img {
+	width: 500px;
+  height: 450px;
+}
+div {
+	text-align: center;
+}
+.order {
+	font-size: 1.8em;
+}
+.orderNum {
+	font-size: 1.5em;
+	color: red;
+}
+#ranNum {
+	font-size: 7.0em;
+	color: red;
+	line-height: 200px;
+}
+.receipt {
+	font-size: 1.5em;
+}
+#mno {
+	display: none;
+}
+</style>
 
 <div class="container p-3 my-3 border">
-	<span>주문이 완료되었습니다!</span><br>
-	<span>주문번호</span><br>
-	<span id="ranNum"></span><br>
-	<span>신용카드를 뽑은 후</span><br>
-	<span>출력된 영수증을 받아가세요!</span>
+	<span class="order">주문이 완료되었습니다!</span><br><br>
+	<span class="orderNum">주문번호</span><br>
+	<span id="ranNum"></span><br><br>
+	<span class="receipt">신용카드를 뽑은 후</span><br>
+	<span class="receipt">출력된 영수증을 받아가세요!</span><br><br><br>
 	<span id="mno">${ses.mno }</span>	
 	<img src="/resources/images/complete.png" class="img" id="img">
+	<br><br><br><br><br><br><br>
 </div>
 
 <script>
@@ -39,4 +78,4 @@ $("#img").click(function() {
 });
 </script>
 
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../payCommon/payFooter.jsp" />

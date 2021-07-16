@@ -19,6 +19,7 @@
       <typeAlias type="com.myweb.domain.CouponVO" alias="cpvo"/>
       <typeAlias type="com.myweb.domain.StockVO" alias="svo"/>
    	  <typeAlias type="com.myweb.domain.MemberPageVO" alias="mpgvo"/>
+   	  <typeAlias type="com.myweb.domain.ReviewPageVO" alias="rpgvo"/>
    	  <typeAlias type="com.myweb.domain.StockOrderVO" alias="sovo"/>
    	  <typeAlias type="com.myweb.domain.StockOrderPageVO" alias="sopgvo"/>
    	  <typeAlias type="com.myweb.domain.PurchaseVO" alias="purvo"/>
