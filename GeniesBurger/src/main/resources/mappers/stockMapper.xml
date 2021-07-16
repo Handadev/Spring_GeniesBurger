@@ -22,7 +22,7 @@
 	<!-- HomeCtrl 버거와 연관되어있는 재고 가져오기 -->
 	<select id="getBurgerStock" resultType="svo">
 		select sname from tbl_stock where isburger = 1 group by sname
-
+	</select>
 	<select id="upsqSno" parameterType="String" resultType="int">
 		SELECT MIN(SNO) FROM TBL_STOCK WHERE shelf_life=(SELECT MIN(shelf_life) FROM TBL_STOCK WHERE sname=#{sname}) and sname=#{sname}
 	</select>
