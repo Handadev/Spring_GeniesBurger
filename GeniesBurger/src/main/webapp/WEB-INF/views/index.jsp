@@ -19,13 +19,16 @@
 		height: 100%;
 	}
 }
-#menu-strong{
-	font-size:2em;
-	color:black;
+
+#menu-strong {
+	font-size: 2em;
+	color: black;
 }
-.product-category{
-	margin-top:20px;
+
+.product-category {
+	margin-top: 20px;
 }
+
 .modal-dialog {
 	display: inline-block;
 	text-align: left;
@@ -53,27 +56,59 @@
 	color: red;
 }
 
+.menuselect {
+	cursor: pointer;
+}
+
 .con_modal_footer {
-	height : 60px;
+	height: 60px;
 }
 
 .row {
-	height : 100%;
+	height: 100%;
 }
 
 .footer_btn {
 	padding-top: 10px;
+	cursor: pointer;
 }
 
 #button_text {
-	color : white;
+	color: white;
 	font-size: 25px;
 	text-align: center;
 }
 
-#indexSearch{
-	margin-top:5px;
-	margin-right:25px;
+#indexSearch {
+	margin-top: 5px;
+	margin-right: 25px;
+}
+
+.checkbox.row {
+	position: relative;
+	margin-bottom: 30px;
+}
+
+.checkText {
+	font-size: 25px;
+}
+
+.checkbox input.checkbox{
+    font-size: 1em;
+    width: 1.5em; /* 너비 설정 */
+    height: 1.5em; /* 높이 설정 */
+    vertical-align: middle;
+}
+.checkbox input.checkbox + label{ /* 라벨 텍스트 크기와 수직 정렬 맞춤 */
+    font-size: 1.7em;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+.check_label {
+	position: absolute;
+    top: -50%;
+    left: 7%;
 }
 
 </style>
@@ -84,26 +119,21 @@
 		<!-- 상품 분류 선택 -->
 		<div class="row justify-content-center">
 			<div class="col-md-10 mb-5 text-center float-left">
-			<strong id="menu-strong">메뉴</strong>
+				<strong id="menu-strong">메뉴</strong>
 				<ul class="product-category">
-					<li><a href="/"
-						class="total">전체</a></li>
-					<li><a href="/?range=category&keyword=1"
-						class="burger">버거</a></li>
-					<li><a href="/?range=category&keyword=2"
-						class="set">버거세트</a></li>
-					<li><a href="/?range=category&keyword=4"
-						class="allday">올데이킹</a></li>
-					<li><a href="/?range=category&keyword=7"
-						class="side">사이드</a></li>
-					<li><a href="/?range=category&keyword=8"
-						class="beverage">음료</a></li>
+					<li><a href="/" class="total">전체</a></li>
+					<li><a href="/?range=category&keyword=1" class="burger">버거</a></li>
+					<li><a href="/?range=category&keyword=2" class="set">버거세트</a></li>
+					<li><a href="/?range=category&keyword=4" class="allday">올데이킹</a></li>
+					<li><a href="/?range=category&keyword=7" class="side">사이드</a></li>
+					<li><a href="/?range=category&keyword=8" class="beverage">음료</a></li>
 				</ul>
 				<form action="/">
 					<input type="hidden" name="range" value="pro"> <input
-						class="form-control float-left" type="text" placeholder="찾으시는 제품명을 입력하세요"
-						name="keyword">
-					<button type="submit" class="btn-lg btn-danger" style="margin-right:100px;">검색</button>
+						class="form-control float-left" type="text"
+						placeholder="찾으시는 제품명을 입력하세요" name="keyword">
+					<button type="submit" class="btn-lg btn-danger"
+						style="margin-right: 100px;">검색</button>
 				</form>
 			</div>
 		</div>
@@ -116,15 +146,15 @@
 				<c:when test="${product_list.size() ne 0 }">
 					<c:forEach items="${product_list }" var="pvo">
 						<div class="col-md-6 col-lg-3 ftco-animate">
-							<div class="product" data-toggle="modal" data-target="#sigle_set_modal" id="product" data-pno="${pvo.pno }" data-category="${pvo.category }">
-								<img class="img-fluid"
-									src="/resources/images/product-1.jpg" alt="Colorlib Template" />
-									<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
-									<div class="overlay"></div> 
+							<div class="product" data-toggle="modal"
+								data-target="#sigle_set_modal" id="product"
+								data-pno="${pvo.pno }" data-category="${pvo.category }">
+								<img class="img-fluid" src="/resources/images/product-1.jpg"
+									alt="Colorlib Template" />
+								<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
+								<div class="overlay"></div>
 								<div class="text py-3 pb-4 px-3 text-center">
-									<h3>
-										${pvo.title }
-									</h3>
+									<h3>${pvo.title }</h3>
 									<div class="d-flex">
 										<div class="pricing">
 											<p class="price">
@@ -189,8 +219,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="container" id="menuZone">
-				</div>
+				<div class="container" id="menuZone"></div>
 			</div>
 
 			<!-- Modal footer -->
@@ -216,19 +245,49 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="container text-center" id="suggestZone">
-				</div>
+				<div class="container text-center" id="suggestZone"></div>
 			</div>
 
 			<!-- Modal footer -->
-			
-				<div class="container con_modal_footer" id="sizeChooseZone">
-				</div>
+			<div class="container con_modal_footer" id="suggestZoneFooter"></div>
 		</div>
 	</div>
 </div>
 <!-- 2번 모달 끝 -->
 
+<!-- 3번 모달 추가 재료 선택 -->
+<div class="modal modal-center fade" id="add_ingredient_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">재료를 추가해 더 맛있게 즐겨보세요!</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="container" id="ingredientZone">
+					<div class="checkbox row">
+					     <input type="checkbox" name="sname" id="check1" value="1" class="checkbox">
+    					<label class="check_label" for="check1">큰체크박스</label>
+					</div>
+					<div class="checkbox row">
+					     <input type="checkbox" name="sname" id="check2" value="2" class="checkbox">
+    					<label class="check_label" for="check2">큰체크박스2</label>
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="container con_modal_footer" id="ingredientZoneFooter">
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- 3번 모달 끝 -->
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
@@ -264,6 +323,7 @@
 	});
 	
 	function get_menu(pno, category) {
+		console.log("1번모달 선택된 pno : "+pno);
 		$.getJSON("/select/"+pno+"/"+category+".json", function(result) {
 			menu_list(result);
 		}).fail(function(err){
@@ -314,19 +374,19 @@
 	
 	/* 단품, 세트 골랐을 때 사이즈업 */
 	function want_larger_one(pno, category) {
+		console.log("2번모달 선택된 pno : "+pno);
 		$.getJSON("/wantLarger/"+pno+"/"+category+".json", function(result) {
-			console.log(result);
-			display_suggest(result);
+			display_suggest(result, category);
 		}).fail(function(err){
 			console.log(err);
 		});
 	}
-	function display_suggest(obj) {
+	function display_suggest(obj, category) {
 		$("#size_up_modal").modal("show");
 		let suggestZone = $("#suggestZone");
-		let sizeChooseZone = $("#sizeChooseZone");
+		let suggestZoneFooter = $("#suggestZoneFooter");
 		suggestZone.html("");
-		sizeChooseZone.html("");
+		suggestZoneFooter.html("");
 		let html = '';
 		console.log("obj 잘 뽑힘? = "+obj.category);
 		 if (obj.category == 3 || obj.category == 5) {
@@ -351,30 +411,83 @@
 		 
 		 let fhtml = '';
 		 fhtml += '<div class="row">';
-		 fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_extra('+sel_pno_val+')">';
+		 fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_extra('+sel_pno_val+','+category+')">';
 		 fhtml += '<span id="button_text">아니오</span></div>';
-		 fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_extra('+obj.pno+')">';
+		 fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_extra('+obj.pno+','+obj.category+')">';
 		 fhtml += '<span id="button_text">업그레이드 하기</span></div>';
 		 fhtml += '</div>';
 		 
 		 suggestZone.append(html);
-		 sizeChooseZone.append(fhtml);
+		 suggestZoneFooter.append(fhtml);
 	}
 	/* 2 모달 끝 */
 	
 	/* 3 모달 - 추가 재료 add_extra() */
-	function add_extra(pno) {
-		console.log("2번 모달에서 온 pno = "+pno);
+	function add_extra(pno, category) {
+		console.log("3번모달 선택된 pno : "+pno);
 		$("#size_up_modal").modal("hide");
 		
-		$.getJSON("/getStock.json", function(result) {
+		$.getJSON("/getBurgerStock.json", function(result) {
 			console.log(result);
+			show_ingredient(result, pno, category);
 		}).fail(function(err){
 			console.log(err);
 		});
 	}
+	function show_ingredient(list, pno, category){
+		$("#add_ingredient_modal").modal("show");
+		let ingredientZone = $("#ingredientZone");
+		let ingredientZoneFooter = $("#ingredientZoneFooter");
+		ingredientZone.html("");
+		ingredientZoneFooter.html("");
+		html = '';
+		
+		for (let svo of list) {
+			html += '<div class="checkbox row">';
+			html += '<input type="checkbox" name="sname" id="'+svo.sname+'" value="'+svo.sname+'" class="checkbox">';
+			html += '<label class="check_label" for="'+svo.sname+'">'+svo.sname+'</label></div>';
+		}
+		
+		let fhtml = '';
+		fhtml += '<div class="row">';
+		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="select_side('+pno+','+category+')">';
+		fhtml += '<span id="button_text">추가안함</span></div>';
+		fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="select_side('+pno+','+category+')">';
+		fhtml += '<span id="button_text">추가하기</span></div>';
+		fhtml += '</div>';
+		
+		ingredientZone.append(html);
+		ingredientZoneFooter.append(fhtml);
+	}
+	/* 3 모달 끝 */
+	
+	/* 4 모달 사이드메뉴 고르기 */
+	function select_side(pno, category) {
+		let extraArr = [];
+		let mno = '<c:out value="${ses.mno}"/>';
+		$("input:checkbox[name=sname]:checked").each(function() {
+			let ingredients = $(this).val();
+			extraArr.push(ingredients);
+		})
+		if (extraArr.length != 0 ) {
+			$.ajax({
+				url : "/addExtra",
+				type : "post",
+				data : {
+					list : extraArr,
+					mno : mno,
+					pno : pno,
+				}
+			}).done(function(result) {
+				console.log("성공함");
+				/* 다음 func 실행 */
+			}).fail(function(err) {
+				console.log("실패함");
+			});
+		}
+	}
 	
 </script>
-	
+
 
 <jsp:include page="common/footer.jsp" />
