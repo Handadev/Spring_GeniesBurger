@@ -49,7 +49,7 @@ public class HomeController {
 		return "index";
 	}
 	
-	@ResponseBody // 소비자 - 단품 or 세트선택 화면리스트
+	@ResponseBody
 	@GetMapping(value = "/select/{pno}/{category}",
 				produces= {MediaType.APPLICATION_ATOM_XML_VALUE,
 						MediaType.APPLICATION_JSON_UTF8_VALUE})
@@ -57,14 +57,5 @@ public class HomeController {
 															@PathVariable("category") int category) {
 		
 		return new ResponseEntity<List<ProductAndFileDTO>>(psv.getProductList(pno, category), HttpStatus.OK);
-	}
-	
-	@ResponseBody // 단품, 세트를 선택하면 세트 / 라지 세트 선택 화면
-	@GetMapping(value = "/wantLarger/{pno}/{category}",
-				produces= {MediaType.APPLICATION_ATOM_XML_VALUE,
-						MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<ProductAndFileDTO> getLargerOne (@PathVariable("pno") int pno,
-																@PathVariable("category") int category) {
-		return new ResponseEntity<ProductAndFileDTO>(psv.getLargerProduct(pno, category), HttpStatus.OK);
 	}
 }

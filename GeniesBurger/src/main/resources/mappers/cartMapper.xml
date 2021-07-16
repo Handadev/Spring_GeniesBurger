@@ -11,7 +11,7 @@
 
 	<select parameterType="int" id="list" resultType="cartvo">
 		select *
-		from TBL_CART tc LEFT JOIN TBL_PRODUCTFILE tp 
+		from TBL_CART tc LEFT OUTER JOIN TBL_PRODUCTFILE tp 
 		on tc.PNO = tp.PNO
 	</select>
 	
@@ -24,6 +24,11 @@
 	<delete parameterType="int" id="del">
 		delete from tbl_cart
 		where cartno=#{cartno}
+	</delete>
+	
+	<delete parameterType="int" id="delWithPno">
+		delete from tbl_cart
+		where pno=#{pno}
 	</delete>
 	
 	<!-- 수량 증가  -->
@@ -46,7 +51,7 @@
 	
 	<!-- 결제창에서 해당하는 mno의 카트정보 가져오기 -->
 	<select id="pay" parameterType="int" resultType="cartvo">
-		select * from tbl_cart tc left  join tbl_productfile tp 
+		select * from tbl_cart tc left join tbl_productfile tp 
 		on tc.pno = tp.pno where tc.mno = #{mno}
 	</select>
 	

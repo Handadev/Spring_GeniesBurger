@@ -104,7 +104,7 @@
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
 				<div class="col">
-				<a href="/cart/cart" id="navOrder">
+				<a href="/cart/purchaseListMember?mno=${ses.mno }" id="navOrder">
 				<strong>딜리버리 주문 내역</strong>
 				</a>
 				</div>
