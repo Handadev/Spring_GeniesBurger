@@ -351,6 +351,7 @@
 	}
 	/* 1 모달 끝 */
 	
+	
 	/* 사이즈 업 모달에서 고른 pno */
 	let sel_pno_val;
 	/* 2 모달 단품 / 세트를 누르면 세트 / 라지세트로 선택하겠냐는 모달*/
@@ -422,6 +423,7 @@
 	}
 	/* 2 모달 끝 */
 	
+	
 	/* 3 모달 - 추가 재료 add_extra() */
 	function add_extra(pno, category) {
 		console.log("3번모달 선택된 pno : "+pno);
@@ -461,6 +463,7 @@
 	}
 	/* 3 모달 끝 */
 	
+	
 	/* 4 모달 사이드메뉴 고르기 */
 	function select_side(pno, category) {
 		let extraArr = [];
@@ -480,11 +483,14 @@
 				}
 			}).done(function(result) {
 				console.log("성공함");
-				/* 다음 func 실행 */
+				show_sides(pno, category);
 			}).fail(function(err) {
 				console.log("실패함");
 			});
 		}
+	}
+	function show_sides(pno, category) {
+		
 	}
 	
 </script>
