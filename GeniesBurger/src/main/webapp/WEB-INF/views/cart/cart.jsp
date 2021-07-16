@@ -43,35 +43,33 @@
   }
 </style>
 
-<section class="ftco-section ftco-cart">
+<section class="ftco-section ftco-cart" style="background-color: #F1EAE5; height: 500px;">
+<c:if test="${cartList[0].title eq null || cartList[0].title eq  '' }">
+<img src="/resources/icons/nolist_logo.png" style="width: 350px; display: block; margin: auto; margin-top: 50px;">
+</c:if>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 ftco-animate">
-				<div class="cart-list">
 					<table class="table">
 						<thead class="thead-primary">
-							<tr class="text-center">
-								<th>&nbsp;</th>
-								<th>상품</th>
-								<th>수량</th>
-								<th>가격</th>
-								<th>&nbsp;</th>
-							</tr>
+						<!-- 결론! 장바구니가 비어있어도 cartList : not null -->
+							<c:if test="${cartList[0].title ne null && cartList[0].title ne  '' }">
+								<tr class="text-center">
+									<th>&nbsp;</th>
+									<th>상품</th>
+									<th>수량</th>
+									<th>가격</th>
+									<th>&nbsp;</th>
+								</tr>
+							</c:if>
 						</thead>
 						<tbody>
 							<c:forEach items="${cartList }" var="cartList">
 								<c:choose>
-									<c:when test="${ses.mno == cartList.mno }">
+									<c:when test="${cartList.title ne null && cartList.title ne '' }">
 										<tr class="text-center">
-											<%-- <td id="pnoVal">pno : ${cartList.pno }</td> --%>
-											<%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
-											<%-- <td class="cartno">
-												<h3>cartno</h3>
-												<p>${cartList.cartno }</p>
-											</td> --%>
 											<td class="image-prod">
 											<img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
-											
 											</td>
 											<td class="product-name">
 												<h3>${cartList.title }</h3>
@@ -95,25 +93,16 @@
 												</button>
 											</td>
 										</tr>
-									</c:when>
-									<c:when test="${ses.mno eq '' || ses.mno eq null}">
 										<script>
-											alert("먼저 로그인을 하셔야 합니다!");
-											location.replace("/member/login");
-										</script>
-									</c:when>
-									<c:when test="${cartList.price eq null }">
-										<script>
-											alert("장바구니에 담긴 상품이 없습니다!");
-											location.replace("/product/list");
+											$(".ftco-cart").css("background-color", "white");
 										</script>
 									</c:when>
 								</c:choose>
 							</c:forEach>
 						</tbody>
 					</table>
-				</div>
 			</div>
+			<c:if test="${cartList[0].title ne null && cartList[0].title ne  '' }">
 			<div style="font-size:2em; margin-top:30px; text-align: center; width:100%">
 				<c:forEach items="${cartList }" var="cartList">
 					<c:if test="${ses.mno == cartList.mno }">
@@ -128,6 +117,7 @@
 				data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
 				</c:if>
 			</div>
+			</c:if>
 		</div>
 	</div>
 </section>

@@ -1,5 +1,6 @@
 package com.myweb.ctrl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -137,8 +138,13 @@ public class CartController {
 	}
 
 	@GetMapping("/cart")
-	public void list(Model model) {
-		model.addAttribute("cartList", cartsv.getList());
+	public void list(@RequestParam("mno") int mno, Model model) {
+		List<CartVO> list = cartsv.getList(mno);
+		model.addAttribute("cartList", list);
+		for (int i = 0; i < list.size(); i++) {
+			logger.info("★★★★★★★★★★★★★★★ : " + list);
+			logger.info("★★★★★★★★★★★★★★★ cartno : " + list.get(i).getCartno() + ", title : " + list.get(i).getTitle() + ", price : " + list.get(i).getPrice() + ", quantity : " +  list.get(i).getQuantity() + ", mno : " + list.get(i).getMno() + ", pno : " + list.get(i).getPno());
+		}
 	}
 
 	@GetMapping("/purchaseList")
