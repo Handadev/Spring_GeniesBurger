@@ -67,7 +67,7 @@ public class CartController {
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
 		List<CartVO> list = cartsv.payment(mno);
-//		model.addAttribute("myCpList", cpsv.myCouponList(mno));
+		model.addAttribute("myCpList", cpsv.myCouponList(mno));
 		if (list != null) {
 			model.addAttribute("list", list);
 		}
