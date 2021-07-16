@@ -160,8 +160,9 @@ a {
 
 		</div>
 		<div class="img_wrap">
-			<img class="img" src="/upload/${cvo.savedir }/${cvo.puuid}_${cvo.fname}" alt="display none"
-				alt="display none">
+			<img class="img"
+				src="/upload/${cvo.savedir }/${cvo.puuid}_${cvo.fname}"
+				alt="display none" alt="display none">
 		</div>
 		<hr>
 		<div class="sum_wrap">
@@ -174,7 +175,7 @@ a {
 			<p class="redfont2">${cvo.price * cvo.quantity }원</p>
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
-</c:forEach>
+	</c:forEach>
 </div>
 <div class="container p-3 my-3 box2">
 	<div class="total_pay">
@@ -191,51 +192,44 @@ a {
 	</div>
 </div>
 <div class="container whole">
-	<div class="left">
-		<a href="/">취소</a>
-	</div>
-	<div class="right">
-		<a href="/cart/method" id="paymentBtn>결제</a>
-	</div>
+	<div class="left"><a href="/">취소</a></div>
+	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
 	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
 	쿠폰사용하기</div>
-
 </div>
 
 <!-- Coupon Modal -->
 <div class="modal fade" id="couponModal">
-	<div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-		<div class="modal-content">
+   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+      
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">쿠폰을 선택해주세요.</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
 
-			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">쿠폰을 선택해주세요.</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-			</div>
+      <!-- Modal body -->
+      <div class="modal-body" style="height: 400px;">
+      <img src="/resources/icons/coupon2.png" style="width:300px; height:200px;" class="modal-img" />
+      	<p class="mt-1">
+      		<select name="coupon" id="coupon" style="width:300px;">
+				<option value="">쿠폰 선택</option>
+        			<c:forEach items="${myCpList }" var="cp">
+        				<option value="${cp.discount }" value2="${cp.cplno }">${cp.cpname } (${cp.discount }% 할인)</option>
+        			</c:forEach>
+      	   </select>
+      	 </p>
+      </div>
 
-			<!-- Modal body -->
-			<div class="modal-body" style="height: 400px;">
-				<img src="/resources/icons/coupon2.png"
-					style="width: 300px; height: 200px;" class="modal-img" />
-				<p class="mt-1">
-					<select name="coupon" id="coupon" style="width: 300px;">
-						<option value="">쿠폰 선택</option>
-						<c:forEach items="${myCpList }" var="cp">
-							<option value="${cp.discount }" value2="${cp.cplno }">${cp.cpname }
-								(${cp.discount }% 할인)</option>
-						</c:forEach>
-					</select>
-				</p>
-			</div>
+      <!-- Modal footer -->
+      <div class="modal-footer">
+      	<button class="btn btn-primary" type="button" id="selectCp">선택</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+      </div>
 
-			<!-- Modal footer -->
-			<div class="modal-footer">
-				<button class="btn btn-primary" type="button" id="selectCp">선택</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-			</div>
-
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
@@ -272,3 +266,4 @@ function coupon_cancel(cplno){
 	}
  });
 </script>
+<jsp:include page="../payCommon/payFooter.jsp" />
