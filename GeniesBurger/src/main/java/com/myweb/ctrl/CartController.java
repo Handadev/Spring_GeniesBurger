@@ -52,12 +52,6 @@ public class CartController {
 	@Inject
 	private StockServiceRule ssv;
 
-	@Inject
-	private ProductStockServiceRule pssv;
-
-	@Inject
-	private StockServiceRule ssv;
-
 	@GetMapping("/complete")
 	public void complete() {
 	}
@@ -135,6 +129,7 @@ public class CartController {
 						cartvo.get(i).getQuantity());
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
+				int pno = cartvo.get(i).getPno();
 				List<ProductStockVO> productStockList = pssv.getList(pno);
 				for (int t = 0; t < productStockList.size(); t++) {
 					String sname = productStockList.get(t).getSname();
