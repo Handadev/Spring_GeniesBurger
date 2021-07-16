@@ -2,8 +2,70 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="PurchaseMapper">
+<sql id="search">
+		<if test="range != null">
+			<trim prefix="and (" suffix=")">
+				<choose>
+					<when test="range == 'en'.toString()">
+						email like '%'||#{keyword}||'%' or name like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'e'.toString()">
+						email like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'n'.toString()">
+						name like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 't'.toString()">
+						title like '%'||#{keyword}||'%'
+					</when>
+					<when test="range == 'p'.toString()">
+						price like '%'||#{keyword}||'%'
+					</when>
+				</choose>
+			</trim>
+		</if>
+	</sql>
 	<insert id="reg" parameterType="hashmap">
-		insert into tbl_purchase(purno, mno, cartno)
-		values (seq_purchase_purno.nextval, #{mno}, #{cartno})
+		insert into tbl_purchase(purno, mno, cartno, pno, title, price, quantity)
+		values (seq_purchase_purno.nextval, #{mno}, #{cartno}, #{pno}, #{title}, #{price}, #{quantity})
 	</insert>	
+	
+	<select id="totalList" resultType="purvo" >
+		<![CDATA[
+ 		select rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME  
+		from(select /*INDEX_DESC(tbl_purchase pk_purchase)*/
+		rownum as rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME 
+		from V_MEMBER_PUR
+		where rownum > 0
+ 		]]>
+ 			<include refid="search"></include>
+		<![CDATA[		
+ 			and rownum <= #{pageIndex} * #{countPerPage})
+        	where rn > (#{pageIndex}-1) * #{countPerPage}
+ 		]]>
+	</select>
+	<select id="totalListMember" parameterType="hashmap" resultType="purvo" >
+		<![CDATA[
+ 		select rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME  
+		from(select /*INDEX_DESC(tbl_purchase pk_purchase)*/
+		rownum as rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME 
+		from V_MEMBER_PUR
+		
+		where rownum > 0 and mno=#{mno}
+ 		]]>
+ 			<include refid="search"></include>
+		<![CDATA[		
+ 			and rownum <= #{pageIndex} * #{countPerPage})
+        	where rn > (#{pageIndex}-1) * #{countPerPage}
+ 		]]>
+	</select>
+	
+	<select id="tc" parameterType="mpgvo" resultType="int">
+			select count(purno) FROM tbl_purchase WHERE purno > 0
+   </select>
+   
+   <select id="tcMember" parameterType="mpgvo" resultType="int">
+			select count(purno) FROM tbl_purchase WHERE purno > 0 and mno=#{mno}
+   </select>
+	
 </mapper>

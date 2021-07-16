@@ -8,14 +8,14 @@
 			<ul>
 				<c:if test="${pghdl.pBtn }">
 					<li>
-						<a href="/cart/purchaseList?pageIndex=${pghdl.fPageIndex-1 }
+						<a href="/cart/purchaseListMember?pageIndex=${pghdl.fPageIndex-1 }
 						&countPerPage=${pghdl.mpgvo.countPerPage}">
 						&lt;</a>
 					</li>
 				</c:if>
 				<c:forEach begin="${pghdl.fPageIndex }" end="${pghdl.lPageIndex }" var="i">
 					<li class=" ${pghdl.mpgvo.pageIndex == i ? 'active' : ''}">
-						<a href="/cart/purchaseList?pageIndex=${i }
+						<a href="/cart/purchaseListMember?pageIndex=${i }
 						&countPerPage=${pghdl.mpgvo.countPerPage}">
 						${i }
 					</a>
@@ -23,7 +23,7 @@
 				</c:forEach>
 				<c:if test="${pghdl.nBtn }">
 					<li>
-						<a href="/cart/purchaseList?pageIndex=${pghdl.lPageIndex+1 } 
+						<a href="/cart/purchaseListMember?pageIndex=${pghdl.lPageIndex+1 } 
 						&countPerPage=${pghdl.mpgvo.countPerPage}">
 						&gt;</a></li>
 				</c:if>

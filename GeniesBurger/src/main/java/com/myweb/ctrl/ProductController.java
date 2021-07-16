@@ -21,6 +21,7 @@ import com.myweb.domain.ProductVO;
 import com.myweb.domain.StockVO;
 import com.myweb.handler.ProductPagingHandler;
 import com.myweb.orm.ProductFileProcessor;
+import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.product.ProductServiceRule;
 import com.myweb.service.product_stock.ProductStockServiceRule;
 
@@ -37,6 +38,9 @@ public class ProductController {
 	
 	@Inject
 	private ProductFileProcessor pfp;
+	
+	@Inject
+	private CartServiceRule cartsv;
 	
 	@GetMapping("/register")
 	public void register(Model model, ProductVO pvo) {
@@ -94,7 +98,9 @@ public class ProductController {
 	@PostMapping("/remove")
 	public String remove(@RequestParam("pno") int pno, RedirectAttributes reAttr) {
 		int isDel = psv.remove(pno); // 상품 삭제와 함께 사진, product_sock도 삭제
+		int isDelCart = cartsv.removeWithPno(pno);
 		reAttr.addFlashAttribute("result", isDel > 0 ? "상품 삭제 완료" : "상품 삭제 실패");
+		reAttr.addFlashAttribute("result", isDelCart > 0 ? "상품-카트 삭제 완료" : "상품-카트 삭제 실패");
 		return "redirect:/product/list";
 	}
 	

@@ -22,6 +22,7 @@
 <link rel="stylesheet" href="/resources/css/flaticon.css">
 <link rel="stylesheet" href="/resources/css/icomoon.css">
 <link rel="stylesheet" href="/resources/css/style.css">
+<link rel="shortcut icon" href="/resources/icons/favicon.png">
 
 </head>
 <!-- Start header / nav  -->
@@ -62,10 +63,14 @@
 						class="nav-link dropdown-toggle" href="#" id="dropdown04"
 						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
 						<div class="dropdown-menu" aria-labelledby="dropdown04">
-							<a class="dropdown-item" href="/product/register">상품추가</a> <a
-								class="dropdown-item" href="/product/list">상품리스트</a> <a
-								class="dropdown-item" href="product-single.html">Single
-								Product</a> <a class="dropdown-item" href="checkout.html">Checkout</a>
+							<c:choose>
+								<c:when test="${ses.email eq 'admin@admin.com' }">
+									<a class="dropdown-item" href="/product/register">상품추가</a>
+								</c:when>
+							</c:choose>
+							<a class="dropdown-item" href="/product/list">상품리스트</a>
+							<a class="dropdown-item" href="product-single.html">Single Product</a> 
+							<a class="dropdown-item" href="checkout.html">Checkout</a>
 						</div></li>
 					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
@@ -76,7 +81,7 @@
 						<c:when test="${ses.email eq 'admin@admin.com' }">
 							<li class="nav-item dropdown"><a
 								class="nav-link dropdown-toggle"
-								href="/member/detail?mno=${ses.mno }" id="dropdown04"
+								href="#" id="dropdown04"
 								data-toggle="dropdown" aria-haspopup="true"
 								aria-expanded="false">ADMIN</a>
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
@@ -99,7 +104,7 @@
 		<div class="container-fluid" id="navBtn">
 			<div class="row">
 				<div class="col">
-				<a href="/cart/cart" id="navOrder">
+				<a href="/cart/purchaseListMember?mno=${ses.mno }" id="navOrder">
 				<strong>딜리버리 주문 내역</strong>
 				</a>
 				</div>

@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.CartVO;
+import com.myweb.domain.MemberPageVO;
 import com.myweb.domain.ProductStockVO;
 import com.myweb.domain.PurchaseVO;
+import com.myweb.handler.MemberPagingHandler;
 import com.myweb.service.cart.CartServiceRule;
+import com.myweb.service.coupon.CouponServiceRule;
 import com.myweb.service.product_stock.ProductStockServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
 import com.myweb.service.stock.StockServiceRule;
@@ -38,11 +41,20 @@ public class CartController {
 	private CartServiceRule cartsv;
 
 	@Inject
+	private CouponServiceRule cpsv;
+
+	@Inject
 	private PurchaseServiceRule pursv;
 	
 	@Inject
 	private ProductStockServiceRule pssv;
 	
+	@Inject
+	private StockServiceRule ssv;
+
+	@Inject
+	private ProductStockServiceRule pssv;
+
 	@Inject
 	private StockServiceRule ssv;
 
@@ -60,9 +72,10 @@ public class CartController {
 
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
-		CartVO cvo = cartsv.payment(mno);
-		if (cvo != null) {
-			model.addAttribute("cvo", cvo);
+		List<CartVO> list = cartsv.payment(mno);
+		model.addAttribute("myCpList", cpsv.myCouponList(mno));
+		if (list != null) {
+			model.addAttribute("list", list);
 		}
 	}
 
@@ -117,8 +130,9 @@ public class CartController {
 		int isUp3 = 0;
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
-				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno());
-				int pno = cartvo.get(i).getPno();
+				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
+						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), cartvo.get(i).getPrice(),
+						cartvo.get(i).getQuantity());
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
 				List<ProductStockVO> productStockList = pssv.getList(pno);
@@ -140,9 +154,20 @@ public class CartController {
 	public void list(Model model) {
 		model.addAttribute("cartList", cartsv.getList());
 	}
-	
+
 	@GetMapping("/purchaseList")
-	public void purchaseList() {
-		
+	public void purList(Model model, MemberPageVO mpgvo) {
+		model.addAttribute("purchaseList", pursv.getList(mpgvo));
+		int totalCount = pursv.getTotalCount(mpgvo);
+		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo));
 	}
+
+	@GetMapping("/purchaseListMember")
+	public void purList(Model model, MemberPageVO mpgvo, @RequestParam("mno") int mno) {
+		int totalCount = pursv.getTotalCount(mpgvo, mno);
+		model.addAttribute("purchaseListMember", pursv.getList(mpgvo, mno));
+		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo, mno));
+		logger.info("model : " + model);
+	}
+
 }

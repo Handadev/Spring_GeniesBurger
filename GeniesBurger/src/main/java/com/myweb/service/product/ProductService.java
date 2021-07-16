@@ -61,10 +61,6 @@ public class ProductService implements ProductServiceRule {
 		return pdao.selectList(pno, category);
 	}
 
-	@Override // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지
-	public ProductAndFileDTO getLargerProduct(int pno, int category) {
-		return pdao.selectOne(pno, category);
-	}
 	
 	@Override
 	public ProductVO detail(int pno) {
@@ -112,6 +108,9 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
+
+	
+	
 
 
 }

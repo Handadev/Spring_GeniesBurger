@@ -9,9 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import com.myweb.domain.CartVO;
-import com.myweb.domain.ProductFileVO;
 import com.myweb.persistence.cart.CartDAORule;
-import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Service
 public class CartService implements CartServiceRule {
@@ -33,6 +31,11 @@ public class CartService implements CartServiceRule {
 	@Override
 	public int remove(int cartno) {
 		return cartdao.delete(cartno);
+	}
+	
+	@Override
+	public int removeWithPno(int pno) {
+		return cartdao.deleteWithPno(pno);
 	}
 
 	@Override
@@ -61,8 +64,8 @@ public class CartService implements CartServiceRule {
 	}
 
 	@Override
-	public CartVO payment(int mno) {
-		return cartdao.selectOne(mno);
+	public List<CartVO> payment(int mno) {
+		return cartdao.selectList(mno);
 	}
 
 	@Override
@@ -74,5 +77,7 @@ public class CartService implements CartServiceRule {
 	public List<CartVO> getOrderList(int mno) {
 		return cartdao.selectOrderList(mno);
 	}
+
+	
 
 }
