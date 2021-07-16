@@ -24,8 +24,8 @@ public class CartService implements CartServiceRule {
 	}
 
 	@Override
-	public List<CartVO> getList() {
-		return cartdao.selectList();
+	public List<CartVO> getList(int mno) {
+		return cartdao.selectList(mno);
 	}
 
 	@Override
