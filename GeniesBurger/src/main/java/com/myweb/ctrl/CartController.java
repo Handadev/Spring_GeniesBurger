@@ -51,6 +51,7 @@ public class CartController {
 	
 	@Inject
 	private StockServiceRule ssv;
+	
 
 	@GetMapping("/complete")
 	public void complete() {
