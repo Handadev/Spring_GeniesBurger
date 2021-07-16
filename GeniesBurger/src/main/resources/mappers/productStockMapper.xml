@@ -11,7 +11,7 @@
      </insert>
   	
   	
-  	<select id="list" parameterType="int">
+  	<select id="list" parameterType="int" resultType="psvo">
   		select * from tbl_product_stock where pno = #{pno}
   	</select>
  	

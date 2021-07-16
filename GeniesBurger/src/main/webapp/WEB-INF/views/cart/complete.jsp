@@ -1,29 +1,41 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../payCommon/header_03.jsp" />
+<jsp:include page="../payCommon/header_04.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <style>
+* {
+    font-size: 22px;
+  }
+
+.box {
+    border: none;
+    width: 850px;
+    height: 740px;
+    margin: auto;
+  }
+
+.img {
+	width: 500px;
+  height: 450px;
+}
 div {
 	text-align: center;
 }
 .order {
-	font-size: 50px;
+	font-size: 1.8em;
 }
 .orderNum {
-	font-size: 30px;
+	font-size: 1.5em;
 	color: red;
 }
 #ranNum {
-	font-size: 200px;
+	font-size: 7.0em;
 	color: red;
 	line-height: 200px;
 }
 .receipt {
-	font-size: 30px;
-}
-.img {
-	width: 500px;
+	font-size: 1.5em;
 }
 #mno {
 	display: none;

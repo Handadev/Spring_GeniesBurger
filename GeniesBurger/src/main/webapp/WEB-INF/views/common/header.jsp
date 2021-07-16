@@ -36,16 +36,61 @@
 				<span id="logo-text" style="margin-left: 20px">지니스버거</span>
 			</a>
 		</div>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#ftco-nav" aria-controls="ftco-nav"
-			aria-expanded="false" aria-label="Toggle navigation">
-			<span class="oi oi-menu"></span> Menu
-		</button>
-		<div class="collapse navbar-collapse" id="ftco-nav">
-			<ul class="navbar-nav ml-auto" style="margin-right: 100px">
-				<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
-				<!-- <li class="nav-item active"><a href="/member/login" class="nav-link">Login</a></li> -->
-				<li class="nav-item dropdown"><c:choose>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#ftco-nav" aria-controls="ftco-nav"
+				aria-expanded="false" aria-label="Toggle navigation">
+				<span class="oi oi-menu"></span> Menu
+			</button>
+			<div class="collapse navbar-collapse" id="ftco-nav">
+				<ul class="navbar-nav ml-auto" style="margin-right:100px">
+					<li class="nav-item active"><a href="/" class="nav-link">Home</a></li>
+					<!-- <li class="nav-item active"><a href="/member/login" class="nav-link">Login</a></li> -->
+					<li class="nav-item dropdown"><c:choose>
+							<c:when test="${ses.email ne null && ses.email ne '' }">
+								<li class="nav-item"><a href="/member/logout"
+									class="nav-link">logout</a></li>
+							</c:when>
+							<c:otherwise>
+								<a class="nav-link dropdown-toggle" href="#" id="dropdown04"
+									data-toggle="dropdown" aria-haspopup="true"
+									aria-expanded="false">login</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href="/member/login">Login</a>
+									<a class="dropdown-item" href="/member/register">Register</a>
+								</div>
+							</c:otherwise>
+						</c:choose></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<c:choose>
+								<c:when test="${ses.email eq 'admin@admin.com' }">
+									<a class="dropdown-item" href="/product/register">상품추가</a>
+								</c:when>
+							</c:choose>
+							<a class="dropdown-item" href="/product/list">상품리스트</a>
+							<a class="dropdown-item" href="product-single.html">Single Product</a> 
+							<a class="dropdown-item" href="checkout.html">Checkout</a>
+						</div></li>
+					<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
+					<c:choose>
+						<c:when test="${ses.email eq 'admin@admin.com' }">
+							<li class="nav-item dropdown"><a
+								class="nav-link dropdown-toggle"
+								href="#" id="dropdown04"
+								data-toggle="dropdown" aria-haspopup="true"
+								aria-expanded="false">ADMIN</a>
+								<div class="dropdown-menu" aria-labelledby="dropdown04">
+									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
+									my page</a> 
+									<a class="dropdown-item" href="/dash_index">admin page</a>
+									<a class="dropdown-item" href="/cart/purchaseList">purchase page</a>
+								</div>
+						</c:when>
 						<c:when test="${ses.email ne null && ses.email ne '' }">
 							<li class="nav-item"><a href="/member/logout"
 								class="nav-link">logout</a></li>

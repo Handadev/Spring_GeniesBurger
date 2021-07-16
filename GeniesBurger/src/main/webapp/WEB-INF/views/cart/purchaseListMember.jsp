@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col" style="margin-bottom: 10px;">
-				<form action="/cart/purchaseListMember" class="form-inline justify-content-end">
+				<form action="/cart/purchaseListMember?mno=${ses.mno }" class="form-inline justify-content-end">
 				<p style="font-size:2em; margin-right:450px;">나의 주문목록</p>
 					<select class="form-control" name="range">
 						<option value="en"
@@ -32,8 +32,6 @@
 					<table class="table">
 						<thead class="thead-primary">
 							<tr class="text-center">
-								<th>Number</th>
-								<th>mno</th>
 								<th>name</th>
 								<th>title</th>
 								<th>price</th>
@@ -46,8 +44,6 @@
 						<tbody>
 							<c:forEach items="${purchaseListMember }" var="purchaseListMember">
 								<tr class="text-center">
-									<td>${purchaseListMember.purno }</td>
-									<td>${purchaseListMember.mno }</td>
 									<td>${purchaseListMember.name }</td>
 									<td>${purchaseListMember.title }</td>
 									<td>${purchaseListMember.price }</td>

@@ -35,8 +35,8 @@ public class StockService implements StockServiceRule {
 	}
 
 	@Override
-	public int modifyStockQty(int sno, int qty) {
-		return sdao.updateStockQty(sno, qty);
+	public int modifyStockQty(int sno) {
+		return sdao.updateStockQty(sno);
 	}
 
 	@Override
@@ -57,6 +57,11 @@ public class StockService implements StockServiceRule {
 	@Override
 	public int removeAll(String sname) {
 		return sdao.deleteAll(sname);
+	}
+
+	@Override
+	public int getUpsqSno(String sname) {
+		return sdao.selectUpsqSno(sname);
 	}
 
 }
