@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../payCommon/header_02.jsp" />
 <style>
 span {
 	font-size: 50px;
@@ -31,4 +31,4 @@ div {
 	<br><br><br><br><br><br><br>
 </div>
 
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../payCommon/payFooter.jsp" />

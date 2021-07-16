@@ -22,10 +22,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.CartVO;
+import com.myweb.domain.MemberPageVO;
+import com.myweb.domain.ProductStockVO;
 import com.myweb.domain.PurchaseVO;
+import com.myweb.handler.MemberPagingHandler;
 import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.coupon.CouponServiceRule;
+import com.myweb.service.product_stock.ProductStockServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
+import com.myweb.service.stock.StockServiceRule;
 
 @RequestMapping("/cart/*")
 @Controller
@@ -35,11 +40,17 @@ public class CartController {
 	@Inject
 	private CartServiceRule cartsv;
 
-  @Inject
-  private CouponServiceRule cpsv;
-    
+	@Inject
+	private CouponServiceRule cpsv;
+
 	@Inject
 	private PurchaseServiceRule pursv;
+
+	@Inject
+	private ProductStockServiceRule pssv;
+
+	@Inject
+	private StockServiceRule ssv;
 
 	@GetMapping("/complete")
 	public void complete() {
@@ -56,6 +67,7 @@ public class CartController {
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
 		List<CartVO> list = cartsv.payment(mno);
+//		model.addAttribute("myCpList", cpsv.myCouponList(mno));
 		if (list != null) {
 			model.addAttribute("list", list);
 		}
@@ -100,24 +112,26 @@ public class CartController {
 		return cartsv.remove(cartno) > 0 ? new ResponseEntity<String>("1", HttpStatus.OK)
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
-	
+
 	@ResponseBody
 	@PostMapping(value = "/mno/", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String removeWithMno(@RequestParam("mno") int mno) {
 		logger.info(">>> mno : " + mno);
-		List<CartVO> cartvo = cartsv.getOrderList(mno);  //삭제전
+		List<CartVO> cartvo = cartsv.getOrderList(mno);
 		logger.info(">>> cartvo : " + cartvo);
 		int isUp = 0;
 		int isUp2 = 0;
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
-				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno());
+				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
+						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), cartvo.get(i).getPrice(),
+						cartvo.get(i).getQuantity());
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
 			}
 		}
 		if (isUp > 0) {
-			isUp2 = cartsv.removeWithMno(mno);  //삭제후
+			isUp2 = cartsv.removeWithMno(mno);
 		}
 		return isUp2 > 0 ? "redirect:/" : "/cart/complete";
 	}
@@ -126,9 +140,20 @@ public class CartController {
 	public void list(Model model) {
 		model.addAttribute("cartList", cartsv.getList());
 	}
-	
+
 	@GetMapping("/purchaseList")
-	public void purchaseList() {
-		
+	public void purList(Model model, MemberPageVO mpgvo) {
+		model.addAttribute("purchaseList", pursv.getList(mpgvo));
+		int totalCount = pursv.getTotalCount(mpgvo);
+		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo));
 	}
+
+	@GetMapping("/purchaseListMember")
+	public void purList(Model model, MemberPageVO mpgvo, @RequestParam("mno") int mno) {
+		int totalCount = pursv.getTotalCount(mpgvo, mno);
+		model.addAttribute("purchaseListMember", pursv.getList(mpgvo, mno));
+		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo, mno));
+		logger.info("model : " + model);
+	}
+
 }

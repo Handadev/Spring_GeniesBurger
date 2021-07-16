@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="../common/header.jsp" />
+<jsp:include page="../payCommon/header_01.jsp" />
 <style>
 .title {
 	padding: 50px 320px 20px 0px;
@@ -175,4 +175,4 @@ function coupon_cancel(cplno){
 	}
  });
 </script>
-<jsp:include page="../common/footer.jsp" />
+<jsp:include page="../payCommon/payFooter.jsp" />

@@ -8,6 +8,7 @@ public interface CartServiceRule {
 	public int register(CartVO cartvo);
 	public List<CartVO> getList();
 	public int remove(int cartno);
+	public int removeWithPno(int pno);
 	public int increQty(int cartno, String upqtystr);
 	public int decreQty(int cartno, String downqtystr);
 	public boolean dupleCheck(int pno, int mno);

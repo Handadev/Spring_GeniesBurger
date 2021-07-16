@@ -8,19 +8,19 @@
 	<div class="container">
 		<div class="row">
 			<div class="col" style="margin-bottom: 10px;">
-				<form action="/cart/purchaseList" class="form-inline justify-content-end">
-				<p style="font-size:2em; margin-right:450px;">TOTAL PUCHASE PAGE</p>
+				<form action="/cart/purchaseListMember" class="form-inline justify-content-end">
+				<p style="font-size:2em; margin-right:450px;">나의 주문목록</p>
 					<select class="form-control" name="range">
 						<option value="en"
-							<c:out value="${pghdl.mpgvo.range eq 'en' ? 'selected' : '' }"/>>이메일+이름</option>
+							<c:out value="${pghdlM.mpgvo.range eq 'en' ? 'selected' : '' }"/>>이메일+이름</option>
 						<option value="e"
-							<c:out value="${pghdl.mpgvo.range eq 'e' ? 'selected' : '' }"/>>이메일</option>
+							<c:out value="${pghdlM.mpgvo.range eq 'e' ? 'selected' : '' }"/>>이메일</option>
 						<option value="n"
-							<c:out value="${pghdl.mpgvo.range eq 'n' ? 'selected' : '' }"/>>이름</option>
+							<c:out value="${pghdlM.mpgvo.range eq 'n' ? 'selected' : '' }"/>>이름</option>
 						<option value="t"
-							<c:out value="${pghdl.mpgvo.range eq 't' ? 'selected' : '' }"/>>상품명</option>
+							<c:out value="${pghdlM.mpgvo.range eq 't' ? 'selected' : '' }"/>>상품명</option>
 						<option value="p"
-							<c:out value="${pghdl.mpgvo.range eq 'p' ? 'selected' : '' }"/>>가격</option>
+							<c:out value="${pghdlM.mpgvo.range eq 'p' ? 'selected' : '' }"/>>가격</option>
 					</select>&nbsp;&nbsp;<input class="form-control" type="text"
 						placeholder="검색어 입력" name="keyword"
 						value="${pghdl.mpgvo.keyword }"> &nbsp;&nbsp;
@@ -44,22 +44,22 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${purchaseList }" var="purchaseList">
+							<c:forEach items="${purchaseListMember }" var="purchaseListMember">
 								<tr class="text-center">
-									<td>${purchaseList.purno }</td>
-									<td>${purchaseList.mno }</td>
-									<td>${purchaseList.name }</td>
-									<td>${purchaseList.title }</td>
-									<td>${purchaseList.price }</td>
-									<td>${purchaseList.quantity }</td>
-									<td>${purchaseList.regdate }</td>
+									<td>${purchaseListMember.purno }</td>
+									<td>${purchaseListMember.mno }</td>
+									<td>${purchaseListMember.name }</td>
+									<td>${purchaseListMember.title }</td>
+									<td>${purchaseListMember.price }</td>
+									<td>${purchaseListMember.quantity }</td>
+									<td>${purchaseListMember.regdate }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
 						<tfoot>
 					</table>
 				</div>
-				<jsp:include page="paging.jsp" />
+				<jsp:include page="pagingMember.jsp" />
 			</div>
 		</div>
 	</div>

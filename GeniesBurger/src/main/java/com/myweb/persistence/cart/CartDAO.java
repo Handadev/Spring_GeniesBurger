@@ -35,6 +35,11 @@ public class CartDAO implements CartDAORule {
 	public int delete(int cartno) {
 		return sql.delete(NS + "del", cartno);
 	}
+	
+	@Override
+	public int deleteWithPno(int pno) {
+		return sql.delete(NS + "delWithPno", pno);
+	}
 
 	@Override
 	public int upQty(int cartno, int upqtystr) {
@@ -82,5 +87,7 @@ public class CartDAO implements CartDAORule {
 	public List<CartVO> selectOrderList(int mno) {
 		return sql.selectList(NS+"ol", mno);
 	}
+
+	
 
 }
