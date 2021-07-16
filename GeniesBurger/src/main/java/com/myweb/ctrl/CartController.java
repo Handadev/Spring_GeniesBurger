@@ -22,9 +22,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.CartVO;
+import com.myweb.domain.ProductStockVO;
 import com.myweb.domain.PurchaseVO;
 import com.myweb.service.cart.CartServiceRule;
+import com.myweb.service.product_stock.ProductStockServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
+import com.myweb.service.stock.StockServiceRule;
 
 @RequestMapping("/cart/*")
 @Controller
@@ -36,6 +39,12 @@ public class CartController {
 
 	@Inject
 	private PurchaseServiceRule pursv;
+	
+	@Inject
+	private ProductStockServiceRule pssv;
+	
+	@Inject
+	private StockServiceRule ssv;
 
 	@GetMapping("/complete")
 	public void complete() {
@@ -105,14 +114,23 @@ public class CartController {
 		logger.info(">>> cartvo : " + cartvo);
 		int isUp = 0;
 		int isUp2 = 0;
+		int isUp3 = 0;
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
 				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno());
+				int pno = cartvo.get(i).getPno();
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
+				List<ProductStockVO> productStockList = pssv.getList(pno);
+				for (int t = 0; t < productStockList.size(); t++) {
+					String sname = productStockList.get(t).getSname();
+					int sno = ssv.getUpsqSno(sname);
+					isUp3 = ssv.modifyStockQty(sno);
+					isUp3 *= isUp3;
+				}
 			}
 		}
-		if (isUp > 0) {
+		if (isUp > 0 && isUp3 > 0) {
 			isUp2 = cartsv.removeWithMno(mno);
 		}
 		return isUp2 > 0 ? "redirect:/" : "/cart/complete";
