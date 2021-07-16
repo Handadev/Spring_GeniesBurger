@@ -62,7 +62,8 @@ public class StockService implements StockServiceRule {
 	@Override // HomeCtrl 버거와 연관되어있는 재고 가져오기
 	public List<StockVO> getBurgerStockList() {
 		return sdao.selectBurgerStockList();
-
+	}
+	
 	@Override
 	public int getUpsqSno(String sname) {
 		return sdao.selectUpsqSno(sname);

@@ -64,7 +64,8 @@ public class StockDAO implements StockDAORule {
 	@Override // HomeCtrl 버거와 연관되어있는 재고 가져오기
 	public List<StockVO> selectBurgerStockList() {
 		return sql.selectList(NS + "getBurgerStock");
-
+	}
+	
 	@Override
 	public int selectUpsqSno(String sname) {
 		return sql.selectOne(NS + "upsqSno", sname);
