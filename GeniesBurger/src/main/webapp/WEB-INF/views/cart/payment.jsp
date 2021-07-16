@@ -90,23 +90,22 @@ a {
 	</div>
 	<div class="sum_wrap">
 		<br><br><br><span>수량</span><span style="float: right;">${cvo.quantity }</span><br>
-		<c:set var="dc" value="1000" />
+		<%-- <c:set var="dc" value="1000" /> --%>
 		<span>금액</span><span class="redFont" style="float: right;">${cvo.price * cvo.quantity }</span><br><hr>
 		<c:set var= "total" value="${total + (cvo.price * cvo.quantity)}"/>
 	</div>
 </c:forEach>
 </div>
 <div class="container p-3 my-3 border">
-	<span>주문금액</span><span style="float: right;">${total }</span><br>
-	<span>할인금액</span><span style="float: right;">${dc }</span><br>
-	<span id="sum">총 결제금액</span><span class="redFont" id="sum" style="float: right;">${total-dc }</span>
+	<span>주문금액</span><span style="float: right;" id="total">${total }</span><br>
+	<span>할인금액</span><span style="float: right;" id="dc">0</span><br>
+	<span id="sum">총 결제금액</span><span class="redFont" id="total" style="float: right;">${total }</span>
 </div>
 <div class="container whole">
 	<div class="left"><a href="/">취소</a></div>
-	<div class="right"><a href="/cart/method">결제</a></div>
-	<div class="container coupon">쿠폰사용하기<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#couponModal">
-  		쿠폰 선택
-	</button></div>
+	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
+	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
+	쿠폰사용하기</div>
 </div>
 <div class="modal fade" id="couponModal">
    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
@@ -145,12 +144,12 @@ a {
 $("#selectCp").on("click", function() {
 	let couponVal = $("#coupon option:selected").attr("value");
 	let cplno = $("#cplno").val();
-	let sum = $("#summ").text();
-	let salePrice = Math.floor(sum * (couponVal*(0.01)));
-	let price = sum - salePrice;
+	let total = $("#total").text();
+	let dcPrice = Math.floor(total * (couponVal*(0.01)));
+	let price = total - dcPrice;
 	console.log(couponVal);
 	$("#dc").val(couponVal);
-	$("#dc").html(salePrice);
+	$("#dc").html(dcPrice);
 	$("#price").html(price);
 	$("#paymentBtn").data("cplno", cplno);
 	$("#couponModal").modal("hide");
