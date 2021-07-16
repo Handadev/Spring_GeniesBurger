@@ -5,6 +5,8 @@
 <jsp:include page="../adminCommon/header.jsp" />
 <jsp:include page="../adminCommon/nav.jsp" />
 <jsp:include page="../adminCommon/sidebar.jsp" />
+<c:choose>
+	<c:when test="${ses.email eq 'admin@admin.com' }">
 	<div class="container">
 	<h2 class="float-left">쿠폰 리스트</h2>
 		<a href="/coupon/issueList" class="btn btn-primary float-right ml-3">발급 현황</a>
@@ -65,4 +67,12 @@
 	    </c:choose>
 	  </table>
   </div>
+  </c:when>
+			<c:otherwise>
+			<script>
+				alert("관리자 로그인이 필요한 페이지 입니다!");
+				location.replace("/member/login");
+			</script>
+			</c:otherwise>
+		</c:choose>
 <jsp:include page="../adminCommon/footer.jsp" />

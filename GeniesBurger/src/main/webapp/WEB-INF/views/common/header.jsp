@@ -76,7 +76,6 @@
 					<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
 					<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
 					<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
-          <li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
 					<c:choose>
 						<c:when test="${ses.email eq 'admin@admin.com' }">
 							<li class="nav-item dropdown"><a
@@ -87,7 +86,7 @@
 								<div class="dropdown-menu" aria-labelledby="dropdown04">
 									<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
 									my page</a> 
-									<a class="dropdown-item" href="/member/list">admin page</a>
+									<a class="dropdown-item" href="/dash_index">admin page</a>
 									<a class="dropdown-item" href="/cart/purchaseList">purchase page</a>
 								</div>
 						</c:when>

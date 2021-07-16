@@ -99,7 +99,7 @@ a {
 <div class="container p-3 my-3 border">
 	<span>주문금액</span><span style="float: right;" id="total">${total }</span><br>
 	<span>할인금액</span><span style="float: right;" id="dc">0</span><br>
-	<span id="sum">총 결제금액</span><span class="redFont" id="total" style="float: right;">${total }</span>
+	<span id="sum">총 결제금액</span><span class="redFont" id="price" style="float: right;">${total }</span>
 </div>
 <div class="container whole">
 	<div class="left"><a href="/">취소</a></div>
@@ -107,6 +107,8 @@ a {
 	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
 	쿠폰사용하기</div>
 </div>
+
+<!-- Coupon Modal -->
 <div class="modal fade" id="couponModal">
    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
       <div class="modal-content">
