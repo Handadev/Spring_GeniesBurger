@@ -156,7 +156,6 @@
             <p><b>포장주문</b></p>
             </div>
              <div id="confirmBtn"><a class="btn btn-dark checkBtn" style="color: white;">확인</a></div>
-
           </div>
         </div>
       </div>
