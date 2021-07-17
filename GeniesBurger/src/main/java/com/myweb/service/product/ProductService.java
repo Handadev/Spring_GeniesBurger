@@ -48,7 +48,18 @@ public class ProductService implements ProductServiceRule {
 
 	@Override // 소비자 상품 리스트
 	public List<ProductVO> getList(ProductCustomerPageVO pcpgvo) {
-		return pdao.selectList(pcpgvo);
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectList(pcpgvo);
+		for (ProductVO pvo : plist) {
+			int pno = pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		logger.info("flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getFname());
+		logger.info("flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getPuuid());
+		logger.info("flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getSavedir());
+		return list;
 	}
 	
 	@Override // 상품등록시 세트 메뉴구성을 위한 단품 리스트

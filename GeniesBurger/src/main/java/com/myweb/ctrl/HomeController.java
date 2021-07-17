@@ -55,9 +55,14 @@ public class HomeController {
 	
 	@GetMapping("/")
 	public String home(Model model, ProductCustomerPageVO pcpgvo) {
-		model.addAttribute("product_list", psv.getList(pcpgvo));
+		List<ProductVO> list = psv.getList(pcpgvo);
+		logger.info("ctrl flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getFname());
+		logger.info("ctrl flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getPuuid());
+		logger.info("ctrl flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getSavedir());
+		model.addAttribute("product_list",list);
 		int totalCount = psv.getTotalCount(pcpgvo);
 		model.addAttribute("product_paging", new ProductCustomerPagingHandler(totalCount, pcpgvo));
+		logger.info("index로 가즈아");
 		return "index";
 	}
 	
@@ -99,6 +104,7 @@ public class HomeController {
 		}
 		
 	}
+	
 	
 	
 }
