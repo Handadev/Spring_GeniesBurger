@@ -137,7 +137,7 @@
 				</form>
 			</div>
 		</div>
-
+	
 		<!-- 상품 분류 선택 끝-->
 		<!-- 상품 전체 -->
 		<div class="row">
@@ -149,8 +149,9 @@
 							<div class="product" data-toggle="modal"
 								data-target="#sigle_set_modal" id="product"
 								data-pno="${pvo.pno }" data-category="${pvo.category }">
-								<img class="img-fluid" src="/resources/images/product-1.jpg"
-									alt="Colorlib Template" />
+								<c:forEach items="${pvo.flist }" var="fvo">
+									<img class="img-fluid" src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }" alt="Colorlib Template" />
+								</c:forEach>
 								<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
 								<div class="overlay"></div>
 								<div class="text py-3 pb-4 px-3 text-center">
@@ -291,6 +292,11 @@
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
+
+	let flist = '<c:out value="${product_list[0].flist}"/>';
+	
+	console.log(flist);
+		
 	/* 카테고리 누르면 active 버튼 색 변함 */
 	let keyword_val = '<c:out value="${product_paging.pcpgvo.keyword}"/>';
 	switch (keyword_val) {
@@ -452,20 +458,18 @@
 		
 		let fhtml = '';
 		fhtml += '<div class="row">';
-		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="select_side('+pno+','+category+')">';
+		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="show_sides('+pno+','+category+')">';
 		fhtml += '<span id="button_text">추가안함</span></div>';
-		fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="select_side('+pno+','+category+')">';
+		fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="confirm_extra('+pno+','+category+')">';
 		fhtml += '<span id="button_text">추가하기</span></div>';
 		fhtml += '</div>';
 		
 		ingredientZone.append(html);
 		ingredientZoneFooter.append(fhtml);
 	}
-	/* 3 모달 끝 */
 	
-	
-	/* 4 모달 사이드메뉴 고르기 */
-	function select_side(pno, category) {
+	/* 재료 추가하면 작동 */
+	function confirm_extra(pno, category) {
 		let extraArr = [];
 		let mno = '<c:out value="${ses.mno}"/>';
 		$("input:checkbox[name=sname]:checked").each(function() {
@@ -487,8 +491,14 @@
 			}).fail(function(err) {
 				console.log("실패함");
 			});
+		} else {
+			alert("추가하시려는 재료를 넣으셔야합니다");
 		}
 	}
+	/* 3 모달 끝 */
+	
+	
+	/* 4 모달 사이드메뉴 고르기 */
 	function show_sides(pno, category) {
 		
 	}
