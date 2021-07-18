@@ -17,6 +17,7 @@ public interface ProductServiceRule {
 	public List<ProductAndFileDTO> getProductList(int pno, int category); // 소비자 - 단품 or 세트선택 화면리스트
 	public ProductAndFileDTO getLargerProduct(int pno, int category); // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지 
 	public List<ProductVO> getSideList(); // 4번 모달 사이드 리스트 출력
+	public List<ProductVO> getBeverageList(); // 5번 모달 사이드 리스트 출력
 	public ProductVO detail(int pno);
 	public int modify(ProductVO pvo);
 	public int remove(int pno);

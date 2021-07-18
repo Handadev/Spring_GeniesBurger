@@ -141,7 +141,7 @@
 					<li><a href="/?range=category&keyword=1" class="burger">버거</a></li>
 					<li><a href="/?range=category&keyword=2" class="set">버거세트</a></li>
 					<li><a href="/?range=category&keyword=4" class="allday">올데이킹</a></li>
-					<li><a href="/?range=category&keyword=7" class="side">사이드</a></li>
+					<li><a href="/?range=category&keyword=7" class="sides">사이드</a></li>
 					<li><a href="/?range=category&keyword=8" class="beverage">음료</a></li>
 				</ul>
 				<form action="/">
@@ -312,39 +312,6 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<div class="container" id="sideZone">
-					<div class="row">
-						<div class="col-md-4">
-							<div class="add_check">
-								<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">
-							</div>
-								<img class="img-fluid" src="/resources/images/product-1.jpg" alt="Colorlib Template"/>
-							<div class="text-center">
-								<p class="side top">제품제품</p>
-								<p class="side bottom">+가격가격 원</p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div>
-								<img class="check_img" src="/resources/icons/check.png">
-								<img class="img-fluid" src="/resources/images/product-1.jpg" alt="Colorlib Template"/>
-							</div>
-							<div class="text-center">
-								<p class="side top">제품제품</p>
-								<p class="side bottom">가격가격</p>
-							</div>
-						</div>
-						<div class="col-md-4">
-							<div>
-								<img class="check_img" src="/resources/icons/check.png">
-								<img class="img-fluid" src="/resources/images/product-1.jpg" alt="Colorlib Template"/>
-							</div>
-							<div class="text-center">
-								<p class="side top">제품제품</p>
-								<p class="side bottom">가격가격</p>
-							</div>
-						</div>
-						
-					</div>
 				</div>
 			</div>
 
@@ -356,6 +323,32 @@
 	</div>
 </div>
 <!-- 4번 모달 끝 -->
+
+<!-- 5번 모달 음료 선택 -->
+<div class="modal modal-center fade" id="beverage_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">음료 변경</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="container" id="beverageZone">
+				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="container con_modal_footer" id="beverageZoneFooter">
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- 5번 모달 -->
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
@@ -380,7 +373,7 @@
 			$(".allday").addClass("active");
 			break;
 		case "7":
-			$(".side").addClass("active");
+			$(".sides").addClass("active");
 			break;
 		case "8":
 			$(".beverage").addClass("active");
@@ -554,7 +547,7 @@
 				}
 			}).done(function(result) {
 				console.log("성공함");
-				show_sides(pno, category);
+				show_sides(pno, category, mno);
 			}).fail(function(err) {
 				console.log("실패함");
 			});
@@ -565,16 +558,16 @@
 	/* 3 모달 끝 */
 	
 	/* 4 모달 사이드메뉴 고르기 */
-	function show_sides(pno, category) {
+	function show_sides(pno, category, mno) {
 		$("#add_ingredient_modal").modal("hide");
 		$.getJSON("/getSideList.json", function(result) {
 			console.log(result);
-			print_sides(result, pno, category);
+			print_sides(result, pno, category, mno);
 		}).fail(function(err) {
 			console.log(err);
 		});
 	}
-	function print_sides(pvoObj, pno, category) {
+	function print_sides(pvoObj, pno, category, mno) {
 		$("#side_modal").modal("show");
 		let sideZone = $("#sideZone");
 		let sideZoneFooter = $("#sideZoneFooter");
@@ -585,7 +578,7 @@
 		
 		if (category == 1 || category == 4) { /* 단품 */
 			for (let pvo of pvoObj) {
-				html += '<div class="col-md-4" data-title="'+pvo.title+'" data-price="'+pvo.price+'" onclick="product_check(this)">';
+				html += '<div class="col-md-4" onclick="side_check(this)">';
 				html += '<div class="add_check"></div>';
 				for (let list of pvo.flist) {
 					html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
@@ -597,7 +590,7 @@
 			}
 		} else if (category == 2 || category == 5) { /* 세트 */
 			for (let pvo of pvoObj) {
-				html += '<div class="col-md-4" data-title="'+pvo.title+'" data-price="'+pvo.price+'" onclick="product_check(this)">';
+				html += '<div class="col-md-4" onclick="side_check(this)">';
 				html += '<div class="add_check"></div>';
 				for (let list of pvo.flist) {
 					html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
@@ -610,7 +603,7 @@
 		} else { /* 라지 세트 */
 			for (let pvo of pvoObj) {
 				if (parseInt(pvo.price) >= 2900) {
-					html += '<div class="col-md-4" data-title="'+pvo.title+'" data-price="'+pvo.price+'" onclick="product_check(this)">';
+					html += '<div class="col-md-4" onclick="side_check(this)">';
 					html += '<div class="add_check"></div>';
 					for (let list of pvo.flist) {
 						html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
@@ -627,39 +620,43 @@
 		let fhtml = '';
 		if (category == 1 || category == 4) {
 			fhtml += '<div class="row">';
-			fhtml += '<div class="col-sm bg-dark text-center footer_btn">';
+			fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="show_beverage('+pno+','+category+','+mno+')">';
 			fhtml += '<span id="button_text">추가안함</span></div>';
-			fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_side('+pno+','+category+')">';
+			fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_side('+pno+','+category+','+mno+')">';
 			fhtml += '<span id="button_text">추가하기</span></div>';
 			fhtml += '</div>';
 		} else {
 			fhtml += '<div class="row">';
-			fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_side('+pno+','+category+')">';
+			fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_side('+pno+','+category+','+mno+')">';
 			fhtml += '<span id="button_text">선택</span></div>';
 			fhtml += '</div>';
 		}
 		
 		sideZone.append(html);
 		sideZoneFooter.append(fhtml);
-		default_check();
+		side_default_check();
 	}
 		/* 사이드 메뉴에 디폴트로 체크 이미지 표시하기 */
-		function default_check() {
+		function side_default_check() {
 			let check = '<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">';
 			$("#sideZone").children("div").find(".add_check").eq(0).append(check);
 			
 		}
 		/* 클릭한 제품에 체크 이미지 표시하기 */
-		function product_check(e) {
+		function side_check(e) {
 			let check = '<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">';
 			$("#sideZone").children("div").find(".add_check").html("");
 			$(e).children(".add_check").append(check);
 		}
 		
-		function add_side(pno, category) {
+		/* 사이드 추가 기능 */
+		function add_side(pno, category, mno) {
 			let side_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let side_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
 			let mno = '<c:out value="${ses.mno}"/>';
+			
+			console.log(side_title);
+			console.log(side_price);
 			
 			$.ajax({
 				url : "/addSide",
@@ -672,11 +669,141 @@
 				}
 			}).done(function(result){
 				console.log("성공");
+				show_beverage(pno, category, mno);
 			}).fail(function(){
 				console.log("실패");
 			});
 		}
-	
+		/* 4 모달 끝 */
+		
+		/* 5 모달 음료 고르기 */
+		function show_beverage(pno, category, mno) {
+			let sideZone = $("#sideZone");
+			let sideZoneFooter = $("#sideZoneFooter");
+		  	sideZone.html("");
+			sideZoneFooter.html("");
+			
+			$("#side_modal").modal("hide");
+			$.getJSON("/getBeverageList.json", function(result) {
+				console.log(result);
+				print_beverage(result, pno, category, mno);
+			}).fail(function(err) {
+				console.log(err);
+			});
+		}
+		function print_beverage(pvoObj, pno, category, mno) {
+			$("#beverage_modal").modal("show");
+			let beverageZone = $("#beverageZone");
+			let beverageZoneFooter = $("#beverageZoneFooter");
+			beverageZone.html("");
+			beverageZoneFooter.html("");
+			html = '';
+			html += '<div class="row">';
+			
+			if (category == 1 || category == 4) { /* 단품 */
+				for (let pvo of pvoObj) {
+					html += '<div class="col-md-4" onclick="beverage_check(this)">';
+					html += '<div class="add_check"></div>';
+					for (let list of pvo.flist) {
+						html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
+					}
+					html += '<div class="text-center">';
+					html += '<p class="side top">'+pvo.title+'</p>';
+					html += '<p class="side">+<span>'+pvo.price+'</span>원</p>';
+					html += '</div></div>';
+				}
+			} else if (category == 2 || category == 5) { /* 세트 */
+				for (let pvo of pvoObj) {
+					html += '<div class="col-md-4" onclick="beverage_check(this)">';
+					html += '<div class="add_check"></div>';
+					for (let list of pvo.flist) {
+						html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
+					}
+					html += '<div class="text-center">';
+					html += '<p class="side top">'+pvo.title+'</p>';
+					html += '<p class="side">+<span>'+ (parseInt(pvo.price) - 2500)  +'</span>원</p>';
+					html += '</div></div>';
+				}
+			} else { /* 라지 세트 */
+				for (let pvo of pvoObj) {
+					if (parseInt(pvo.price) >= 2700) {
+						html += '<div class="col-md-4" onclick="beverage_check(this)">';
+						html += '<div class="add_check"></div>';
+						for (let list of pvo.flist) {
+							html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
+						}
+						html += '<div class="text-center">';
+						html += '<p class="side top">'+pvo.title+'</p>';
+						html += '<p class="side">+<span>'+ (parseInt(pvo.price) - 2700)  +'</span>원</p>';
+						html += '</div></div>';
+					}
+				}
+			}
+			html += '</div>';
+			
+			let fhtml = '';
+			if (category == 1 || category == 4) {
+				fhtml += '<div class="row">';
+				fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_cart('+pno+','+category+','+mno+')">';
+				fhtml += '<span id="button_text">추가안함</span></div>';
+				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+category+','+mno+')">';
+				fhtml += '<span id="button_text">추가하기</span></div>';
+				fhtml += '</div>';
+			} else {
+				fhtml += '<div class="row">';
+				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+category+','+mno+')">';
+				fhtml += '<span id="button_text">선택</span></div>';
+				fhtml += '</div>';
+			}
+			
+			beverageZone.append(html);
+			beverageZoneFooter.append(fhtml);
+			beverage_default_check();
+		}
+		
+		/* 음료 메뉴에 디폴트로 체크 이미지 표시하기 */
+		function beverage_default_check() {
+			let check = '<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">';
+			$("#beverageZone").children("div").find(".add_check").eq(0).append(check);
+			
+		}
+		/* 클릭한 제품에 체크 이미지 표시하기 */
+		function beverage_check(e) {
+			let check = '<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">';
+			$("#beverageZone").children("div").find(".add_check").html("");
+			$(e).children(".add_check").append(check);
+		}
+		
+		/* 음료 추가 기능 */
+		function add_beverage(pno, category, mno) {
+			let beverage_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
+			let beverage_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
+			let mno = '<c:out value="${ses.mno}"/>';
+			
+			console.log(beverage_title);
+			console.log(beverage_price);
+		 	$.ajax({
+				url : "/addBeverage",
+				type : "post",
+				data : {
+					title : beverage_title,
+					price : beverage_price,
+					mno : mno,
+					pno : pno
+				}
+			}).done(function(result){
+				console.log("성공");
+				add_cart(pno, category, mno);
+			}).fail(function(){
+				console.log("실패");
+			});
+		}
+		/* 5번 모달 끝 */
+		
+		/* 카트에 추가하기 */
+		function add_cart(pno, category, mno) {
+			
+		}
 </script>
 
 

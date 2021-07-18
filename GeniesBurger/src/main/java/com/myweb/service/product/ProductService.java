@@ -87,6 +87,19 @@ public class ProductService implements ProductServiceRule {
 		return list;
 	}
 	
+	@Override // 5번 모달 음료 리스트 출력
+	public List<ProductVO> getBeverageList() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectBeverageList();
+		for (ProductVO pvo : plist) {
+			int pno = pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		return list;
+	}
+	
 	@Override
 	public ProductVO detail(int pno) {
 		ProductVO pvo = new ProductVO();
@@ -133,5 +146,6 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
+
 
 }

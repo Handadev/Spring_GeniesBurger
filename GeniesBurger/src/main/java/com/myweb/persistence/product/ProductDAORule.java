@@ -16,6 +16,7 @@ public interface ProductDAORule {
 	public List<ProductAndFileDTO> selectList(int pno, int category); // 소비자 - 단품 or 세트선택 화면리스트
 	public ProductAndFileDTO selectOne(int pno, int category); // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지
 	public List<ProductVO> selectSideList(); // 4번 모달 사이드 리스트 출력
+	public List<ProductVO> selectBeverageList(); // 5번 모달 음료 리스트 출력
 	public ProductVO selectOne(int pno); // detail
 	public int update(ProductVO pvo); 
 	public int delete(int pno);
