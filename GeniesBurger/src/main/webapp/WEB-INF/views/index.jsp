@@ -84,6 +84,7 @@
 	margin-right: 25px;
 }
 
+/* 3번 체크 박스 */
 .checkbox.row {
 	position: relative;
 	margin-bottom: 30px;
@@ -110,6 +111,21 @@
     top: -50%;
     left: 7%;
 }
+
+/* 4번 체크 박스  */
+.side {
+	font-size: 19px;
+}
+
+.side.top {
+	margin-top: 10px;
+	margin-bottom: -10px;
+}
+
+.side.bottom {
+   margin-bottom: 10px;
+}
+
 
 </style>
 
@@ -270,14 +286,6 @@
 			<!-- Modal body -->
 			<div class="modal-body">
 				<div class="container" id="ingredientZone">
-					<div class="checkbox row">
-					     <input type="checkbox" name="sname" id="check1" value="1" class="checkbox">
-    					<label class="check_label" for="check1">큰체크박스</label>
-					</div>
-					<div class="checkbox row">
-					     <input type="checkbox" name="sname" id="check2" value="2" class="checkbox">
-    					<label class="check_label" for="check2">큰체크박스2</label>
-					</div>
 				</div>
 			</div>
 
@@ -289,6 +297,65 @@
 	</div>
 </div>
 <!-- 3번 모달 끝 -->
+
+<!-- 4번 모달 사이드 선택 -->
+<div class="modal modal-center fade" id="side_modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+
+			<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">사이드 변경</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div class="container" id="sideZone">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="add_check">
+								<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">
+							</div>
+								<img class="img-fluid" src="/resources/images/product-1.jpg" alt="Colorlib Template"/>
+							<div class="text-center">
+								<p class="side top">제품제품</p>
+								<p class="side bottom">+가격가격 원</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div>
+								<img class="check_img" src="/resources/icons/check.png">
+								<img class="img-fluid" src="/resources/images/product-1.jpg" alt="Colorlib Template"/>
+							</div>
+							<div class="text-center">
+								<p class="side top">제품제품</p>
+								<p class="side bottom">가격가격</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div>
+								<img class="check_img" src="/resources/icons/check.png">
+								<img class="img-fluid" src="/resources/images/product-1.jpg" alt="Colorlib Template"/>
+							</div>
+							<div class="text-center">
+								<p class="side top">제품제품</p>
+								<p class="side bottom">가격가격</p>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal footer -->
+			<div class="container con_modal_footer" id="sideZoneFooter">
+			</div>
+
+		</div>
+	</div>
+</div>
+<!-- 4번 모달 끝 -->
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
@@ -497,11 +564,118 @@
 	}
 	/* 3 모달 끝 */
 	
-	
 	/* 4 모달 사이드메뉴 고르기 */
 	function show_sides(pno, category) {
-		
+		$("#add_ingredient_modal").modal("hide");
+		$.getJSON("/getSideList.json", function(result) {
+			console.log(result);
+			print_sides(result, pno, category);
+		}).fail(function(err) {
+			console.log(err);
+		});
 	}
+	function print_sides(pvoObj, pno, category) {
+		$("#side_modal").modal("show");
+		let sideZone = $("#sideZone");
+		let sideZoneFooter = $("#sideZoneFooter");
+	  	sideZone.html("");
+		sideZoneFooter.html("");
+		html = '';
+		html += '<div class="row">';
+		
+		if (category == 1 || category == 4) { /* 단품 */
+			for (let pvo of pvoObj) {
+				html += '<div class="col-md-4" data-title="'+pvo.title+'" data-price="'+pvo.price+'" onclick="product_check(this)">';
+				html += '<div class="add_check"></div>';
+				for (let list of pvo.flist) {
+					html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
+				}
+				html += '<div class="text-center">';
+				html += '<p class="side top">'+pvo.title+'</p>';
+				html += '<p class="side">+<span>'+pvo.price+'</span>원</p>';
+				html += '</div></div>';
+			}
+		} else if (category == 2 || category == 5) { /* 세트 */
+			for (let pvo of pvoObj) {
+				html += '<div class="col-md-4" data-title="'+pvo.title+'" data-price="'+pvo.price+'" onclick="product_check(this)">';
+				html += '<div class="add_check"></div>';
+				for (let list of pvo.flist) {
+					html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
+				}
+				html += '<div class="text-center">';
+				html += '<p class="side top">'+pvo.title+'</p>';
+				html += '<p class="side">+<span>'+ (parseInt(pvo.price) - 2400)  +'</span>원</p>';
+				html += '</div></div>';
+			}
+		} else { /* 라지 세트 */
+			for (let pvo of pvoObj) {
+				if (parseInt(pvo.price) >= 2900) {
+					html += '<div class="col-md-4" data-title="'+pvo.title+'" data-price="'+pvo.price+'" onclick="product_check(this)">';
+					html += '<div class="add_check"></div>';
+					for (let list of pvo.flist) {
+						html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'"/>';
+					}
+					html += '<div class="text-center">';
+					html += '<p class="side top">'+pvo.title+'</p>';
+					html += '<p class="side">+<span>'+ (parseInt(pvo.price) - 2900)  +'</span>원</p>';
+					html += '</div></div>';
+				}
+			}
+		}
+		html += '</div>';
+
+		let fhtml = '';
+		if (category == 1 || category == 4) {
+			fhtml += '<div class="row">';
+			fhtml += '<div class="col-sm bg-dark text-center footer_btn">';
+			fhtml += '<span id="button_text">추가안함</span></div>';
+			fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_side('+pno+','+category+')">';
+			fhtml += '<span id="button_text">추가하기</span></div>';
+			fhtml += '</div>';
+		} else {
+			fhtml += '<div class="row">';
+			fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_side('+pno+','+category+')">';
+			fhtml += '<span id="button_text">선택</span></div>';
+			fhtml += '</div>';
+		}
+		
+		sideZone.append(html);
+		sideZoneFooter.append(fhtml);
+		default_check();
+	}
+		/* 사이드 메뉴에 디폴트로 체크 이미지 표시하기 */
+		function default_check() {
+			let check = '<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">';
+			$("#sideZone").children("div").find(".add_check").eq(0).append(check);
+			
+		}
+		/* 클릭한 제품에 체크 이미지 표시하기 */
+		function product_check(e) {
+			let check = '<img class="check_img" src="/resources/icons/check.png" width="110px" style="position: absolute;">';
+			$("#sideZone").children("div").find(".add_check").html("");
+			$(e).children(".add_check").append(check);
+		}
+		
+		function add_side(pno, category) {
+			let side_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
+			let side_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
+			let mno = '<c:out value="${ses.mno}"/>';
+			
+			$.ajax({
+				url : "/addSide",
+				type : "post",
+				data : {
+					title : side_title,
+					price : side_price,
+					mno : mno,
+					pno : pno
+				}
+			}).done(function(result){
+				console.log("성공");
+			}).fail(function(){
+				console.log("실패");
+			});
+		}
 	
 </script>
 

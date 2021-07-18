@@ -4,8 +4,16 @@
   <mapper namespace="AddExtraMapper">
   <!-- price는 나중에 추가하면 넣어야함 -->
   	<insert id="reg" parameterType="aevo">
-  		insert into tbl_add_extra (aeno, mno, pno, sname)
-  		values (seq_add_extra_aeno.nextval, #{mno }, #{pno }, #{sname })
+  		<choose>
+  			<when test="sname != null and !sname.equals('')">
+		  		insert into tbl_add_extra (aeno, mno, pno, sname)
+		  		values (seq_add_extra_aeno.nextval, #{mno }, #{pno }, #{sname })
+  			</when>
+  			<otherwise>
+  				insert into tbl_add_extra (aeno, mno, pno, price, title)
+  				values (seq_add_extra_aeno.nextval, #{mno }, #{pno }, #{price }, #{title })
+  			</otherwise>
+  		</choose>
   	</insert>
   	
   	<delete id="del" parameterType="int">

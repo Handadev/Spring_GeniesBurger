@@ -56,9 +56,6 @@ public class ProductService implements ProductServiceRule {
 			pvo.setFlist(flist);
 			list.add(pvo);
 		}
-		logger.info("flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getFname());
-		logger.info("flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getPuuid());
-		logger.info("flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getSavedir());
 		return list;
 	}
 	
@@ -75,6 +72,19 @@ public class ProductService implements ProductServiceRule {
 	@Override // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지
 	public ProductAndFileDTO getLargerProduct(int pno, int category) {
 		return pdao.selectOne(pno, category);
+	}
+	
+	@Override // 4번 모달 사이드 리스트 출력
+	public List<ProductVO> getSideList() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectSideList();
+		for (ProductVO pvo : plist) {
+			int pno = pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		return list;
 	}
 	
 	@Override
@@ -123,9 +133,5 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
-
-	
-	
-
 
 }

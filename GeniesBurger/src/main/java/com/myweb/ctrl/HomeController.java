@@ -56,9 +56,6 @@ public class HomeController {
 	@GetMapping("/")
 	public String home(Model model, ProductCustomerPageVO pcpgvo) {
 		List<ProductVO> list = psv.getList(pcpgvo);
-		logger.info("ctrl flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getFname());
-		logger.info("ctrl flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getPuuid());
-		logger.info("ctrl flist 제대로 들어있는지 = "+ list.get(0).getFlist().get(0).getSavedir());
 		model.addAttribute("product_list",list);
 		int totalCount = psv.getTotalCount(pcpgvo);
 		model.addAttribute("product_paging", new ProductCustomerPagingHandler(totalCount, pcpgvo));
@@ -102,9 +99,23 @@ public class HomeController {
 		for (int i = 0; i < list.size(); i++) {
 			aesv.register(new AddExtraVO(mno, pno, list.get(i)));
 		}
-		
 	}
 	
+	@ResponseBody // 4번 모달 사이드 리스트 출력
+	@GetMapping(value = "/getSideList",
+				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+						MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<ProductVO>> getSideList () {
+		return new ResponseEntity<List<ProductVO>> (psv.getSideList() , HttpStatus.OK);
+	}
 	
+	@ResponseBody // 선택한 사이드 추가
+	@PostMapping("/addSide")
+	public void addSide(@RequestParam("title") String title,
+						@RequestParam("price") int price,
+						@RequestParam("mno") int mno,
+						@RequestParam("pno") int pno) {
+		aesv.register(new AddExtraVO(mno, pno, title, price));
+	}
 	
 }

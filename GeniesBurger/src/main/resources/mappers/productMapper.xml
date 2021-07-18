@@ -132,6 +132,11 @@
 		</trim>
   	</select>
   	
+  	<!-- 4번 모달 사이드 고르기에서 사이드 메뉴 출력 -->
+  	<select id="getSides" resultType="pvo">
+  		select * from tbl_product where category = 7
+  	</select>
+  	
   	<select id="detail" parameterType="int" resultType="pvo">
   		select * from tbl_product where pno = #{pno}
   	</select>
