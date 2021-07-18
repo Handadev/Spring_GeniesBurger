@@ -66,6 +66,11 @@ public class ProductDAO implements ProductDAORule {
 		return sql.selectList(NS+"getSides");
 	}
 	
+	@Override // 5번 모달 음료 리스트 출력
+	public List<ProductVO> selectBeverageList() {
+		return sql.selectList(NS+"getBeverage");
+	}
+	
 	@Override
 	public ProductVO selectOne(int pno) {
 		return sql.selectOne(NS+"detail", pno);
@@ -100,6 +105,7 @@ public class ProductDAO implements ProductDAORule {
 	public List<StockVO> selectList() {
 		return sql.selectList(NS+"stocklist");
 	}
+
 
 
 	/**

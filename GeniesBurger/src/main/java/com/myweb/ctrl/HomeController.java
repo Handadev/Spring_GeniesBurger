@@ -118,4 +118,21 @@ public class HomeController {
 		aesv.register(new AddExtraVO(mno, pno, title, price));
 	}
 	
+	@ResponseBody // 5번 모달 음료 리스트 출력
+	@GetMapping(value = "/getBeverageList",
+				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+						MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<ProductVO>> getBeverageList () {
+		return new ResponseEntity<List<ProductVO>> (psv.getBeverageList(), HttpStatus.OK);
+	}
+	
+	@ResponseBody // 선택한 음료 추가
+	@PostMapping("/addBeverage")
+	public void addBeverage(@RequestParam("title") String title,
+							@RequestParam("price") int price,
+							@RequestParam("mno") int mno,
+							@RequestParam("pno") int pno) {
+		aesv.register(new AddExtraVO(mno, pno, title, price));
+	}
+	
 }

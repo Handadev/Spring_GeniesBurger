@@ -56,7 +56,7 @@
  	<select id="listcustomer" parameterType="pcpgvo" resultType="pvo">
   		<![CDATA[
   		select *
-  		from (select /*+INDEX_DESC(tbl_product pk_product)*/
+  		from (select /*+INDEX_DESC(tbl_product category)*/
   			rownum AS rn , pno, title, price, category, sales, cansale, regdate, moddate
 			from tbl_product where pno > 0
   		]]>
@@ -135,6 +135,11 @@
   	<!-- 4번 모달 사이드 고르기에서 사이드 메뉴 출력 -->
   	<select id="getSides" resultType="pvo">
   		select * from tbl_product where category = 7
+  	</select>
+  	
+  	<!-- 5번 모달 음료 고르기에서 음료 메뉴 출력 -->
+  	<select id="getBeverage" resultType="pvo">
+  		select * from tbl_product where category = 8
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
