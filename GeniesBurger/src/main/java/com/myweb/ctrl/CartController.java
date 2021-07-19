@@ -1,5 +1,6 @@
 package com.myweb.ctrl;
 
+import java.util.Iterator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -45,13 +46,12 @@ public class CartController {
 
 	@Inject
 	private PurchaseServiceRule pursv;
-	
+
 	@Inject
 	private ProductStockServiceRule pssv;
-	
+
 	@Inject
 	private StockServiceRule ssv;
-	
 
 	@GetMapping("/complete")
 	public void complete() {
@@ -74,6 +74,7 @@ public class CartController {
 		}
 	}
 
+	@ResponseBody
 	@PostMapping("/register")
 	public String register(CartVO cartvo, @RequestParam("pno") int pno, @RequestParam("mno") int mno,
 			RedirectAttributes reAttr, HttpSession ses) {
@@ -131,11 +132,20 @@ public class CartController {
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
 				int pno = cartvo.get(i).getPno();
+				int qty = cartvo.get(i).getQuantity();
 				List<ProductStockVO> productStockList = pssv.getList(pno);
+				logger.info(i + "번째 상품의 재고 삭제");
 				for (int t = 0; t < productStockList.size(); t++) {
-					String sname = productStockList.get(t).getSname();
-					int sno = ssv.getUpsqSno(sname);
-					isUp3 = ssv.modifyStockQty(sno);
+					logger.info(t + "번째 재고 삭제");
+					for (int j = 0; j < qty; j++) {
+						String sname = productStockList.get(t).getSname();
+						int sno = ssv.getUpsqSno(sname);
+						isUp3 = ssv.modifyStockQty(sno);
+						int stock_qty = ssv.checkStockQty(sno);
+						if (stock_qty == 0) {
+							ssv.remove(sno);
+						}
+					}
 					isUp3 *= isUp3;
 				}
 			}
@@ -147,8 +157,13 @@ public class CartController {
 	}
 
 	@GetMapping("/cart")
-	public void list(Model model) {
-		model.addAttribute("cartList", cartsv.getList());
+	public void list(@RequestParam("mno") int mno, Model model) {
+		List<CartVO> list = cartsv.getList(mno);
+		model.addAttribute("cartList", list);
+		for (int i = 0; i < list.size(); i++) {
+			logger.info("★★★★★★★★★★★★★★★ : " + list);
+			logger.info("★★★★★★★★★★★★★★★ cartno : " + list.get(i).getCartno() + ", title : " + list.get(i).getTitle() + ", price : " + list.get(i).getPrice() + ", quantity : " +  list.get(i).getQuantity() + ", mno : " + list.get(i).getMno() + ", pno : " + list.get(i).getPno());
+		}
 	}
 
 	@GetMapping("/purchaseList")

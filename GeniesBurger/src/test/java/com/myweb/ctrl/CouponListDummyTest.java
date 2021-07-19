@@ -24,6 +24,12 @@ public class CouponListDummyTest {
 	private CouponDAO cpdao;
 	
 //	@Test
+//	public void enddate() {
+//		cpdao.enddateList();
+//		System.out.println(cpdao.enddateList().toString());
+//	}
+	
+//	@Test
 //	public void selectCouponListTest() {
 //		List<CouponListVO> list = new ArrayList<CouponListVO>();
 //		list = (ArrayList<CouponListVO>) cpdao.SelectIssueList();

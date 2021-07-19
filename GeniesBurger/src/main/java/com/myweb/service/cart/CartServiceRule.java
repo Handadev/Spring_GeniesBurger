@@ -6,7 +6,7 @@ import com.myweb.domain.CartVO;
 
 public interface CartServiceRule {
 	public int register(CartVO cartvo);
-	public List<CartVO> getList();
+	public List<CartVO> getList(int mno);
 	public int remove(int cartno);
 	public int removeWithPno(int pno);
 	public int increQty(int cartno, String upqtystr);

@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.myweb.domain.PurchaseVO;
 import com.myweb.domain.ReviewPageVO;
 import com.myweb.domain.ReviewVO;
 import com.myweb.domain.adCommentVO;
@@ -34,4 +35,6 @@ public interface ReviewDAORule {
 	public int selectTotalCount();
 
 	public int selectMyTotalCount(String email);
+
+	public List<PurchaseVO> selectPurchase(int mno);
 }

@@ -2,6 +2,7 @@ package com.myweb.service.review;
 
 import java.util.List;
 
+import com.myweb.domain.PurchaseVO;
 import com.myweb.domain.ReviewPageVO;
 import com.myweb.domain.ReviewVO;
 
@@ -25,4 +26,6 @@ public interface ReviewServiceRule {
 	public int getTotalCount();
 
 	public int getMyTotalCount(String email);
+
+	public List<PurchaseVO> getMyPurchase(int mno);
 }
