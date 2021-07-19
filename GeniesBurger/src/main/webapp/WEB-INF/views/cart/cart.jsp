@@ -8,15 +8,19 @@
     min-width: 100%;
     min-height: 100%;
   }
+
   .modal-title {
     margin: auto;
   }
+
   .modal-body {
     text-align: center; 
   }
+
   .modal-img {
     margin: 10px;
   }
+
   .checkBtn {
     margin-top: 15px;
     width: 90%;
@@ -145,8 +149,8 @@
             <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
             <p><b>포장주문</b></p>
             </div>
-             <div id="confirmBtn"><a class="btn btn-dark checkBtn" style="color: white;">확인</a></div>
-
+             <a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
+            <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
       </div>
@@ -154,30 +158,27 @@
   </div>
 <!-- Modal 이미지 겹치기 스크립트 -->
 <script>
-let check = false;
-
 $(document).on("click", "#background1", function() {
    let html = "<div style='position: relative; top: 50px; left:50px;'><img src='/resources/icons/check.png' style='width:150px'/></div>";
    $("#check1").html(html);
    $("#check2").html("");
-   check = true;
 });
 
 $(document).on("click", "#background2", function() {
    let html = "<div style='position: relative; top: 50px; left:50px;'><img src='/resources/icons/check.png' style='width:150px'/></div>";
    $("#check2").html(html);
    $("#check1").html("");
-   check = true;
 });
 
-$(document).on("click",".checkBtn",function() {
-   if(check == true) {
-      $(".checkBtn").attr("href", '/cart/payment?mno='+${ses.mno });
+/* $("#confirmBtn").click(function () {
+   if($("#check1").text() == "" &&  $("#check2").text() == "") {
+      alert("choose one");
    } else {
-      alert("항목을 선택하세요!");
+      $(".checkBtn").attr("href", '/cart/payment?mno='+"${ses.mno }");
    }
-});
+}); */
 </script>
+
 <!-- 삭제 스크립트 -->
 <script>
    $(document).on("click", ".removeBtn", function() {
@@ -208,57 +209,82 @@ $(document).on("click",".checkBtn",function() {
 </script>
 <!-- Quantity 스크립트 -->
 <script>
-	/* 수량 감소 */
-	$(document).on("click", ".downQtyBtn", function(e) {
-		console.log(this);
-		let downqty_val = $(this).data("downqty");
-		let downqty_val2 = $(this).data("down");
-		let qtyData = $(".qtyclass").data("qtydata");
-		console.log("qtyData : " + qtyData);
-		console.log("downqty_val : " + downqty_val);
-		console.log("downqty_val2 : " + downqty_val2);
-		if(qtyData == 1){
-			alert("더 이상 감소가 불가능합니다.");
-		}else{
-		downqty_cart(downqty_val, downqty_val2);
-		}
-	});
-	function downqty_cart(downqty, downqty2) {
-		$.ajax({
-			url : "/cart/" + downqty,
-			type : "post",
-			data : {
-				downqty_key : downqty2
-			}
-		}).done(function(result) {
-			location.reload();
-		}).fail(function(err) {
-			location.reload();
-		});
-	}
+   /* 수량 감소 */
+   $(document).on("click", ".downQtyBtn", function(e) {
+      console.log(this);
+      let downqty_val = $(this).data("downqty");
+      let downqty_val2 = $(this).data("down");
+      let qtyData = $(this).data("qtydata");
+      console.log("qtyData : " + qtyData);
+      console.log("downqty_val : " + downqty_val);
+      console.log("downqty_val2 : " + downqty_val2);
+      if(qtyData == 1){
+         alert("더 이상 감소가 불가능합니다.");
+      }else{
+      downqty_cart(downqty_val, downqty_val2);
+      }
+   });
+   function downqty_cart(downqty, downqty2) {
+      $.ajax({
+         url : "/cart/" + downqty,
+         type : "post",
+         data : {
+            downqty_key : downqty2
+         }
+      }).done(function(result) {
+         alert("수량 감소 성공");
+         location.reload();
+      }).fail(function(err) {
+         alert("수량 감소 실패");
+         location.reload();
+      });
+   }
 
-	/* 수량 증가 */
-	$(document).on("click", ".upQtyBtn", function(e) {
-		console.log(this);
-		let upqty_val = $(this).data("upqty");
-		let upqty_val2 = $(this).data("up");
-		console.log("Upcartno_val : " + upqty_val);
-		console.log("Upcartno_val2 : " + upqty_val2);
-		upqty_cart(upqty_val, upqty_val2);
-	});
-	function upqty_cart(upqty, upqty2) {
-		$.ajax({
-			url : "/cart/" + upqty,
-			type : "post",
-			data : {
-				upqty_key : upqty2
-			}
-		}).done(function(result) {
-			location.reload();
-		}).fail(function(err) {
-			location.reload();
-		});
-	}
+   /* 수량 증가 */
+   $(document).on("click", ".upQtyBtn", function(e) {
+      console.log(this);
+      let upqty_val = $(this).data("upqty");
+      let upqty_val2 = $(this).data("up");
+      let qtyData = $(".qtyclass").data("qtydata");
+      console.log("qtyData : " + qtyData);
+      console.log("Upcartno_val : " + upqty_val);
+      console.log("Upcartno_val2 : " + upqty_val2);
+      upqty_cart(upqty_val, upqty_val2);
+   });
+   function upqty_cart(upqty, upqty2) {
+      $.ajax({
+         url : "/cart/" + upqty,
+         type : "post",
+         data : {
+            upqty_key : upqty2 n
+         }
+      }).done(function(result) {
+         alert("수량 증가 성공");
+         location.reload();
+      }).fail(function(err) {
+         alert("수량 증가 실패");
+         location.reload();
+      });
+   }
+   
 </script>
 
 <jsp:include page="../common/footer.jsp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
