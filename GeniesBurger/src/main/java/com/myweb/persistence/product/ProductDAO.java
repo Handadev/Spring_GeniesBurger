@@ -72,6 +72,14 @@ public class ProductDAO implements ProductDAORule {
 	}
 	
 	@Override
+	public int updateQty(int pno, int qty) {
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("pno", pno);
+		map.put("sales", qty);
+		return sql.update(NS+"salesUp", map);
+	}
+	
+	@Override
 	public ProductVO selectOne(int pno) {
 		return sql.selectOne(NS+"detail", pno);
 	}
@@ -106,9 +114,4 @@ public class ProductDAO implements ProductDAORule {
 		return sql.selectList(NS+"stocklist");
 	}
 
-
-
-	/**
-	 * 상품 구매시 카운트 올리기 ns+"salesup" 
-	 */
 }
