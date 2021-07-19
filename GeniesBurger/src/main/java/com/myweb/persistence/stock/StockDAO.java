@@ -66,5 +66,15 @@ public class StockDAO implements StockDAORule {
 		return sql.selectOne(NS + "upsqSno", sname);
 	}
 
+	@Override
+	public int checkStockQty(int sno) {
+		return sql.selectOne(NS + "checkQty", sno);
+	}
+
+	@Override
+	public List<StockVO> selectSlifeList() {
+		return sql.selectList(NS + "slifeList");
+	}
+
 
 }
