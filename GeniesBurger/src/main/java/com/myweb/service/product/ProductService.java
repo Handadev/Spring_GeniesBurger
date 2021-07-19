@@ -48,7 +48,15 @@ public class ProductService implements ProductServiceRule {
 
 	@Override // 소비자 상품 리스트
 	public List<ProductVO> getList(ProductCustomerPageVO pcpgvo) {
-		return pdao.selectList(pcpgvo);
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectList(pcpgvo);
+		for (ProductVO pvo : plist) {
+			int pno = pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		return list;
 	}
 	
 	@Override // 상품등록시 세트 메뉴구성을 위한 단품 리스트
@@ -61,6 +69,36 @@ public class ProductService implements ProductServiceRule {
 		return pdao.selectList(pno, category);
 	}
 
+	@Override // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지
+	public ProductAndFileDTO getLargerProduct(int pno, int category) {
+		return pdao.selectOne(pno, category);
+	}
+	
+	@Override // 4번 모달 사이드 리스트 출력
+	public List<ProductVO> getSideList() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectSideList();
+		for (ProductVO pvo : plist) {
+			int pno = pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		return list;
+	}
+	
+	@Override // 5번 모달 음료 리스트 출력
+	public List<ProductVO> getBeverageList() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectBeverageList();
+		for (ProductVO pvo : plist) {
+			int pno = pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		return list;
+	}
 	
 	@Override
 	public ProductVO detail(int pno) {
@@ -108,9 +146,6 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
-
-	
-	
 
 
 }

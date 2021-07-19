@@ -18,6 +18,11 @@
 	<select id="oneList" parameterType="String" resultType="svo">
 		select sno, sname, stock_qty, TO_CHAR(shelf_life, 'YYYY-MM-DD') as shelf_life, TO_CHAR(STOCK_REGDATE, 'YYYY-MM-DD') as stock_regdate from tbl_stock where sname=#{sname} order by shelf_life
 	</select>
+
+	<!-- HomeCtrl 버거와 연관되어있는 재고 가져오기 -->
+	<select id="getBurgerStock" resultType="svo">
+		select sname from tbl_stock where isburger = 1 group by sname
+	</select>
 	<select id="upsqSno" parameterType="String" resultType="int">
 		SELECT MIN(SNO) FROM TBL_STOCK WHERE shelf_life=(SELECT MIN(shelf_life) FROM TBL_STOCK WHERE sname=#{sname}) and sname=#{sname}
 	</select>

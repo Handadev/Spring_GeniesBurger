@@ -188,7 +188,6 @@
 	
 	$("#box").change(function() {
 		let valval = $(this).val();
-		console.log("alkdfjasdlkj = "+valval);
 		
 	});
 </script>
