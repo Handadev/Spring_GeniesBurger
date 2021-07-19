@@ -52,13 +52,6 @@ public class PurchaseVO {
 
 	public void setPno(int pno) {
 		this.pno = pno;
-    
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public int getPrice() {
@@ -91,6 +84,14 @@ public class PurchaseVO {
 
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 }
