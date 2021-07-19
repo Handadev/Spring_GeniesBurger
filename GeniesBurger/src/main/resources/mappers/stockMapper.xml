@@ -26,6 +26,12 @@
 	<select id="upsqSno" parameterType="String" resultType="int">
 		SELECT MIN(SNO) FROM TBL_STOCK WHERE shelf_life=(SELECT MIN(shelf_life) FROM TBL_STOCK WHERE sname=#{sname}) and sname=#{sname}
 	</select>
+	<select id="checkQty" parameterType="int" resultType="int">
+		select stock_qty from tbl_stock where sno=#{sno}
+	</select>
+	<select id="slifeList" resultType="svo">
+		select sno, shelf_life from tbl_stock
+	</select>
 	
 	<update id="mod" parameterType="svo">
  		update tbl_stock set stock_qty=#{stock_qty} where sno=#{sno}
