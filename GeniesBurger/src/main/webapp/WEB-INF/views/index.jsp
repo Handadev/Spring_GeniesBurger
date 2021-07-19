@@ -166,9 +166,19 @@
 								data-target="#sigle_set_modal" id="product"
 								data-pno="${pvo.pno }" data-category="${pvo.category }">
 								<c:forEach items="${pvo.flist }" var="fvo">
-									<img class="img-fluid"
-										src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
-										alt="Colorlib Template" />
+									<c:choose>
+										<c:when test="${pvo.cansale eq 0 }">
+											<img class="img-fluid"
+												src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
+												alt="Colorlib Template" />
+										</c:when>
+										<c:otherwise>
+											<div><img class="img-fluid" src="/resources/icons/soldout.png" width="250" height="150" alt="" style="position: absolute;"/></div>
+											<img class="img-fluid"
+												src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
+												alt="" />
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 								<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
 								<div class="overlay"></div>
