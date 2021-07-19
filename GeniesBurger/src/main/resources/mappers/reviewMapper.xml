@@ -39,6 +39,9 @@
 	<select id="myTc" parameterType="String" resultType="int">
 		select count(rno) as cnt from tbl_review where email = #{email}
 	</select>
+	<select id="purchase" parameterType="int" resultType="purvo">
+		select * from tbl_purchase where mno = #{mno}
+	</select>
 
 	<delete id="del" parameterType="int">
 		delete from tbl_review where rno = #{rno}
