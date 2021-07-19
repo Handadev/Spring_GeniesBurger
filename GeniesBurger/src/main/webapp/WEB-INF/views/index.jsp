@@ -440,7 +440,7 @@
 	$(document).on("click", ".menuselect", function() {
 		sel_pno_val = $(this).data("sel_pno");
 		let category_val = $(this).data("sel_category");
-		console.log(category_val);
+		let mno = '<c:out value="${ses.mno}"/>';
 		$("#sigle_set_modal").modal("hide");
 		if (category_val == 1 || category_val == 2 || category_val == 4 || category_val == 5) {
 			/* 단품, 세트 사이즈업 */
@@ -452,6 +452,7 @@
 			add_extra(sel_pno_val);
 		} else {
 			/*사이드, 음료 누르면 카트에 추가 - 바로 마지막 단계 */
+			add_cart(sel_pno_val, mno);
 		}
 	});
 	
@@ -522,6 +523,7 @@
 		$("#add_ingredient_modal").modal("show");
 		let ingredientZone = $("#ingredientZone");
 		let ingredientZoneFooter = $("#ingredientZoneFooter");
+		let mno = '<c:out value="${ses.mno}"/>';
 		ingredientZone.html("");
 		ingredientZoneFooter.html("");
 		html = '';
@@ -534,7 +536,7 @@
 		
 		let fhtml = '';
 		fhtml += '<div class="row">';
-		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="show_sides('+pno+','+category+')">';
+		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="show_sides('+pno+','+category+','+mno+')">';
 		fhtml += '<span id="button_text">추가안함</span></div>';
 		fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="confirm_extra('+pno+','+category+')">';
 		fhtml += '<span id="button_text">추가하기</span></div>';
@@ -669,7 +671,6 @@
 		function add_side(pno, category, mno) {
 			let side_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let side_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
-			let mno = '<c:out value="${ses.mno}"/>';
 			
 			console.log(side_title);
 			console.log(side_price);
@@ -760,14 +761,14 @@
 			let fhtml = '';
 			if (category == 1 || category == 4) {
 				fhtml += '<div class="row">';
-				fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_cart('+pno+','+category+','+mno+')">';
+				fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_cart('+pno+','+mno+')">';
 				fhtml += '<span id="button_text">추가안함</span></div>';
-				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+category+','+mno+')">';
+				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+mno+')">';
 				fhtml += '<span id="button_text">추가하기</span></div>';
 				fhtml += '</div>';
 			} else {
 				fhtml += '<div class="row">';
-				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+category+','+mno+')">';
+				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+mno+')">';
 				fhtml += '<span id="button_text">선택</span></div>';
 				fhtml += '</div>';
 			}
@@ -794,7 +795,6 @@
 		function add_beverage(pno, category, mno) {
 			let beverage_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let beverage_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
-			let mno = '<c:out value="${ses.mno}"/>';
 			
 			console.log(beverage_title);
 			console.log(beverage_price);
@@ -809,7 +809,7 @@
 				}
 			}).done(function(result){
 				console.log("성공");
-				add_cart(pno, category, mno);
+				add_cart(pno, mno);
 			}).fail(function(){
 				console.log("실패");
 			});
@@ -817,8 +817,34 @@
 		/* 5번 모달 끝 */
 		
 		/* 카트에 추가하기 */
-		function add_cart(pno, category, mno) {
+		function add_cart(pno, mno) {
 			
+			$.getJSON("/getSelectedProduct/"+pno+".json", function(result){
+				console.log(result);
+				send_product_info(result, pno, mno);
+			}).fail(function(err){
+				console.log(err);
+			});
+		}
+		function send_product_info(pvoObj, pno, mno) {
+			let title = pvoObj.title;
+			let price = pvoObj.price;
+			
+			$.ajax({
+				url : "/cart/register",
+				type : "post",
+				data : {
+					title : title,
+					price : price,
+					pno : pno,
+					mno : mno
+				}
+			}).done(function(){
+				console.log("상품 등록 성공");
+			}).fail(function(err){
+				console.log("상품 등록 실패");
+				console.log(err);
+			});
 		}
 </script>
 

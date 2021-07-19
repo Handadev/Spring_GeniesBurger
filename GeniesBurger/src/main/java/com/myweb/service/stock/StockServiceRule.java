@@ -16,4 +16,6 @@ public interface StockServiceRule {
 	public List<StockVO> getTotalCntList();
 	public int removeAll(String sname);
 	public int getUpsqSno(String sname);
+	public int checkStockQty(int sno);
+	public List<StockVO> getSlifeList();
 }

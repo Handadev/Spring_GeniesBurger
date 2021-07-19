@@ -135,4 +135,12 @@ public class HomeController {
 		aesv.register(new AddExtraVO(mno, pno, title, price));
 	}
 	
+	@ResponseBody // 카트 추가하기 위해 상품 객체 가져오기
+	@GetMapping(value = "/getSelectedProduct/{pno}",
+				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+						MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<ProductVO> getSelectedProduct (@PathVariable("pno") int pno) {
+		return new ResponseEntity<ProductVO> (psv.detail(pno), HttpStatus.OK);
+	}
+	
 }

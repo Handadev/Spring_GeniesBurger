@@ -70,4 +70,14 @@ public class StockService implements StockServiceRule {
 
 	}
 
+	@Override
+	public int checkStockQty(int sno) {
+		return sdao.checkStockQty(sno);
+	}
+
+	@Override
+	public List<StockVO> getSlifeList() {
+		return sdao.selectSlifeList();
+	}
+
 }

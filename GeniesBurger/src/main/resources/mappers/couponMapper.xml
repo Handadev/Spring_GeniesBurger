@@ -147,6 +147,11 @@
       AND cpl.MNO = #{mno}
      </select>
      
+     <!-- 쿠폰 유효기간 리스트 -->
+     <select id="enddate" resultType="cplvo">
+     	select cplno, enddate from tbl_couponlist
+     </select>
+     
      <!-- 쿠폰 수정 -->
      <update id="mod" parameterType="cpvo">
         update tbl_coupon set cpname=#{cpname}, discount=#{discount}

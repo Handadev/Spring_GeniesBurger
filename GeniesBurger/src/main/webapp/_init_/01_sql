@@ -9,7 +9,6 @@ conn geniesburger/0915;
 
 select * from tab;
 
-
 -----------------------회원-------------------------
 DROP SEQUENCE seq_member_mno;
 DROP TABLE tbl_member;
@@ -99,6 +98,17 @@ increment by 1
 nocycle nocache;
 
 -----------------------상품 주문내역-------------------------
+-- view 생성 권한
+conn system/oracle
+grant create view to geniesburger;
+
+-- 주문 내역 view
+CREATE OR REPLACE VIEW V_MEMBER_PUR AS
+SELECT purno, tp.mno, cartno, pno, title, price, quantity, tp.regdate, tm.email, tm.name   
+FROM TBL_PURCHASE tp
+INNER JOIN TBL_MEMBER tm
+ON tp.mno = tm.mno;
+
 DROP SEQUENCE seq_purchase_purno;
 DROP TABLE tbl_purchase;
 
@@ -106,9 +116,14 @@ CREATE table tbl_purchase(
    purno number(11),
    mno number(11),
    cartno number(11),
+   pno number(11),
+   title varchar2(100),
+   price number(11),
+   quantity number(11),
    regdate DATE DEFAULT sysdate,
    constraint pk_purchase primary key(purno)
 );
+
 create sequence seq_purchase_purno
 start with 1
 increment by 1
@@ -142,8 +157,6 @@ enddate DATE,
 constraint pk_couponlist primary key(cplno)
 );
 
-
-
 create sequence seq_couponlist_cplno
 start with 1
 increment by 1
@@ -174,8 +187,6 @@ nocycle nocache;
 -----------------------관리자 댓글-------------------------
 drop sequence seq_adcomment_acno;
 drop table tbl_admincomment;
-
-
 
 CREATE TABLE TBL_ADMINCOMMENT (
 acno number(10),
@@ -240,6 +251,26 @@ constraint pk_extra primary key(aeno)
 );
 
 create sequence seq_add_extra_aeno
+start with 1
+increment by 1
+nocycle nocache;
+-----------------------상품 주문내역-------------------------
+DROP SEQUENCE seq_purchase_purno;
+DROP TABLE tbl_purchase;
+
+CREATE table tbl_purchase(
+   purno number(11),
+   mno number(11),
+   cartno number(11),
+   pno number(11),
+   title varchar2(100),
+   price number(11),
+   quantity number(11),
+   regdate DATE DEFAULT sysdate,
+   constraint pk_purchase primary key(purno)
+);
+
+create sequence seq_purchase_purno
 start with 1
 increment by 1
 nocycle nocache;
