@@ -39,14 +39,14 @@
 		"Liberation Mono", "Courier New", monospace;
 }
 @font-face {
-	font-family: 'Maplestory Light';
-	src: url("../fonts/Maplestory Light.ttf");
+	font-family: 'A아시아헤드3'';
+	src: url("../fonts/A아시아헤드3.ttf");
 }
 
 *, *::before, *::after {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	font-family: 'Maplestory Light';
+	font-family: 'A아시아헤드3';
 }
 
 html {

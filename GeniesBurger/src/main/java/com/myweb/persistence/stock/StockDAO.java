@@ -37,11 +37,8 @@ public class StockDAO implements StockDAORule {
 	}
 
 	@Override
-	public int updateStockQty(int sno, int qty) {
-		Map<String, Integer> map = new HashMap<String, Integer>();
-		map.put("sno", (Integer) sno);
-		map.put("qty", (Integer) qty);
-		return sql.update(NS + "upsq", map);
+	public int updateStockQty(int sno) {
+		return sql.update(NS + "upsq", sno);
 	}
 
 	@Override
@@ -62,6 +59,17 @@ public class StockDAO implements StockDAORule {
 	@Override
 	public int deleteAll(String sname) {
 		return sql.delete(NS + "delAll", sname);
+	}
+
+	@Override // HomeCtrl 버거와 연관되어있는 재고 가져오기
+	public List<StockVO> selectBurgerStockList() {
+		return sql.selectList(NS + "getBurgerStock");
+	}
+	
+	@Override
+	public int selectUpsqSno(String sname) {
+		return sql.selectOne(NS + "upsqSno", sname);
+
 	}
 
 

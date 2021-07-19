@@ -5,17 +5,21 @@ public class PurchaseVO {
 	private int mno;
 	private int cartno;
 	private int pno;
+	private String title;
 	private int price;
 	private int quantity;
-	private String title;
 	private String regdate;
+	private String name;
+  
+	public PurchaseVO() {}
 
-	public PurchaseVO() {
-	}
-
-	public PurchaseVO(int mno, int cartno) {
+	public PurchaseVO(int mno, int cartno, int pno, String title, int price, int quantity) {
 		this.mno = mno;
 		this.cartno = cartno;
+		this.pno = pno;
+		this.title = title;
+		this.price = price;
+		this.quantity = quantity;
 	}
 
 	public int getPurno() {
@@ -48,6 +52,13 @@ public class PurchaseVO {
 
 	public void setPno(int pno) {
 		this.pno = pno;
+    
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getPrice() {
@@ -81,5 +92,5 @@ public class PurchaseVO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-
+	
 }

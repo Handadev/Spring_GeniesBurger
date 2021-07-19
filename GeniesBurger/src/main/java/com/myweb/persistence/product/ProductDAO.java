@@ -52,13 +52,23 @@ public class ProductDAO implements ProductDAORule {
 		map.put("category", category);
 		return sql.selectList(NS+"selectmenu", map);
 	}
-	
+		
 	@Override // 단품, 세트를 선택하면 세트 / 라지 세트로 바꾸는지 
 	public ProductAndFileDTO selectOne(int pno, int category) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("pno", pno);
 		map.put("category", category);
 		return sql.selectOne(NS+"wantLarger", map);
+	}
+	
+	@Override // 4번 모달 사이드 리스트 출력
+	public List<ProductVO> selectSideList() {
+		return sql.selectList(NS+"getSides");
+	}
+	
+	@Override // 5번 모달 음료 리스트 출력
+	public List<ProductVO> selectBeverageList() {
+		return sql.selectList(NS+"getBeverage");
 	}
 	
 	@Override
@@ -95,6 +105,7 @@ public class ProductDAO implements ProductDAORule {
 	public List<StockVO> selectList() {
 		return sql.selectList(NS+"stocklist");
 	}
+
 
 
 	/**

@@ -56,7 +56,7 @@
  	<select id="listcustomer" parameterType="pcpgvo" resultType="pvo">
   		<![CDATA[
   		select *
-  		from (select /*+INDEX_DESC(tbl_product pk_product)*/
+  		from (select /*+INDEX_DESC(tbl_product category)*/
   			rownum AS rn , pno, title, price, category, sales, cansale, regdate, moddate
 			from tbl_product where pno > 0
   		]]>
@@ -88,7 +88,7 @@
   	
   	<!-- 상품 등록시 재고 리스트 가져오기 후에 stockmapper로 옮기기-->
   	<select id="stocklist" resultType="svo">
-  		select sno, sname from tbl_stock
+  		select sname from tbl_stock GROUP BY sname order by sname
   	</select>
   	
   	<!-- 소비자 - 단품 or 세트 or 라지세트 선택 화면리스트 -->
@@ -130,6 +130,16 @@
 				</when>
 			</choose>
 		</trim>
+  	</select>
+  	
+  	<!-- 4번 모달 사이드 고르기에서 사이드 메뉴 출력 -->
+  	<select id="getSides" resultType="pvo">
+  		select * from tbl_product where category = 7
+  	</select>
+  	
+  	<!-- 5번 모달 음료 고르기에서 음료 메뉴 출력 -->
+  	<select id="getBeverage" resultType="pvo">
+  		select * from tbl_product where category = 8
   	</select>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
