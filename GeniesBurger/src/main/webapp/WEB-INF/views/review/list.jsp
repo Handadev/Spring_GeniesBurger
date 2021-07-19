@@ -54,6 +54,11 @@ img{
 
 				<!-- Modal body -->
 				<div class="container h-100">
+					<select>
+						<c:forEach items="${myPlist }" var="mpvo">
+							<option value="${mpvo.pno}">${mpvo.title }</option>
+						</c:forEach>
+					</select>
 					<div class="modal-body row justify-content-center">
 						<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
 							<input type="hidden" name="email" id="email" value="${ses.email }">
@@ -114,6 +119,17 @@ img{
 
 <script src="/resources/js/jquery.min.js"></script>
 <script>
+$(document).on("click","#modalBtn",function(){
+	let mno = ${ses.mno};	
+	$.ajax({
+		url : "/review/myPurchase/",
+		type : "post",
+		data : {mno : mno}
+	}).done(function(result){
+		console.log(result);
+	});
+});
+
 $(document).on("click", "#fileTrigger", function() {
 	$("#files").click();
 });

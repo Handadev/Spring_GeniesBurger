@@ -185,8 +185,8 @@ a {
 		<p id="sum">총 결제금액</p>
 	</div>
 	<div class="total_pay02">
-		<p>${total }원</p>
-		<p id="price">${dc }원</p>
+		<p id="total">${total }원</p>
+		<p id="dc">0원</p>
 		<hr>
 		<p id="price">${total }원</p>
 	</div>
@@ -235,15 +235,14 @@ a {
 <script>
 $("#selectCp").on("click", function() {
 	let couponVal = $("#coupon option:selected").attr("value");
-	let cplno = $("#cplno").val();
 	let total = $("#total").text();
-	let dcPrice = Math.floor(total * (couponVal*(0.01)));
-	let price = total - dcPrice;
+	let totalPrice = total.substr(0, total.length-1);
+	let dcPrice = Math.floor(totalPrice * (couponVal*(0.01)));
+	let price = totalPrice - dcPrice;
 	console.log(couponVal);
 	$("#dc").val(couponVal);
-	$("#dc").html(dcPrice);
-	$("#price").html(price);
-	$("#paymentBtn").data("cplno", cplno);
+	$("#dc").html(dcPrice + "원");
+	$("#price").html(price +"원");
 	$("#couponModal").modal("hide");
 });
 

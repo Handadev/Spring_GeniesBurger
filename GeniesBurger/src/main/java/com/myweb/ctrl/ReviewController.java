@@ -82,4 +82,9 @@ public class ReviewController {
 		model.addAttribute("rpghdl", new ReviewPagingHandler(totalCount, rpgvo));
 	}
 
+//	@ResponseBody
+//	@PostMapping("/myPurchase")
+//	public ResponseEntity<String> myPusrchase(@RequestParam("mno") int mno) {
+//		return isUp > 0 ? "1" : "0";
+//	}
 }
