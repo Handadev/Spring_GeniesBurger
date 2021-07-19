@@ -135,4 +135,9 @@ public class HomeController {
 		aesv.register(new AddExtraVO(mno, pno, title, price));
 	}
 	
+	@GetMapping("/dash_index")
+	public void register() {
+		logger.info("/WEB-INF/views/dash_index.jsp");
+	}
+	
 }
