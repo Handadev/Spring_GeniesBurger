@@ -100,6 +100,11 @@ public class ProductService implements ProductServiceRule {
 		return list;
 	}
 	
+	@Override // cart ctrl 주문시 재품 판매량 높이기
+	public int updateProductQty(int pno, int qty) {
+		return pdao.updateQty(pno, qty);
+	}
+	
 	@Override
 	public ProductVO detail(int pno) {
 		ProductVO pvo = new ProductVO();
@@ -146,6 +151,7 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
+
 
 
 }

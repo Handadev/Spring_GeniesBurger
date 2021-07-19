@@ -142,6 +142,11 @@
   		select * from tbl_product where category = 8
   	</select>
   	
+  	<update id="salesUp" parameterType="hashmap">
+  		update tbl_product set
+  		sales = sales + #{sales} where pno = #{pno}
+  	</update>
+  	
   	<select id="detail" parameterType="int" resultType="pvo">
   		select * from tbl_product where pno = #{pno}
   	</select>

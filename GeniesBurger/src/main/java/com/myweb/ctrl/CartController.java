@@ -29,6 +29,7 @@ import com.myweb.domain.PurchaseVO;
 import com.myweb.handler.MemberPagingHandler;
 import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.coupon.CouponServiceRule;
+import com.myweb.service.product.ProductServiceRule;
 import com.myweb.service.product_stock.ProductStockServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
 import com.myweb.service.stock.StockServiceRule;
@@ -52,6 +53,9 @@ public class CartController {
 
 	@Inject
 	private StockServiceRule ssv;
+	
+	@Inject
+	private ProductServiceRule psv;
 
 	@GetMapping("/complete")
 	public void complete() {
@@ -133,6 +137,7 @@ public class CartController {
 				isUp *= isUp;
 				int pno = cartvo.get(i).getPno();
 				int qty = cartvo.get(i).getQuantity();
+				isUp *= psv.updateProductQty(pno, qty);
 				List<ProductStockVO> productStockList = pssv.getList(pno);
 				logger.info(i + "번째 상품의 재고 삭제");
 				for (int t = 0; t < productStockList.size(); t++) {
