@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="common/header.jsp" />
 <style>
 .form-control {
@@ -177,7 +178,8 @@
 										<div class="pricing">
 											<p class="price">
 												<!-- <span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span> -->
-												<span class="mr-2 price">${pvo.price }</span>
+												
+												<span class="mr-2 price"><fmt:formatNumber value="${pvo.price }" pattern="#,###"/></span>
 											</p>
 										</div>
 									</div>

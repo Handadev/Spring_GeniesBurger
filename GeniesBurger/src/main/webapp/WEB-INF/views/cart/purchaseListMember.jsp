@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 
@@ -36,6 +37,11 @@
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
+									<td>${purchaseListMember.name }</td>
+									<td>${purchaseListMember.title }</td>
+									<td><fmt:formatNumber value="${purchaseListMember.price }" pattern="#,###"/></td>
+									<td>${purchaseListMember.quantity }</td>
+									<td>${purchaseListMember.regdate }</td>
 									<th>name</th>
 									<th>title</th>
 									<th>price</th>

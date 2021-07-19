@@ -1,10 +1,6 @@
 package com.myweb.ctrl;
 
-import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -18,12 +14,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myweb.domain.AddExtraVO;
 import com.myweb.domain.ProductAndFileDTO;
@@ -61,6 +54,12 @@ public class HomeController {
 		model.addAttribute("product_paging", new ProductCustomerPagingHandler(totalCount, pcpgvo));
 		logger.info("index로 가즈아");
 		return "index";
+	}
+	
+	@GetMapping("/dash_index")
+	public String dash_index() {
+		return "dash_index";
+		
 	}
 	
 	@ResponseBody

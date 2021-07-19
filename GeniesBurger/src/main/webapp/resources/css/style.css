@@ -75,6 +75,9 @@ body {
 button{
 	cursor: pointer;
 }
+.btn{
+	cursor: pointer;
+}
 
 #navBtn{
 	text-align: center;
