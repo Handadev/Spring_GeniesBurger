@@ -11,7 +11,7 @@
 .box {
     border: none;
     width: 850px;
-    height: 740px;
+    height: 750px;
     margin: auto;
   }
 
@@ -78,4 +78,3 @@ $("#img").click(function() {
 });
 </script>
 
-<jsp:include page="../payCommon/payFooter.jsp" />

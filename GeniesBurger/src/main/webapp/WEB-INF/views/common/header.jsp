@@ -92,8 +92,7 @@
 						</c:when>
 						<c:when test="${ses.email ne null && ses.email ne '' }">
 							<li class="nav-item"><a
-								href="/member/detail?mno=${ses.mno }" class="nav-link">my
-									page</a></li>
+								href="/member/detail?mno=${ses.mno }" class="nav-link">my page</a></li>
 						</c:when>
 					</c:choose>
 				</ul>

@@ -72,6 +72,10 @@ body {
 	background-color: #fff;
 }
 
+button{
+	cursor: pointer;
+}
+
 #navBtn{
 	text-align: center;
 	height: 100px;

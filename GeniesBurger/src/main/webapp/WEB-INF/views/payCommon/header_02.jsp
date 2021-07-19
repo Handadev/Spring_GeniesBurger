@@ -42,8 +42,8 @@
 </style>
 <body>
     <div class="row payNav">
-      <div class="col-sm-3" id="payFinish">주문확인</div>
-      <div class="col-sm-3" id="payFinish">결제수단선택</div>
+      <div class="col-sm-3" id="payFinish">1.주문확인</div>
+      <div class="col-sm-3" id="payFinish">2.결제수단선택</div>
       <div class="col-sm-3">다음</div>
       <div class="col-sm-3">다음</div>
     </div>

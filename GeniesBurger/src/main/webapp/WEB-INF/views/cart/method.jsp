@@ -11,7 +11,7 @@
     box-shadow: 1px 1px 1px 1px;
     border: none;
     width: 850px;
-    height: 550px;
+    height: 750px;
     margin: auto;
   }
 

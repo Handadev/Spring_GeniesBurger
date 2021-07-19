@@ -151,9 +151,9 @@ a {
 }
 </style>
 
+<c:forEach items="${list }" var="cvo">
 <div class="container p-3 my-3 box">
 	<c:set var="total" value="0" />
-	<c:forEach items="${list }" var="cvo">
 		<div class="menu_wrap">
 			<p class="title">${cvo.title }</p>
 			<p class="redfont">${cvo.price }원</p>
@@ -175,9 +175,9 @@ a {
 			<p class="redfont2">${cvo.price * cvo.quantity }원</p>
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
-	</c:forEach>
 </div>
-<div class="container p-3 my-3 box2">
+	</c:forEach>
+<div class="container box2">
 	<div class="total_pay">
 		<p>주문금액</p>
 		<p>할인금액</p>
@@ -191,7 +191,7 @@ a {
 		<p id="price">${total }원</p>
 	</div>
 </div>
-<div class="container whole">
+<div class="container whole" style="margin-top:30px;">
 	<div class="left"><a href="/">취소</a></div>
 	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
 	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
@@ -266,4 +266,3 @@ function coupon_cancel(cplno){
 	}
  });
 </script>
-<jsp:include page="../payCommon/payFooter.jsp" />

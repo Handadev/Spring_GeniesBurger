@@ -118,7 +118,7 @@
 						<div class="col-md-6 col-lg-3 ftco-animate">
 							<div class="product" data-toggle="modal" data-target="#sigle_set_modal" id="product" data-pno="${pvo.pno }" data-category="${pvo.category }">
 								<img class="img-fluid"
-									src="/resources/images/product-1.jpg" alt="Colorlib Template" />
+									src="/resources/hamburger/와퍼/스태커2와퍼.png" alt="Colorlib Template" />
 									<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
 									<div class="overlay"></div> 
 								<div class="text py-3 pb-4 px-3 text-center">
