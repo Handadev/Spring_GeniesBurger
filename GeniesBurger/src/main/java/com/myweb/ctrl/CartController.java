@@ -74,6 +74,7 @@ public class CartController {
 		}
 	}
 
+	@ResponseBody
 	@PostMapping("/register")
 	public String register(CartVO cartvo, @RequestParam("pno") int pno, @RequestParam("mno") int mno,
 			RedirectAttributes reAttr, HttpSession ses) {

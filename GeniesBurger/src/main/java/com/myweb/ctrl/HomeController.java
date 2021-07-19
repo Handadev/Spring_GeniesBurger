@@ -135,9 +135,12 @@ public class HomeController {
 		aesv.register(new AddExtraVO(mno, pno, title, price));
 	}
 	
-	@GetMapping("/dash_index")
-	public void register() {
-		logger.info("/WEB-INF/views/dash_index.jsp");
+	@ResponseBody // 카트 추가하기 위해 상품 객체 가져오기
+	@GetMapping(value = "/getSelectedProduct/{pno}",
+				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+						MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<ProductVO> getSelectedProduct (@PathVariable("pno") int pno) {
+		return new ResponseEntity<ProductVO> (psv.detail(pno), HttpStatus.OK);
 	}
 	
 }
