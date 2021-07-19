@@ -80,4 +80,9 @@ public class CouponDAO implements CouponDAORule{
 	public List<CouponListVO> myCouponList(int mno) {
 		return SQL.selectList(NS + "myCpList", mno);
 	}
+
+	@Override
+	public List<CouponListVO> enddateList() {
+		return SQL.selectList(NS + "enddate");
+	}
 }
