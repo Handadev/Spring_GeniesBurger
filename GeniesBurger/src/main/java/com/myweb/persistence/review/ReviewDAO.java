@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import com.myweb.domain.PurchaseVO;
 import com.myweb.domain.ReviewPageVO;
 import com.myweb.domain.ReviewVO;
 import com.myweb.domain.adCommentVO;
@@ -96,6 +97,11 @@ public class ReviewDAO implements ReviewDAORule {
 	@Override
 	public int selectMyTotalCount(String email) {
 		return sql.selectOne(NS + "myTc", email);
+	}
+
+	@Override
+	public List<PurchaseVO> selectPurchase(int mno) {
+		return sql.selectList(NS + "purchase", mno);
 	}
 
 }

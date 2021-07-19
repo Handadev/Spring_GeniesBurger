@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.myweb.domain.PurchaseVO;
 import com.myweb.domain.ReviewPageVO;
 import com.myweb.domain.ReviewVO;
 import com.myweb.domain.adCommentVO;
@@ -85,6 +86,11 @@ public class ReviewService implements ReviewServiceRule {
 	@Override
 	public int getMyTotalCount(String email) {
 		return rdao.selectMyTotalCount(email);
+	}
+
+	@Override
+	public List<PurchaseVO> getMyPurchase(int mno) {
+		return rdao.selectPurchase(mno);
 	}
 
 }
