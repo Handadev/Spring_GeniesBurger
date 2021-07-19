@@ -96,33 +96,8 @@
 								class="nav-link">logout</a></li>
 						</c:when>
 						<c:otherwise>
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">login</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="/member/login">Login</a> <a
-									class="dropdown-item" href="/member/register">Register</a>
-							</div>
 						</c:otherwise>
-					</c:choose></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="dropdown04"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<c:choose>
-							<c:when test="${ses.email eq 'admin@admin.com' }">
-								<a class="dropdown-item" href="/product/register">상품추가</a>
-							</c:when>
-						</c:choose>
-						<a class="dropdown-item" href="/product/list">상품리스트</a> <a
-							class="dropdown-item" href="product-single.html">Single
-							Product</a> <a class="dropdown-item" href="checkout.html">Checkout</a>
-					</div></li>
-				<li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-				<li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-				<li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-				<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
-				<li class="nav-item"><a href="/coupon/list" class="nav-link">Coupon</a></li>
+					</c:choose>
 				<c:choose>
 					<c:when test="${ses.email eq 'admin@admin.com' }">
 						<li class="nav-item dropdown"><a

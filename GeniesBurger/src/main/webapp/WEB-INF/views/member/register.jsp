@@ -23,6 +23,7 @@
   width: 40%;
 }
 </style>
+
 <div class="container container-login">
 	<p style="font-size: 2em">회원가입</p>
 	<form action="/member/register" method="post" id="registerForm">
