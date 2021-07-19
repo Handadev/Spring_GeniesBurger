@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
 
-</style>
 <div class="container-fluid border pcontainer">
 	<div class="container col-sm-9">
 		<div class="container col-sm-6">
@@ -46,7 +46,7 @@
 			</tr>
 			<tr>
 				<td>가격</td>
-				<td>${pvo.price }</td>
+				<td><fmt:formatNumber value="${pvo.price }" pattern="#,###"/></td>
 			</tr>
 			<tr>
 				<td>칼로리</td>

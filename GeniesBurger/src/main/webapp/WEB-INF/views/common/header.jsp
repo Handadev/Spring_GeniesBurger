@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,6 +89,7 @@
                            <a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
                            my page</a> 
                            <a class="dropdown-item" href="/dash_index">admin page</a>
+                           <a class="dropdown-item" href="/member/list">member list</a>
                            <a class="dropdown-item" href="/cart/purchaseList">purchase page</a>
                         </div>
                   </c:when>
@@ -98,23 +100,6 @@
                   <c:otherwise>
                   </c:otherwise>
                </c:choose>
-            <c:choose>
-               <c:when test="${ses.email eq 'admin@admin.com' }">
-                  <li class="nav-item dropdown"><a
-                     class="nav-link dropdown-toggle" href="#" id="dropdown04"
-                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMIN</a>
-                     <div class="dropdown-menu" aria-labelledby="dropdown04">
-                        <a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
-                           my page</a> <a class="dropdown-item" href="/member/list">admin
-                           page</a> <a class="dropdown-item" href="/cart/purchaseList">purchase
-                           page</a>
-                     </div>
-               </c:when>
-               <c:when test="${ses.email ne null && ses.email ne '' }">
-                  <li class="nav-item"><a href="/member/detail?mno=${ses.mno }"
-                     class="nav-link">my page</a></li>
-               </c:when>
-            </c:choose>
          </ul>
       </div>
    </nav>
