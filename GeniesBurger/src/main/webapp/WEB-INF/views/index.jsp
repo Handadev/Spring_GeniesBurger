@@ -94,22 +94,23 @@
 	font-size: 25px;
 }
 
-.checkbox input.checkbox{
-    font-size: 1em;
-    width: 1.5em; /* 너비 설정 */
-    height: 1.5em; /* 높이 설정 */
-    vertical-align: middle;
+.checkbox input.checkbox {
+	font-size: 1em;
+	width: 1.5em; /* 너비 설정 */
+	height: 1.5em; /* 높이 설정 */
+	vertical-align: middle;
 }
-.checkbox input.checkbox + label{ /* 라벨 텍스트 크기와 수직 정렬 맞춤 */
-    font-size: 1.7em;
-    vertical-align: middle;
-    cursor: pointer;
+
+.checkbox input.checkbox+label { /* 라벨 텍스트 크기와 수직 정렬 맞춤 */
+	font-size: 1.7em;
+	vertical-align: middle;
+	cursor: pointer;
 }
 
 .check_label {
 	position: absolute;
-    top: -50%;
-    left: 7%;
+	top: -50%;
+	left: 7%;
 }
 
 /* 4번 체크 박스  */
@@ -123,10 +124,8 @@
 }
 
 .side.bottom {
-   margin-bottom: 10px;
+	margin-bottom: 10px;
 }
-
-
 </style>
 
 <!-- 메뉴 상단이미지 삭제 -->
@@ -153,7 +152,7 @@
 				</form>
 			</div>
 		</div>
-	
+
 		<!-- 상품 분류 선택 끝-->
 		<!-- 상품 전체 -->
 		<div class="row">
@@ -166,7 +165,9 @@
 								data-target="#sigle_set_modal" id="product"
 								data-pno="${pvo.pno }" data-category="${pvo.category }">
 								<c:forEach items="${pvo.flist }" var="fvo">
-									<img class="img-fluid" src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }" alt="Colorlib Template" />
+									<img class="img-fluid"
+										src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
+										alt="Colorlib Template" />
 								</c:forEach>
 								<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
 								<div class="overlay"></div>
@@ -219,6 +220,25 @@
 					</ul>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="container" id="warning">
+		<b>유의사항</b><span style="float: right;"><img src="/resources/icons/info.png" style="width: 20px;">&nbsp;<b>원산지, 영양분석, 알레르기 유발성분  ></b></span>
+		<hr>
+		<div>
+			<ul>
+				<li>매장별 주문금액이 상이하니, 반드시 최소금액을 확인하기 바랍니다.</li>
+				<li>배달 소요시간은 기상조건이나 매장 사정상 지연 또는 제한될 수 있습니다.</li>
+				<li>고객님과 수 차례 연락을 시도한 후 연락이 되지 않는 경우 배달음식이 변질되거나 부패될 우려로 <br>식품위생법상
+					위반될 여지가 있어 별도로 보관 하지 않으며, <b>재배달 또는 환불처리가 어려울 수 있습니다.</b>
+				</li>
+				<li>딜리버리 서비스 메뉴의 가격은 매장 가격과 상이하며, 딜리버리 시 타쿠폰을 사용하실 수 없습니다.
+					(일부품목 배달 제외)</li>
+				<li>배달 제품은 매장 행사(할인가격)에서 제외됩니다.</li>
+				<li>제품 가격 및 메뉴 구성은 본사 사정상 변경될 수 있습니다.</li>
+				<li>대량 주문의 경우 콜센터(1599-0505)주문으로만 가능합니다.</li>
+				<li>주문 완료 후 변경 및 취소는 콜센터(1599-0505)에서만 가능합니다.</li>
+			</ul>
 		</div>
 	</div>
 </section>
@@ -285,8 +305,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="container" id="ingredientZone">
-				</div>
+				<div class="container" id="ingredientZone"></div>
 			</div>
 
 			<!-- Modal footer -->
@@ -311,13 +330,11 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="container" id="sideZone">
-				</div>
+				<div class="container" id="sideZone"></div>
 			</div>
 
 			<!-- Modal footer -->
-			<div class="container con_modal_footer" id="sideZoneFooter">
-			</div>
+			<div class="container con_modal_footer" id="sideZoneFooter"></div>
 
 		</div>
 	</div>
@@ -337,8 +354,7 @@
 
 			<!-- Modal body -->
 			<div class="modal-body">
-				<div class="container" id="beverageZone">
-				</div>
+				<div class="container" id="beverageZone"></div>
 			</div>
 
 			<!-- Modal footer -->

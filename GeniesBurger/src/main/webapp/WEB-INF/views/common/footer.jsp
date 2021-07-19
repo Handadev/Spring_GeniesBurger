@@ -2,23 +2,43 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<style>
+.footerText {
+	color: #6A6A69;
+}
+.footerItem {
+	list-style: none;
+}
+.footerMenu {
+	float: right; 
+	background-color: #6A6A69; 
+	color: white;
+}
+.sns {
+	width: 36px
+}
+.ftco-footer {
+	background-color: #282828;
+	font-size: 15px;
+}
+</style>
+
 <!-- Start footer -->
 <footer class="ftco-footer ftco-section">
   <div class="container">
-  <div id="warning">
-  	유의사항
+  <div id="warning" class="footerText">
+  	<img src="/resources/images/footer_logo.png" style="width: 200px;">
   	<hr>
   	<div>
-  	<ul>
-<li>매장별 주문금액이 상이하니, 반드시 최소금액을 확인하기 바랍니다.</li>
-<li>배달 소요시간은 기상조건이나 매장 사정상 지연 또는 제한될 수 있습니다.</li>
-<li>고객님과 수 차례 연락을 시도한 후 연락이 되지 않는 경우 배달음식이 변질되거나 부패될 우려로 <br>식품위생법상 위반될 여지가 있어 별도로 보관 하지 않으며,
-재배달 또는 환불처리가 어려울 수 있습니다.</li>
-<li>딜리버리 서비스 메뉴의 가격은 매장 가격과 상이하며, 딜리버리 시 타쿠폰을 사용하실 수 없습니다. (일부품목 배달 제외)</li>
-<li>배달 제품은 매장 행사(할인가격)에서 제외됩니다.</li>
-<li>제품 가격 및 메뉴 구성은 본사 사정상 변경될 수 있습니다.</li>
-<li>대량 주문의 경우 콜센터(1599-0505)주문으로만 가능합니다.</li>
-<li>주문 완료 후 변경 및 취소는 콜센터(1599-0505)에서만 가능합니다.</li>
+  	<ul class="footerItem">
+  	<span style="float: right;">이용약관 | 개인정보취급방침 |  법적고지</span>
+<li class="footerText">서울특별시 서초구 서초대로77길 54 (서초더블유타워 13,14층) | T. 02-532-6500</li>
+<span class="footerMenu">인재채용</span>
+<span class="footerMenu">가맹점모집/</span>
+<li class="footerText">사업자등록번호 : 153-88-00321 | 대표자 : 박현진</li>
+<li class="footerText">Copyright by EZEN. All rights reserved.</li>
+<li style="margin-top: 6px;"><img src="/resources/icons/fb.png" class="sns">&nbsp;
+<img src="/resources/icons/insta.png" class="sns"></li>
 </ul>
   	</div>
   </div>
