@@ -177,7 +177,7 @@ a {
 <div class="container whole">
 	<div class="left"><a href="/">취소</a></div>
 	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
-	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
+	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor: pointer;">
 	쿠폰사용하기</div>
 </div>
 
