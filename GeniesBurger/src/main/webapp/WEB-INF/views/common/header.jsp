@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="/resources/css/icomoon.css">
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="shortcut icon" href="/resources/icons/favicon.png">
+<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 </head>
 <style>

@@ -14,7 +14,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="col" style="margin-bottom: 10px;">
-						<form action="/cart/purchaseListMember?mno=${ses.mno }" class="form-inline justify-content-end">
+						<form action="/cart/purchaseListMember" class="form-inline justify-content-end">
 						<p style="font-size:2em; margin-right:450px;">나의 주문목록</p>
 							<select class="form-control" name="range">
 								<option value="en"
@@ -30,6 +30,7 @@
 							</select>&nbsp;&nbsp;<input class="form-control" type="text"
 								placeholder="검색어 입력" name="keyword"
 								value="${pghdl.mpgvo.keyword }"> &nbsp;&nbsp;
+								<input type="hidden" name="mno" value="${ses.mno }">
 							<button type="submit" class="btn-sm btn-danger detailBtn">검색</button>
 						</form>
 					</div>
@@ -37,11 +38,6 @@
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
-									<td>${purchaseListMember.name }</td>
-									<td>${purchaseListMember.title }</td>
-									<td><fmt:formatNumber value="${purchaseListMember.price }" pattern="#,###"/></td>
-									<td>${purchaseListMember.quantity }</td>
-									<td>${purchaseListMember.regdate }</td>
 									<th>name</th>
 									<th>title</th>
 									<th>price</th>
@@ -56,7 +52,7 @@
 									<tr class="text-center">
 										<td>${purchaseListMember.name }</td>
 										<td>${purchaseListMember.title }</td>
-										<td>${purchaseListMember.price }</td>
+										<td><fmt:formatNumber value="${purchaseListMember.price }" pattern="#,###"/></td>
 										<td>${purchaseListMember.quantity }</td>
 										<td>${purchaseListMember.regdate }</td>
 									</tr>
