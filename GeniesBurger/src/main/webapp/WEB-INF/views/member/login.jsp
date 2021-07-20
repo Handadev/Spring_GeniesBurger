@@ -17,11 +17,36 @@
 
 .container-login {
 	margin-top: 30px;
+	margin-bottom: 50px;
 	text-align: center;
 }
 
 p {
 	color: black;
+}
+#pwd {
+	position: relative;
+	top: -20px;
+}
+#clear {
+	width: 30px;
+	position: relative;
+	top: -45px;
+	left: 200px;
+	cursor: pointer;
+}
+#eye {
+	width: 30px;
+	position: relative;
+	top: -65px;
+	left: 200px;
+	cursor: pointer;
+}
+#bg {
+	position: relative;
+	width: 700px;
+	top: -190px;
+	left: 60%;
 }
 </style>
 
@@ -31,9 +56,11 @@ p {
 	<form action="/member/login" method="post">
 		<div class="form-group">
 			<input type="email" class="form-control" placeholder="아이디(이메일)"
-				id="email" name="email" value="tester1@tester.com"> <input
-				type="password" class="form-control" placeholder="비밀번호" id="pwd"
+				id="email" name="email" value="tester1@tester.com">
+				<img id="clear" src="/resources/icons/input_clear_button.png">
+				<input type="password" class="form-control" placeholder="비밀번호" id="pwd"
 				name="pwd" value="1111">
+				<img id="eye" src="/resources/icons/dead_eye.png">
 		</div>
 		<button type="submit" class="btn-lg btn-danger">로그인</button>
 		<a href="/member/register">
@@ -45,8 +72,26 @@ p {
 	<!-- 24d93e65b0bdea1b94042e297fdbab05 -->
 	 <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=24d93e65b0bdea1b94042e297fdbab05&redirect_uri=http://localhost:9089/member/kakaoLogin&response_type=code">
     <img src="/resources/icons/kakao_login_medium_narrow.png"/></a> -->
-    
 </div>
+<div style="height:100px; background-color: #f2ebe6;">
+<img src="/resources/images/login_background.png" id="bg">
+</div>
+<script>
+$("#clear").click(function() {
+	$("#email").val('');
+});
+
+$("#eye").click(function (){
+    $("#pwd").toggleClass("active");
+    if ($("#pwd").hasClass("active")) {
+        $("#pwd").attr("type", "text");
+        $("#eye").attr("src", "/resources/icons/eye.png");
+    }else{
+        $("#pwd").attr("type", "password");
+        $("#eye").attr("src", "/resources/icons/dead_eye.png");        
+    }
+});
+</script>
 
 
 

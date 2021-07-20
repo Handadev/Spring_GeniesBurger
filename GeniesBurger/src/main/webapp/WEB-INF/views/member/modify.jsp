@@ -14,6 +14,7 @@
 }
 .container-login{
 	margin-top: 30px;
+	margin-bottom: 50px;
   text-align: center;
 }
 .input-btn-block{
