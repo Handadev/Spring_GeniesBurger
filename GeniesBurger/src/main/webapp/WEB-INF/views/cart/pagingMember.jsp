@@ -6,25 +6,27 @@
 	<div class="col text-center">
 		<div class="block-27">
 			<ul>
-				<c:if test="${pghdl.pBtn }">
+				<c:if test="${pghdlM.pBtn }">
 					<li>
-						<a href="/cart/purchaseListMember?pageIndex=${pghdl.fPageIndex-1 }
-						&countPerPage=${pghdl.mpgvo.countPerPage}">
+						<a href="/cart/purchaseListMember?
+						pageIndex=${pghdlM.fPageIndex-1 }
+						&countPerPage=${pghdlM.mpgvo.countPerPage}
+						&mno=${pghdlM.mpgvo.mno}">
 						&lt;</a>
 					</li>
 				</c:if>
-				<c:forEach begin="${pghdl.fPageIndex }" end="${pghdl.lPageIndex }" var="i">
-					<li class=" ${pghdl.mpgvo.pageIndex == i ? 'active' : ''}">
+				<c:forEach begin="${pghdlM.fPageIndex }" end="${pghdlM.lPageIndex }" var="i">
+					<li class=" ${pghdlM.mpgvo.pageIndex == i ? 'active' : ''}">
 						<a href="/cart/purchaseListMember?pageIndex=${i }
-						&countPerPage=${pghdl.mpgvo.countPerPage}">
+						&countPerPage=${pghdlM.mpgvo.countPerPage}&mno=${pghdlM.mpgvo.mno}">
 						${i }
 					</a>
 					</li>
 				</c:forEach>
-				<c:if test="${pghdl.nBtn }">
+				<c:if test="${pghdlM.nBtn }">
 					<li>
-						<a href="/cart/purchaseListMember?pageIndex=${pghdl.lPageIndex+1 } 
-						&countPerPage=${pghdl.mpgvo.countPerPage}">
+						<a href="/cart/purchaseListMember?pageIndex=${pghdlM.lPageIndex+1 } 
+						&countPerPage=${pghdlM.mpgvo.countPerPage}&mno=${pghdlM.mpgvo.mno}">
 						&gt;</a></li>
 				</c:if>
 			</ul>

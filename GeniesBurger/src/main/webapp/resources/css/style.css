@@ -11115,7 +11115,6 @@ opacity
 	-webkit-transition: all 0.3s ease;
 	-ms-transition: all 0.3s ease;
 	transition: all 0.3s ease;
-	border: 1px solid #f0f0f0;
 }
 
 @media ( max-width : 991.98px) {

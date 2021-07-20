@@ -15,22 +15,16 @@
 				<div class="row">
 					<div class="col" style="margin-bottom: 10px;">
 						<form action="/cart/purchaseListMember" class="form-inline justify-content-end">
-						<p style="font-size:2em; margin-right:450px;">나의 주문목록</p>
+						<p style="font-size:2em; margin-right:450px;">나의 주문내역</p>
 							<select class="form-control" name="range">
-								<option value="en"
-									<c:out value="${pghdlM.mpgvo.range eq 'en' ? 'selected' : '' }"/>>이메일+이름</option>
-								<option value="e"
-									<c:out value="${pghdlM.mpgvo.range eq 'e' ? 'selected' : '' }"/>>이메일</option>
-								<option value="n"
-									<c:out value="${pghdlM.mpgvo.range eq 'n' ? 'selected' : '' }"/>>이름</option>
 								<option value="t"
 									<c:out value="${pghdlM.mpgvo.range eq 't' ? 'selected' : '' }"/>>상품명</option>
 								<option value="p"
 									<c:out value="${pghdlM.mpgvo.range eq 'p' ? 'selected' : '' }"/>>가격</option>
-							</select>&nbsp;&nbsp;<input class="form-control" type="text"
-								placeholder="검색어 입력" name="keyword"
-								value="${pghdl.mpgvo.keyword }"> &nbsp;&nbsp;
-								<input type="hidden" name="mno" value="${ses.mno }">
+							</select>&nbsp;&nbsp;
+							<input class="form-control" type="text" placeholder="검색어 입력" name="keyword" value="${pghdlM.mpgvo.keyword }">
+							<input type="hidden" name="mno" value="${pghdlM.mpgvo.mno }"> 
+							&nbsp;&nbsp;
 							<button type="submit" class="btn-sm btn-danger detailBtn">검색</button>
 						</form>
 					</div>
@@ -38,11 +32,10 @@
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
-									<th>name</th>
-									<th>title</th>
-									<th>price</th>
-									<th>quantity</th>
-									<th>regdate</th>
+									<th>상품명</th>
+									<th>가격</th>
+									<th>수량</th>
+									<th>주문시간</th>
 									<th>
 									<th>
 								</tr>
@@ -50,7 +43,6 @@
 							<tbody>
 								<c:forEach items="${purchaseListMember }" var="purchaseListMember">
 									<tr class="text-center">
-										<td>${purchaseListMember.name }</td>
 										<td>${purchaseListMember.title }</td>
 										<td><fmt:formatNumber value="${purchaseListMember.price }" pattern="#,###"/></td>
 										<td>${purchaseListMember.quantity }</td>
