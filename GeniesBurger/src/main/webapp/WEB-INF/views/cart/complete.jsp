@@ -54,6 +54,23 @@ div {
 </div>
 
 <script>
+// 할인 금액
+if(localStorage.getItem('price')) {
+	var data = localStorage.getItem('price');
+	console.log("***data : " + data);
+}
+var arr = [];
+var count = 0;
+for (var i = 0; i < data.length; i++) {
+	if(data.charAt(i) == ",") {
+		count++;
+	}
+}
+for (var i = 0; i < count+1; i++) {
+	arr[i] = data.split(",")[i];
+}
+console.log(arr); // arr ctrl로 넘겨줘야됨~~~~~~~~
+
 let ranNum = Math.floor((Math.random() * 900)+100)
 $("#ranNum").text(ranNum);
 
@@ -67,7 +84,10 @@ $("#img").click(function() {
 		$.ajax({
 			url: "/cart/mno/",
 			type: "post",
-			data:{mno:mno_val}
+			data:{
+				mno:mno_val,
+				list : arr
+				}
 		}).done(function(result) {
 			alert("이용해주셔서 감사합니다~");
 			location.replace("/");

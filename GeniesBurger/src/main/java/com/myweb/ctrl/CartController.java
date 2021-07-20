@@ -121,7 +121,9 @@ public class CartController {
 
 	@ResponseBody
 	@PostMapping(value = "/mno/", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String removeWithMno(@RequestParam("mno") int mno) {
+	public String removeWithMno(@RequestParam("mno") int mno,
+			@RequestParam(value = "list[]") List<Integer> list) {
+		logger.info("*************" + list.toString());
 		logger.info(">>> mno : " + mno);
 		List<CartVO> cartvo = cartsv.getOrderList(mno);
 		logger.info(">>> cartvo : " + cartvo);
@@ -131,7 +133,7 @@ public class CartController {
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
 				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
-						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), cartvo.get(i).getPrice(),
+						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), list.get(i),
 						cartvo.get(i).getQuantity());
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
@@ -139,9 +141,7 @@ public class CartController {
 				int qty = cartvo.get(i).getQuantity();
 				isUp *= psv.updateProductQty(pno, qty);
 				List<ProductStockVO> productStockList = pssv.getList(pno);
-				logger.info(i + "번째 상품의 재고 삭제");
 				for (int t = 0; t < productStockList.size(); t++) {
-					logger.info(t + "번째 재고 삭제");
 					for (int j = 0; j < qty; j++) {
 						String sname = productStockList.get(t).getSname();
 						int sno = ssv.getUpsqSno(sname);
@@ -173,7 +173,7 @@ public class CartController {
 		int totalCount = pursv.getTotalCount(mpgvo);
 		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo));
 	}
-
+	
 	@GetMapping("/purchaseListMember")
 	public void purList(Model model, MemberPageVO mpgvo, @RequestParam("mno") int mno) {
 		int totalCount = pursv.getTotalCount(mpgvo, mno);

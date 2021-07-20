@@ -11,4 +11,5 @@ public interface PurchaseServiceRule {
 	public List<PurchaseVO> getList(MemberPageVO mpgvo, int mno);
 	public int getTotalCount(MemberPageVO mpgvo);
 	public int getTotalCount(MemberPageVO mpgvo, int mno);
+	public List<PurchaseVO> getDateSalesList(String todayString);
 }
