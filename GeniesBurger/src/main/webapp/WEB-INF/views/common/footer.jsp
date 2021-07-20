@@ -24,6 +24,7 @@
 </style>
 
 <!-- Start footer -->
+
 <footer class="ftco-footer ftco-section">
   <div class="container">
   <div id="warning" class="footerText">
@@ -31,7 +32,7 @@
   	<hr>
   	<div>
   	<ul class="footerItem">
-  	<span style="float: right;">이용약관 | 개인정보취급방침 |  법적고지</span>
+<span style="float: right;">이용약관 | 개인정보취급방침 |  법적고지</span>
 <li class="footerText">서울특별시 서초구 서초대로77길 54 (서초더블유타워 13,14층) | T. 02-532-6500</li>
 <span class="footerMenu">인재채용</span>
 <span class="footerMenu">가맹점모집/</span>

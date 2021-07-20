@@ -178,8 +178,9 @@ public class CartController {
 	public void purList(Model model, MemberPageVO mpgvo, @RequestParam("mno") int mno) {
 		int totalCount = pursv.getTotalCount(mpgvo, mno);
 		model.addAttribute("purchaseListMember", pursv.getList(mpgvo, mno));
-		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo, mno));
+		model.addAttribute("pghdlM", new MemberPagingHandler(totalCount, mpgvo, mno));
 		logger.info("model : " + model);
+		logger.info("PurchaseListMember mno : " + mno);
 	}
 
 }

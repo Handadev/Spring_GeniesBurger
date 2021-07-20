@@ -127,6 +127,17 @@
 .side.bottom {
 	margin-bottom: 10px;
 }
+.price{
+color:#e31212;
+}
+.product_div:hover{
+color:#f74f4f;
+}
+.product_div{
+cursor: pointer;
+-webkit-box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83); 
+box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
+}
 </style>
 
 <!-- 메뉴 상단이미지 삭제 -->
@@ -161,7 +172,7 @@
 			<c:choose>
 				<c:when test="${product_list.size() ne 0 }">
 					<c:forEach items="${product_list }" var="pvo">
-						<div class="col-md-6 col-lg-3 ftco-animate">
+						<div class="col-md-6 col-lg-3 ftco-animate product_div">
 							<div class="product" data-toggle="modal"
 								data-target="#sigle_set_modal" id="product"
 								data-pno="${pvo.pno }" data-category="${pvo.category }">
@@ -187,8 +198,6 @@
 									<div class="d-flex">
 										<div class="pricing">
 											<p class="price">
-												<!-- <span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span> -->
-												
 												<span class="mr-2 price"><fmt:formatNumber value="${pvo.price }" pattern="#,###"/></span>
 											</p>
 										</div>
@@ -435,6 +444,7 @@
 			html += '<span id="title">'+pfdto.title+'</span><br>';
 			html += '<span id="content">'+pfdto.content+'</span><br>';
 			html += '<span id="price">'+pfdto.price+'</span><br>';
+			/* <fmt:formatNumber value="${pfdto.price }" pattern="#,###"/> */
 			html += '</div>';
 			html += '<div class="col-sm">';
 			html += '<img class="img-fluid" src="/upload/'+pfdto.savedir+'/'+pfdto.puuid+'_th_'+pfdto.fname+'"';
