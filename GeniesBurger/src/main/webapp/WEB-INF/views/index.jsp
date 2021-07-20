@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="common/header.jsp" />
 <style>
 .form-control {
@@ -165,9 +166,19 @@
 								data-target="#sigle_set_modal" id="product"
 								data-pno="${pvo.pno }" data-category="${pvo.category }">
 								<c:forEach items="${pvo.flist }" var="fvo">
-									<img class="img-fluid"
-										src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
-										alt="Colorlib Template" />
+									<c:choose>
+										<c:when test="${pvo.cansale eq 0 }">
+											<img class="img-fluid"
+												src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
+												alt="Colorlib Template" />
+										</c:when>
+										<c:otherwise>
+											<div><img class="img-fluid" src="/resources/icons/soldout.png" width="250" height="150" alt="" style="position: absolute;"/></div>
+											<img class="img-fluid"
+												src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
+												alt="" />
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
 								<!-- 할인 혹은 new 혹은 best 들어가는 공간  <span class="status">할인/new/best</span> -->
 								<div class="overlay"></div>
@@ -177,7 +188,8 @@
 										<div class="pricing">
 											<p class="price">
 												<!-- <span class="mr-2 price-dc">$120.00</span><span class="price-sale">$80.00</span> -->
-												<span class="mr-2 price">${pvo.price }</span>
+												
+												<span class="mr-2 price"><fmt:formatNumber value="${pvo.price }" pattern="#,###"/></span>
 											</p>
 										</div>
 									</div>
@@ -318,14 +330,13 @@
 <!-- 3번 모달 끝 -->
 
 <!-- 4번 모달 사이드 선택 -->
-<div class="modal modal-center fade" id="side_modal">
+<div class="modal modal-center fade" id="side_modal" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 
 			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">사이드 변경</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-header" id="sideHeader">
+				
 			</div>
 
 			<!-- Modal body -->
@@ -342,14 +353,13 @@
 <!-- 4번 모달 끝 -->
 
 <!-- 5번 모달 음료 선택 -->
-<div class="modal modal-center fade" id="beverage_modal">
+<div class="modal modal-center fade" id="beverage_modal" data-backdrop="static">
 	<div class="modal-dialog">
 		<div class="modal-content">
 
 			<!-- Modal Header -->
-			<div class="modal-header">
-				<h4 class="modal-title">음료 변경</h4>
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-header" id="beverageHeader">
+				
 			</div>
 
 			<!-- Modal body -->
@@ -368,11 +378,6 @@
 
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
-
-	let flist = '<c:out value="${product_list[0].flist}"/>';
-	
-	console.log(flist);
-		
 	/* 카테고리 누르면 active 버튼 색 변함 */
 	let keyword_val = '<c:out value="${product_paging.pcpgvo.keyword}"/>';
 	switch (keyword_val) {
@@ -395,6 +400,41 @@
 			$(".beverage").addClass("active");
 			break;
 	}
+	
+	/* 주문 취소시 add_extra 테이블 정보를 받아와서 있으면 취소하겠냐 모달 띄우고 아니면 그냥 모달 꺼짐 */
+	function cancel_order (mno, pno) {
+		$.getJSON("/isAddExtra/"+mno+"/"+pno+".json", function(result) {
+			console.log(result);
+			get_obj(result, mno, pno);
+		}).fail(function(err){
+			console.log(err);
+		});
+	}
+	function get_obj(obj, mno, pno) {
+		if(Object.keys(obj).length != 0) {
+			if (confirm ("주문을 취소하시겠습니까?")) {
+				/* 예 */
+				$.ajax({
+					url : "/delAddExtra",
+					type : "post",
+					data : {
+						mno : mno,
+						pno : pno
+					}
+				}).done(function(){
+					alert("주문이 취소되셨습니다");
+					$("#side_modal").modal("hide");
+					$("#beverage_modal").modal("hide");
+				}).fail(function(err){
+					console.log(err);
+				})
+			} else {
+				/* 아니오 */
+			}
+		}
+	}
+	
+	
 	/* 처음 선택한 pno */
 	let pno_val;
 	/* 1 상품 div 누르면 모달 뜨면서 단품 - 세트 - 라지세트 등장 */
@@ -440,7 +480,7 @@
 	$(document).on("click", ".menuselect", function() {
 		sel_pno_val = $(this).data("sel_pno");
 		let category_val = $(this).data("sel_category");
-		console.log(category_val);
+		let mno = '<c:out value="${ses.mno}"/>';
 		$("#sigle_set_modal").modal("hide");
 		if (category_val == 1 || category_val == 2 || category_val == 4 || category_val == 5) {
 			/* 단품, 세트 사이즈업 */
@@ -452,6 +492,7 @@
 			add_extra(sel_pno_val);
 		} else {
 			/*사이드, 음료 누르면 카트에 추가 - 바로 마지막 단계 */
+			add_cart(sel_pno_val, mno);
 		}
 	});
 	
@@ -522,6 +563,7 @@
 		$("#add_ingredient_modal").modal("show");
 		let ingredientZone = $("#ingredientZone");
 		let ingredientZoneFooter = $("#ingredientZoneFooter");
+		let mno = '<c:out value="${ses.mno}"/>';
 		ingredientZone.html("");
 		ingredientZoneFooter.html("");
 		html = '';
@@ -534,7 +576,7 @@
 		
 		let fhtml = '';
 		fhtml += '<div class="row">';
-		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="show_sides('+pno+','+category+')">';
+		fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="show_sides('+pno+','+category+','+mno+')">';
 		fhtml += '<span id="button_text">추가안함</span></div>';
 		fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="confirm_extra('+pno+','+category+')">';
 		fhtml += '<span id="button_text">추가하기</span></div>';
@@ -585,13 +627,19 @@
 	}
 	function print_sides(pvoObj, pno, category, mno) {
 		$("#side_modal").modal("show");
+		let sideHeader = $("#sideHeader");
 		let sideZone = $("#sideZone");
 		let sideZoneFooter = $("#sideZoneFooter");
-	  	sideZone.html("");
+		sideHeader.html("");
+		sideZone.html("");
 		sideZoneFooter.html("");
+		
+		let h_html = '';
+		h_html += '<h4 class="modal-title">사이드 변경</h4>';
+		h_html += '<button type="button" class="close" onclick="cancel_order('+mno+','+pno+')">&times;</button>';
+		
 		html = '';
 		html += '<div class="row">';
-		
 		if (category == 1 || category == 4) { /* 단품 */
 			for (let pvo of pvoObj) {
 				html += '<div class="col-md-4" onclick="side_check(this)">';
@@ -647,7 +695,7 @@
 			fhtml += '<span id="button_text">선택</span></div>';
 			fhtml += '</div>';
 		}
-		
+		sideHeader.append(h_html);
 		sideZone.append(html);
 		sideZoneFooter.append(fhtml);
 		side_default_check();
@@ -669,7 +717,6 @@
 		function add_side(pno, category, mno) {
 			let side_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let side_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
-			let mno = '<c:out value="${ses.mno}"/>';
 			
 			console.log(side_title);
 			console.log(side_price);
@@ -709,10 +756,17 @@
 		}
 		function print_beverage(pvoObj, pno, category, mno) {
 			$("#beverage_modal").modal("show");
+			let beverageHeader = $("#beverageHeader");
 			let beverageZone = $("#beverageZone");
 			let beverageZoneFooter = $("#beverageZoneFooter");
+			beverageHeader.html("");
 			beverageZone.html("");
 			beverageZoneFooter.html("");
+			
+			h_html = '';
+			h_html += '<h4 class="modal-title">음료 변경</h4>';
+			h_html += '<button type="button" class="close" onclick="cancel_order('+mno+','+pno+')">&times;</button>';
+			
 			html = '';
 			html += '<div class="row">';
 			
@@ -760,18 +814,18 @@
 			let fhtml = '';
 			if (category == 1 || category == 4) {
 				fhtml += '<div class="row">';
-				fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_cart('+pno+','+category+','+mno+')">';
+				fhtml += '<div class="col-sm bg-dark text-center footer_btn" onclick="add_cart('+pno+','+mno+')">';
 				fhtml += '<span id="button_text">추가안함</span></div>';
-				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+category+','+mno+')">';
+				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+mno+')">';
 				fhtml += '<span id="button_text">추가하기</span></div>';
 				fhtml += '</div>';
 			} else {
 				fhtml += '<div class="row">';
-				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+category+','+mno+')">';
+				fhtml += '<div class="col-sm bg-danger text-center footer_btn" onclick="add_beverage('+pno+','+mno+')">';
 				fhtml += '<span id="button_text">선택</span></div>';
 				fhtml += '</div>';
 			}
-			
+			beverageHeader.append(h_html);
 			beverageZone.append(html);
 			beverageZoneFooter.append(fhtml);
 			beverage_default_check();
@@ -794,7 +848,6 @@
 		function add_beverage(pno, category, mno) {
 			let beverage_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let beverage_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
-			let mno = '<c:out value="${ses.mno}"/>';
 			
 			console.log(beverage_title);
 			console.log(beverage_price);
@@ -809,7 +862,7 @@
 				}
 			}).done(function(result){
 				console.log("성공");
-				add_cart(pno, category, mno);
+				add_cart(pno, mno);
 			}).fail(function(){
 				console.log("실패");
 			});
@@ -817,8 +870,34 @@
 		/* 5번 모달 끝 */
 		
 		/* 카트에 추가하기 */
-		function add_cart(pno, category, mno) {
+		function add_cart(pno, mno) {
 			
+			$.getJSON("/getSelectedProduct/"+pno+".json", function(result){
+				console.log(result);
+				send_product_info(result, pno, mno);
+			}).fail(function(err){
+				console.log(err);
+			});
+		}
+		function send_product_info(pvoObj, pno, mno) {
+			let title = pvoObj.title;
+			let price = pvoObj.price;
+			
+			$.ajax({
+				url : "/cart/register",
+				type : "post",
+				data : {
+					title : title,
+					price : price,
+					pno : pno,
+					mno : mno
+				}
+			}).done(function(){
+				console.log("상품 등록 성공");
+			}).fail(function(err){
+				console.log("상품 등록 실패");
+				console.log(err);
+			});
 		}
 </script>
 

@@ -29,6 +29,7 @@ import com.myweb.domain.PurchaseVO;
 import com.myweb.handler.MemberPagingHandler;
 import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.coupon.CouponServiceRule;
+import com.myweb.service.product.ProductServiceRule;
 import com.myweb.service.product_stock.ProductStockServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
 import com.myweb.service.stock.StockServiceRule;
@@ -52,6 +53,9 @@ public class CartController {
 
 	@Inject
 	private StockServiceRule ssv;
+	
+	@Inject
+	private ProductServiceRule psv;
 
 	@GetMapping("/complete")
 	public void complete() {
@@ -74,6 +78,7 @@ public class CartController {
 		}
 	}
 
+	@ResponseBody
 	@PostMapping("/register")
 	public String register(CartVO cartvo, @RequestParam("pno") int pno, @RequestParam("mno") int mno,
 			RedirectAttributes reAttr, HttpSession ses) {
@@ -132,6 +137,7 @@ public class CartController {
 				isUp *= isUp;
 				int pno = cartvo.get(i).getPno();
 				int qty = cartvo.get(i).getQuantity();
+				isUp *= psv.updateProductQty(pno, qty);
 				List<ProductStockVO> productStockList = pssv.getList(pno);
 				for (int t = 0; t < productStockList.size(); t++) {
 					for (int j = 0; j < qty; j++) {
@@ -157,10 +163,6 @@ public class CartController {
 	public void list(@RequestParam("mno") int mno, Model model) {
 		List<CartVO> list = cartsv.getList(mno);
 		model.addAttribute("cartList", list);
-		for (int i = 0; i < list.size(); i++) {
-			logger.info("★★★★★★★★★★★★★★★ : " + list);
-			logger.info("★★★★★★★★★★★★★★★ cartno : " + list.get(i).getCartno() + ", title : " + list.get(i).getTitle() + ", price : " + list.get(i).getPrice() + ", quantity : " +  list.get(i).getQuantity() + ", mno : " + list.get(i).getMno() + ", pno : " + list.get(i).getPno());
-		}
 	}
 
 	@GetMapping("/purchaseList")

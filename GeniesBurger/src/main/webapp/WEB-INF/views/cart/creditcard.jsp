@@ -11,7 +11,7 @@
     box-shadow: 1px 1px 1px 1px;
     border: none;
     width: 850px;
-    height: 740px;
+    height: 750px;
     margin: auto;
   }
 
@@ -22,7 +22,7 @@
 }
 .img {
 	width: 300px;
-  height: 450px;
+  	height: 450px;
 }
 div {
 	text-align: center;

@@ -16,7 +16,15 @@
   		</choose>
   	</insert>
   	
+  	<select id="list" parameterType="hashmap" resultType="aevo">
+  		select * from tbl_add_extra where mno = #{mno} and pno =#{pno}
+  	</select>
+
   	<delete id="del" parameterType="int">
   		delete from tbl_add_extra where mno = #{mno}
   	</delete>
+	
+	<delete id="delPno" parameterType="hashmap">
+		delete from tbl_add_extra where mno = #{mno} and pno = #{pno}
+	</delete>  	
   </mapper>

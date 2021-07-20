@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <style>
 #email, #pwd {
 	margin: auto;
@@ -35,11 +36,18 @@ p {
 				name="pwd" value="1111">
 		</div>
 		<button type="submit" class="btn-lg btn-danger">로그인</button>
-		<!-- <button type="button" class="btn-lg btn-black">회원가입</button> -->
 		<a href="/member/register">
 			<button type="button" class="btn-lg btn-info">회원가입</button>
 		</a>
 	</form>
+	<!-- <img src="/resources/icons/kakao_login_medium_narrow.png"/> -->
+	
+	<!-- 24d93e65b0bdea1b94042e297fdbab05 -->
+	 <!-- <a href="https://kauth.kakao.com/oauth/authorize?client_id=24d93e65b0bdea1b94042e297fdbab05&redirect_uri=http://localhost:9089/member/kakaoLogin&response_type=code">
+    <img src="/resources/icons/kakao_login_medium_narrow.png"/></a> -->
+    
 </div>
+
+
 
 <jsp:include page="../common/footer.jsp" />

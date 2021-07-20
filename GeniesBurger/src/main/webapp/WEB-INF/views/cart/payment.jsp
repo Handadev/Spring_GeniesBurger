@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../payCommon/header_01.jsp" />
 <style>
 * {
@@ -19,7 +20,6 @@
 	width: 850px;
 	margin: auto;
 }
-
 .box2 {
 	box-shadow: 1px 1px 1px 1px;
 	border: none;
@@ -27,76 +27,64 @@
 	width: 850px;
 	margin: auto;
 }
-
 .menu_wrap {
 	float: left;
 	width: 50%;
 	height: 200px;
 	padding: 10px;
 }
-
 .img_wrap {
 	padding-top: 15px;
 	height: 200px;
 	text-align: right;
 	padding-right: 70px;
 }
-
 .img {
 	width: 260px;
 	height: 180px;
 }
-
 .sum_wrap {
 	float: left;
 	width: 50%;
 	padding: 10px;
 	height: 120px;
 }
-
 .sum_wrap02 {
 	padding: 10px;
 	padding-right: 90px;
 	height: 120px;
 	text-align: right;
 }
-
 .total_pay {
 	float: left;
 	width: 50%;
 	height: 180px;
 	padding: 10px;
 }
-
 .total_pay02 {
 	padding-top: 10px;
 	height: 180px;
 	padding-right: 90px;
 	text-align: right;
 }
-
 .title {
 	font-size: 1.8em;
 	font-weight: bold;
 }
-
 .redfont {
 	padding-top: 55px;
 	color: red;
 	font-weight: bold;
 }
-
 .redfont2 {
 	color: red;
 }
-
 div.whole {
 	width: 880px;
 	text-align: center;
 	line-height: 100px;
 	vertical-align: middle;
 }
-
 div.left {
 	width: 50%;
 	height: 100px;
@@ -104,7 +92,6 @@ div.left {
 	box-sizing: border-box;
 	background-image: url("/resources/icons/button5.jpg");
 }
-
 div.right {
 	width: 50%;
 	height: 100px;
@@ -112,7 +99,6 @@ div.right {
 	box-sizing: border-box;
 	background-image: url("/resources/icons/button4.jpg");
 }
-
 div.coupon {
 	text-align: center;
 	height: 150px;
@@ -121,42 +107,37 @@ div.coupon {
 	background-color: black;
 	color: white;
 }
-
 a {
 	color: white;
 	font-size: 40px;
 }
-
 #sum {
 	padding-bottom: 20px;
 	font-size: 1.8em;
 	font-weight: bold;
 }
-
 .modal {
 	min-width: 100%;
 	min-height: 100%;
 }
-
 .modal-title {
 	margin: auto;
 }
-
 .modal-body {
 	text-align: center;
 }
-
 .modal-img {
 	margin: 10px;
 }
 </style>
 
-<div class="container p-3 my-3 box">
 	<c:set var="total" value="0" />
 	<c:forEach items="${list }" var="cvo">
+<div class="container p-3 my-3 box">
 		<div class="menu_wrap">
 			<p class="title">${cvo.title }</p>
-			<p class="redfont">${cvo.price }원</p>
+			
+			<p class="redfont"><fmt:formatNumber value="${cvo.price }" pattern="#,###"/>원</p>
 
 		</div>
 		<div class="img_wrap">
@@ -172,11 +153,12 @@ a {
 		<c:set var="dc" value="1000" />
 		<div class="sum_wrap02">
 			<p>${cvo.quantity }개</p>
-			<p class="redfont2">${cvo.price * cvo.quantity }원</p>
+			
+			<p class="redfont2"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
-	</c:forEach>
 </div>
+	</c:forEach>
 <div class="container p-3 my-3 box2">
 	<div class="total_pay">
 		<p>주문금액</p>
@@ -185,16 +167,17 @@ a {
 		<p id="sum">총 결제금액</p>
 	</div>
 	<div class="total_pay02">
-		<p id="total">${total }원</p>
+	
+		<p id="total"><fmt:formatNumber value="${total }" pattern="#,###"/>원</p>
 		<p id="dc">0원</p>
 		<hr>
-		<p id="price">${total }원</p>
+		<p id="price"><fmt:formatNumber value="${total }" pattern="#,###"/>원</p>
 	</div>
 </div>
 <div class="container whole">
 	<div class="left"><a href="/">취소</a></div>
 	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
-	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor:default">
+	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor: pointer;">
 	쿠폰사용하기</div>
 </div>
 
@@ -224,8 +207,8 @@ a {
 
       <!-- Modal footer -->
       <div class="modal-footer">
-      	<button class="btn btn-primary" type="button" id="selectCp">선택</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+      	<button class="btn-sm btn-primary" type="button" id="selectCp">선택</button>
+        <button type="button" class="btn-sm btn-secondary" data-dismiss="modal">취소</button>
       </div>
 
     </div>
@@ -245,7 +228,6 @@ $("#selectCp").on("click", function() {
 	$("#price").html(price +"원");
 	$("#couponModal").modal("hide");
 });
-
 function coupon_cancel(cplno){
 	$.ajax({
 		url: "/coupon/" + cplno,
@@ -265,4 +247,4 @@ function coupon_cancel(cplno){
 	}
  });
 </script>
-<jsp:include page="../payCommon/payFooter.jsp" />
+<jsp:include page="../common/footer.jsp" />

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
 
 <style>
@@ -55,7 +56,7 @@ p{
 								<td>${pvo.pno }</td>
 								<td><a href="/product/detail?pno=${pvo.pno }"
 								style="color:black">${pvo.title }</a></td>
-								<td>${pvo.price }</td>
+								<td><fmt:formatNumber value="${pvo.price }" pattern="#,###"/></td>
 								<td>${pvo.sales }</td>
 								<td><c:choose>
 										<c:when test="${pvo.cansale eq 0}">

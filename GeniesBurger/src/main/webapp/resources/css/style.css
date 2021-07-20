@@ -39,7 +39,7 @@
 		"Liberation Mono", "Courier New", monospace;
 }
 @font-face {
-	font-family: 'A아시아헤드3'';
+	font-family: 'A아시아헤드3';
 	src: url("../fonts/A아시아헤드3.ttf");
 }
 
@@ -63,13 +63,19 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav,
 
 body {
 	margin: 0;
-	/* font-family: 'Maplestory Light'; */
 	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.5;
 	color: #212529;
 	text-align: left;
 	background-color: #fff;
+}
+
+button{
+	cursor: pointer;
+}
+.btn{
+	cursor: pointer;
 }
 
 #navBtn{
