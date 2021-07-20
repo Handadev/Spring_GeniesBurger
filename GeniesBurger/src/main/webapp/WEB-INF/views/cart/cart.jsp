@@ -256,7 +256,7 @@ $(document).on("click", "#background2", function() {
          url : "/cart/" + upqty,
          type : "post",
          data : {
-            upqty_key : upqty2 n
+            upqty_key : upqty2
          }
       }).done(function(result) {
          alert("수량 증가 성공");

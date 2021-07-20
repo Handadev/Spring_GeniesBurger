@@ -143,4 +143,8 @@ public class HomeController {
 		return new ResponseEntity<ProductVO> (psv.detail(pno), HttpStatus.OK);
 	}
 	
+	@GetMapping("/dash_index")
+	public String dash_index() {
+		return "dash_index";
+	}
 }

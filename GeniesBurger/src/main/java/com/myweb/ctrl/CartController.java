@@ -117,7 +117,9 @@ public class CartController {
 
 	@ResponseBody
 	@PostMapping(value = "/mno/", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String removeWithMno(@RequestParam("mno") int mno) {
+	public String removeWithMno(@RequestParam("mno") int mno,
+			@RequestParam(value = "list[]") List<Integer> list) {
+		logger.info("*************" + list.toString());
 		logger.info(">>> mno : " + mno);
 		List<CartVO> cartvo = cartsv.getOrderList(mno);
 		logger.info(">>> cartvo : " + cartvo);
@@ -127,7 +129,7 @@ public class CartController {
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
 				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
-						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), cartvo.get(i).getPrice(),
+						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), list.get(i),
 						cartvo.get(i).getQuantity());
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
