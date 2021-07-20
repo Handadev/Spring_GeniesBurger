@@ -110,7 +110,7 @@ INNER JOIN TBL_MEMBER tm
 ON tp.mno = tm.mno;
 
 DROP SEQUENCE seq_purchase_purno;
-DROP TABLE tbl_purchase;
+DROP TABLE TBL_PURCHASE;
 
 CREATE table tbl_purchase(
    purno number(11),
@@ -212,10 +212,11 @@ stock_qty number(11) not null,
 shelf_life date not null,
 stock_regdate date default sysdate,
 isburger number(2) DEFAULT 0,
+extra_price number(11),
 constraint pk_stock primary key(sno)
 );
 
-create sequence seq_coupon_cpno
+create sequence seq_stock_sno
 start with 1
 increment by 1
 nocycle nocache;

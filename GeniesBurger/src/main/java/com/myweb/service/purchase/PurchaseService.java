@@ -44,5 +44,10 @@ public class PurchaseService implements PurchaseServiceRule {
 		return pdao.getTotalCount(mpgvo, mno);
 	}
 
+	@Override
+	public List<PurchaseVO> getDateSalesList(String todayString) {
+		return pdao.selectDateSalesList(todayString);
+	}
+
 
 }

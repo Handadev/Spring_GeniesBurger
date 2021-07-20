@@ -139,9 +139,7 @@ public class CartController {
 				int qty = cartvo.get(i).getQuantity();
 				isUp *= psv.updateProductQty(pno, qty);
 				List<ProductStockVO> productStockList = pssv.getList(pno);
-				logger.info(i + "번째 상품의 재고 삭제");
 				for (int t = 0; t < productStockList.size(); t++) {
-					logger.info(t + "번째 재고 삭제");
 					for (int j = 0; j < qty; j++) {
 						String sname = productStockList.get(t).getSname();
 						int sno = ssv.getUpsqSno(sname);
