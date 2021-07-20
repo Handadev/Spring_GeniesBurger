@@ -1,5 +1,6 @@
 package com.myweb.service.cart;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -8,7 +9,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.myweb.domain.AddExtraVO;
 import com.myweb.domain.CartVO;
+import com.myweb.persistence.add_extra.AddExtraDAORule;
 import com.myweb.persistence.cart.CartDAORule;
 
 @Service
@@ -18,6 +21,9 @@ public class CartService implements CartServiceRule {
 	@Inject
 	private CartDAORule cartdao;
 	
+	@Inject
+	private AddExtraDAORule aedao;
+	
 	@Override
 	public int register(CartVO cartvo) {
 		return cartdao.insert(cartvo);
@@ -25,7 +31,16 @@ public class CartService implements CartServiceRule {
 
 	@Override
 	public List<CartVO> getList(int mno) {
-		return cartdao.selectList(mno);
+		List<CartVO> list = new ArrayList<CartVO>();
+		List<CartVO> clist =  cartdao.selectList(mno);
+		for (CartVO cartvo : clist) {
+			int pno = cartvo.getPno();
+			List<AddExtraVO> aelist = aedao.selectList(mno, pno);
+			cartvo.setAelist(aelist);
+			list.add(cartvo);
+		}
+		
+		return list;
 	}
 
 	@Override

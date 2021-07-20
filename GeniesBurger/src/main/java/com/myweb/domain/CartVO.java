@@ -12,6 +12,7 @@ public class CartVO {
 	private String puuid;
 	private String savedir;
 	private String fname;
+	private List<AddExtraVO> aelist;
 	
 
 	public String getPuuid() {
@@ -86,4 +87,12 @@ public class CartVO {
 		this.pno = pno;
 	}
 
+	public List<AddExtraVO> getAelist() {
+		return aelist;
+	}
+
+	public void setAelist(List<AddExtraVO> aelist) {
+		this.aelist = aelist;
+	}
+	
 }

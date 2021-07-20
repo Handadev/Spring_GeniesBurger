@@ -30,7 +30,7 @@ public class AddExtraService implements AddExtraServiceRule {
 		return aedao.delete(mno);
 	}
 
-	@Override
+	@Override // 주문 취소시 add_extra 테이블에 정보가 있으면 지우기 위해서 일단 테이블 정보 가져옴
 	public List<AddExtraVO> getList(int mno, int pno) {
 		return aedao.selectList(mno, pno);
 	}
