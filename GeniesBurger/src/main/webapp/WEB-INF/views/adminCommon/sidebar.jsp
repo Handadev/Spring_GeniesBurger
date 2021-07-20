@@ -33,7 +33,7 @@
 						class="hide-menu">재고 주문</span></a></li>
 						
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/stock/presentList" aria-expanded="false"><i
+					href="/stock/stock_present" aria-expanded="false"><i
 						data-feather="calendar" class="feather-icon"></i><span
 						class="hide-menu">재고 관리</span></a></li>
 						

@@ -9,6 +9,7 @@ public class StockVO {
 	private String shelf_life;
 	private String stock_regdate;
 	private int isburger;
+	private String extra_price;
 	
 	public int getSno() {
 		return sno;
@@ -46,12 +47,15 @@ public class StockVO {
 	public void setIsburger(int isburger) {
 		this.isburger = isburger;
 	}
-
+	public String getExtra_price() {
+		return extra_price;
+	}
+	public void setExtra_price(String extra_price) {
+		this.extra_price = extra_price;
+	}
 	@Override
 	public String toString() {
 		return "StockVO [sno=" + sno + ", sname=" + sname + ", stock_qty=" + stock_qty + ", shelf_life=" + shelf_life
-				+ ", stock_regdate=" + stock_regdate + ", isburger=" + isburger + "]";
+				+ ", stock_regdate=" + stock_regdate + ", isburger=" + isburger + ", extra_price=" + extra_price + "]";
 	}
-	
-	
 }
