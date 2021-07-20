@@ -100,12 +100,16 @@ nocycle nocache;
 
 -----------------------상품 주문내역-------------------------
 DROP SEQUENCE seq_purchase_purno;
-DROP TABLE tbl_purchase;
+DROP TABLE TBL_PURCHASE;
 
 CREATE table tbl_purchase(
    purno number(11),
    mno number(11),
    cartno number(11),
+   pno number(11),
+   title varchar2(100),
+   price number(11),
+   quantity number(11),
    regdate DATE DEFAULT sysdate,
    constraint pk_purchase primary key(purno)
 );
@@ -201,10 +205,11 @@ stock_qty number(11) not null,
 shelf_life date not null,
 stock_regdate date default sysdate,
 isburger number(2) DEFAULT 0,
+extra_price number(11),
 constraint pk_stock primary key(sno)
 );
 
-create sequence seq_coupon_cpno
+create sequence seq_stock_sno
 start with 1
 increment by 1
 nocycle nocache;
