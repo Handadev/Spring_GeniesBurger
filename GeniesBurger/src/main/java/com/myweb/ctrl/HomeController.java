@@ -52,7 +52,6 @@ public class HomeController {
 		model.addAttribute("product_list",list);
 		int totalCount = psv.getTotalCount(pcpgvo);
 		model.addAttribute("product_paging", new ProductCustomerPagingHandler(totalCount, pcpgvo));
-		logger.info("index로 가즈아");
 		return "index";
 	}
 	
@@ -62,7 +61,25 @@ public class HomeController {
 		
 	}
 	
-	@ResponseBody
+	@ResponseBody // 주문 취소시 add_extra 테이블에 정보가 있으면 지우기 위해서 일단 테이블 정보 가져옴
+	@GetMapping(value = "/isAddExtra/{mno}/{pno}",
+				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+							MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<AddExtraVO>> isAddExtra (@PathVariable("mno") int mno,
+														@PathVariable("pno") int pno) {
+		return new ResponseEntity<List<AddExtraVO>> (aesv.getList(mno, pno), HttpStatus.OK);
+	}
+	
+	@ResponseBody // 주문 취소시 add_extra 테이블의 mno의 해당 pno add_extra 삭제
+	@PostMapping("/delAddExtra")
+	public void delAddExtra(@RequestParam("mno") int mno,
+							@RequestParam("pno") int pno) {
+		aesv.removePno(mno, pno);
+	}
+	
+	
+	
+	@ResponseBody // 단품 혹은 세트 골랐을 때 사이즈업을 위해서 세트 / 라지세트 가져옴
 	@GetMapping(value = "/select/{pno}/{category}",
 				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
 							MediaType.APPLICATION_JSON_UTF8_VALUE})
