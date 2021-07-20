@@ -855,7 +855,7 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 		}
 		
 		/* 음료 추가 기능 */
-		function add_beverage(pno, category, mno) {
+		function add_beverage(pno, mno) {
 			let beverage_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let beverage_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
 			
@@ -904,6 +904,8 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 				}
 			}).done(function(){
 				console.log("상품 등록 성공");
+				alert("상품이 장바구니에 추가되었습니다");
+				$("#beverage_modal").modal("hide");
 			}).fail(function(err){
 				console.log("상품 등록 실패");
 				console.log(err);
