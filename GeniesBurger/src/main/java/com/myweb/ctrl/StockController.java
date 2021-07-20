@@ -51,11 +51,9 @@ public class StockController {
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
-	@GetMapping("/presentList")
-	public ModelAndView presentList() {
-		ModelAndView view = new ModelAndView();
-		view.setViewName("/stock/stock_present");
-		return view;
+	@GetMapping("/stock_present")
+	public String stock_present() {
+		return "stock_present";
 	}
 	
 	@GetMapping("/stock_regList")

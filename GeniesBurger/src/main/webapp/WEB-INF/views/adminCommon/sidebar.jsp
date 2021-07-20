@@ -18,7 +18,7 @@
 						재고 관리</span></li>
 
 				<li class="sidebar-item"><a class="sidebar-link"
-					href="ticket-list.html" aria-expanded="false"><i
+					href="sales/sales_detail" aria-expanded="false"><i
 						data-feather="tag" class="feather-icon"></i><span
 						class="hide-menu">매출 상세 확인</span></a></li>
 						
@@ -33,7 +33,7 @@
 						class="hide-menu">재고 주문</span></a></li>
 						
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/stock/presentList" aria-expanded="false"><i
+					href="/stock/stock_present" aria-expanded="false"><i
 						data-feather="calendar" class="feather-icon"></i><span
 						class="hide-menu">재고 관리</span></a></li>
 						

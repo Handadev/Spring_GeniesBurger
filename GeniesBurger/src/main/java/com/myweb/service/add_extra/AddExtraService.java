@@ -1,6 +1,8 @@
 package com.myweb.service.add_extra;
 
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.slf4j.Logger;
@@ -26,6 +28,16 @@ public class AddExtraService implements AddExtraServiceRule {
 	@Override
 	public int remove(int mno) {
 		return aedao.delete(mno);
+	}
+
+	@Override
+	public List<AddExtraVO> getList(int mno, int pno) {
+		return aedao.selectList(mno, pno);
+	}
+
+	@Override // 주문 취소한 제품 AE만 지우기
+	public void removePno(int mno, int pno) {
+		aedao.deletePno(mno, pno);
 	}
 
 }

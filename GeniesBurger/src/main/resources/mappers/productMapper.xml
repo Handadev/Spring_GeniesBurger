@@ -134,13 +134,18 @@
   	
   	<!-- 4번 모달 사이드 고르기에서 사이드 메뉴 출력 -->
   	<select id="getSides" resultType="pvo">
-  		select * from tbl_product where category = 7
+  		select * from tbl_product where category = 7 and cansale = 0
   	</select>
   	
   	<!-- 5번 모달 음료 고르기에서 음료 메뉴 출력 -->
   	<select id="getBeverage" resultType="pvo">
-  		select * from tbl_product where category = 8
+  		select * from tbl_product where category = 8 and cansale = 0
   	</select>
+  	
+  	<update id="salesUp" parameterType="hashmap">
+  		update tbl_product set
+  		sales = sales + #{sales} where pno = #{pno}
+  	</update>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
   		select * from tbl_product where pno = #{pno}

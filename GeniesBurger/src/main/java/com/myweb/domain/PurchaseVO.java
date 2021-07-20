@@ -1,98 +1,97 @@
 package com.myweb.domain;
 
 public class PurchaseVO {
-   private int purno;
-   private int mno;
-   private int cartno;
-   private int pno;
-   private int price;
-   private int quantity;
-   private String regdate;
-   private String title;
-   private String name;
+	private int purno;
+	private int mno;
+	private int cartno;
+	private int pno;
+	private String title;
+	private int price;
+	private int quantity;
+	private String regdate;
+	private String name;
+  
+	public PurchaseVO() {}
 
-   public PurchaseVO() {
-   }
+	public PurchaseVO(int mno, int cartno, int pno, String title, int price, int quantity) {
+		this.mno = mno;
+		this.cartno = cartno;
+		this.pno = pno;
+		this.title = title;
+		this.price = price;
+		this.quantity = quantity;
+	}
 
-   public PurchaseVO(int mno, int cartno, int pno, String title, int price, int quantity) {
-      this.mno = mno;
-      this.cartno = cartno;
-      this.pno = pno;
-      this.title = title;
-      this.price = price;
-      this.quantity = quantity;
-   }
+	public int getPurno() {
+		return purno;
+	}
 
-   public String getName() {
-      return name;
-   }
+	public void setPurno(int purno) {
+		this.purno = purno;
+	}
 
-   public void setName(String name) {
-      this.name = name;
-   }
+	public int getMno() {
+		return mno;
+	}
 
-   public int getPurno() {
-      return purno;
-   }
+	public void setMno(int mno) {
+		this.mno = mno;
+	}
 
-   public void setPurno(int purno) {
-      this.purno = purno;
-   }
+	public int getCartno() {
+		return cartno;
+	}
 
-   public int getMno() {
-      return mno;
-   }
+	public void setCartno(int cartno) {
+		this.cartno = cartno;
+	}
 
-   public void setMno(int mno) {
-      this.mno = mno;
-   }
+	public int getPno() {
+		return pno;
+	}
 
-   public int getCartno() {
-      return cartno;
-   }
+	public void setPno(int pno) {
+		this.pno = pno;
+	}
 
-   public void setCartno(int cartno) {
-      this.cartno = cartno;
-   }
+	public int getPrice() {
+		return price;
+	}
 
-   public int getPno() {
-      return pno;
-   }
+	public void setPrice(int price) {
+		this.price = price;
+	}
 
-   public void setPno(int pno) {
-      this.pno = pno;
-   }
+	public int getQuantity() {
+		return quantity;
+	}
 
-   public String getTitle() {
-      return title;
-   }
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
 
-   public void setTitle(String title) {
-      this.title = title;
-   }
+	public String getTitle() {
+		return title;
+	}
 
-   public int getPrice() {
-      return price;
-   }
+	public void setTitle(String title) {
+		this.title = title;
+	}
 
-   public void setPrice(int price) {
-      this.price = price;
-   }
+	public String getRegdate() {
+		return regdate;
+	}
 
-   public int getQuantity() {
-      return quantity;
-   }
+	public void setRegdate(String regdate) {
+		this.regdate = regdate;
+	}
 
-   public void setQuantity(int quantity) {
-      this.quantity = quantity;
-   }
+	public String getName() {
+		return name;
+	}
 
-   public String getRegdate() {
-      return regdate;
-   }
-
-   public void setRegdate(String regdate) {
-      this.regdate = regdate;
-   }
-
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }
