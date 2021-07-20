@@ -26,7 +26,7 @@ public class StockSweeper {
 	public void stockSweep() throws Exception {
 		logger.info("swepper 시작!!!!!!!");
 		LocalDate now = LocalDate.now();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-mm-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		String todayString = now.toString();
 		Date slife = null;
 		Date today = sdf.parse(todayString);

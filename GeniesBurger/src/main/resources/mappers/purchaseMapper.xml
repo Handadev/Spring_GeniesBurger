@@ -69,8 +69,8 @@
 			select count(purno) FROM tbl_purchase WHERE purno > 0 and mno=#{mno}
    </select>
    
-   <select id="dateSalesList" parameterType="String" resultType="purvo">
- 			SELECT price FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString};
+   <select id="dateSalesList" parameterType="String" resultType="int">
+ 			SELECT price FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString}
    </select>
   
 	
