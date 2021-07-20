@@ -72,7 +72,7 @@
                            <c:forEach items="${cartList }" var="cartList">
                                     <tr class="text-center">
                                        <td class="image-prod">
-                                       <img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
+                                       <img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none" style="width:160px;">
                                        </td>
                                        <td class="product-name">
                                           <h3>${cartList.title }</h3>
@@ -147,7 +147,7 @@
             <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
             <p><b>포장주문</b></p>
             </div>
-             <a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
+             <a href="/cart/payment?mno=${ses.mno }" class="btn-lg btn-dark checkBtn" style="width:100px;">확인</a>
             <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
