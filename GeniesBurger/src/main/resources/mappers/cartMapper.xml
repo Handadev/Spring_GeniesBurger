@@ -46,7 +46,7 @@
 	<!-- 결제창에서 해당하는 mno의 카트정보 가져오기 -->
 	<select id="pay" parameterType="int" resultType="cartvo">
 		select * from tbl_cart tc left join tbl_productfile tp 
-		on tc.pno = tp.pno where tc.mno = #{mno}
+		on tc.pno = tp.pno where tc.mno = #{mno} order by cartno
 	</select>
 	
 	<!-- 결제완료후 해당멤버의 카트 비우기(mno) -->
@@ -56,6 +56,6 @@
 	
 	<!-- 결제완료 후 주문내역 가져오기 -->
 	<select id="ol" parameterType="int" resultType="cartvo">
-		SELECT * FROM tbl_cart WHERE mno=#{mno}
+		SELECT * FROM tbl_cart WHERE mno=#{mno} order by cartno
 	</select>
 </mapper>

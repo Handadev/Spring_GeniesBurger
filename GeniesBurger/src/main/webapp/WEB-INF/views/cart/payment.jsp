@@ -151,10 +151,12 @@ a {
 			<p>금액</p>
 		</div>
 		<c:set var="dc" value="1000" />
-		<div class="sum_wrap02">
+ 		<div class="sum_wrap02">
 			<p>${cvo.quantity }개</p>
-			
-			<p class="redfont2"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
+			<c:set var="num2" value="${num2+1 }" />
+			<p class="redfont2" id="A${num2 }" pattern="#,###">${cvo.price * cvo.quantity }원</p>
+			<c:set var="num" value="${num+1 }" />
+			<p class="redfont2" id="${num }">${cvo.price * cvo.quantity }</p>
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
 </div>
@@ -177,8 +179,10 @@ a {
 <div class="container whole">
 	<div class="left"><a href="/">취소</a></div>
 	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
+
 	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor: pointer;">
 	쿠폰사용하기</div>
+
 </div>
 
 <!-- Coupon Modal -->
@@ -216,8 +220,45 @@ a {
 </div>
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
+var arr = [];
+var arr2 = [];
+var arrString = '';
+for(let i = 1; i <= ${num}; i++) {
+	let c = $("#"+ i).text(); // 할인 전 금액
+	arr2.push(c);
+	console.log(arr2);
+}
+$("#useCp").on("click", function() {
+	arr = []; // 쿠폰을 재선택할 때 배열 비워줌
+	arrString = '';
+	for(let i = 1; i <= ${num2 }; i++) {
+		let d = $("#A"+ i).text(); // 할인 전 금액
+		let e = d.substr(0, d.length-1); 
+		console.log(d);
+		$("#"+ i).html(e);
+	}
+});
+
 $("#selectCp").on("click", function() {
-	let couponVal = $("#coupon option:selected").attr("value");
+	for(let i = 1; i <= ${num}; i++) {
+		let couponVal = $("#coupon option:selected").attr("value");
+		let c = $("#"+ i).text(); // 할인 전 금액
+		arr2.push(c);
+		console.log("***할인전 금액 : " + c);
+		let a = Math.floor(c * (couponVal*(0.01))); // 할인 금액
+		let b = c - a; // 할인된 금액
+		$("#"+ i).html(b);
+		console.log("***할인된 금액 : " + b);
+		arr.push(b);
+	}
+	
+	console.log(arr); // 할인된 금액 배열
+	arrString = arr;
+	console.log("***arrString : " + arrString);
+	
+	localStorage.setItem('price', arr);
+	
+	let couponVal = $("#coupon option:selected").attr("value"); // %값 
 	let total = $("#total").text();
 	let totalPrice = total.substr(0, total.length-1);
 	let dcPrice = Math.floor(totalPrice * (couponVal*(0.01)));
@@ -228,6 +269,9 @@ $("#selectCp").on("click", function() {
 	$("#price").html(price +"원");
 	$("#couponModal").modal("hide");
 });
+
+console.log(arr2);
+
 function coupon_cancel(cplno){
 	$.ajax({
 		url: "/coupon/" + cplno,
@@ -241,10 +285,17 @@ function coupon_cancel(cplno){
  }
 	$(document).on("click", "#paymentBtn", function() {
 	let couponVal = $("#coupon option:selected").attr("value2");
-	console.log(couponVal)
+	console.log("cplno : " + couponVal);
+	
+	if(arr.length <= 0) {
+		console.log("arr2 보냄")
+		localStorage.setItem('price', arr2);
+	}
 	if(couponVal != null) {
 		coupon_cancel(couponVal);
 	}
  });
 </script>
-<jsp:include page="../common/footer.jsp" />
+
+<jsp:include page="../payCommon/payFooter.jsp" />
+
