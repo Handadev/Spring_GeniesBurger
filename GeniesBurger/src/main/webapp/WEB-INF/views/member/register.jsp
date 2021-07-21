@@ -52,6 +52,20 @@
 				placeholder="Enter mobile" name="mobile">
 		</div>
 		<div class="form-group">
+			<select name="question" class="form-control regInput" id="question">
+				<option value="본인 확인 질문을 선택하세요.">본인 확인 질문을 선택하세요.</option>
+				<option value="어떤 직업을 갖고 싶습니까?">어떤 직업을 갖고 싶습니까?</option>
+				<option value="어떤 가수를 좋아하십니까?">어떤 가수를 좋아하십니까?</option>
+				<option value="어느 나라에 살고 싶습니까?">어느 나라에 살고 싶습니까?</option>
+				<option value="어렸을 때 별명이 무엇이었습니까?">어렸을 때 별명이 무엇이었습니까?</option>
+				<option value="가장 좋아하는 동물은 무엇입니까?">가장 좋아하는 동물은 무엇입니까?</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<input type="text" class="form-control regInput" id="answer"
+				placeholder="Enter answer" name="answer">
+		</div>
+		<div class="form-group">
 			<input type="text" class="form-control regInput" id="address"
 				placeholder="Enter address" name="address">
 		</div>
@@ -119,6 +133,8 @@
    });
    
    $("#submitBtn").click(function() {
+	   console.log("$('#question').val() : " + $("#question").val());
+	   console.log("typeof $('#question').val() : " + typeof $("#question").val());
 	   let isEmpty = false;
 	   firstPwd = $("#pwd").val(); 
        secondPwd = $("#confirmPwd").val();
@@ -134,6 +150,8 @@
 		   alert('이메일 중복여부를 확인하세요!');
 	   } else if (firstPwd != secondPwd) {
 		   alert('비밀번호를 확인하세요!');
+	   } else if ($("#question").val() == "본인 확인 질문을 선택하세요.") { 
+	   		alert('본인 확인 질문을 선택해주세요!');
 	   } else {
 		   $("#registerForm").submit();		   
 	   }
