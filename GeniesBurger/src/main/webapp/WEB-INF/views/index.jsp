@@ -180,7 +180,7 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 									<c:choose>
 										<c:when test="${pvo.cansale eq 0 }">
 											<img class="img-fluid"
-												src="/upload/${fvo.savedir }/${fvo.puuid }_th_${fvo.fname }"
+												src="/upload/${fvo.savedir }/${fvo.puuid }_${fvo.fname }"
 												alt="Colorlib Template" />
 										</c:when>
 										<c:otherwise>
