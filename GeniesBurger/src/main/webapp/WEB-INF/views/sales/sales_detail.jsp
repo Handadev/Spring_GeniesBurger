@@ -35,7 +35,7 @@
 		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">일별 매출</h4>
+					<h4 class="card-title">일 매출</h4>
 					<div>
 						<canvas id="line-chart1" height="150"></canvas>
 					</div>
@@ -47,7 +47,7 @@
 		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">월별 매출</h4>
+					<h4 class="card-title">월 매출</h4>
 					<div>
 						<canvas id="line-chart2" height="150"></canvas>
 					</div>
@@ -59,7 +59,7 @@
 		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">일별 매출</h4>
+					<h4 class="card-title">주간 매출</h4>
 					<div>
 						<canvas id="line-chart3" height="150"></canvas>
 					</div>
@@ -93,15 +93,31 @@
 	let date = today.getDate(); // 날짜
 	let day = today.getDay(); // 요일
 
-	new Chart(document.getElementById("line-chart1"), {
+	new Chart(document.getElementById("line-chart1"),
+			{
+				type : 'line',
+				data : {
+					labels : [ (date - 6) + '일', (date - 5) + '일', (date - 4) + '일', (date - 3) + '일',
+							(date - 2) + '일', (date - 1) + '일', date + '일' ],
+					datasets : [ {
+						data : [ dateSlist[6], dateSlist[5], dateSlist[4],
+								dateSlist[3], dateSlist[2], dateSlist[1],
+								dateSlist[0] ],
+						label : "일 매출",
+						borderColor : "#5f76e8",
+						fill : false
+					} ]
+				},
+			});
+
+	new Chart(document.getElementById("line-chart2"), {
 		type : 'line',
 		data : {
-			labels : [ date - 6, date - 5, date - 4, date - 3, date - 2,
-					date - 1, date ],
+			labels : [ (month - 2) + '월', (month - 1) + '월', month + '월' ],
 			datasets : [ {
-				data : [ dateSlist[6], dateSlist[5], dateSlist[4], dateSlist[3], dateSlist[2], dateSlist[1], dateSlist[0] ],
-				label : "일매출",
-				borderColor : "#5f76e8",
+				data : [ dateSlist[2], dateSlist[1], dateSlist[0] ],
+				label : "월 매출",
+				borderColor : "#5fdae8",
 				fill : false
 			} ]
 		},
