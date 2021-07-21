@@ -855,7 +855,7 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 		}
 		
 		/* 음료 추가 기능 */
-		function add_beverage(pno, category, mno) {
+		function add_beverage(pno, mno) {
 			let beverage_title = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(0).text();
 			let beverage_price = $(".check_img").closest("div").siblings("div").eq(0).find("p").eq(1).find("span").text();
 			

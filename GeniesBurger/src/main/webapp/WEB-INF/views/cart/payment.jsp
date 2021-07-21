@@ -13,7 +13,7 @@
 .box {
 	box-shadow: 1px 1px 1px 1px;
 	border: none;
-	height: 400px;
+	height: 470px;
 	width: 850px;
 	margin: auto;
 }
@@ -26,7 +26,7 @@
 }
 .menu_wrap {
 	float: left;
-	width: 50%;
+/* 	width: 50%; */
 	height: 200px;
 	padding: 10px;
 }
@@ -146,14 +146,16 @@ a {
 		<div class="sum_wrap">
 			<p>수량</p>
 			<p>금액</p>
+			<p>???</p>
 		</div>
 		<c:set var="dc" value="1000" />
  		<div class="sum_wrap02">
 			<p>${cvo.quantity }개</p>
 			<c:set var="num2" value="${num2+1 }" />
-			<p class="redfont2" id="A${num2 }" pattern="#,###">${cvo.price * cvo.quantity }원</p>
-			<c:set var="num" value="${num+1 }" />
-			<p class="redfont2" id="${num }">${cvo.price * cvo.quantity }</p>
+			<p class="redfont2" id="A${num2 }"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
+			
+			<c:set var="num" value="${num+1 }" />  
+			<p class="redfont2" id="${num }"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
 </div>
