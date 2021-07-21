@@ -12,4 +12,6 @@ public interface PurchaseDAORule {
 	public int getTotalCount(MemberPageVO mpgvo);
 	public int getTotalCount(MemberPageVO mpgvo, int mno);
 	public int selectDateSales(String todayString);
+	public int selectMonthSales(String monthString);
+	public List<PurchaseVO> selectSalesRateList(String monthString);
 }

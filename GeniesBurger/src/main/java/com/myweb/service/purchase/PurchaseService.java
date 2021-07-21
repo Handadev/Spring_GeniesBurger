@@ -64,4 +64,14 @@ public class PurchaseService implements PurchaseServiceRule {
 		return pdao.selectDateSales(todayString);
 	}
 
+	@Override
+	public int getMonthSales(String monthString) {
+		return pdao.selectMonthSales(monthString);
+	}
+
+	@Override
+	public List<PurchaseVO> getSalesRateList(String monthString) {
+		return pdao.selectSalesRateList(monthString);
+	}
+
 }
