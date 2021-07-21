@@ -29,36 +29,43 @@ public class SalesController {
 	public void salesDate(Model model) {
 		Calendar cal = Calendar.getInstance();
 		Calendar ycal = Calendar.getInstance();
-		cal.setTime(new Date());
 		ycal.setTime(new Date());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat yyyy = new SimpleDateFormat("yyyy"); // 연매출
-		
 		List<Integer> salesList = new ArrayList<Integer>();
 		List<Integer> ySalesList = new ArrayList<Integer>();
 		
 		for (int i = 0; i < 5; i++) {
 			ycal.add(Calendar.YEAR, -i);
 			String yearString = yyyy.format(ycal.getTime());
-			logger.info("****************************** 연도  " + yearString);
 			int yearSales = pursv.getYearSales(yearString);
-			logger.info("****************** 연매출" + yearSales);
 			ySalesList.add(yearSales);
 			ycal.add(Calendar.YEAR, +i);
+      }
+		 model.addAttribute("yearSalesList", ySalesList);
 
-		}
-		logger.info(ySalesList.toString());
-		model.addAttribute("yearSalesList", ySalesList);
-		
 		for (int i = 0; i < 7; i++) {
-	         cal.add(Calendar.DATE, -i);
-	         String todayString = sdf.format(cal.getTime());
-	         int dateSales = pursv.getDateSales(todayString);
-	         salesList.add(dateSales);
-	      }
-	      logger.info(salesList.toString());
-	      model.addAttribute("dateSalesList", salesList);
-	}
+			cal.setTime(new Date());
+			cal.add(Calendar.DATE, -i);
+			String todayString = sdf.format(cal.getTime());
+			int dateSales = pursv.getDateSales(todayString);
+			salesList.add(dateSales);
+		}
+		logger.info(salesList.toString());
+		model.addAttribute("dateSalesList", salesList);
+	
+		/*-------------- 요일 별 매출 -------------*/
+	
+		cal = Calendar.getInstance();
+		List<Integer> weekSales = new ArrayList<Integer>();
+		for (int i = 1; i <= 7; i++) {
+			cal.setTime(new Date());
+			sdf = new SimpleDateFormat("MM");
+			String month = sdf.format(cal.getTime());
+			weekSales.add(pursv.getWeekSales(month,i));
+		}
+		model.addAttribute("weekSales",weekSales);
+		}
 
 }
 

@@ -55,13 +55,25 @@
 			</div>
 		</div>
 		<!-- column -->
+		 <!-- column -->
+      <div class="col-lg-6">
+         <div class="card">
+            <div class="card-body">
+               <h4 class="card-title">연도별 매출</h4>
+               <div>
+                  <canvas id="line-chart3" height="150"></canvas>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- column -->
 		<!-- column -->
 		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">연도별 매출</h4>
+					<h4 class="card-title">이 달의 요일 별 매출</h4>
 					<div>
-						<canvas id="line-chart3" height="150"></canvas>
+						<canvas id="line-chart4" height="200vh" width="500vw"></canvas>
 					</div>
 				</div>
 			</div>
@@ -85,11 +97,17 @@
 	<c:forEach items="${dateSalesList}" var="sales">
 	dateSlist.push("${sales}");
 	</c:forEach>
-	
+
 	let yearSlist = new Array();
 	<c:forEach items="${yearSalesList}" var="ySales">
 	yearSlist.push("${ySales}");
 	</c:forEach>
+
+	let weekSalesList = new Array();
+	<c:forEach items="${weekSales}" var="week">
+	weekSalesList.push("${week}");
+	</c:forEach>
+	console.log(weekSalesList);
 </script>
 <script>
 	let today = new Date();
@@ -128,19 +146,29 @@
 		},
 	});
 	
+	 new Chart(document.getElementById("line-chart3"), {
+	      type : 'line',
+	      data : {
+	         labels : [ year - 4, year - 3, year - 2, year - 1, year],
+	         datasets : [ {
+	            data : [ yearSlist[4], yearSlist[3], yearSlist[2], yearSlist[1], yearSlist[0] ],
+	            label : "연매출",
+	            borderColor : "#9FC93C",
+	            fill : false
+	         } ]
+	      },
+	   });
 	
-	new Chart(document.getElementById("line-chart3"), {
-		type : 'line',
+	new Chart(document.getElementById("line-chart4"), {
+		type : 'pie',
 		data : {
-			labels : [ year - 4, year - 3, year - 2, year - 1, year],
+			labels : ["일","월","화","수","목","금","토"],
 			datasets : [ {
-				data : [ yearSlist[4], yearSlist[3], yearSlist[2], yearSlist[1], yearSlist[0] ],
-				label : "연매출",
-				borderColor : "#9FC93C",
-				fill : false
-			} ]
-		},
-	});
+			data : [ weekSalesList[0], weekSalesList[1], weekSalesList[2], weekSalesList[3], weekSalesList[4], weekSalesList[5], weekSalesList[6] ],
+						backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(95, 118, 232)', 'rgb(153, 102, 255)'],
+					} ]
+				},
+			});
 </script>
 
 
