@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -52,8 +53,10 @@ public class StockController {
 	}
 
 	@GetMapping("/stock_present")
-	public String stock_present() {
-		return "stock_present";
+	public ModelAndView stock_present() {
+		ModelAndView view = new ModelAndView();
+		view.setViewName("/stock/stock_present");
+		return view;
 	}
 	
 	@GetMapping("/stock_regList")

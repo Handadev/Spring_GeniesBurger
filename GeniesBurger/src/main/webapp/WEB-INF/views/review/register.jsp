@@ -2,28 +2,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
-<div class="container">
-<h1>리뷰 테스트</h1>
+<div class="container" style="height: 1000px;" >
+	<div class="row justify-content-center">
+		<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
+			<input type="hidden" name="pno" value=""> 
+			<input type="hidden" name="purno" value=""> <input type="hidden" name="email" value="${ses.email }">
+			
+			<div class="form-group">
+				<textarea class="form-control" id="content" name="rcontent" style="width: 400px; margin-top:30px; resize: none; " placeholder="내용을 입력해주세요" rows="5"></textarea>
+			</div>
 
-<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
-<input type="hidden" name="pno" value="1">
-<input type="hidden" name="email" value="${ses.email }">
-</select>
-	<div class="form-group">
-		<label for="price">내용:</label>
-		<input type="text" class="form-control" id="content" name="rcontent" style="width:200pt">
+			<div class="form-group">
+				<input type="file" class="form-control" id="files" name="files"	style="display: none;">
+				<button type="button" class="btn btn-outline-info btn-block" id="fileTrigger" style="width: 400px">사진업로드</button>
+			</div>
+
+			<div class="form-group">
+				<ul class="list-group" id="fileZone"></ul>
+			</div>
+			<button type="button" class="btn btn-primary" id="subBtn">리뷰작성</button>
+		</form>
 	</div>
-	
-	<div class="form-group">
-		<input type="file" class="form-control" id="files" name="files" style="display: none;">
-		<button type="button" class="btn btn-outline-info btn-block" id="fileTrigger" style="width:200pt">사진업로드</button>
-	</div>
-	
-	<div class="form-group">
-		<ul class="list-group" id="fileZone"></ul>
-	</div>
-	<button type="button" class="btn btn-primary" id="subBtn">리뷰작성</button>
-</form>
 </div>
 <script src="/resources/js/jquery.min.js"></script>
 <script>
@@ -36,6 +35,10 @@ $(document).on("click","#subBtn", function(){
 	if(title==''||content==''){
 		alert("내용을 입력하세요~");
 	} else{
+		let pno = localStorage.getItem('pno');
+		let purno = localStorage.getItem('purno');
+		$("input[name=pno]").val(pno);
+		$("input[name=purno]").val(purno);
 		$("#regForm").submit();
 	}
 });

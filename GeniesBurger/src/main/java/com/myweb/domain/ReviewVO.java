@@ -5,6 +5,7 @@ import java.util.List;
 public class ReviewVO {
 	private int rno;
 	private int pno;
+	private int purno;
 	private String email;
 	private String rtitle;
 	private String rcontent;
@@ -14,6 +15,14 @@ public class ReviewVO {
 	private String rfname;
 	private int rftype;
 	private List<adCommentVO> clist;
+
+	public int getPurno() {
+		return purno;
+	}
+
+	public void setPurno(int purno) {
+		this.purno = purno;
+	}
 
 	public String getEmail() {
 		return email;

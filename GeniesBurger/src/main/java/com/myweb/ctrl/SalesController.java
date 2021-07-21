@@ -26,7 +26,7 @@ public class SalesController {
 	private PurchaseServiceRule pursv;
 
 	@GetMapping("sales_detail")
-	public void salesDetail(Model model) {
+	public void salesDate(Model model) {
 		Calendar cal = Calendar.getInstance();
 		Calendar ycal = Calendar.getInstance();
 		cal.setTime(new Date());
@@ -45,6 +45,7 @@ public class SalesController {
 			logger.info("****************** 연매출" + yearSales);
 			ySalesList.add(yearSales);
 			ycal.add(Calendar.YEAR, +i);
+
 		}
 		logger.info(ySalesList.toString());
 		model.addAttribute("yearSalesList", ySalesList);
@@ -58,6 +59,6 @@ public class SalesController {
 	      logger.info(salesList.toString());
 	      model.addAttribute("dateSalesList", salesList);
 	}
-	
 
 }
+

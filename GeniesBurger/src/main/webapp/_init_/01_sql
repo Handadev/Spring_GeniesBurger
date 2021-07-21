@@ -201,7 +201,7 @@ START WITH 1
 INCREMENT BY 1
 nocycle nocache;
 
------------------------재고-------------------------
+----------------------재고-------------------------
 drop sequence seq_stock_sno;
 drop table tbl_stock;
 
@@ -212,7 +212,6 @@ stock_qty number(11) not null,
 shelf_life date not null,
 stock_regdate date default sysdate,
 isburger number(2) DEFAULT 0,
-extra_price number(11),
 constraint pk_stock primary key(sno)
 );
 

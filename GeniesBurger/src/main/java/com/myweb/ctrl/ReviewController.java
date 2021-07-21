@@ -51,7 +51,7 @@ public class ReviewController {
 
 	@GetMapping("/register")
 	public void register() {
-
+		
 	}
 
 	@GetMapping("/list")
@@ -64,6 +64,8 @@ public class ReviewController {
 	@ResponseBody
 	@PostMapping("/addAdComment")
 	public String acRegister(@RequestParam("rno") int rno, @RequestParam("adComment") String adComment) {
+		logger.info(">>>>>>>>>>>>> rno" + rno);
+		logger.info(">>>>>>>>>>>>> adComment" + adComment);
 		int isUp = rsv.adCommentAdd(rno, adComment);
 		return isUp > 0 ? "1" : "0";
 	}
@@ -81,10 +83,11 @@ public class ReviewController {
 		int totalCount = rsv.getMyTotalCount(email);
 		model.addAttribute("rpghdl", new ReviewPagingHandler(totalCount, rpgvo));
 	}
-
-//	@ResponseBody
-//	@PostMapping("/myPurchase")
-//	public ResponseEntity<String> myPusrchase(@RequestParam("mno") int mno) {
-//		return isUp > 0 ? "1" : "0";
-//	}
+	
+	@ResponseBody
+	@PostMapping("/acDelete")
+	public String acUpdate(@RequestParam("acno")int acno) {
+		int isUp = rsv.adDelete(acno);
+		return isUp > 0 ? "1" : "0";
+	}
 }

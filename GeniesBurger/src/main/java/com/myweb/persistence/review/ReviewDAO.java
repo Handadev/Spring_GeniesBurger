@@ -104,4 +104,14 @@ public class ReviewDAO implements ReviewDAORule {
 		return sql.selectList(NS + "purchase", mno);
 	}
 
+	@Override
+	public List<ReviewVO> purList(int purno) {
+		return sql.selectList(NS + "getPur", purno);
+	}
+
+	@Override
+	public int adDelete(int acno) {
+		return sql.delete(NS + "adDel", acno);
+	}
+
 }

@@ -60,7 +60,7 @@
 				placeholder="Enter birth day" name="birthday">
 		</div>
 		<button type="button" class="btn-block btn-danger input-btn-block"
-			id="submitBtn">Submit</button>
+			id="submitBtn">가입</button>
 	</form>
 </div>
 
