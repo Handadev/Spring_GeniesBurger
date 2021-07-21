@@ -88,11 +88,23 @@
 /* 3번 체크 박스 */
 .checkbox.row {
 	position: relative;
-	margin-bottom: 30px;
+	margin-bottom: 65px;
+	cursor: pointer;
+}
+
+.checkbox.row:last-child {
+	margin-bottom: 5px;
 }
 
 .checkText {
 	font-size: 25px;
+}
+
+.check_price {
+	position: absolute;
+	font-size: 25px;
+    top: 10px;
+    right: 9%;
 }
 
 .checkbox input.checkbox {
@@ -110,8 +122,14 @@
 
 .check_label {
 	position: absolute;
-	top: -50%;
-	left: 7%;
+	top: 10px;
+	left: 45%;
+}
+
+.extra_img { /* 추가 재료 이미지 */
+	position: absolute;
+	top: -5px;
+    left: 13%;
 }
 
 /* 4번 체크 박스  */
@@ -443,6 +461,15 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 		}
 	}
 	
+	/* checkbox row 누르면 체크박스에 체크 되게하기 */
+	$(document).on("click", ".checkbox.row",function() {
+		if (!$(this).find("input[type=checkbox]").prop("checked")) {
+			$(this).find("input[type=checkbox]").prop("checked", true);
+		} else {
+			$(this).find("input[type=checkbox]").prop("checked", false);
+		}
+	});	
+	
 	
 	/* 처음 선택한 pno */
 	let pno_val;
@@ -581,10 +608,12 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 		for (let pvo of pObj) {
 			html += '<div class="checkbox row">';
 			html += '<input type="checkbox" name="sname" id="'+pvo.title+'" value="" data-title="'+pvo.title+'" data-price="'+pvo.price+'" class="checkbox">';
-			html += '<label class="check_label" for="'+pvo.title+'">'+pvo.title+'&nbsp;&nbsp;'+pvo.price+'</label></div>';
+			html += '<label class="check_label" for="'+pvo.title+'">'+pvo.title+'</label>';
+			html += '<span class="check_price">+'+pvo.price+'원</span>';
 			for (let list of pvo.flist) {
-				html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'" style="height:70px; width:120px;"/>';
+				html += '<img class="img-fluid extra_img" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'" style="height:70px; width:120px;"/>';
 			}
+			html += '</div>';
 		}
 		
 		let fhtml = '';

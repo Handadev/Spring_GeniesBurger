@@ -32,11 +32,27 @@ public class SalesController {
 	@GetMapping("sales_detail")
 	public void salesList(Model model) {
 		Calendar cal = Calendar.getInstance();
+    
+     // 연매출
+		Calendar ycal = Calendar.getInstance();
+		ycal.setTime(new Date());
+		SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
+		List<Integer> ySalesList = new ArrayList<Integer>();
 		
-		//월 매출
+		for (int i = 0; i < 5; i++) {
+			ycal.add(Calendar.YEAR, -i);
+			String yearString = yyyy.format(ycal.getTime());
+			int yearSales = pursv.getYearSales(yearString);
+			ySalesList.add(yearSales);
+			ycal.add(Calendar.YEAR, +i);
+      }
+		 model.addAttribute("yearSalesList", ySalesList);
+
+    
+		//일 매출
 		SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 		List<Integer> dateSalesList = new ArrayList<Integer>();
-
+    
 		for (int i = 0; i < 7; i++) {
 			cal.setTime(new Date());
 			cal.add(Calendar.DATE, -i);
@@ -46,7 +62,8 @@ public class SalesController {
 		}
 		model.addAttribute("dateSalesList", dateSalesList);
 
-		//일 매출
+    
+		//월 매출
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM");
 		List<Integer> monthSalesList = new ArrayList<Integer>();
 
@@ -59,11 +76,13 @@ public class SalesController {
 		}
 		model.addAttribute("monthSalesList", monthSalesList);
 		
+    
 		//메뉴 판매량 top5
 		cal.setTime(new Date());
 		String monthString = sdf2.format(cal.getTime());
 		List<PurchaseVO> productRateList = pursv.getSalesRateList(monthString);
 		List<String> rateList = new ArrayList<String>();
+    
 		Gson gson = new GsonBuilder().create();
 		for (PurchaseVO purvo : productRateList) {
 			String json = gson.toJson(purvo);
@@ -72,4 +91,17 @@ public class SalesController {
 		model.addAttribute("productRateList", rateList);
 	}
 
+  
+		/*-------------- 요일 별 매출 -------------*/
+		cal = Calendar.getInstance();
+		List<Integer> weekSales = new ArrayList<Integer>();
+		for (int i = 1; i <= 7; i++) {
+			cal.setTime(new Date());
+			sdf = new SimpleDateFormat("MM");
+			String month = sdf.format(cal.getTime());
+			weekSales.add(pursv.getWeekSales(month,i));
+		}
+		model.addAttribute("weekSales",weekSales);
+		}
 }
+

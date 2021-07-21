@@ -83,6 +83,11 @@ public class CartDAO implements CartDAORule {
 		return sql.selectList(NS+"ol", mno);
 	}
 
+	@Override // 카트에 제품 등록 후 add_extra 테이블에 cartno 제공을 위한 최근 No. 받아오기
+	public CartVO selectCurrCart() {
+		return sql.selectOne(NS+"currCart");
+	}
+
 	
 
 }

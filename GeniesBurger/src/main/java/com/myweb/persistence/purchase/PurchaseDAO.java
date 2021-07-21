@@ -88,5 +88,17 @@ public class PurchaseDAO implements PurchaseDAORule {
 		return sql.selectList(NS + "productSalesRate", monthString);
 	}
 
+  @Override
+	public Integer selectWeekSales(String month, int i) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("month", month);
+		map.put("i", i);
+		return sql.selectOne(NS + "weekSales", map);
+  }
+  
+  @Override
+	public int selectYearSales(String yearString) {
+		return sql.selectOne(NS + "yearSalesList", yearString);
+	}
 
 }
