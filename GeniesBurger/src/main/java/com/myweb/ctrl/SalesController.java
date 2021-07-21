@@ -28,11 +28,11 @@ public class SalesController {
 	@GetMapping("sales_detail")
 	public void salesDate(Model model) {
 		Calendar cal = Calendar.getInstance();
-		cal.setTime(new Date());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		List<Integer> salesList = new ArrayList<Integer>();
 
 		for (int i = 0; i < 7; i++) {
+			cal.setTime(new Date());
 			cal.add(Calendar.DATE, -i);
 			String todayString = sdf.format(cal.getTime());
 			int dateSales = pursv.getDateSales(todayString);
@@ -40,7 +40,20 @@ public class SalesController {
 		}
 		logger.info(salesList.toString());
 		model.addAttribute("dateSalesList", salesList);
-	}
+	
+		/*-------------- 요일 별 매출 -------------*/
+	
+		cal = Calendar.getInstance();
+		List<Integer> weekSales = new ArrayList<Integer>();
+		for (int i = 1; i <= 7; i++) {
+			cal.setTime(new Date());
+			sdf = new SimpleDateFormat("MM");
+			String month = sdf.format(cal.getTime());
+			weekSales.add(pursv.getWeekSales(month,i));
+		}
+		model.addAttribute("weekSales",weekSales);
+		}
+	
 
 //	@GetMapping("sales_detail")
 //	public void salesMonth(Model model) {

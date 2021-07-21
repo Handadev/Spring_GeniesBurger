@@ -41,7 +41,7 @@ public class PurchaseService implements PurchaseServiceRule {
 		List<PurchaseVO> purList = pdao.selectList(mpgvo, mno);
 		for (PurchaseVO purVO : purList) {
 			int purno = purVO.getPurno();
-			logger.info("purno >>>>>>>>>>>>>>>"+purno);
+			logger.info("purno >>>>>>>>>>>>>>>" + purno);
 			List<ReviewVO> rlist = rdao.purList(purno);
 			purVO.setRlist(rlist);
 			list.add(purVO);
@@ -62,6 +62,11 @@ public class PurchaseService implements PurchaseServiceRule {
 	@Override
 	public int getDateSales(String todayString) {
 		return pdao.selectDateSales(todayString);
+	}
+
+	@Override
+	public Integer getWeekSales(String month, int i) {
+		return pdao.selectWeekSales(month, i);
 	}
 
 }

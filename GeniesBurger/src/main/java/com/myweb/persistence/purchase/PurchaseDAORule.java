@@ -7,9 +7,16 @@ import com.myweb.domain.PurchaseVO;
 
 public interface PurchaseDAORule {
 	public int insert(PurchaseVO purVO);
+
 	public List<PurchaseVO> selectList(MemberPageVO mpgvo);
+
 	public List<PurchaseVO> selectList(MemberPageVO mpgvo, int mno);
+
 	public int getTotalCount(MemberPageVO mpgvo);
+
 	public int getTotalCount(MemberPageVO mpgvo, int mno);
+
 	public int selectDateSales(String todayString);
+
+	public Integer selectWeekSales(String month, int i);
 }
