@@ -89,15 +89,13 @@ public class SalesController {
 			rateList.add(json);
 		}
 		model.addAttribute("productRateList", rateList);
-	}
-
   
 		/*-------------- 요일 별 매출 -------------*/
 		cal = Calendar.getInstance();
 		List<Integer> weekSales = new ArrayList<Integer>();
 		for (int i = 1; i <= 7; i++) {
 			cal.setTime(new Date());
-			sdf = new SimpleDateFormat("MM");
+			SimpleDateFormat sdf = new SimpleDateFormat("MM");
 			String month = sdf.format(cal.getTime());
 			weekSales.add(pursv.getWeekSales(month,i));
 		}
