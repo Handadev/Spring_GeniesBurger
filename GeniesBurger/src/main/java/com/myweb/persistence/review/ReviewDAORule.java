@@ -37,4 +37,8 @@ public interface ReviewDAORule {
 	public int selectMyTotalCount(String email);
 
 	public List<PurchaseVO> selectPurchase(int mno);
+
+	public List<ReviewVO> purList(int purno);
+
+	public int adDelete(int acno);
 }

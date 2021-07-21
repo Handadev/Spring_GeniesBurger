@@ -93,4 +93,9 @@ public class ReviewService implements ReviewServiceRule {
 		return rdao.selectPurchase(mno);
 	}
 
+	@Override
+	public int adDelete(int acno) {
+		return rdao.adDelete(acno);
+	}
+
 }

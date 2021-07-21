@@ -6,9 +6,9 @@
 <h1>리뷰 테스트</h1>
 
 <form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
-<input type="hidden" name="pno" value="1">
+<input type="hidden" name="pno" value="">
+<input type="hidden" name="purno" value="">
 <input type="hidden" name="email" value="${ses.email }">
-</select>
 	<div class="form-group">
 		<label for="price">내용:</label>
 		<input type="text" class="form-control" id="content" name="rcontent" style="width:200pt">
@@ -36,6 +36,10 @@ $(document).on("click","#subBtn", function(){
 	if(title==''||content==''){
 		alert("내용을 입력하세요~");
 	} else{
+		let pno = localStorage.getItem('pno');
+		let purno = localStorage.getItem('purno');
+		$("input[name=pno]").val(pno);
+		$("input[name=purno]").val(purno);
 		$("#regForm").submit();
 	}
 });
