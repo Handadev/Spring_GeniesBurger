@@ -37,18 +37,27 @@
 								<th>price</th>
 								<th>quantity</th>
 								<th>regdate</th>
-								<th>
-								<th>
+								<th>리뷰</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${purchaseListMember }" var="purchaseListMember">
+								<input type="hidden" value="${purchaseListMember.pno }">
+								<input type="hidden" value="${purchaseListMember.purno }">
 								<tr class="text-center">
 									<td>${purchaseListMember.name }</td>
 									<td>${purchaseListMember.title }</td>
 									<td>${purchaseListMember.price }</td>
 									<td>${purchaseListMember.quantity }</td>
 									<td>${purchaseListMember.regdate }</td>
+									<c:choose>
+										<c:when test="${purchaseListMember.rlist.size() == 0} ">
+											<td><button type="button" class="revBtn btn btn-success">리뷰작성</button></td>
+										</c:when>
+										<c:otherwise>
+											<td>리뷰 작성 완료</td>
+										</c:otherwise>
+									</c:choose>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -60,5 +69,15 @@
 		</div>
 	</div>
 </section>
+
+<script>
+$(document).on("click",".revBtn",function(){
+	let pno = $(this).closest("tr").prev("input").prev("input").val();
+	let purno = $(this).closest("tr").prev("input").val();
+	localStorage.setItem("pno", pno);
+	localStorage.setItem("purno", purno);
+	location.href="/review/register";
+});
+</script>
 
 <jsp:include page="../common/footer.jsp" />

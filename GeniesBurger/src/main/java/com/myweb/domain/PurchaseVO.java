@@ -1,17 +1,22 @@
 package com.myweb.domain;
 
+import java.util.List;
+
 public class PurchaseVO {
 	private int purno;
 	private int mno;
 	private int cartno;
 	private int pno;
-	private String title;
 	private int price;
 	private int quantity;
 	private String regdate;
+	private String title;
 	private String name;
-  
-	public PurchaseVO() {}
+	private List<ReviewVO> rlist;
+
+
+	public PurchaseVO() {
+	}
 
 	public PurchaseVO(int mno, int cartno, int pno, String title, int price, int quantity) {
 		this.mno = mno;
@@ -20,6 +25,22 @@ public class PurchaseVO {
 		this.title = title;
 		this.price = price;
 		this.quantity = quantity;
+	}
+
+	public List<ReviewVO> getRlist() {
+		return rlist;
+	}
+
+	public void setRlist(List<ReviewVO> rlist) {
+		this.rlist = rlist;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getPurno() {
@@ -52,7 +73,8 @@ public class PurchaseVO {
 
 	public void setPno(int pno) {
 		this.pno = pno;
-    
+	}
+
 	public String getTitle() {
 		return title;
 	}
@@ -77,14 +99,6 @@ public class PurchaseVO {
 		this.quantity = quantity;
 	}
 
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
 	public String getRegdate() {
 		return regdate;
 	}
@@ -92,5 +106,5 @@ public class PurchaseVO {
 	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	
+
 }

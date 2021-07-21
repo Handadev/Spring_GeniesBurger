@@ -3,6 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
 <style>
+#textarea {
+	resize: none;
+	width:100%;
+	height: 100px;
+	margin-top: 20px;
+}
 img{
 	border-radius: 10px;
 	margin-right: 20px;
@@ -12,82 +18,21 @@ img{
 	background-color: #f5f5f5;
 	margin-bottom: 40px;
 	border-radius: 10px;
-	
+}
+#userComment {
+	background-color: white;
+	border-radius: 10px;
+	height: 100px;
 }
 #adComment {
 	background-color: white;
 	border-radius: 10px;
 	height: 100px;
-}
-
-#modalBtn:focus {
-	border: none;
-	outline: none;
-}
-
-#modalBtn {
-	position: fixed;
-	bottom: 5%;
-	right: 5%;
-	z-index: 1;
-	width: 80px;
-	height: 80px;
-	background-image: url("/resources/images/review-1.png");
-	background-size: auto;
-	background-position: center center;
+	margin-top: 20px;
 }
 </style>
 <div class="container">
 	<div>리뷰!</div>
-	<button type="button" id="modalBtn" class="btn rounded-circle" data-toggle="modal" data-target="#myModal"></button>
-<!-- 모달 영역!! -->
-	<!-- The Modal -->
-	<div class="modal fade" id="myModal">
-		<div class="modal-dialog modal-dialog-centered ">
-			<div class="modal-content">
-
-				<!-- Modal Header -->
-				<div class="modal-header">
-					<h4 class="modal-title">리뷰 작성</h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-
-				<!-- Modal body -->
-				<div class="container h-100">
-					<select>
-						<c:forEach items="${myPlist }" var="mpvo">
-							<option value="${mpvo.pno}">${mpvo.title }</option>
-						</c:forEach>
-					</select>
-					<div class="modal-body row justify-content-center">
-						<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
-							<input type="hidden" name="email" id="email" value="${ses.email }">
-							<input type="hidden" name="pno" value="1">
-							<div class="form-group">
-								<input type="text" class="form-control" id="content" name="rcontent" style="width: 200pt" placeholder="리뷰 내용을 작성 해주세요.">
-							</div>
-							
-							<div class="form-group">
-								<input type="file" class="form-control" id="files" name="files"	style="display: none;">
-								<button type="button" class="btn btn-outline-info btn-block" id="fileTrigger" style="width: 200pt">사진업로드</button>
-							</div>
-
-							<div class="form-group">
-								<ul class="list-group" id="fileZone"></ul>
-							</div>
-							
-						</form>
-					</div>
-				</div>
-				<!-- Modal footer -->
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" id="subBtn">리뷰작성</button>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- 모달 영역!! -->
 	<c:forEach items="${list }" var="rvo">
 		<div class="card shadow radius">
 			<div class="media">
@@ -97,94 +42,144 @@ img{
 				</c:if>
 				</a>
 				<div class="media-body">
-					<h4 class="media-heading">${rvo.email }</h4>
-					<div id="adComment">&nbsp;&nbsp; ${rvo.rcontent }</div>
-						<span>${rvo.rdate } </span>
+					<div id="userComment">
+					&nbsp;&nbsp;<b>${rvo.email }&nbsp;&nbsp;</b><span style="font-weight:lighter;">${rvo.rdate }</span><br>&nbsp;&nbsp;${rvo.rcontent }
+					</div>
 					<c:if test="${rvo.clist.size() > 0}">
 						<c:forEach items="${rvo.clist }" var="cvo">
-							<div id="adComment">&nbsp;&nbsp;<b>점장님 댓글!</b>
-							<br>
-							<br>
-							&nbsp;&nbsp;${cvo.adcomment }
+							<div id="adComment">
+								&nbsp;&nbsp;<b>점장님 댓글!</b>&nbsp;&nbsp;<span style="font-weight:lighter;">${cvo.addate }</span>
+								<br>
+								<br>
+								<span>&nbsp;&nbsp;${cvo.adcomment }</span>
 							</div>
-							<span><i class="glyphicon glyphicon-calendar"></i>${cvo.addate }</span>
+							<c:if test="${ses.email eq 'admin@admin.com' }">
+							<button type="button" class="btn btn-danger float-right adDel" style="margin-top: 20px;">삭제</button>
+							<button type="button" class="btn btn-success float-right adUp" style="margin-top: 20px; margin-right: 10px;">수정</button>
+							<input type="hidden" value="${rvo.rno }">
+							<input type="hidden" value="${cvo.acno }">
+							</c:if>
 						</c:forEach>
+					</c:if>
+					<c:if test="${ses.email eq 'admin@admin.com' && rvo.clist.size() == 0 }">
+							<input type="hidden" value="${rvo.rno }">
+							<textarea id="textarea" disabled></textarea>
+							<button type="button" class="btn btn-success adWrite float-right">댓글 작성</button>
 					</c:if>
 				</div>
 			</div>
 		</div>
 	</c:forEach>
-	<jsp:include page="reviewFooter.jsp"></jsp:include>
+<jsp:include page="reviewFooter.jsp"></jsp:include>
 </div>
 
 <script src="/resources/js/jquery.min.js"></script>
 <script>
-$(document).on("click","#modalBtn",function(){
-	let mno = ${ses.mno};	
+var div;
+$(document).on("click",".adWrite",function() {
+	$(this).prev("textarea").attr("disabled",false);
+	$(this).attr("class","btn btn-danger float-right cancel");
+	$(this).attr("style","margin-right: 20px;");
+	$(this).text("취소");
+	$(this).before("<button type='button' class='btn btn-success adReg float-right'>작성 완료</button>");
+});
+
+$(document).on("click",".cancel",function() {
+	$(this).siblings("textarea").attr("disabled",true);
+	$(this).siblings("textarea").val("");
+	$(this).attr("class","btn btn-success adWrite float-right");
+	$(this).text("댓글 작성");
+	$("button.adReg").remove();
+});
+
+$(document).on("click",".adReg",function() {
+	let adComment = $(this).siblings("textarea").val();
+	let rno = $(this).siblings("input").val();
 	$.ajax({
-		url : "/review/myPurchase/",
+		url : "/review/addAdComment",
 		type : "post",
-		data : {mno : mno}
-	}).done(function(result){
-		console.log(result);
+		data : {
+			rno : rno,
+			adComment : adComment
+		}
+	}).done(function(result) {
+		if(result == 1){
+			alert("댓글이 등록되었습니당 ㅎㅎ");
+			location.reload();
+		} else {
+			alert("댓글 등록 실패!! ㅠㅜ");
+			location.reload();
+		}
 	});
 });
 
-$(document).on("click", "#fileTrigger", function() {
-	$("#files").click();
+$(document).on("click",".adUp",function() {
+	let adComment = $(this).prev("button").prev("div").find("span").eq("1").text();
+	adComment = adComment.trim();
+	div = $(this).prev("button").prev("div").detach();
+	$(this).prev("button").before("<textarea style='width: 100%; height: 100px; margin-top: 10px;'>"+adComment+"</textarea>");
+	$(this).attr("class","btn btn-success float-right adRealUp");
+	$(this).attr("style","margin-top: 20px; margin-right: 10px;");
+	$(this).text("수정완료");
+	$(this).prev("button").attr("class","btn btn-danger float-right upCancel");
+	$(this).prev("button").attr("style","margin-top: 20px;");
+	$(this).prev("button").text("취소");
+	
 });
 
-$(document).on("click","#subBtn", function(){
-	let email = $("#email").val();
-	console.log(email);
-	let title = $("#title").val();
-	let content = $("#content").val();
-	if(email==''){
-		alert("로그인을 해주세요");
-		if(title=='') {
-			alert("내용을 입력해주세요");
-		}
-	} else{
-		$("#regForm").submit();
-	}
+$(document).on("click",".upCancel", function() {
+	$(this).prev("textarea").remove();
+	$(this).before(div);
+	$(this).attr("class","btn btn-danger float-right adDel");
+	$(this).attr("style","margin-top: 20px;");
+	$(this).text("삭제");
+	$(this).next("button").attr("class","btn btn-success float-right adUp");
+	$(this).next("button").attr("style","margin-top: 20px; margin-right: 10px;");
+	$(this).next("button").text("수정");
 });
 
-let regExp = new RegExp("\.(exe|sh|bat|js|msi|dll)$");
-let maxSize = 1048576; // 1MB
-
-function fileValidation(fname, fsize){
-	if(regExp.test(fname)){
-		alert(fname + "는 허용되지 않는 파일 형식입니다!");
-		return false;
-	}else if(fsize > maxSize){
-		alert("1MB 이하의 파일만 허용됩니다!");
-		return false;
-	}else{
-		return true;
-	}
-	
-}
-$(document).on("change", "#files", function() {
-	$("button[type=submit]").attr("disabled", false);
-	let formObj = $("#files");
-	let fileObjs = formObj[0].files;
-	let fileZone = $("#fileZone");
-	fileZone.html("");
-	
-	for (let fobj of fileObjs) {
-		let li = '<li class="list-group-item d-flex justify-content-between align-items-center">';
-		if(fileValidation(fobj.name, fobj.size)){
-			// 정상출력
-			li += fobj.name + '<span class="badge badge-success badge-pill">';
-		}else{
-			// 경고출력 후 서브밋 버튼 비활성화
-			li += '<i class="fa fa-times-rectangle" style="font-size:24px;color:red"></i>';
-			li += fobj.name + '<span class="badge badge-danger badge-pill">';
-			$("button[type=submit]").attr("disabled", true);
+$(document).on("click",".adRealUp",function() {
+	let adComment = $(this).prev("button").prev("textarea").val();
+	let rno = $(this).next("input").val();
+	console.log(adComment);
+	$.ajax({
+		url: "/review/acUpdate",
+		type: "post",
+		data: {
+			adComment:adComment,
+			rno:rno
 		}
-		li += fobj.size +' Byte</span></li>';
-		fileZone.append(li);
-	}
+	}).done(function(result) {
+		if(result == 1) {
+			alert("댓글수정 완료!");
+			location.reload();
+		} else {
+			alert("댓글 수정 실패 ㅠㅜ");
+			location.reload();
+		}
+	});
+});
+
+$(document).on("click",".adDel",function() {
+		if (confirm("정말 삭제 하시겠습니까?")) {
+			let acno = $(this).next("button").next("input").next("input").val();
+			
+			$.ajax({
+				url : "/review/acDelete",
+				type : "post",
+				data : {
+					acno : acno
+				}
+			}).done(function(result) {
+				if (result == 1) {
+					alert("댓글이 삭제 되었습니다!");
+					location.reload();
+				} else {
+					alert("댓글 삭제 실패 ㅠㅜ");
+					location.reload();
+				}
+			});
+		}
 });
 </script>
 <jsp:include page="../common/footer.jsp" />
