@@ -6,7 +6,7 @@ public class ProductVO {
 	private int pno;
 	private String title;
 	private String content;
-	private int category; // 1 버거, 2버거세트, 3버거L세트, 4올데이킹, 5올데이킹세트, 6올데이킹L세트, 7사이드 , 8음료
+	private int category; // 1 버거, 2버거세트, 3버거L세트, 4올데이킹, 5올데이킹세트, 6올데이킹L세트, 7사이드 , 8음료, 9햄버거추가재료
 	private int price;
 	private int calorie;
 	private String regdate;

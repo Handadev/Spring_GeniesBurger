@@ -61,6 +61,11 @@ public class ProductDAO implements ProductDAORule {
 		return sql.selectOne(NS+"wantLarger", map);
 	}
 	
+	@Override // 3번 모달 추가 재료 리스트 출력
+	public List<ProductVO> selectBurgerStockList() {
+		return sql.selectList(NS+"getBurgerStock");
+	}
+	
 	@Override // 4번 모달 사이드 리스트 출력
 	public List<ProductVO> selectSideList() {
 		return sql.selectList(NS+"getSides");

@@ -27,6 +27,7 @@
 					<option value="6">올데이할인 버거 라지 세트</option>
 					<option value="7">사이드</option>
 					<option value="8">음료</option>
+					<option value="9">햄버거 추가 재료</option>
 				</select>
 			</div>
 
