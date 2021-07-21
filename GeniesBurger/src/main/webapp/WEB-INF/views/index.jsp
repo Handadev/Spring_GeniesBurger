@@ -133,11 +133,11 @@ color:#e31212;
 .product_div:hover{
 color:#f74f4f;
 }
-.product_div{
+/* .product_div{
 cursor: pointer;
 -webkit-box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83); 
 box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
-}
+} */
 </style>
 
 <!-- 메뉴 상단이미지 삭제 -->
@@ -569,7 +569,7 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 			console.log(err);
 		});
 	}
-	function show_ingredient(list, pno, category){
+	function show_ingredient(pObj, pno, category){
 		$("#add_ingredient_modal").modal("show");
 		let ingredientZone = $("#ingredientZone");
 		let ingredientZoneFooter = $("#ingredientZoneFooter");
@@ -578,10 +578,13 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 		ingredientZoneFooter.html("");
 		html = '';
 		
-		for (let svo of list) {
+		for (let pvo of pObj) {
 			html += '<div class="checkbox row">';
-			html += '<input type="checkbox" name="sname" id="'+svo.sname+'" value="'+svo.sname+'" class="checkbox">';
-			html += '<label class="check_label" for="'+svo.sname+'">'+svo.sname+'</label></div>';
+			html += '<input type="checkbox" name="sname" id="'+pvo.title+'" value="" data-title="'+pvo.title+'" data-price="'+pvo.price+'" class="checkbox">';
+			html += '<label class="check_label" for="'+pvo.title+'">'+pvo.title+'&nbsp;&nbsp;'+pvo.price+'</label></div>';
+			for (let list of pvo.flist) {
+				html += '<img class="img-fluid" src="/upload/'+list.savedir+'/'+list.puuid+'_th_'+list.fname+'" style="height:70px; width:120px;"/>';
+			}
 		}
 		
 		let fhtml = '';
@@ -598,18 +601,22 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 	
 	/* 재료 추가하면 작동 */
 	function confirm_extra(pno, category) {
-		let extraArr = [];
+		let priceArr = [];
+		let titleArr = [];
 		let mno = '<c:out value="${ses.mno}"/>';
 		$("input:checkbox[name=sname]:checked").each(function() {
-			let ingredients = $(this).val();
-			extraArr.push(ingredients);
+			let price = $(this).data("price");
+			let title = $(this).data("title");
+			priceArr.push(price);
+			titleArr.push(title);
 		})
-		if (extraArr.length != 0 ) {
+		if (priceArr.length != 0 ) {
 			$.ajax({
 				url : "/addExtra",
 				type : "post",
 				data : {
-					list : extraArr,
+					titleList : titleArr,
+					priceList : priceArr,
 					mno : mno,
 					pno : pno,
 				}
@@ -904,6 +911,8 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 				}
 			}).done(function(){
 				console.log("상품 등록 성공");
+				alert("상품이 장바구니에 추가되었습니다");
+				$("#beverage_modal").modal("hide");
 			}).fail(function(err){
 				console.log("상품 등록 실패");
 				console.log(err);

@@ -41,9 +41,6 @@ public class HomeController {
 	private ProductServiceRule psv;
 
 	@Inject
-	private StockServiceRule ssv;
-
-	@Inject
 	private AddExtraServiceRule aesv;
 
 	@GetMapping("/")
@@ -100,16 +97,18 @@ public class HomeController {
 	@ResponseBody // 버거 재료 선택 화면
 	@GetMapping(value = "/getBurgerStock", produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
-	public ResponseEntity<List<StockVO>> getBurgerStock() {
-		return new ResponseEntity<List<StockVO>>(ssv.getBurgerStockList(), HttpStatus.OK);
+	public ResponseEntity<List<ProductVO>> getBurgerStock() {
+		return new ResponseEntity<List<ProductVO>>(psv.getBurgerStockList(), HttpStatus.OK);
 	}
 
 	@ResponseBody // 선택한 재료 tbl_add_extra에 추가
 	@PostMapping("/addExtra")
-	public void addExtra(@RequestParam(value = "list[]") List<String> list, @RequestParam("mno") int mno,
-			@RequestParam("pno") int pno) {
-		for (int i = 0; i < list.size(); i++) {
-			aesv.register(new AddExtraVO(mno, pno, list.get(i)));
+	public void addExtra(@RequestParam(value = "titleList[]") List<String> titleList,
+						@RequestParam(value = "priceList[]") List<Integer> priceList,
+						@RequestParam("mno") int mno,
+						@RequestParam("pno") int pno) {
+		for (int i = 0; i < titleList.size(); i++) {
+			aesv.register(new AddExtraVO(mno, pno, priceList.get(i), titleList.get(i)));
 		}
 	}
 

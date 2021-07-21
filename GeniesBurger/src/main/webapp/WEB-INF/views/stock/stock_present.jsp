@@ -175,19 +175,6 @@ function insert_stock() {
 	if($("input:checkbox[name=insert_isburger]").is(":checked") == true) {
 		isburger_val = 1;
 	}
-	if($("input:text[name=insert_sname]")).is("와퍼패티") == true) {
-		extra_price_val = 2900;
-	}else($("input:text[name=insert_sname]")).is("패티") == true) {
-		extra_price_val = 2000;
-	}else($("input:text[name=insert_sname]")).is("치즈") == true) {
-		extra_price_val = 300;
-	}else($("input:text[name=insert_sname]")).is("롱베이컨") == true) {
-		extra_price_val = 600;
-	}else($("input:text[name=insert_sname]")).is("통새우") == true) {
-		extra_price_val = 300;
-	}else($("input:text[name=insert_sname]")).is("할라피뇨") == true) {
-		extra_price_val = 400;
-	}
 	console.log("isburger " + isburger_val)
 	if (sname_val == null || sname_val == '') {
 		if (qty_val == null || qty_val == ''){
@@ -201,8 +188,7 @@ function insert_stock() {
 			sname : sname_val,
 			stock_qty : qty_val,
 			shelf_life : shelf_life_val,
-			isburger : isburger_val,
-			extra_price : extra_price_val
+			isburger : isburger_val
 		};
 		$.ajax({
 			url : "/stock/register",

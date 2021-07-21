@@ -8,24 +8,21 @@ public class AddExtraVO {
 	private int price;
 	private String sname;
 	private String title;
+	private int quantity;
+	private int cartno;
 	
 	public AddExtraVO() {
 	}
 	
-	// stock에서 price 처리되기 전까지 쓰는 생성자
-	public AddExtraVO(int mno, int pno, String sname) {
-		this.mno = mno;
-		this.pno = pno;
-		this.sname = sname;
-	}
-
+	
+	// 재료 추가
 	public AddExtraVO(int mno, int pno, int price, String sname) {
 		this.mno = mno;
 		this.pno = pno;
 		this.price = price;
 		this.sname = sname;
 	}
-	
+
 	// 사이드, 음료 추가
 	public AddExtraVO(int mno, int pno, String title, int price) {
 		this.mno = mno;
@@ -72,7 +69,21 @@ public class AddExtraVO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
-	
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
+	}
+
+	public int getCartno() {
+		return cartno;
+	}
+
+	public void setCartno(int cartno) {
+		this.cartno = cartno;
+	}
 	
 }
