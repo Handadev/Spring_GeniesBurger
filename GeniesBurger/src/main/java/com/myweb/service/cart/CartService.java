@@ -41,12 +41,10 @@ public class CartService implements CartServiceRule {
 		List<CartVO> list = new ArrayList<CartVO>();
 		List<CartVO> clist =  cartdao.selectList(mno);
 		for (CartVO cartvo : clist) {
-			int pno = cartvo.getPno();
-			List<AddExtraVO> aelist = aedao.selectList(mno, pno);
+			List<AddExtraVO> aelist = aedao.selectAddExtraList(cartvo);
 			cartvo.setAelist(aelist);
 			list.add(cartvo);
 		}
-		
 		return list;
 	}
 

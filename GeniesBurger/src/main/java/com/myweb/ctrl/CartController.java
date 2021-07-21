@@ -96,7 +96,7 @@ public class CartController {
 //			int isUp = cartsv.register(cartvo);
 //			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
 //		}
-		int isUp = cartsv.register(cartvo);
+		int isUp = cartsv.register(cartvo); // 서비스에서 add_extra에 cartno 넣어줌
 		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
 		return "redirect:/";
 	}
