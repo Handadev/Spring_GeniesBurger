@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myweb.domain.AddExtraVO;
 import com.myweb.domain.CartVO;
@@ -24,9 +25,15 @@ public class CartService implements CartServiceRule {
 	@Inject
 	private AddExtraDAORule aedao;
 	
+	@Transactional
 	@Override
 	public int register(CartVO cartvo) {
-		return cartdao.insert(cartvo);
+		int isUp = cartdao.insert(cartvo);
+		if (isUp > 0 ) {
+			CartVO cvo = cartdao.selectCurrCart();
+			isUp = aedao.updateCartno(cvo);
+		}
+		return isUp;
 	}
 
 	@Override
@@ -93,6 +100,7 @@ public class CartService implements CartServiceRule {
 	public List<CartVO> getOrderList(int mno) {
 		return cartdao.selectOrderList(mno);
 	}
+
 
 	
 

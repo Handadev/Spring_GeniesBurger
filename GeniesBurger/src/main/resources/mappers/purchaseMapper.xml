@@ -46,7 +46,7 @@
 	</select>
 	<select id="totalListMember" parameterType="hashmap" resultType="purvo" >
 		<![CDATA[
- 		select rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME  
+ 		select rownum, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME  
 		from(select /*INDEX_DESC(tbl_purchase pk_purchase)*/
 		rownum as rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME 
 		from V_MEMBER_PUR
@@ -55,7 +55,7 @@
  		]]>
  			<include refid="search"></include>
 		<![CDATA[		
- 			and rownum <= #{pageIndex} * #{countPerPage})
+ 			and rownum <= #{pageIndex} * #{countPerPage} ORDER BY purno desc)
         	where rn > (#{pageIndex}-1) * #{countPerPage}
  		]]>
  		and mno=#{mno}
@@ -69,8 +69,8 @@
 			select count(purno) FROM tbl_purchase WHERE purno > 0 and mno=#{mno}
    </select>
    
-   <select id="dateSalesList" parameterType="String" resultType="int">
- 			SELECT price FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString}
+   <select id="dateSales" parameterType="String" resultType="int">
+ 			SELECT NVL(sum(price),0) FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString}
    </select>
   
 	

@@ -28,4 +28,6 @@ public interface ReviewServiceRule {
 	public int getMyTotalCount(String email);
 
 	public List<PurchaseVO> getMyPurchase(int mno);
+
+	public int adDelete(int acno);
 }

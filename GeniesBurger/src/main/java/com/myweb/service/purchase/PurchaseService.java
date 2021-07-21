@@ -1,5 +1,6 @@
 package com.myweb.service.purchase;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 import com.myweb.domain.MemberPageVO;
 import com.myweb.domain.PurchaseVO;
+import com.myweb.domain.ReviewVO;
 import com.myweb.persistence.purchase.PurchaseDAORule;
+import com.myweb.persistence.review.ReviewDAORule;
 
 @Service
 public class PurchaseService implements PurchaseServiceRule {
@@ -18,6 +21,9 @@ public class PurchaseService implements PurchaseServiceRule {
 
 	@Inject
 	private PurchaseDAORule pdao;
+
+	@Inject
+	private ReviewDAORule rdao;
 
 	@Override
 	public int register(PurchaseVO purvo) {
@@ -31,7 +37,16 @@ public class PurchaseService implements PurchaseServiceRule {
 
 	@Override
 	public List<PurchaseVO> getList(MemberPageVO mpgvo, int mno) {
-		return pdao.selectList(mpgvo, mno);
+		List<PurchaseVO> list = new ArrayList<PurchaseVO>();
+		List<PurchaseVO> purList = pdao.selectList(mpgvo, mno);
+		for (PurchaseVO purVO : purList) {
+			int purno = purVO.getPurno();
+			logger.info("purno >>>>>>>>>>>>>>>"+purno);
+			List<ReviewVO> rlist = rdao.purList(purno);
+			purVO.setRlist(rlist);
+			list.add(purVO);
+		}
+		return list;
 	}
 
 	@Override
@@ -45,8 +60,8 @@ public class PurchaseService implements PurchaseServiceRule {
 	}
 
 	@Override
-	public List<Integer> getDateSalesList(String todayString) {
-		return pdao.selectDateSalesList(todayString);
+	public int getDateSales(String todayString) {
+		return pdao.selectDateSales(todayString);
 	}
 
 }
