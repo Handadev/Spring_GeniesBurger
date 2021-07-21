@@ -58,7 +58,7 @@
   		select *
   		from (select /*+INDEX_DESC(tbl_product category)*/
   			rownum AS rn , pno, title, price, category, sales, cansale, regdate, moddate
-			from tbl_product where pno > 0
+			from tbl_product where pno > 0 and not category = 9
   		]]>
   		<include refid="search"/>
   		<![CDATA[
@@ -70,7 +70,7 @@
 	 <!-- 소비자 리스트 서치토탈 -->
   	<select id="totalcountcustomer" parameterType="pcpgvo" resultType="int">
   		<![CDATA[
-  		select count(pno) as cnt from tbl_product where pno > 0
+  		select count(pno) as cnt from tbl_product where pno > 0 and not category = 9
   		]]>
   		<include refid="search"/>
   	</select>
@@ -132,15 +132,25 @@
 		</trim>
   	</select>
   	
+  	<!-- 3번 모달 추가 재료 리스트 출력 -->
+  	<select id="getBurgerStock" resultType="pvo">
+  		select * from tbl_product where category = 9
+  	</select>
+  	
   	<!-- 4번 모달 사이드 고르기에서 사이드 메뉴 출력 -->
   	<select id="getSides" resultType="pvo">
-  		select * from tbl_product where category = 7
+  		select * from tbl_product where category = 7 and cansale = 0
   	</select>
   	
   	<!-- 5번 모달 음료 고르기에서 음료 메뉴 출력 -->
   	<select id="getBeverage" resultType="pvo">
-  		select * from tbl_product where category = 8
+  		select * from tbl_product where category = 8 and cansale = 0
   	</select>
+  	
+  	<update id="salesUp" parameterType="hashmap">
+  		update tbl_product set
+  		sales = sales + #{sales} where pno = #{pno}
+  	</update>
   	
   	<select id="detail" parameterType="int" resultType="pvo">
   		select * from tbl_product where pno = #{pno}

@@ -14,7 +14,8 @@
 }
 .container-login{
 	margin-top: 30px;
-  text-align: center;
+	margin-bottom: 50px;
+    text-align: center;
 }
 .input-btn-block{
   margin: auto;
@@ -59,7 +60,7 @@
 				placeholder="Enter birth day" name="birthday">
 		</div>
 		<button type="button" class="btn-block btn-danger input-btn-block"
-			id="submitBtn">Submit</button>
+			id="submitBtn">가입</button>
 	</form>
 </div>
 

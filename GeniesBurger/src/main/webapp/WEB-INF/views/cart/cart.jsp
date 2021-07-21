@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <style>
@@ -8,15 +9,19 @@
     min-width: 100%;
     min-height: 100%;
   }
+
   .modal-title {
     margin: auto;
   }
+
   .modal-body {
     text-align: center; 
   }
+
   .modal-img {
     margin: 10px;
   }
+
   .checkBtn {
     margin-top: 15px;
     width: 90%;
@@ -43,36 +48,36 @@
   }
 </style>
 
-<section class="ftco-section ftco-cart">
-   <div class="container">
-      <div class="row">
-         <div class="col-md-12 ftco-animate">
-            <div class="cart-list">
-               <table class="table">
-                  <thead class="thead-primary">
-                     <tr class="text-center">
-                        <th>&nbsp;</th>
-                        <th>상품</th>
-                        <th>수량</th>
-                        <th>가격</th>
-                        <th>&nbsp;</th>
-                     </tr>
-                  </thead>
-                  <tbody>
-                     <c:forEach items="${cartList }" var="cartList">
-                        <c:choose>
-                           <c:when test="${ses.mno == cartList.mno }">
+<section class="ftco-section ftco-cart" style="background-color: #F1EAE5;">
+   <c:choose>
+      <c:when test="${cartList[0].title eq null || cartList[0].title eq  '' }">
+         <img src="/resources/icons/nolist_logo.png" style="width: 350px; display: block; margin: auto; margin-top: 50px;">
+      </c:when>
+      <c:otherwise>
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12 ftco-animate">
+                     <table class="table">
+                        <thead class="thead-primary">
+                        <!-- 결론! 장바구니가 비어있어도 cartList : not null -->
                               <tr class="text-center">
-                                 <%-- <td id="pnoVal">pno : ${cartList.pno }</td> --%>
-                                 <%-- <td id="mno_val">mno : ${cartList.mno }</td> --%>
-                                 <td class="image-prod">
-                                 <img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none">
-                                 
-                                 </td>
-                                 <td class="product-name">
-                                    <h3>${cartList.title }</h3>
-                                 </td>
-                                 <td class="quantity">
+                                 <th>&nbsp;</th>
+                                 <th>상품</th>
+                                 <th>수량</th>
+                                 <th>가격</th>
+                                 <th>&nbsp;</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                           <c:forEach items="${cartList }" var="cartList">
+                                    <tr class="text-center">
+                                       <td class="image-prod">
+                                       <img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none" style="width:160px;">
+                                       </td>
+                                       <td class="product-name">
+                                          <h3>${cartList.title }</h3>
+                                       </td>
+                                       <td class="quantity">
                                     <div class="btn-center-div">
                                        <button type="button" class="btn-sm btn-outline-danger downQtyBtn"
                                           data-downqty="${cartList.cartno }" data-down="-1" data-qtydata="${cartList.quantity }">▽</button>
@@ -83,38 +88,41 @@
                                           data-upqty="${cartList.cartno }" data-up="1">△</button>
                                     </div>
                                  </td>
-                                 <td class="price">₩ ${cartList.price }</td>
-                                 <td class="product-remove">
-                                    <button type="button"
-                                       class="btn-sm btn-danger removeBtn"
-                                       style="width: 50px;" data-cartno="${cartList.cartno }">삭제
-                                    </button>
-                                 </td>
-                              </tr>
-                           </c:when>
-                        </c:choose>
+
+                                 
+                                       <td class="price">₩<fmt:formatNumber value="${cartList.price }" pattern="#,###"/></td>
+                                       <td class="product-remove">
+                                          <button type="button"
+                                             class="btn-sm btn-danger removeBtn detailBtn"
+                                             style="width: 50px;" data-cartno="${cartList.cartno }">삭제
+                                          </button>
+                                       </td>
+                                    </tr>
+                                    <script>
+                                       $(".ftco-cart").css("background-color", "white");
+                                    </script>
+                           </c:forEach>
+                        </tbody>
+                     </table>
+                  <div style="font-size:2em; margin-top:30px; text-align: center; width:100%">
+                     <c:forEach items="${cartList }" var="cartList">
+                        <c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
                      </c:forEach>
-                  </tbody>
-               </table>
+                     총 주문금액 :
+                       <fmt:formatNumber value="${sum}" pattern="#,###"/>원
+                     <br>
+                     <button type="button" class="btn-lg btn-danger" style="width:280px"
+                     data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
+                  </div>
+               </div>
             </div>
          </div>
-         <div style="font-size:2em; margin-top:30px; text-align: center; width:100%">
-            <c:forEach items="${cartList }" var="cartList">
-               <c:if test="${ses.mno == cartList.mno }">
-                  <c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
-               </c:if>
-            </c:forEach>
-            <c:if test="${ses.mno != null}">
-            총 주문금액 :
-            <c:out value="${sum }"/>원
-            <br>
-            <button type="button" class="btn-lg btn-danger" style="width:280px"
-            data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
-            </c:if>
-         </div>
-      </div>
-   </div>
+      </c:otherwise>
+   </c:choose>
 </section>
+
+<fmt:formatNumber value="${money}" pattern="#,###"/>
+
 <!-- Modal -->
    <div class="container">
        <!-- Modal -->
@@ -139,13 +147,14 @@
             <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
             <p><b>포장주문</b></p>
             </div>
-             <a href="/cart/payment?mno=${ses.mno }" class="btn btn-dark checkBtn">확인</a>
+             <a href="/cart/payment?mno=${ses.mno }" class="btn-lg btn-dark checkBtn" style="width:100px;">확인</a>
             <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
       </div>
     </div>
   </div>
+  
 <!-- Modal 이미지 겹치기 스크립트 -->
 <script>
 $(document).on("click", "#background1", function() {
@@ -160,13 +169,6 @@ $(document).on("click", "#background2", function() {
    $("#check1").html("");
 });
 
-/* $("#confirmBtn").click(function () {
-   if($("#check1").text() == "" &&  $("#check2").text() == "") {
-      alert("choose one");
-   } else {
-      $(".checkBtn").attr("href", '/cart/payment?mno='+"${ses.mno }");
-   }
-}); */
 </script>
 
 <!-- 삭제 스크립트 -->
@@ -199,36 +201,36 @@ $(document).on("click", "#background2", function() {
 </script>
 <!-- Quantity 스크립트 -->
 <script>
-   /* 수량 감소 */
-   $(document).on("click", ".downQtyBtn", function(e) {
-      console.log(this);
-      let downqty_val = $(this).data("downqty");
-      let downqty_val2 = $(this).data("down");
-      let qtyData = $(this).data("qtydata");
-      console.log("qtyData : " + qtyData);
-      console.log("downqty_val : " + downqty_val);
-      console.log("downqty_val2 : " + downqty_val2);
-      if(qtyData == 1){
-         alert("더 이상 감소가 불가능합니다.");
-      }else{
-      downqty_cart(downqty_val, downqty_val2);
-      }
-   });
-   function downqty_cart(downqty, downqty2) {
-      $.ajax({
-         url : "/cart/" + downqty,
-         type : "post",
-         data : {
-            downqty_key : downqty2
-         }
-      }).done(function(result) {
-         alert("수량 감소 성공");
-         location.reload();
-      }).fail(function(err) {
-         alert("수량 감소 실패");
-         location.reload();
-      });
+/* 수량 감소 */
+$(document).on("click", ".downQtyBtn", function(e) {
+   console.log(this);
+   let downqty_val = $(this).data("downqty");
+   let downqty_val2 = $(this).data("down");
+   let qtyData = $(this).data("qtydata");
+   console.log("qtyData : " + qtyData);
+   console.log("downqty_val : " + downqty_val);
+   console.log("downqty_val2 : " + downqty_val2);
+   if(qtyData == 1){
+      alert("더 이상 감소가 불가능합니다.");
+   }else{
+   downqty_cart(downqty_val, downqty_val2);
    }
+});
+function downqty_cart(downqty, downqty2) {
+   $.ajax({
+      url : "/cart/" + downqty,
+      type : "post",
+      data : {
+         downqty_key : downqty2
+      }
+   }).done(function(result) {
+      alert("수량 감소 성공");
+      location.reload();
+   }).fail(function(err) {
+      alert("수량 감소 실패");
+      location.reload();
+   });
+}
 
    /* 수량 증가 */
    $(document).on("click", ".upQtyBtn", function(e) {
@@ -256,6 +258,24 @@ $(document).on("click", "#background2", function() {
          location.reload();
       });
    }
+   
 </script>
 
 <jsp:include page="../common/footer.jsp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

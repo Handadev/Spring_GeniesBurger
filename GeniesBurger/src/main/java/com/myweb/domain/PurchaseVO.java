@@ -107,4 +107,12 @@ public class PurchaseVO {
 		this.regdate = regdate;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

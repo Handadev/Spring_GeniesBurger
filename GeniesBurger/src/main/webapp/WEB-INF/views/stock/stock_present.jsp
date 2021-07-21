@@ -43,99 +43,99 @@ label {
 }
 </style>
 
-	<!-- ============================================================== -->
-	<!-- Bread crumb and right sidebar toggle -->
-	<!-- ============================================================== -->
-	<div class="page-breadcrumb">
-		<div class="row">
-			<div class="col-7 align-self-center">
-				<h3
-					class="page-title text-truncate text-dark font-weight-medium mb-1">
-					재고 관리</h3>
-				<div class="d-flex align-items-center"></div>
-			</div>
-
+<!-- ============================================================== -->
+<!-- Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+<div class="page-breadcrumb">
+	<div class="row">
+		<div class="col-7 align-self-center">
+			<h3
+				class="page-title text-truncate text-dark font-weight-medium mb-1">
+				재고 관리</h3>
+			<div class="d-flex align-items-center"></div>
 		</div>
-	</div>
-	<!-- ============================================================== -->
-	<!-- End Bread crumb and right sidebar toggle -->
-	<!-- ============================================================== -->
 
+	</div>
+</div>
+<!-- ============================================================== -->
+<!-- End Bread crumb and right sidebar toggle -->
+<!-- ============================================================== -->
+
+<!-- ============================================================== -->
+<!-- Container fluid  -->
+<!-- ============================================================== -->
+<div class="container-fluid">
 	<!-- ============================================================== -->
-	<!-- Container fluid  -->
+	<!-- Start Page Content -->
 	<!-- ============================================================== -->
-	<div class="container-fluid">
-		<!-- ============================================================== -->
-		<!-- Start Page Content -->
-		<!-- ============================================================== -->
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body">
-						<h4 class="card-title">재고 입력</h4>
-						<form>
-							<div class="form-body">
-								<div class="row">
-									<div class="col-md-4">
-										<div class="form-group">
-											<label>이름</label> <input type="text" class="form-control"
-												placeholder="이름" id="insert_sname">
-										</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">재고 입력</h4>
+					<form>
+						<div class="form-body">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="form-group">
+										<label>이름</label> <input type="text" class="form-control"
+											placeholder="이름" id="insert_sname" name="insert_sname">
 									</div>
-									<div class="col-md-2">
-										<div class="form-group">
-											<label>수량</label> <input type="number" class="form-control"
-												placeholder="수량" id="insert_qty">
-										</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<label>수량</label> <input type="number" class="form-control"
+											placeholder="수량" id="insert_qty">
 									</div>
-									<div class="col-md-3">
-										<div class="form-group">
-											<label>유통기한</label> <input type="date" class="form-control"
-												id="insert_shelf_life">
-										</div>
+								</div>
+								<div class="col-md-3">
+									<div class="form-group">
+										<label>유통기한</label> <input type="date" class="form-control"
+											id="insert_shelf_life">
 									</div>
-									<div class="col-md-2">
-										<div class="form-group">
-											<label>버거 재료 여부</label>
-											<div class="custom-control custom-checkbox">
-												<input type="checkbox" class="custom-control-input"
-													id="customCheck1" name="insert_isburger"> <label
-													class="custom-control-label" for="customCheck1"></label>
-											</div>
+								</div>
+								<div class="col-md-2">
+									<div class="form-group">
+										<label>버거 재료 여부</label>
+										<div class="custom-control custom-checkbox">
+											<input type="checkbox" class="custom-control-input"
+												id="customCheck1" name="insert_isburger"> <label
+												class="custom-control-label" for="customCheck1"></label>
 										</div>
 									</div>
 								</div>
+							</div>
 
+						</div>
+						<div class="form-actions">
+							<div class="text-left">
+								<button type="button" class="btn btn-info" id="submit">Submit</button>
+								<button type="reset" class="btn btn-dark">Reset</button>
 							</div>
-							<div class="form-actions">
-								<div class="text-left">
-									<button type="button" class="btn btn-info" id="submit">Submit</button>
-									<button type="reset" class="btn btn-dark">Reset</button>
-								</div>
-							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
+	</div>
 
-		<div class="row">
-			<div class="col-12">
-				<div class="card">
-					<div class="card-body">
-						<h4 class="card-title">재고 현황</h4>
-						<div id="accordion" style="clear: both;" class="d-flex flex-wrap"></div>
-					</div>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">재고 현황</h4>
+					<div id="accordion" style="clear: both;" class="d-flex flex-wrap"></div>
 				</div>
 			</div>
 		</div>
-		<!-- ============================================================== -->
-		<!-- End PAge Content -->
-		<!-- ============================================================== -->
 	</div>
 	<!-- ============================================================== -->
-	<!-- End Container fluid  -->
+	<!-- End PAge Content -->
 	<!-- ============================================================== -->
+</div>
+<!-- ============================================================== -->
+<!-- End Container fluid  -->
+<!-- ============================================================== -->
 <!-- The Modal -->
 <div class="modal" id="modifyModal">
 	<div class="modal-dialog">
@@ -171,6 +171,7 @@ function insert_stock() {
 	let qty_val = $("#insert_qty").val();
 	let shelf_life_val = $("#insert_shelf_life").val();
 	let isburger_val = 0;
+	let extra_price_val = 0;
 	if($("input:checkbox[name=insert_isburger]").is(":checked") == true) {
 		isburger_val = 1;
 	}

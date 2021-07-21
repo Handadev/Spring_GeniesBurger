@@ -9,7 +9,7 @@
 		<div class="row">
 			<div class="col" style="margin-bottom: 10px;">
 				<form action="/member/list" class="form-inline justify-content-end">
-				<p style="font-size:2em; margin-right:600px;">ADMIN PAGE</p>
+				<p style="font-size:2em; margin-right:450px;">회원정보</p>
 					<select class="form-control" name="range">
 						<option value="en"
 							<c:out value="${pghdl.mpgvo.range eq 'en' ? 'selected' : '' }"/>>Email+Name</option>
@@ -28,43 +28,42 @@
 				</form>
 			</div>
 			<div class="col-md-12 ftco-animate">
-				<div class="cart-list">
-					<table class="table">
-						<thead class="thead-primary">
+				<table class="table">
+					<thead class="thead-primary">
+						<tr class="text-center">
+							<th>넘버</th>
+							<th>이메일</th>
+							<th>이름</th>
+							<th>전화번호</th>
+							<th>주소</th>
+							<th>생일</th>
+							<th>포인트</th>
+							<th>
+							<th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${mList }" var="mList">
 							<tr class="text-center">
-								<th>Number</th>
-								<th>Email</th>
-								<th>Name</th>
-								<th>Mobile</th>
-								<th>Address</th>
-								<th>Birthday</th>
-								<th>Point</th>
-								<th>
-								<th>
+								<td>${mList.mno }</td>
+								<td>${mList.email }</td>
+								<td>${mList.name }</td>
+								<td>${mList.mobile }</td>
+								<td>${mList.address }</td>
+								<td>${mList.birthday }</td>
+								<td>${mList.point }</td>
+								<td>
+								&nbsp;
+									<button type="button"
+										class="btn-sm btn-danger removeBtn detailBtn"
+										data-mno="${mList.mno }">삭제</button>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${mList }" var="mList">
-								<tr class="text-center">
-									<td>${mList.mno }</td>
-									<td>${mList.email }</td>
-									<td>${mList.name }</td>
-									<td>${mList.mobile }</td>
-									<td>${mList.address }</td>
-									<td>${mList.birthday }</td>
-									<td>${mList.point }</td>
-									<td>
-										<button type="button"
-											class="btn-sm btn-danger removeBtn detailBtn"
-											data-mno="${mList.mno }">삭제</button>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-					</table>
-				</div>
-				<jsp:include page="paging.jsp" />
+						</c:forEach>
+					</tbody>
+					<tfoot>
+				</table>
+			<jsp:include page="paging.jsp" />
 			</div>
 		</div>
 	</div>

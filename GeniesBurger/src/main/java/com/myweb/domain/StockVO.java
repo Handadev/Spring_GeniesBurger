@@ -1,7 +1,5 @@
 package com.myweb.domain;
 
-import java.util.List;
-
 public class StockVO {
 	private int sno;
 	private String sname;
@@ -46,12 +44,10 @@ public class StockVO {
 	public void setIsburger(int isburger) {
 		this.isburger = isburger;
 	}
-
 	@Override
 	public String toString() {
 		return "StockVO [sno=" + sno + ", sname=" + sname + ", stock_qty=" + stock_qty + ", shelf_life=" + shelf_life
 				+ ", stock_regdate=" + stock_regdate + ", isburger=" + isburger + "]";
 	}
-	
-	
+
 }

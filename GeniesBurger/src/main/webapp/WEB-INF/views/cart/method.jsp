@@ -11,7 +11,7 @@
     box-shadow: 1px 1px 1px 1px;
     border: none;
     width: 850px;
-    height: 550px;
+    height: 750px;
     margin: auto;
   }
 
@@ -44,5 +44,11 @@
     <a href="#"><img src="/resources/images/payco.png" class="img"></a>
     <br><br><br><br><br><br><br>
   </div>
-
+<script>
+var data = '';
+	if(localStorage.getItem('price')) {
+		data = localStorage.getItem('price');
+		console.log("***data : " + data);
+	}
+</script>
 <jsp:include page="../payCommon/payFooter.jsp" />

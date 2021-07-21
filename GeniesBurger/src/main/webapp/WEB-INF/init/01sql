@@ -98,22 +98,6 @@ start with 1
 increment by 1
 nocycle nocache;
 
------------------------상품 주문내역-------------------------
-DROP SEQUENCE seq_purchase_purno;
-DROP TABLE tbl_purchase;
-
-CREATE table tbl_purchase(
-   purno number(11),
-   mno number(11),
-   cartno number(11),
-   regdate DATE DEFAULT sysdate,
-   constraint pk_purchase primary key(purno)
-);
-create sequence seq_purchase_purno
-start with 1
-increment by 1
-nocycle nocache;
-
 -----------------------쿠폰-------------------------
 DROP SEQUENCE seq_coupon_cpno;
 DROP TABLE tbl_coupon;
@@ -201,6 +185,7 @@ stock_qty number(11) not null,
 shelf_life date not null,
 stock_regdate date default sysdate,
 isburger number(2) DEFAULT 0,
+extra_price number(11),
 constraint pk_stock primary key(sno)
 );
 
@@ -263,6 +248,7 @@ nocycle nocache;
 
 ------------------ 상품 주문 내역 --------------------
 DROP TABLE TBL_PURCHASE;
+DROP SEQUENCE seq_purchase_purno;
 
 CREATE table tbl_purchase(
    purno number(11),
@@ -280,3 +266,16 @@ create sequence seq_purchase_purno
 start with 1
 increment by 1
 nocycle nocache;
+
+
+------------------주문 내역 view--------------------
+// 권한 설정
+conn system/oracle
+grant create view to geniesburger;
+
+CREATE OR REPLACE VIEW V_MEMBER_PUR AS
+SELECT purno, tp.mno, cartno, pno, title, price, quantity, tp.regdate, tm.email, tm.name   
+FROM TBL_PURCHASE tp
+INNER JOIN TBL_MEMBER tm
+ON tp.mno = tm.mno;
+

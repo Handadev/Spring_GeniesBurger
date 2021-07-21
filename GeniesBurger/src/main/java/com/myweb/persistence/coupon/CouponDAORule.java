@@ -20,4 +20,5 @@ public interface CouponDAORule {
 	public int cancel(int cplno);
 	public int issueTotalCount(CouponPageVO cpgvo);
 	public List<CouponListVO> myCouponList(int mno);
+	public List<CouponListVO> enddateList();
 }

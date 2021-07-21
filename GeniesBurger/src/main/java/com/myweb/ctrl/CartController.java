@@ -29,6 +29,7 @@ import com.myweb.domain.PurchaseVO;
 import com.myweb.handler.MemberPagingHandler;
 import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.coupon.CouponServiceRule;
+import com.myweb.service.product.ProductServiceRule;
 import com.myweb.service.product_stock.ProductStockServiceRule;
 import com.myweb.service.purchase.PurchaseServiceRule;
 import com.myweb.service.stock.StockServiceRule;
@@ -46,26 +47,32 @@ public class CartController {
 
 	@Inject
 	private PurchaseServiceRule pursv;
-	
+
 	@Inject
 	private ProductStockServiceRule pssv;
-	
+
 	@Inject
 	private StockServiceRule ssv;
 	
+	@Inject
+	private ProductServiceRule psv;
 
+	// 주문완료
 	@GetMapping("/complete")
 	public void complete() {
 	}
 
+	// 카드 결제 중
 	@GetMapping("/creditcard")
 	public void creditcard() {
 	}
 
+	// 결제 시 방법(카드 or 페이코 // 페이코는 현재 적용 안됨)
 	@GetMapping("/method")
 	public void method() {
 	}
 
+	// 첫 번째 결제창
 	@GetMapping("/payment")
 	public void payment(@RequestParam("mno") int mno, Model model, RedirectAttributes reAttr) {
 		List<CartVO> list = cartsv.payment(mno);
@@ -75,20 +82,26 @@ public class CartController {
 		}
 	}
 
+	// 상품을 카트에 추가
+	@ResponseBody
 	@PostMapping("/register")
 	public String register(CartVO cartvo, @RequestParam("pno") int pno, @RequestParam("mno") int mno,
 			RedirectAttributes reAttr, HttpSession ses) {
-		boolean isExist = cartsv.dupleCheck(pno, mno);
-		if (isExist) {
-			int isUp = cartsv.increRegister(pno, mno);
-			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 수량증가 성공" : "카트 수량증가 실패");
-		} else {
-			int isUp = cartsv.register(cartvo);
-			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
-		}
+		// 상품 카트에 추가할 시 중복체크 부분 삭제 
+//		boolean isExist = cartsv.dupleCheck(pno, mno);
+//		if (isExist) {
+//			int isUp = cartsv.increRegister(pno, mno);
+//			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 수량증가 성공" : "카트 수량증가 실패");
+//		} else {
+//			int isUp = cartsv.register(cartvo);
+//			reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
+//		}
+		int isUp = cartsv.register(cartvo);
+		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
 		return "redirect:/product/list";
 	}
 
+	// 카트 수량 증가, 감소
 	@ResponseBody
 	@PostMapping(value = "/{upqty}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> up(@PathVariable("upqty") int upqty,
@@ -107,6 +120,7 @@ public class CartController {
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	// 카트 삭제
 	@ResponseBody
 	@DeleteMapping(value = "/{cartno}", produces = MediaType.TEXT_PLAIN_VALUE)
 	public ResponseEntity<String> remove(@PathVariable("cartno") int cartno) {
@@ -115,9 +129,11 @@ public class CartController {
 				: new ResponseEntity<String>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 
+	// 카트 => 주문내역
 	@ResponseBody
 	@PostMapping(value = "/mno/", produces = MediaType.TEXT_PLAIN_VALUE)
-	public String removeWithMno(@RequestParam("mno") int mno) {
+	public String removeWithMno(@RequestParam("mno") int mno, @RequestParam(value = "list[]") List<Integer> list) {
+		logger.info("*************" + list.toString());
 		logger.info(">>> mno : " + mno);
 		List<CartVO> cartvo = cartsv.getOrderList(mno);
 		logger.info(">>> cartvo : " + cartvo);
@@ -127,16 +143,26 @@ public class CartController {
 		if (cartvo != null) {
 			for (int i = 0; i < cartvo.size(); i++) {
 				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
-						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), cartvo.get(i).getPrice(),
+						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), list.get(i),
 						cartvo.get(i).getQuantity());
+				// 주문내역에 cartvo에서 받아온 상품들 추가 
 				isUp = pursv.register(purvo);
 				isUp *= isUp;
 				int pno = cartvo.get(i).getPno();
+				int qty = cartvo.get(i).getQuantity();
+				isUp *= psv.updateProductQty(pno, qty);
+				// 재고 관련 for문
 				List<ProductStockVO> productStockList = pssv.getList(pno);
 				for (int t = 0; t < productStockList.size(); t++) {
-					String sname = productStockList.get(t).getSname();
-					int sno = ssv.getUpsqSno(sname);
-					isUp3 = ssv.modifyStockQty(sno);
+					for (int j = 0; j < qty; j++) {
+						String sname = productStockList.get(t).getSname();
+						int sno = ssv.getUpsqSno(sname);
+						isUp3 = ssv.modifyStockQty(sno);
+						int stock_qty = ssv.checkStockQty(sno);
+						if (stock_qty == 0) {
+							ssv.remove(sno);
+						}
+					}
 					isUp3 *= isUp3;
 				}
 			}
@@ -151,10 +177,6 @@ public class CartController {
 	public void list(@RequestParam("mno") int mno, Model model) {
 		List<CartVO> list = cartsv.getList(mno);
 		model.addAttribute("cartList", list);
-		for (int i = 0; i < list.size(); i++) {
-			logger.info("★★★★★★★★★★★★★★★ : " + list);
-			logger.info("★★★★★★★★★★★★★★★ cartno : " + list.get(i).getCartno() + ", title : " + list.get(i).getTitle() + ", price : " + list.get(i).getPrice() + ", quantity : " +  list.get(i).getQuantity() + ", mno : " + list.get(i).getMno() + ", pno : " + list.get(i).getPno());
-		}
 	}
 
 	@GetMapping("/purchaseList")
@@ -163,13 +185,14 @@ public class CartController {
 		int totalCount = pursv.getTotalCount(mpgvo);
 		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo));
 	}
-
+	
 	@GetMapping("/purchaseListMember")
 	public void purList(Model model, MemberPageVO mpgvo, @RequestParam("mno") int mno) {
 		int totalCount = pursv.getTotalCount(mpgvo, mno);
 		model.addAttribute("purchaseListMember", pursv.getList(mpgvo, mno));
-		model.addAttribute("pghdl", new MemberPagingHandler(totalCount, mpgvo, mno));
+		model.addAttribute("pghdlM", new MemberPagingHandler(totalCount, mpgvo, mno));
 		logger.info("model : " + model);
+		logger.info("PurchaseListMember mno : " + mno);
 	}
 
 }

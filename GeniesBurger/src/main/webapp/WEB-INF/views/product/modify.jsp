@@ -81,7 +81,7 @@
 			</div>
 			<!-- File List Part-->
 			<c:if test="${pvo.flist.size() > 0 }">
-				<table class="table table-hover col-sm-4">
+				<div class="form-group">
 					<tr>
 						<td>
 							<ul class="list-group">
@@ -98,7 +98,7 @@
 							</ul>
 						</td>
 					</tr>
-				</table>
+				</div>
 			</c:if>
 			
 			<button type="submit" class="btn btn-primary">Submit</button>

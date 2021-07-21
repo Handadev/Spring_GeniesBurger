@@ -34,8 +34,6 @@ public class ProductService implements ProductServiceRule {
 	@Inject
 	private ProductStockDAORule psdao;
 	
-	
-	
 	@Override
 	public int register(ProductVO pvo) {
 		return pdao.insert(pvo) > 0  ? 1 : 0;
@@ -74,6 +72,19 @@ public class ProductService implements ProductServiceRule {
 		return pdao.selectOne(pno, category);
 	}
 	
+	@Override // 3번 모달 추가 재료 리스트 출력
+	public List<ProductVO> getBurgerStockList() {
+		List<ProductVO> list = new ArrayList<ProductVO>();
+		List<ProductVO> plist = pdao.selectBurgerStockList(); 
+		for (ProductVO pvo : plist) {
+			int pno =  pvo.getPno();
+			List<ProductFileVO> flist = pfdao.selectList(pno);
+			pvo.setFlist(flist);
+			list.add(pvo);
+		}
+		return list;
+	}
+	
 	@Override // 4번 모달 사이드 리스트 출력
 	public List<ProductVO> getSideList() {
 		List<ProductVO> list = new ArrayList<ProductVO>();
@@ -98,6 +109,11 @@ public class ProductService implements ProductServiceRule {
 			list.add(pvo);
 		}
 		return list;
+	}
+	
+	@Override // cart ctrl 주문시 재품 판매량 높이기
+	public int updateProductQty(int pno, int qty) {
+		return pdao.updateQty(pno, qty);
 	}
 	
 	@Override
@@ -146,6 +162,8 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
+
+
 
 
 }
