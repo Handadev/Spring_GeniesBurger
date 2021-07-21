@@ -146,7 +146,6 @@ a {
 		<div class="sum_wrap">
 			<p>수량</p>
 			<p>금액</p>
-			<p>???</p>
 		</div>
 		<c:set var="dc" value="1000" />
  		<div class="sum_wrap02">
@@ -155,7 +154,7 @@ a {
 			<p class="redfont2" id="A${num2 }"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
 			
 			<c:set var="num" value="${num+1 }" />  
-			<p class="redfont2" id="${num }"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
+			<input type="hidden" class="redfont2" id="${num }" value="${cvo.price * cvo.quantity }">
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
 </div>
