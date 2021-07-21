@@ -59,7 +59,7 @@
 		<div class="col-lg-6">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">주간 매출</h4>
+					<h4 class="card-title">연도별 매출</h4>
 					<div>
 						<canvas id="line-chart3" height="150"></canvas>
 					</div>
@@ -84,6 +84,11 @@
 	let dateSlist = new Array();
 	<c:forEach items="${dateSalesList}" var="sales">
 	dateSlist.push("${sales}");
+	</c:forEach>
+	
+	let yearSlist = new Array();
+	<c:forEach items="${yearSalesList}" var="ySales">
+	yearSlist.push("${ySales}");
 	</c:forEach>
 </script>
 <script>
@@ -118,6 +123,20 @@
 				data : [ dateSlist[2], dateSlist[1], dateSlist[0] ],
 				label : "월 매출",
 				borderColor : "#5fdae8",
+				fill : false
+			} ]
+		},
+	});
+	
+	
+	new Chart(document.getElementById("line-chart3"), {
+		type : 'line',
+		data : {
+			labels : [ year - 4, year - 3, year - 2, year - 1, year],
+			datasets : [ {
+				data : [ yearSlist[4], yearSlist[3], yearSlist[2], yearSlist[1], yearSlist[0] ],
+				label : "연매출",
+				borderColor : "#9FC93C",
 				fill : false
 			} ]
 		},

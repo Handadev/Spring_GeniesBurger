@@ -64,4 +64,9 @@ public class PurchaseService implements PurchaseServiceRule {
 		return pdao.selectDateSales(todayString);
 	}
 
+	@Override
+	public int getYearSales(String yearString) {
+		return pdao.selectYearSales(yearString);
+	}
+
 }

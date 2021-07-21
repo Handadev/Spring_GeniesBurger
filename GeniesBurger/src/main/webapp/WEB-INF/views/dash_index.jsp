@@ -13,15 +13,7 @@
 		<div class="col-7 align-self-center">
 			<h3
 				class="page-title text-truncate text-dark font-weight-medium mb-1">Good
-				Morning Jason!</h3>
-			<div class="d-flex align-items-center">
-				<nav aria-label="breadcrumb">
-					<ol class="breadcrumb m-0 p-0">
-						<li class="breadcrumb-item"><a href="index.html">Dashboard</a>
-						</li>
-					</ol>
-				</nav>
-			</div>
+				Morning Genie</h3>
 		</div>
 		<div class="col-5 align-self-center">
 			<div class="customize-input float-right">
@@ -381,7 +373,7 @@
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
 												<img
-													src="/resources/assets/images/users/widget-table-pic1.jpg"
+													src="/resources/admin/assets/images/users/widget-table-pic1.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
@@ -419,7 +411,7 @@
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
 												<img
-													src="/resources/assets/images/users/widget-table-pic2.jpg"
+													src="/resources/admin/assets/images/users/widget-table-pic2.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
@@ -452,7 +444,7 @@
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
 												<img
-													src="/resources/assets/images/users/widget-table-pic3.jpg"
+													src="/resources/admin/assets/images/users/widget-table-pic3.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
@@ -487,7 +479,7 @@
 										<div class="d-flex no-block align-items-center">
 											<div class="mr-3">
 												<img
-													src="/resources/assets/images/users/widget-table-pic4.jpg"
+													src="/resources/admin/assets/images/users/widget-table-pic4.jpg"
 													alt="user" class="rounded-circle" width="45" height="45" />
 											</div>
 											<div class="">
