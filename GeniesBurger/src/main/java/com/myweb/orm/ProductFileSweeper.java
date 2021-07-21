@@ -27,7 +27,7 @@ public class ProductFileSweeper {
 	
 	// db 확인하고 실제 파일 위치 확인하고 db에 존재하지 않는 파일은 싹다 지움
 	// 초 - 분 - 시 - 일 - 월 - 요일 - 연도(옵션) * = 매/일.월.요일
-	@Scheduled(cron = "45 50 17 * * *")
+	// @Scheduled(cron = "45 50 17 * * *")
 	public void fileSweep() throws Exception{
 		logger.info(">>>>> FileSweeper > fileSweep() 시작");
 		logger.info(">>>>> fileSweep() 시작 시간" + LocalDateTime.now());

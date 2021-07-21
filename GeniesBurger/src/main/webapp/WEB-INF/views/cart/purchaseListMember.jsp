@@ -37,11 +37,6 @@
 						<table class="table">
 							<thead class="thead-primary">
 								<tr class="text-center">
-									<td>${purchaseListMember.name }</td>
-									<td>${purchaseListMember.title }</td>
-									<td><fmt:formatNumber value="${purchaseListMember.price }" pattern="#,###"/></td>
-									<td>${purchaseListMember.quantity }</td>
-									<td>${purchaseListMember.regdate }</td>
 									<th>name</th>
 									<th>title</th>
 									<th>price</th>

@@ -154,9 +154,9 @@ a {
  		<div class="sum_wrap02">
 			<p>${cvo.quantity }개</p>
 			<c:set var="num2" value="${num2+1 }" />
-			<p class="redfont2" id="A${num2 }" pattern="#,###">${cvo.price * cvo.quantity }원</p>
+			<p class="redfont2" id="A${num2 }"><fmt:formatNumber value="${cvo.price * cvo.quantity }" pattern="#,###"/>원</p>
 			<c:set var="num" value="${num+1 }" />
-			<p class="redfont2" id="${num }">${cvo.price * cvo.quantity }</p>
+			<input type="hidden" class="redfont2" id="${num }" value="${cvo.price * cvo.quantity }">
 		</div>
 		<c:set var="total" value="${total + (cvo.price * cvo.quantity)}" />
 </div>
@@ -180,7 +180,7 @@ a {
 	<div class="left"><a href="/">취소</a></div>
 	<div class="right"><a href="/cart/method" id="paymentBtn">결제</a></div>
 
-	<div class="container coupon" class="btn btn-primary" data-toggle="modal" data-target="#couponModal" style="cursor: pointer;">
+	<div class="container coupon" class="btn btn-primary" id="useCp" data-toggle="modal" data-target="#couponModal" style="cursor: pointer;">
 	쿠폰사용하기</div>
 
 </div>
@@ -224,17 +224,18 @@ var arr = [];
 var arr2 = [];
 var arrString = '';
 for(let i = 1; i <= ${num}; i++) {
-	let c = $("#"+ i).text(); // 할인 전 금액
+	let c = $("#"+ i).val(); // 할인 전 금액
 	arr2.push(c);
-	console.log(arr2);
 }
+	console.log(arr2);
 $("#useCp").on("click", function() {
 	arr = []; // 쿠폰을 재선택할 때 배열 비워줌
 	arrString = '';
 	for(let i = 1; i <= ${num2 }; i++) {
 		let d = $("#A"+ i).text(); // 할인 전 금액
+		d = d.replace(",", "");
 		let e = d.substr(0, d.length-1); 
-		console.log(d);
+		console.log(e);
 		$("#"+ i).html(e);
 	}
 });
@@ -242,14 +243,15 @@ $("#useCp").on("click", function() {
 $("#selectCp").on("click", function() {
 	for(let i = 1; i <= ${num}; i++) {
 		let couponVal = $("#coupon option:selected").attr("value");
-		let c = $("#"+ i).text(); // 할인 전 금액
-		arr2.push(c);
-		console.log("***할인전 금액 : " + c);
-		let a = Math.floor(c * (couponVal*(0.01))); // 할인 금액
-		let b = c - a; // 할인된 금액
-		$("#"+ i).html(b);
-		console.log("***할인된 금액 : " + b);
-		arr.push(b);
+		let p = $("#"+ i).text(); // 할인 전 금액
+		p = p.replace(",", "");
+		arr2.push(p);
+		console.log("***할인전 금액 : " + p);
+		let dc = Math.floor(p * (couponVal*(0.01))); // 할인 금액
+		let fp = p - dc; // 할인된 금액
+		$("#"+ i).html(fp);
+		console.log("***할인된 금액 : " + fp);
+		arr.push(fp);
 	}
 	
 	console.log(arr); // 할인된 금액 배열
@@ -260,16 +262,20 @@ $("#selectCp").on("click", function() {
 	
 	let couponVal = $("#coupon option:selected").attr("value"); // %값 
 	let total = $("#total").text();
-	let totalPrice = total.substr(0, total.length-1);
-	let dcPrice = Math.floor(totalPrice * (couponVal*(0.01)));
-	let price = totalPrice - dcPrice;
+	total = total.replace(",", "");
+	let totalPrice = total.substr(0, total.length-1); // 할인 전 총 가격
+	let dcPrice = Math.floor(totalPrice * (couponVal*(0.01))); // 할인 금액
+	let price = totalPrice - dcPrice; // 할인 된 총 가격
 	console.log(couponVal);
-	$("#dc").val(couponVal);
-	$("#dc").html(dcPrice + "원");
-	$("#price").html(price +"원");
-	$("#couponModal").modal("hide");
+	/* $("#dc").val(couponVal); */
+	let dcPrice2 = dcPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // 숫자 콤마 정규식
+	console.log("dcPrice >>>>>>>>>> " + dcPrice2);
+	$("#dc").html(dcPrice2 + "원"); // 할인 금액
+	let price2 = price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	console.log("price >>>>>>>>>> " + price2);
+	$("#price").html(price2 +"원"); // 할인 된 총 가격
+	$("#couponModal").modal("hide"); // 모달 닫기
 });
-
 console.log(arr2);
 
 function coupon_cancel(cplno){
@@ -288,7 +294,7 @@ function coupon_cancel(cplno){
 	console.log("cplno : " + couponVal);
 	
 	if(arr.length <= 0) {
-		console.log("arr2 보냄")
+		console.log("arr2 보냄"); // 쿠폰 선택하기를 누르지 않았을 경우 원래 금액 보내줌!!!
 		localStorage.setItem('price', arr2);
 	}
 	if(couponVal != null) {
