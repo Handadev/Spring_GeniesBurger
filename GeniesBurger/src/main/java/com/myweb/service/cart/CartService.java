@@ -66,6 +66,7 @@ public class CartService implements CartServiceRule {
 		return isUp;
 	}
 
+	// 카트 중복체크 기능 : 현재 사용 X
 	@Override
 	public boolean dupleCheck(int pno, int mno) {
 		return cartdao.dupleProduct(pno, mno) > 0 ? true : false;

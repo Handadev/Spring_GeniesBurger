@@ -98,7 +98,7 @@ public class CartController {
 //		}
 		int isUp = cartsv.register(cartvo);
 		reAttr.addFlashAttribute("result", isUp > 0 ? "카트 등록 성공" : "카트 등록 실패");
-		return "redirect:/product/list";
+		return "redirect:/";
 	}
 
 	// 카트 수량 증가, 감소

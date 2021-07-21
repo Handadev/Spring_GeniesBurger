@@ -36,17 +36,26 @@
 									<th>가격</th>
 									<th>수량</th>
 									<th>주문시간</th>
-									<th>
-									<th>
+									<th>리뷰</th>
 								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="${purchaseListMember }" var="purchaseListMember">
+									<input type="hidden" value="${purchaseListMember.pno }">
+			                        <input type="hidden" value="${purchaseListMember.purno }">
 									<tr class="text-center">
 										<td>${purchaseListMember.title }</td>
 										<td><fmt:formatNumber value="${purchaseListMember.price }" pattern="#,###"/></td>
 										<td>${purchaseListMember.quantity }</td>
 										<td>${purchaseListMember.regdate }</td>
+										<c:choose>
+                              <c:when test="${purchaseListMember.rlist.size() == 0} ">
+                                 <td><button type="button" class="revBtn btn btn-success">리뷰작성</button></td>
+                              </c:when>
+                              <c:otherwise>
+                                 <td>리뷰 작성 완료</td>
+                              </c:otherwise>
+                           </c:choose>
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -59,8 +68,18 @@
 			<script>
 				$(".ftco-cart").css("background-color", "white");
 			</script>
+			
 		</c:otherwise>
 	</c:choose>
 </section>
+<script>
+$(document).on("click",".revBtn",function(){
+   let pno = $(this).closest("tr").prev("input").prev("input").val();
+   let purno = $(this).closest("tr").prev("input").val();
+   localStorage.setItem("pno", pno);
+   localStorage.setItem("purno", purno);
+   location.href="/review/register";
+});
+</script>
 
 <jsp:include page="../common/footer.jsp" />

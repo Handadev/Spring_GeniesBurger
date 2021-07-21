@@ -908,6 +908,8 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 					price : price,
 					pno : pno,
 					mno : mno
+					console.log("pvoObj : " + pvoObj);
+					
 				}
 			}).done(function(){
 				console.log("상품 등록 성공");
