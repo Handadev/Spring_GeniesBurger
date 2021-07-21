@@ -6,8 +6,8 @@
   	<insert id="reg" parameterType="aevo">
   		<choose>
   			<when test="sname != null and !sname.equals('')">
-		  		insert into tbl_add_extra (aeno, mno, pno, sname)
-		  		values (seq_add_extra_aeno.nextval, #{mno }, #{pno }, #{sname })
+		  		insert into tbl_add_extra (aeno, mno, pno, price, sname)
+		  		values (seq_add_extra_aeno.nextval, #{mno }, #{pno }, #{price}, #{sname })
   			</when>
   			<otherwise>
   				insert into tbl_add_extra (aeno, mno, pno, price, title)
