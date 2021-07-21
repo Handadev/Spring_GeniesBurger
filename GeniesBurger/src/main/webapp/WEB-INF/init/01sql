@@ -212,14 +212,16 @@ INCREMENT BY 1
 nocycle nocache;
 
 --------------------소비자 버거 추가 재료-----------------------
-DROP TABLE tbl_add_extra;
-
+DROP TABLE TBL_ADD_EXTRA;
 CREATE TABLE tbl_add_extra (
 aeno number(11),
 mno number(11),
 pno number(11),
 price number(11),
 sname varchar2(100),
+title varchar2(100),
+quantity number(11) default 1,
+cartno number(11),
 constraint pk_extra primary key(aeno)
 );
 

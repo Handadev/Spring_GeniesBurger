@@ -67,6 +67,11 @@ public class PurchaseService implements PurchaseServiceRule {
 	@Override
 	public Integer getWeekSales(String month, int i) {
 		return pdao.selectWeekSales(month, i);
+ }
+
+  @Override
+	public int getYearSales(String yearString) {
+		return pdao.selectYearSales(yearString);
 	}
 
 }

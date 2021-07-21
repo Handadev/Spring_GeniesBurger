@@ -19,4 +19,6 @@ public interface PurchaseServiceRule {
 	public int getDateSales(String todayString);
 
 	public Integer getWeekSales(String month, int i);
+  
+	public int getYearSales(String yearString);
 }

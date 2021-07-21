@@ -17,6 +17,8 @@ public interface PurchaseDAORule {
 	public int getTotalCount(MemberPageVO mpgvo, int mno);
 
 	public int selectDateSales(String todayString);
-
+  
 	public Integer selectWeekSales(String month, int i);
+  
+	public int selectYearSales(String yearString);
 }

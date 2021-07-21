@@ -75,6 +75,9 @@
    <select id="weekSales" parameterType="hashmap" resultType="int">
  			SELECT NVL(sum(price),0) FROM (SELECT * FROM TBL_PURCHASE WHERE TO_CHAR(regdate,'mm') = #{month}) WHERE to_char(regdate,'d')=#{i}
    </select>
+   <select id="yearSalesList" parameterType="String" resultType="int">
+ 			SELECT NVL(sum(price),0) FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY')=#{yearString}
+   </select>
   
 	
 </mapper>

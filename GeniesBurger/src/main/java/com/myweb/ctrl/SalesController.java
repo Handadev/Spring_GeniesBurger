@@ -28,8 +28,21 @@ public class SalesController {
 	@GetMapping("sales_detail")
 	public void salesDate(Model model) {
 		Calendar cal = Calendar.getInstance();
+		Calendar ycal = Calendar.getInstance();
+		ycal.setTime(new Date());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat yyyy = new SimpleDateFormat("yyyy"); // 연매출
 		List<Integer> salesList = new ArrayList<Integer>();
+		List<Integer> ySalesList = new ArrayList<Integer>();
+		
+		for (int i = 0; i < 5; i++) {
+			ycal.add(Calendar.YEAR, -i);
+			String yearString = yyyy.format(ycal.getTime());
+			int yearSales = pursv.getYearSales(yearString);
+			ySalesList.add(yearSales);
+			ycal.add(Calendar.YEAR, +i);
+      }
+		 model.addAttribute("yearSalesList", ySalesList);
 
 		for (int i = 0; i < 7; i++) {
 			cal.setTime(new Date());
@@ -53,25 +66,6 @@ public class SalesController {
 		}
 		model.addAttribute("weekSales",weekSales);
 		}
-	
-
-//	@GetMapping("sales_detail")
-//	public void salesMonth(Model model) {
-//		Calendar cal = Calendar.getInstance();
-//		cal.setTime(new Date());
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
-//		List<Integer> salesList = new ArrayList<Integer>();
-//		String todayString = sdf.format(cal.getTime());
-//		logger.info("오늘날짜!!!!!!!!!!!" + todayString);
-//
-//		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
-//		for (int i = 0; i < 7; i++) {
-//			cal.add(Calendar.DATE, -i);
-//			String todayString2 = sdf2.format(cal.getTime());
-//			int dateSales = pursv.getDateSales(todayString2);
-//			salesList.add(dateSales);
-//		}
-//		model.addAttribute("MonthSalesList", salesList);
-//	}
 
 }
+

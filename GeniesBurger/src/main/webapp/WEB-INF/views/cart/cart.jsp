@@ -101,6 +101,19 @@
                                     <script>
                                        $(".ftco-cart").css("background-color", "white");
                                     </script>
+                                    <hr>
+                                    <c:forEach items="${cartList.aelist }" var="aevo">
+                                    	<div class="container">
+                                    		<c:choose>
+                                    			<c:when test="${aevo.title eq null }">
+                                    				<span>${aevo.sname} 수량 ${aevo.quantity} 가격 ${aevo.price * aevo.quantity} </span>
+                                    			</c:when>
+                                    			<c:otherwise>
+                                    				<span>${aevo.title} 수량 ${aevo.quantity} 가격 ${aevo.price * aevo.quantity} </span>
+                                    			</c:otherwise>
+                                    		</c:choose>
+                                    	</div>
+                                    </c:forEach>
                            </c:forEach>
                         </tbody>
                      </table>
