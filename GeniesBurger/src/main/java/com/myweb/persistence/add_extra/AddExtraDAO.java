@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
 import com.myweb.domain.AddExtraVO;
+import com.myweb.domain.CartVO;
 
 @Repository
 public class AddExtraDAO implements AddExtraDAORule {
@@ -45,6 +46,11 @@ public class AddExtraDAO implements AddExtraDAORule {
 		map.put("mno", mno);
 		map.put("pno", pno);
 		sql.delete(NS+"delPno", map);
+	}
+
+	@Override // 최근 추가된 cartno mno pno 받아와서 tbl_AE cartno 컬럼 수정하기
+	public int updateCartno(CartVO cartvo) {
+		return sql.update(NS+"updateCartno", cartvo);
 	}
 
 
