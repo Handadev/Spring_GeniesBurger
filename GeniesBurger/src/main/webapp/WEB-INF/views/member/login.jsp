@@ -48,6 +48,41 @@ p {
 	top: -190px;
 	left: 60%;
 }
+.box {
+	margin-top: 20px;
+}
+#findID, #findQuestion {
+	color: black;
+	font-size: 1.375em;
+}
+#submitBtn {
+	 margin: 0px auto;
+	 background-image: url(/resources/icons/button.png);
+	 background-repeat: no-repeat;
+     background-position: 0px -10px;
+     background-size: cover;
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+     width: 300px;
+     height: 100px;
+     color: white;
+     font-size: 1.5em;
+}
+#registerBtn {
+	 margin: 0px auto;
+	 background-image: url(/resources/icons/button2.png);
+	 background-repeat: no-repeat;
+     background-position: 0px -10px;
+     background-size: cover;
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+     width: 300px;
+     height: 100px;
+     color: white;
+     font-size: 1.5em;
+}
 </style>
 
 <div class="container container-login">
@@ -62,11 +97,13 @@ p {
 				name="pwd" value="1111">
 				<img id="eye" src="/resources/icons/dead_eye.png">
 		</div>
-		<button type="submit" class="btn-lg btn-danger">로그인</button>
-		<a href="/member/register">
-			<button type="button" class="btn-lg btn-info">회원가입</button>
-		</a>
+		<button type="button" id="registerBtn" onclick="location.href='/member/register'">회원가입</button>
+		<button type="submit" id="submitBtn">로그인</button>
 	</form>
+	<div class="box">
+		<a href="/member/findID" id="findID">아이디 찾기&nbsp;&nbsp;|</a>
+		<a href="/member/findQuestion" id="findQuestion">&nbsp;비밀번호 찾기</a>
+	</div>
 	<!-- <img src="/resources/icons/kakao_login_medium_narrow.png"/> -->
 	
 	<!-- 24d93e65b0bdea1b94042e297fdbab05 -->
@@ -76,6 +113,7 @@ p {
 <div style="height:100px; background-color: #f2ebe6;">
 <img src="/resources/images/login_background.png" id="bg">
 </div>
+
 <script>
 $("#clear").click(function() {
 	$("#email").val('');
@@ -92,7 +130,5 @@ $("#eye").click(function (){
     }
 });
 </script>
-
-
 
 <jsp:include page="../common/footer.jsp" />

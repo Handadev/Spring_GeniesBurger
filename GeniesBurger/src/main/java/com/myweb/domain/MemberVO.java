@@ -10,6 +10,8 @@ public class MemberVO {
    private String birthday;
    private int point;
    private String regdate;
+   private String question;
+   private String answer;
    
    public int getMno() {
       return mno;
@@ -65,4 +67,16 @@ public class MemberVO {
    public void setRegdate(String regdate) {
       this.regdate = regdate;
    }
+	public String getQuestion() {
+		return question;
+	}
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	public String getAnswer() {
+		return answer;
+	}
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 }   

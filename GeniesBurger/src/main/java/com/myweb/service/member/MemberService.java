@@ -54,14 +54,28 @@ public class MemberService implements MemberServiceRule {
       return mdao.delete(mno);
    }
 
-@Override
-public int getTotalCount(MemberPageVO mpgvo) {
-	return mdao.selectOne(mpgvo);
-}
+	@Override
+	public int getTotalCount(MemberPageVO mpgvo) {
+		return mdao.selectOne(mpgvo);
+	}
+	
+	@Override
+	public List<MemberVO> getList() { // 쿠폰 발급용 멤버 리스트
+		return mdao.selectList();
+	}
+	
+	@Override
+	public String findID(MemberVO mvo) {
+		return mdao.selectEmail(mvo);
+	}
+	
+	@Override
+	public MemberVO findQuestion(MemberVO mvo) {
+		return mdao.selectQuestion(mvo);
+	}
 
-@Override
-public List<MemberVO> getList() { // 쿠폰 발급용 멤버 리스트
-	return mdao.selectList();
-}
-
+	@Override
+	public MemberVO findPwd(MemberVO mvo) {
+		return mdao.selectPwd(mvo);
+	}
 }

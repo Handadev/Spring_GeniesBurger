@@ -24,7 +24,8 @@
 <link rel="stylesheet" href="/resources/css/icomoon.css">
 <link rel="stylesheet" href="/resources/css/style.css">
 <link rel="shortcut icon" href="/resources/icons/favicon.png">
-<link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+<link
+	rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
 </head>
 <style>
@@ -36,9 +37,10 @@
 	margin-right: 10px;
 	margin-top: 7px;
 }
-.welcome{
-	margin-top:11px;
-	margin-left:5px;
+
+.welcome {
+	margin-top: 11px;
+	margin-left: 5px;
 }
 </style>
 <!-- Start header / nav  -->
@@ -67,31 +69,26 @@
 								class="nav-link">logout</a></li>
 						</c:when>
 						<c:otherwise>
-							<a class="nav-link dropdown-toggle" href="#" id="dropdown04"
-								data-toggle="dropdown" aria-haspopup="true"
-								aria-expanded="false">login</a>
-							<div class="dropdown-menu" aria-labelledby="dropdown04">
-								<a class="dropdown-item" href="/member/login">Login</a> <a
-									class="dropdown-item" href="/member/register">Register</a>
-							</div>
+							<li class="nav-item"><a class="nav-link"
+								href="/member/login">Login</a></li>
+							<li class="nav-item"><a class="nav-link"
+								href="/member/register">Register</a></li>
 						</c:otherwise>
 					</c:choose></li>
-					<c:if test="${ses.email eq 'admin@admin.com' }">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="dropdown04"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
-					<div class="dropdown-menu" aria-labelledby="dropdown04">
-						<c:choose>
-							<c:when test="${ses.email eq 'admin@admin.com' }">
-								<a class="dropdown-item" href="/product/register">상품추가</a>
-							</c:when>
-						</c:choose>
-						<a class="dropdown-item" href="/product/list">상품리스트</a> <a
-							class="dropdown-item" href="product-single.html">Single
-							Product</a> <a class="dropdown-item" href="checkout.html">Checkout</a>
-					</div></li>
-					</c:if>
 				<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>
+				<c:if test="${ses.email eq 'admin@admin.com' }">
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="dropdown04"
+						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+						<div class="dropdown-menu" aria-labelledby="dropdown04">
+							<c:choose>
+								<c:when test="${ses.email eq 'admin@admin.com' }">
+									<a class="dropdown-item" href="/product/register">PRODUCT REGISTER</a>
+								</c:when>
+							</c:choose>
+							<a class="dropdown-item" href="/product/list">PRODUCT LIST</a>
+						</div></li>
+				</c:if>
 				<c:choose>
 					<c:when test="${ses.email eq 'admin@admin.com' }">
 						<li class="nav-item dropdown"><a
@@ -99,29 +96,30 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMIN</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
 								<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
-									my page</a> <a class="dropdown-item" href="/dash_index">admin
-									page</a> <a class="dropdown-item" href="/member/list">member
-									list</a> <a class="dropdown-item" href="/cart/purchaseList">purchase
-									page</a>
+									MY PAGE</a> <a class="dropdown-item" href="/dash_index">ADMIN
+									PAGE</a> <a class="dropdown-item" href="/member/list">MEMBER
+									LIST</a> <a class="dropdown-item" href="/cart/purchaseList">PURCHASE
+									PAGE</a>
 							</div>
 					</c:when>
-						<c:when test="${ses.email ne null && ses.email ne '' && ses.email ne 'admin@admin.com' }">
+					<c:when
+						test="${ses.email ne null && ses.email ne '' && ses.email ne 'admin@admin.com' }">
 						<li>
-					<div class="welcome">
-							<div class="float-left myImg">
-								<a href="/member/detail?mno=${ses.mno }"> <img
-									src="/resources/icons/who.png"
-									style="width: 45px; height: 45px;" />
-								</a>
+							<div class="welcome">
+								<div class="float-left myImg">
+									<a href="/member/detail?mno=${ses.mno }"> <img
+										src="/resources/icons/who.png"
+										style="width: 45px; height: 45px;" />
+									</a>
+								</div>
+								<div style="width: 200px;">
+									<a href="/member/detail?mno=${ses.mno }" class="welcomeAtag">
+										<strong>${ses.name}</strong><br> my page
+									</a>
+								</div>
 							</div>
-							<div style="width: 200px;">
-								<a href="/member/detail?mno=${ses.mno }" class="welcomeAtag">
-									<strong>${ses.name}</strong><br> my page
-								</a>
-							</div>
-					</div>
-					</li>
-						</c:when>
+						</li>
+					</c:when>
 					<c:otherwise>
 					</c:otherwise>
 				</c:choose>
