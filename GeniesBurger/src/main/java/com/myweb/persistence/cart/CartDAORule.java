@@ -15,4 +15,5 @@ public interface CartDAORule {
 	public List<CartVO> selectList(int mno);  // 장바구니목록과 결제목록에서 같이사용
 	public int deleteWithMno(int mno);
 	public List<CartVO> selectOrderList(int mno);
+	public CartVO selectCurrCart(); // 카트에 제품 등록 후 add_extra 테이블에 cartno 제공을 위한 최근 No. 받아오기
 }

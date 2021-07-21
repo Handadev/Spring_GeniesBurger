@@ -26,5 +26,10 @@
 	
 	<delete id="delPno" parameterType="hashmap">
 		delete from tbl_add_extra where mno = #{mno} and pno = #{pno}
-	</delete>  	
+	</delete> 
+	
+	<!-- 최근 추가된 cartno mno pno 받아와서 tbl_AE cartno 컬럼 수정하기-->
+	<update id="updateCartno" parameterType="cartvo">
+		update tbl_add_extra set cartno = #{cartno} where mno = #{mno} and pno = #{pno} and cartno is null
+	</update>
   </mapper>
