@@ -51,13 +51,14 @@
 		rownum as rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME 
 		from V_MEMBER_PUR
 		
-		where rownum > 0 and mno=#{mno}
+		where rownum > 0 
  		]]>
  			<include refid="search"></include>
 		<![CDATA[		
  			and rownum <= #{pageIndex} * #{countPerPage})
         	where rn > (#{pageIndex}-1) * #{countPerPage}
  		]]>
+ 		and mno=#{mno}
 	</select>
 	
 	<select id="tc" parameterType="mpgvo" resultType="int">
@@ -68,8 +69,8 @@
 			select count(purno) FROM tbl_purchase WHERE purno > 0 and mno=#{mno}
    </select>
    
-   <select id="dateSalesList" parameterType="String" resultType="purvo">
- 			SELECT price FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString};
+   <select id="dateSalesList" parameterType="String" resultType="int">
+ 			SELECT price FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString}
    </select>
   
 	

@@ -31,14 +31,14 @@ public class AddExtraDAO implements AddExtraDAORule {
 		return sql.delete(NS+"del", mno);
 	}
 
-	@Override
+	@Override // 주문 취소시 add_extra 테이블에 정보가 있으면 지우기 위해서 일단 테이블 정보 가져옴
 	public List<AddExtraVO> selectList(int mno, int pno) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("mno", mno);
 		map.put("pno", pno);
 		return sql.selectList(NS+"list", map);
 	}
-
+	
 	@Override // 주문 취소한 제품 AE만 지우기
 	public void deletePno(int mno, int pno) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
@@ -46,5 +46,6 @@ public class AddExtraDAO implements AddExtraDAORule {
 		map.put("pno", pno);
 		sql.delete(NS+"delPno", map);
 	}
+
 
 }

@@ -10,9 +10,6 @@
 	box-sizing: border-box;
 	font-size: 22px;
 }
-/* div{
-    border: 1px dashed blue;
-  } */
 .box {
 	box-shadow: 1px 1px 1px 1px;
 	border: none;

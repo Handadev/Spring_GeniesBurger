@@ -28,43 +28,41 @@
 				</form>
 			</div>
 			<div class="col-md-12 ftco-animate">
-				<div class="cart-list">
-					<table class="table">
-						<thead class="thead-primary">
+				<table class="table">
+					<thead class="thead-primary">
+						<tr class="text-center">
+							<th>Number</th>
+							<th>Email</th>
+							<th>Name</th>
+							<th>Mobile</th>
+							<th>Address</th>
+							<th>Birthday</th>
+							<th>Point</th>
+							<th>
+							<th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${mList }" var="mList">
 							<tr class="text-center">
-								<th>Number</th>
-								<th>Email</th>
-								<th>Name</th>
-								<th>Mobile</th>
-								<th>Address</th>
-								<th>Birthday</th>
-								<th>Point</th>
-								<th>
-								<th>
+								<td>${mList.mno }</td>
+								<td>${mList.email }</td>
+								<td>${mList.name }</td>
+								<td>${mList.mobile }</td>
+								<td>${mList.address }</td>
+								<td>${mList.birthday }</td>
+								<td>${mList.point }</td>
+								<td>
+									<button type="button"
+										class="btn-sm btn-danger removeBtn detailBtn"
+										data-mno="${mList.mno }">삭제</button>
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${mList }" var="mList">
-								<tr class="text-center">
-									<td>${mList.mno }</td>
-									<td>${mList.email }</td>
-									<td>${mList.name }</td>
-									<td>${mList.mobile }</td>
-									<td>${mList.address }</td>
-									<td>${mList.birthday }</td>
-									<td>${mList.point }</td>
-									<td>
-										<button type="button"
-											class="btn-sm btn-danger removeBtn detailBtn"
-											data-mno="${mList.mno }">삭제</button>
-									</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-						<tfoot>
-					</table>
-				</div>
-				<jsp:include page="paging.jsp" />
+						</c:forEach>
+					</tbody>
+					<tfoot>
+				</table>
+			<jsp:include page="paging.jsp" />
 			</div>
 		</div>
 	</div>

@@ -16,6 +16,7 @@ public class MemberPagingHandler {
 	private MemberPageVO mpgvo;
 	private int mno;
 	
+	
 	public MemberPagingHandler() {}
 
 	public MemberPagingHandler(int totalCount, MemberPageVO mpgvo) {
@@ -62,6 +63,7 @@ public class MemberPagingHandler {
 		this.totalCount = totalCount;
 		this.mpgvo = mpgvo;
 		this.mno = mno;
+		logger.info("paging handler >> mno : " + mno);
 		// lastPageIndex logic
 		// 15번을 클릭했다고 가정(페이지네이션)
 		// 15/10.0 = 1.5

@@ -4,8 +4,8 @@
 <mapper namespace="StockMapper">
 
 	<insert id="reg" parameterType="svo">
-		insert into tbl_stock(sno, sname, stock_qty, shelf_life, isburger, extra_price) values
-		(seq_stock_sno.nextval, #{sname}, #{stock_qty}, #{shelf_life}, #{isburger}, #{extra_price})
+		insert into tbl_stock(sno, sname, stock_qty, shelf_life, isburger) values
+		(seq_stock_sno.nextval, #{sname}, #{stock_qty}, #{shelf_life}, #{isburger})
 	</insert>
 	
 	<select id="list" resultType="svo">

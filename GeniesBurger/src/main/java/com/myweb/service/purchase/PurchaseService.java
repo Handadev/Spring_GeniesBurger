@@ -15,7 +15,7 @@ import com.myweb.persistence.purchase.PurchaseDAORule;
 @Service
 public class PurchaseService implements PurchaseServiceRule {
 	private static Logger logger = LoggerFactory.getLogger(PurchaseService.class);
-	
+
 	@Inject
 	private PurchaseDAORule pdao;
 
@@ -28,7 +28,7 @@ public class PurchaseService implements PurchaseServiceRule {
 	public List<PurchaseVO> getList(MemberPageVO mpgvo) {
 		return pdao.selectList(mpgvo);
 	}
-	
+
 	@Override
 	public List<PurchaseVO> getList(MemberPageVO mpgvo, int mno) {
 		return pdao.selectList(mpgvo, mno);
@@ -45,9 +45,8 @@ public class PurchaseService implements PurchaseServiceRule {
 	}
 
 	@Override
-	public List<PurchaseVO> getDateSalesList(String todayString) {
+	public List<Integer> getDateSalesList(String todayString) {
 		return pdao.selectDateSalesList(todayString);
 	}
-
 
 }
