@@ -11,5 +11,6 @@ public interface PurchaseDAORule {
 	public List<PurchaseVO> selectList(MemberPageVO mpgvo, int mno);
 	public int getTotalCount(MemberPageVO mpgvo);
 	public int getTotalCount(MemberPageVO mpgvo, int mno);
-	public List<Integer> selectDateSalesList(String todayString);
+	public int selectDateSales(String todayString);
+	public int selectYearSales(String yearString);
 }

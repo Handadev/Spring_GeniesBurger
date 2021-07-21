@@ -74,8 +74,13 @@ public class PurchaseDAO implements PurchaseDAORule {
 	}
 
 	@Override
-	public List<Integer> selectDateSalesList(String todayString) {
-		return sql.selectList(NS + "dateSalesList", todayString);
+	public int selectDateSales(String todayString) {
+		return sql.selectOne(NS + "dateSalesList", todayString);
+	}
+
+	@Override
+	public int selectYearSales(String yearString) {
+		return sql.selectOne(NS + "yearSalesList", yearString);
 	}
 
 

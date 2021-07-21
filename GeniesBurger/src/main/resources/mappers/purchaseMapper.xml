@@ -70,7 +70,11 @@
    </select>
    
    <select id="dateSalesList" parameterType="String" resultType="int">
- 			SELECT price FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString}
+ 			SELECT NVL(sum(price),0) FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY-MM-DD')=#{todayString}
+   </select>
+   
+   <select id="yearSalesList" parameterType="String" resultType="int">
+ 			SELECT NVL(sum(price),0) FROM TBL_PURCHASE WHERE TO_CHAR(regdate, 'YYYY')=#{yearString}
    </select>
   
 	

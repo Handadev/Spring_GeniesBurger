@@ -45,8 +45,13 @@ public class PurchaseService implements PurchaseServiceRule {
 	}
 
 	@Override
-	public List<Integer> getDateSalesList(String todayString) {
-		return pdao.selectDateSalesList(todayString);
+	public int getDateSales(String todayString) {
+		return pdao.selectDateSales(todayString);
+	}
+
+	@Override
+	public int getYearSales(String yearString) {
+		return pdao.selectYearSales(yearString);
 	}
 
 }
