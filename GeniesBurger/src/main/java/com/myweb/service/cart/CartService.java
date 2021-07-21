@@ -58,17 +58,20 @@ public class CartService implements CartServiceRule {
 		return cartdao.deleteWithPno(pno);
 	}
 
+	@Transactional
 	@Override
 	public int increQty(int cartno, String upqtystr) {
-		return cartdao.upQty(cartno, Integer.parseInt(upqtystr));
+		return cartdao.upQty(cartno, Integer.parseInt(upqtystr)) > 0 &&
+				aedao.updateQty(cartno, Integer.parseInt(upqtystr)) > 0 ?
+				1 : 0;
 	}
 
+	@Transactional
 	@Override
 	public int decreQty(int cartno, String downqtystr) {
-		int isUp = cartdao.downQty(cartno, Integer.parseInt(downqtystr));
-		logger.info("decreQty : " + isUp);
-		
-		return isUp;
+		return cartdao.downQty(cartno, Integer.parseInt(downqtystr)) > 0 &&
+				aedao.updateQty(cartno, Integer.parseInt(downqtystr)) > 0 ?
+				1 : 0;
 	}
 
 	// 카트 중복체크 기능 : 현재 사용 X

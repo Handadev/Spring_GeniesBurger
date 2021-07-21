@@ -58,6 +58,15 @@ public class AddExtraDAO implements AddExtraDAORule {
 		return sql.update(NS+"updateCartno", cartvo);
 	}
 
+	@Override // 카트에서 상품 수량을 변경하면 crtno연동된 add_extra 수량 동일변경
+	public int updateQty(int cartno, int num) {
+		logger.info("updateQty 넘어오는 num"+ num);
+		Map<String, Integer> map = new HashMap<String, Integer>();
+		map.put("cartno", cartno);
+		map.put("num", num);
+		return sql.update(NS+"updateQty", map);
+	}
+
 	
 
 
