@@ -18,6 +18,10 @@ public interface PurchaseServiceRule {
 
 	public int getDateSales(String todayString);
 
+	public int getMonthSales(String monthString);
+  
+	public List<PurchaseVO> getSalesRateList(String monthString);
+
 	public Integer getWeekSales(String month, int i);
   
 	public int getYearSales(String yearString);
