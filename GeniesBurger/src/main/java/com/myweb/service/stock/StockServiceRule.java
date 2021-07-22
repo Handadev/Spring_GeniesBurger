@@ -3,6 +3,7 @@ package com.myweb.service.stock;
 import java.util.List;
 import java.util.Map;
 
+import com.myweb.domain.StockReceivingPageVO;
 import com.myweb.domain.StockVO;
 
 public interface StockServiceRule {
@@ -17,4 +18,6 @@ public interface StockServiceRule {
 	public int getUpsqSno(String sname);
 	public int checkStockQty(int sno);
 	public List<StockVO> getSlifeList();
+	public List<StockVO> getRegList(StockReceivingPageVO srpgvo);
+	public int getTotalRegCount(StockReceivingPageVO srpgvo);
 }

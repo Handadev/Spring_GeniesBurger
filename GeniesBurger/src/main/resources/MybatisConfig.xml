@@ -22,6 +22,7 @@
    	  <typeAlias type="com.myweb.domain.ReviewPageVO" alias="rpgvo"/>
    	  <typeAlias type="com.myweb.domain.StockOrderVO" alias="sovo"/>
    	  <typeAlias type="com.myweb.domain.StockOrderPageVO" alias="sopgvo"/>
+   	  <typeAlias type="com.myweb.domain.StockReceivingPageVO" alias="srpgvo"/>
    	  <typeAlias type="com.myweb.domain.PurchaseVO" alias="purvo"/>
    </typeAliases>
 </configuration>

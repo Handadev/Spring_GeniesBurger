@@ -21,7 +21,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myweb.domain.StockReceivingPageVO;
 import com.myweb.domain.StockVO;
+import com.myweb.handler.StockOrderPagingHandler;
+import com.myweb.handler.StockReceivingPagingHandler;
 import com.myweb.service.stock.StockServiceRule;
 
 @RequestMapping("/stock/*")
@@ -59,12 +62,12 @@ public class StockController {
 		return view;
 	}
 	
-	@GetMapping("/stock_regList")
-	public ModelAndView regList() {
-		ModelAndView view = new ModelAndView();
-		view.setViewName("/stock/stock_regList");
-		return view;
-	}
+//	@GetMapping("/stock_regList")
+//	public ModelAndView regList() {
+//		ModelAndView view = new ModelAndView();
+//		view.setViewName("/stock/stock_regList");
+//		return view;
+//	}
 
 //	@GetMapping(value = "/list", produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
 //			MediaType.APPLICATION_JSON_UTF8_VALUE })
@@ -72,6 +75,27 @@ public class StockController {
 //		return new ResponseEntity<List<StockVO>>(ssv.getList(), HttpStatus.OK);
 //	}
 
+//	@GetMapping("/stock_regList")
+//	public void regList(StockReceivingPageVO srpgvo, Model model) {
+//		logger.info(srpgvo.getStock_regdate());
+//		model.addAttribute("dateList", ssv.getRegList(srpgvo));
+//		int totalCount = ssv.getTotalRegCount(srpgvo);
+//		model.addAttribute("spghdl", new StockReceivingPagingHandler(totalCount, srpgvo));
+//		
+//	}
+	
+	@GetMapping("/stock_regList")
+	public ModelAndView regList(StockReceivingPageVO srpgvo) {
+		logger.info("srpgvo.getStock_regdate()!!!!!!!!!!!!!!!!!!!!!" + srpgvo.getStock_regdate());
+		ModelAndView view = new ModelAndView();
+		view.addObject("dateList", ssv.getRegList(srpgvo));
+		int totalCount = ssv.getTotalRegCount(srpgvo);
+		view.addObject("srpghdl", new StockReceivingPagingHandler(totalCount, srpgvo));
+		view.setViewName("/stock/stock_regList");
+		return view;
+	}
+	
+	
 	@GetMapping(value = "/totalCntList", produces = { MediaType.APPLICATION_ATOM_XML_VALUE,
 			MediaType.APPLICATION_JSON_UTF8_VALUE })
 	public ResponseEntity<List<StockVO>> totalCntList() {

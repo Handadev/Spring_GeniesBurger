@@ -2,6 +2,7 @@ package com.myweb.persistence.stock;
 
 import java.util.List;
 
+import com.myweb.domain.StockReceivingPageVO;
 import com.myweb.domain.StockVO;
 
 public interface StockDAORule {
@@ -16,4 +17,6 @@ public interface StockDAORule {
 	public int selectUpsqSno(String sname);
 	public int checkStockQty(int sno);
 	public List<StockVO> selectSlifeList();
+	public List<StockVO> selectRegList(StockReceivingPageVO srpgvo);
+	public int selectTotalRegCount(StockReceivingPageVO srpgvo);
 }
