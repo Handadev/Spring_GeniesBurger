@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.myweb.domain.StockReceivingPageVO;
 import com.myweb.domain.StockVO;
 import com.myweb.persistence.stock.StockDAORule;
 
@@ -73,6 +74,16 @@ public class StockService implements StockServiceRule {
 	@Override
 	public List<StockVO> getSlifeList() {
 		return sdao.selectSlifeList();
+	}
+
+	@Override
+	public List<StockVO> getRegList(StockReceivingPageVO srpgvo) {
+		return sdao.selectRegList(srpgvo);
+	}
+
+	@Override
+	public int getTotalRegCount(StockReceivingPageVO srpgvo) {
+		return sdao.selectTotalRegCount(srpgvo);
 	}
 
 }

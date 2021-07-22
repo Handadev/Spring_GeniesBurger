@@ -31,71 +31,65 @@
 		<div class="col-12">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">입고 내역</h4>
-					<div class="d-flex align-items-center">
-						<ul class="nav nav-tabs mb-3">
-							<li class="nav-item"><a href="#home" data-toggle="tab"
-								aria-expanded="false" class="nav-link"> <i
-									class="mdi mdi-home-variant d-lg-none d-block mr-1"></i> <span
-									class="d-none d-lg-block">Home</span>
-							</a></li>
-							<li class="nav-item"><a href="#profile" data-toggle="tab"
-								aria-expanded="true" class="nav-link active"> <i
-									class="mdi mdi-account-circle d-lg-none d-block mr-1"></i> <span
-									class="d-none d-lg-block">Profile</span>
-							</a></li>
-							<li class="nav-item"><a href="#settings" data-toggle="tab"
-								aria-expanded="false" class="nav-link"> <i
-									class="mdi mdi-settings-outline d-lg-none d-block mr-1"></i> <span
-									class="d-none d-lg-block">Settings</span>
-							</a></li>
-						</ul>
-
-						<div class="tab-content">
-							<div class="tab-pane" id="home">
-								<p>Food truck quinoa dolor sit amet, consectetuer adipiscing
-									elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-									sociis natoque penatibus et magnis dis parturient montes,
-									nascetur ridiculus mus. Donec quam felis, ultricies nec,
-									pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-									enim.</p>
-								<p class="mb-0">Donec pede justo, fringilla vel, aliquet
-									nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-									a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
-									pretium. Integer tincidunt.Cras dapibus. Vivamus elementum
-									semper nisi. Aenean vulputate eleifend tellus. Aenean leo
-									ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-							</div>
-							<div class="tab-pane show active" id="profile">
-								<p>Donec pede justo, fringilla vel, aliquet nec, vulputate
-									eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis
-									vitae, justo. Nullam dictum felis eu pede mollis pretium.
-									Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi.
-									Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor
-									eu, consequat vitae, eleifend ac, enim.</p>
-								<p class="mb-0">Food truck quinoa dolor sit amet,
-									consectetuer adipiscing elit. Aenean commodo ligula eget dolor.
-									Aenean massa. Cum sociis natoque penatibus et magnis dis
-									parturient montes, nascetur ridiculus mus. Donec quam felis,
-									ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-									consequat massa quis enim.</p>
-							</div>
-							<div class="tab-pane" id="settings">
-								<p>Food truck quinoa dolor sit amet, consectetuer adipiscing
-									elit. Aenean commodo ligula eget dolor. Aenean massa. Cum
-									sociis natoque penatibus et magnis dis parturient montes,
-									nascetur ridiculus mus. Donec quam felis, ultricies nec,
-									pellentesque eu, pretium quis, sem. Nulla consequat massa quis
-									enim.</p>
-								<p class="mb-0">Donec pede justo, fringilla vel, aliquet
-									nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet
-									a, venenatis vitae, justo. Nullam dictum felis eu pede mollis
-									pretium. Integer tincidunt.Cras dapibus. Vivamus elementum
-									semper nisi. Aenean vulputate eleifend tellus. Aenean leo
-									ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-							</div>
-						</div>
+					<div class="form-group float-left ml-3">
+						<form action="/stock/stock_regList" class="form-inline">
+							<input type="date" class="float-left mr-3" name="stock_regdate"
+								value="${srpghdl.srpgvo.stock_regdate }"> <select
+								class="form-control" name="range">
+								<option value="all"
+									<c:out value="${srpghdl.srpgvo.range eq 'nd' ? 'selected' : '' }"/>>
+									전체</option>
+								<option value="no"
+									<c:out value="${srpghdl.srpgvo.range eq 'no' ? 'selected' : '' }"/>>
+									입고 번호</option>
+								<option value="na"
+									<c:out value="${srpghdl.srpgvo.range eq 'na' ? 'selected' : '' }"/>>
+									재고명</option>
+								<option value="q"
+									<c:out value="${srpghdl.srpgvo.range eq 'q' ? 'selected' : '' }"/>>
+									유통기한</option>
+							</select> <input class="form-control" type="text" placeholder="검색어 입력"
+								name="keyword"
+								value='<c:out value="${srpghdl.srpgvo.keyword }"/>'>
+							<button type="submit" class="btn btn-success">검색</button>
+						</form>
 					</div>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>입고 번호</th>
+								<th>재고명</th>
+								<th>유통기한</th>
+								<th>주문일</th>
+							</tr>
+						</thead>
+						<c:choose>
+							<c:when test="${dateList.size() ne 0 }">
+								<tbody>
+									<c:forEach items="${dateList }" var="svo">
+										<tr>
+											<td>${svo.sno }</td>
+											<td>${svo.sname }</td>
+											<td>${svo.shelf_life }</td>
+											<td>${svo.stock_regdate }</td>
+										</tr>
+									</c:forEach>
+								</tbody>
+								<tfoot>
+									<tr>
+										<td colspan="4"><jsp:include page="paging.jsp" /></td>
+									</tr>
+								</tfoot>
+							</c:when>
+							<c:otherwise>
+								<tbody>
+									<tr>
+										<td colspan="4" class="text-center">입고 내역이 없습니다.</td>
+									</tr>
+								</tbody>
+							</c:otherwise>
+						</c:choose>
+					</table>
 				</div>
 			</div>
 		</div>

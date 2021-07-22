@@ -1,8 +1,6 @@
 package com.myweb.persistence.stock;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -11,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 
+import com.myweb.domain.StockReceivingPageVO;
 import com.myweb.domain.StockVO;
 
 @Repository
@@ -75,6 +74,16 @@ public class StockDAO implements StockDAORule {
 	@Override
 	public List<StockVO> selectSlifeList() {
 		return sql.selectList(NS + "slifeList");
+	}
+
+	@Override
+	public List<StockVO> selectRegList(StockReceivingPageVO srpgvo) {
+		return sql.selectList(NS + "regList", srpgvo);
+	}
+
+	@Override
+	public int selectTotalRegCount(StockReceivingPageVO srpgvo) {
+		return sql.selectOne(NS + "totalRegCount", srpgvo);
 	}
 
 
