@@ -1,140 +1,155 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <style>
-  .modal {
-    min-width: 100%;
-    min-height: 100%;
-  }
+.modal {
+	min-width: 100%;
+	min-height: 100%;
+}
 
-  .modal-title {
-    margin: auto;
-  }
+.modal-title {
+	margin: auto;
+}
 
-  .modal-body {
-    text-align: center; 
-  }
+.modal-body {
+	text-align: center;
+}
 
-  .modal-img {
-    margin: 10px;
-  }
+.modal-img {
+	margin: 10px;
+}
 
-  .checkBtn {
-    margin-top: 15px;
-    width: 90%;
-  }
-  .modal-select{
-  width: 50%;
-  margin: 0;
-  padding: 0;   
-  float: left; 
-  }
-  .modal-select:active{
-    color: #ff0000;
-  }
-  .img{
-     width: 120px;
-     height: 120px;
-  }
-  .btn-center-div{
-    text-align: center;
-    margin:auto;
-  }
-  .downQtyBtn, .upQtyBtn{
-     width:30px;
-  }
+.checkBtn {
+	margin-top: 15px;
+	width: 90%;
+}
+
+.modal-select {
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	float: left;
+}
+
+.modal-select:active {
+	color: #ff0000;
+}
+
+.img {
+	width: 120px;
+	height: 120px;
+}
+
+.btn-center-div {
+	text-align: center;
+	margin: auto;
+}
+
+.downQtyBtn, .upQtyBtn {
+	width: 30px;
+}
+
+.box {
+	-webkit-box-shadow: 5px 6px 3px -7px rgba(0, 0, 0, 0.83);
+	box-shadow: 5px 6px 3px -7px rgba(0, 0, 0, 0.83);
+}
 </style>
 
-<section class="ftco-section ftco-cart" style="background-color: #F1EAE5;">
-   <c:choose>
-      <c:when test="${cartList[0].title eq null || cartList[0].title eq  '' }">
-         <img src="/resources/icons/nolist_logo.png" style="width: 350px; display: block; margin: auto; margin-top: 50px;">
-      </c:when>
-      <c:otherwise>
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12 ftco-animate">
-                     <table class="table">
-                        <thead class="thead-primary">
-                        <!-- 결론! 장바구니가 비어있어도 cartList : not null -->
-                              <tr class="text-center">
-                                 <th>&nbsp;</th>
-                                 <th>상품</th>
-                                 <th>수량</th>
-                                 <th>가격</th>
-                                 <th>&nbsp;</th>
-                              </tr>
-                        </thead>
-                        <tbody>
-                           <c:forEach items="${cartList }" var="cartList">
-                                    <tr class="text-center">
-                                       <td class="image-prod">
-                                       <img class="img" src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}" alt="display none" style="width:160px;">
-                                       </td>
-                                       <td class="product-name">
-                                          <h3>${cartList.title }</h3>
-                                       </td>
-                                       <td class="quantity">
-                                    <div class="btn-center-div">
-                                       <button type="button" class="btn-sm btn-outline-danger downQtyBtn"
-                                          data-downqty="${cartList.cartno }" data-down="-1" data-qtydata="${cartList.quantity }">▽</button>
-                                       &nbsp;&nbsp;
-                                          <span class="qtyclass">${cartList.quantity }</span>
-                                       &nbsp;&nbsp;
-                                       <button type="button" class="btn-sm btn-outline-danger upQtyBtn"
-                                          data-upqty="${cartList.cartno }" data-up="1">△</button>
-                                    </div>
-                                 </td>
-
-                                 
-                                       <td class="price">₩<fmt:formatNumber value="${cartList.price }" pattern="#,###"/></td>
-                                       <td class="product-remove">
-                                          <button type="button"
-                                             class="btn-sm btn-danger removeBtn detailBtn"
-                                             style="width: 50px;" data-cartno="${cartList.cartno }">삭제
-                                          </button>
-                                       </td>
-                                    </tr>
-                                    <script>
+<section class="ftco-section ftco-cart"
+	style="background-color: #F1EAE5;">
+	<c:choose>
+		<c:when
+			test="${cartList[0].title eq null || cartList[0].title eq  '' }">
+			<img src="/resources/icons/nolist_logo.png"
+				style="width: 350px; display: block; margin: auto; margin-top: 50px;">
+		</c:when>
+		<c:otherwise>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 ftco-animate">
+						<table class="table box">
+							<thead class="thead-primary">
+								<!-- 결론! 장바구니가 비어있어도 cartList : not null -->
+								<tr class="text-center">
+									<th>&nbsp;</th>
+									<th>상품</th>
+									<th>수량</th>
+									<th>가격</th>
+									<th>&nbsp;</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${cartList }" var="cartList">
+									<tr class="text-center">
+										<td class="image-prod"><img class="img"
+											src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}"
+											alt="display none" style="width: 160px;"></td>
+										<td class="product-name">
+											<h2>${cartList.title }</h2> 
+											<c:forEach items="${cartList.aelist }" var="aevo">
+												<h5>${aevo.title }</h5>
+												<h5>${aevo.sname }</h5>
+											</c:forEach>
+										</td>
+										<td class="quantity">
+											<div class="btn-center-div">
+												<button type="button"
+													class="btn-sm btn-outline-danger downQtyBtn"
+													data-downqty="${cartList.cartno }" data-down="-1"
+													data-qtydata="${cartList.quantity }">▽</button>
+												&nbsp;&nbsp; <span class="qtyclass">${cartList.quantity }</span>
+												&nbsp;&nbsp;
+												<button type="button"
+													class="btn-sm btn-outline-danger upQtyBtn"
+													data-upqty="${cartList.cartno }" data-up="1">△</button>
+											</div>
+										</td>
+										<c:set var="unitTotalPrice" value="0" />
+										<c:forEach items="${cartList.aelist }" var="aevo">
+											<c:set var="unitTotalPrice" value="${unitTotalPrice + (aevo.price * aevo.quantity)}" />
+											<c:set var="unitTotalPrice2" value="${unitTotalPrice2 + (aevo.price * aevo.quantity)}" />
+										</c:forEach>
+										<td class="price"><h2>
+												₩<fmt:formatNumber value="${cartList.quantity * (unitTotalPrice + cartList.price) }" pattern="#,###" /></h2>
+										</td>
+										<td class="product-remove">
+											<button type="button"
+												class="btn-sm btn-danger removeBtn detailBtn"
+												style="width: 50px;" data-cartno="${cartList.cartno }">삭제
+											</button>
+										</td>
+									</tr>
+									<script>
                                        $(".ftco-cart").css("background-color", "white");
                                     </script>
-                                    <hr>
-                                    <c:forEach items="${cartList.aelist }" var="aevo">
-                                    	<div class="container">
-                                    		<c:choose>
-                                    			<c:when test="${aevo.title eq null }">
-                                    				<span>${aevo.sname} 수량 ${aevo.quantity} 가격 ${aevo.price * aevo.quantity} </span>
-                                    			</c:when>
-                                    			<c:otherwise>
-                                    				<span>${aevo.title} 수량 ${aevo.quantity} 가격 ${aevo.price * aevo.quantity} </span>
-                                    			</c:otherwise>
-                                    		</c:choose>
-                                    	</div>
-                                    </c:forEach>
-                           </c:forEach>
-                        </tbody>
-                     </table>
-                  <div style="font-size:2em; margin-top:30px; text-align: center; width:100%">
-                     <c:forEach items="${cartList }" var="cartList">
-                        <c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
-                     </c:forEach>
-                     총 주문금액 :
-                       <fmt:formatNumber value="${sum}" pattern="#,###"/>원
-                     <br>
-                     <button type="button" class="btn-lg btn-danger" style="width:280px"
-                     data-toggle="modal" data-target="#orderBtn"> 결제하기 </button>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </c:otherwise>
-   </c:choose>
+								</c:forEach>
+							</tbody>
+						</table>
+						<div
+							style="font-size: 2em; margin-top: 30px; text-align: center; width: 100%">
+							<c:set var="sum" value="0" />
+							<c:set var="sum2" value="0" />
+							<c:forEach items="${cartList }" var="cartList">
+								<c:set var="sum" value="${sum + (cartList.price * cartList.quantity)}" />
+								<c:set var="sum2" value="${sum2 + (unitTotalPrice2 * cartList.quantity)}" />
+							</c:forEach>
+							총 주문금액 :
+							<fmt:formatNumber value="${sum + unitTotalPrice2 }" pattern="#,###" />원 <br>
+							<button type="button" class="btn-lg btn-danger"
+								style="width: 280px" data-toggle="modal" data-target="#orderBtn">
+								결제하기</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
 </section>
 
-<fmt:formatNumber value="${money}" pattern="#,###"/>
+<fmt:formatNumber value="${money}" pattern="#,###" />
 
 <!-- Modal -->
    <div class="container">
@@ -167,7 +182,7 @@
       </div>
     </div>
   </div>
-  
+
 <!-- Modal 이미지 겹치기 스크립트 -->
 <script>
 let check = false;

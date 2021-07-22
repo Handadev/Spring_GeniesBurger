@@ -89,7 +89,14 @@ public class CartService implements CartServiceRule {
 
 	@Override
 	public List<CartVO> payment(int mno) {
-		return cartdao.selectList(mno);
+		List<CartVO> list = new ArrayList<CartVO>();
+		List<CartVO> clist =  cartdao.selectList(mno);
+		for (CartVO cartvo : clist) {
+			List<AddExtraVO> aelist = aedao.selectAddExtraList(cartvo);
+			cartvo.setAelist(aelist);
+			list.add(cartvo);
+		}
+		return list;
 	}
 
 	@Override

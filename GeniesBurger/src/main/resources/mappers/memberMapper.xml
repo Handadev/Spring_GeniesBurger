@@ -26,8 +26,8 @@
 		</if>
 	</sql>
    <insert id="reg" parameterType="mvo">
-      insert into tbl_member(mno, email, pwd, name, mobile, address, birthday)
-      values (seq_member_mno.nextval, #{email}, #{pwd}, #{name}, #{mobile}, #{address}, #{birthday})
+      insert into tbl_member(mno, email, pwd, name, mobile, address, birthday, question, answer)
+      values (seq_member_mno.nextval, #{email}, #{pwd}, #{name}, #{mobile}, #{address}, #{birthday}, #{question}, #{answer})
    </insert>
    
    <select id="check" parameterType="String" resultType="int">
@@ -60,6 +60,15 @@
    <select id="issueMList" resultType="mvo">
    	  select * from tbl_member
    </select>
+   <select id="findID" parameterType="hashmap" resultType="string">
+    	select email from tbl_member where name=#{name} and mobile=#{mobile}
+	</select>
+   <select id="findQuestion" parameterType="hashmap" resultType="mvo">
+    	select email, question from tbl_member where name=#{name} and email=#{email}
+	</select>
+	<select id="findPwd" parameterType="hashmap" resultType="mvo">
+    	select email, pwd from tbl_member where email=#{email} and answer=#{answer}
+	</select>
    
    <update id="mod" parameterType="mvo">
       update tbl_member set    pwd=#{pwd}, name=#{name}, 

@@ -1,7 +1,5 @@
 package com.myweb.ctrl;
 
-import java.util.HashMap;
-
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
@@ -35,7 +33,60 @@ public class MemberController {
 	@Inject
 	private CouponServiceRule cpsv;
 	
-
+	@PostMapping("/findPwd")
+	public String findPwd(MemberVO mvo, Model model, RedirectAttributes reAttr) {
+		MemberVO result = msv.findPwd(mvo);
+		logger.info("aaaaaaaaaaaaaaaa result : " + result);
+		if (result != null) {
+		    model.addAttribute("mvo", result);
+		    return "/member/pwdResult";
+		    } else {
+		    reAttr.addFlashAttribute("result", "본인 확인 답변이 틀립니다!");
+		    return "redirect:/member/findQuestion";
+		    }   
+		}
+	
+	@GetMapping("/question")
+	public void findPwd() {
+		logger.info("WEB-INF/views/member/question.jsp - GET");
+	}
+	
+	@PostMapping("/findQuestion")
+	public String findQuestion(MemberVO mvo, Model model, RedirectAttributes reAttr) {
+		MemberVO eq = msv.findQuestion(mvo);
+		if (eq != null) {
+			logger.info("해당 회원의 email : " + eq.getEmail());
+			logger.info("해당 회원의 question : " + eq.getQuestion());
+		    model.addAttribute("mvo", eq);
+		    return "/member/question";
+		    } else {
+		    reAttr.addFlashAttribute("result", "정보가 존재하지 않습니다!");
+		    return "redirect:/member/findQuestion";
+		    }   
+		}
+	
+	@GetMapping("/findQuestion")
+	public void findQuestion() {
+		logger.info("WEB-INF/views/member/findQuestion.jsp - GET");
+	}
+	
+	@PostMapping("/findID")
+	public String findID(MemberVO mvo, Model model, RedirectAttributes reAttr) {
+	String email = msv.findID(mvo);
+	if (email != null) {
+	    model.addAttribute("email", email);
+	    return "/member/idResult";
+	    } else {
+	    reAttr.addFlashAttribute("result", "아이디가 존재하지 않습니다!");
+	    return "redirect:/member/findID";
+	    }   
+	}
+	
+	@GetMapping("/findID")
+	public void findID() {
+	    logger.info("WEB-INF/views/member/findID.jsp - GET");
+	}
+	
 	// kakao login
 	@Autowired
     private KakaoService kakaoService;
