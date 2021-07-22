@@ -63,7 +63,7 @@
 	     		   <td>${cplvo.discount }%</td>
 	     		   <td>${fn:substring(enddate,-1, 11)}</td>
 	     		   <td>
-	     		   <button type="button" id="cancelBtn" data-cplno="${cplvo.cplno }" class="btn btn-primary">취소</button>
+	     		   <button type="button" id="cancelBtn" data-cplno="${cplvo.cplno }" class="btn btn-danger">취소</button>
 	     		   </td>
 	    		  </tr>
 	    		  </c:forEach>

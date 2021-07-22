@@ -277,40 +277,38 @@ a {
 <script src="/resources/js/jquery-3.2.1.min.js"></script>
 <script>
 	/*add_extra가 추가되었을 때 추가금액을 가져와서 총액에 더해줌 */
-	let product_count = $(".title").length; // 상품의 개수 반환
-	let price;
-	for (let i = 0; i < product_count; i++) {
-		price = 0;
-		let extra_text = $(".extras"+i+" span").text(); //한 상품의 모든 add_extra 가져옴
-		extra_text = extra_text.substr(1);
-		let extra_price_arr = extra_text.split("+");
-		
-		for (let index of extra_price_arr) {
-			price += parseInt(index);
-		}
-		console.log(price);
-		/* 추가 메뉴가 없는 제품은 price가 nan이 뜨기 때문에 nan이 아닐때만 상품의 가격에 추가상품 가격을 넣어줌 */
-		if (isNaN(price)) { 
-		} else {
-			let product_text = $("#A"+(i+1)).text();
-			product_text = product_text.replace(",", "").trim();
-			let product_total = parseInt(product_text.substr(0, product_text.length-1)); 
-			product_total = product_total+price;
-			
-			$("#"+(i+1)).val(product_total); // input hidden에 상품가격+add_extra 설정
-			$("#A"+(i+1)).text(product_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"); //상품가격+add_extra 정규식 추가해서 삽입
-		}
-	}
-	
-	let total_price = 0;
-	for (let i = 0; i < product_count; i++) {
-		total_price += parseInt($("#"+(i+1)).val());
-	}
-	/* 총액 정규식 추가해서 삽입 */
-	$("#total").text(total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
-	$("#price").text(total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
-	
-	
+   let product_count = $(".title").length; // 상품의 개수 반환
+   let price;
+   for (let i = 0; i < product_count; i++) {
+      price = 0;
+      let extra_text = $(".extras"+i+" span").text(); //한 상품의 모든 add_extra 가져옴
+      extra_text = extra_text.substr(1);
+      let extra_price_arr = extra_text.split("+");
+      
+      for (let index of extra_price_arr) {
+         price += parseInt(index);
+      }
+      console.log(price);
+      /* 추가 메뉴가 없는 제품은 price가 nan이 뜨기 때문에 nan이 아닐때만 상품의 가격에 추가상품 가격을 넣어줌 */
+      if (isNaN(price)) { 
+      } else {
+         let product_text = $("#A"+(i+1)).text();
+         product_text = product_text.replace(",", "").trim();
+         let product_total = parseInt(product_text.substr(0, product_text.length-1)); 
+         product_total = product_total+price;
+         
+         $("#"+(i+1)).val(product_total); // input hidden에 상품가격+add_extra 설정
+         $("#A"+(i+1)).text(product_total.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원"); //상품가격+add_extra 정규식 추가해서 삽입
+      }
+   }
+   
+   let total_price = 0;
+   for (let i = 0; i < product_count; i++) {
+      total_price += parseInt($("#"+(i+1)).val());
+   }
+   /* 총액 정규식 추가해서 삽입 */
+   $("#total").text(total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
+   $("#price").text(total_price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")+"원");
 	
 	var arr = [];
 	var arr2 = [];
