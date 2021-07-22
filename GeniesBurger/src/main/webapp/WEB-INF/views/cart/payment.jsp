@@ -11,15 +11,17 @@
 	font-size: 22px;
 }
 .box {
-	box-shadow: 1px 1px 1px 1px;
 	border: none;
+	-webkit-box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83); 
+	box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 	height: 470px;
 	width: 850px;
 	margin: auto;
 }
 .box2 {
-	box-shadow: 1px 1px 1px 1px;
 	border: none;
+	-webkit-box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83); 
+	box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 	height: 250px;
 	width: 850px;
 	margin: auto;
@@ -130,6 +132,10 @@ a {
 
 	<c:set var="total" value="0" />
 	<c:forEach items="${list }" var="cvo">
+	<c:forEach items="${list.aelist }" var="aevo">
+												<h5>??? : ${aevo.title }</h5>
+												<h5>${aevo.sname }</h5>
+											</c:forEach>
 <div class="container p-3 my-3 box">
 		<div class="menu_wrap">
 			<p class="title">${cvo.title }</p>
