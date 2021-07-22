@@ -5,8 +5,13 @@
 <div class="container" style="height: 1000px;" >
 	<div class="row justify-content-center">
 		<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
+			<div>
+				<span id="title"></span>
+			</div>
 			<input type="hidden" name="pno" value=""> 
-			<input type="hidden" name="purno" value=""> <input type="hidden" name="email" value="${ses.email }">
+			<input type="hidden" name="purno" value="">
+			<input type="hidden" name="email" value="${ses.email }">
+			<input type="hidden" name="title" value="">
 			
 			<div class="form-group">
 				<textarea class="form-control" id="content" name="rcontent" style="width: 400px; margin-top:30px; resize: none; " placeholder="내용을 입력해주세요" rows="5"></textarea>
@@ -14,31 +19,34 @@
 
 			<div class="form-group">
 				<input type="file" class="form-control" id="files" name="files"	style="display: none;">
-				<button type="button" class="btn btn-outline-info btn-block" id="fileTrigger" style="width: 400px">사진업로드</button>
-			</div>
-
-			<div class="form-group">
+				<button type="button" class="btn-sm btn-info btn-block" id="fileTrigger" style="width: 400px;">사진업로드</button>
 				<ul class="list-group" id="fileZone"></ul>
 			</div>
-			<button type="button" class="btn btn-primary" id="subBtn">리뷰작성</button>
+			<div class="form-group">
+			</div>
+			<button type="button" class="btn-sm btn-danger" id="subBtn" style="width:400px;">리뷰작성</button>
 		</form>
 	</div>
 </div>
 <script src="/resources/js/jquery.min.js"></script>
 <script>
+let title = localStorage.getItem('title');
+$("#title").text(title);
+
 $(document).on("click", "#fileTrigger", function() {
 	$("#files").click();
 });
 $(document).on("click","#subBtn", function(){
-	let title = $("#title").val();
 	let content = $("#content").val();
-	if(title==''||content==''){
+	if(content==''){
 		alert("내용을 입력하세요~");
 	} else{
 		let pno = localStorage.getItem('pno');
 		let purno = localStorage.getItem('purno');
 		$("input[name=pno]").val(pno);
 		$("input[name=purno]").val(purno);
+		$("input[name=title]").val(title);
+		console.log(title);
 		$("#regForm").submit();
 	}
 });

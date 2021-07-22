@@ -51,16 +51,15 @@
 	<select id="totalListMember" parameterType="hashmap"
 		resultType="purvo">
 		<![CDATA[
- 		select rownum, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME  
+ 		select rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME  
 		from(select /*INDEX_DESC(tbl_purchase pk_purchase)*/
 		rownum as rn, PURNO, MNO, CARTNO, PNO, TITLE, PRICE, QUANTITY, REGDATE, EMAIL, NAME 
 		from V_MEMBER_PUR
-		
-		where rownum > 0 
+		where rownum > 0
  		]]>
 		<include refid="search"></include>
 		<![CDATA[		
- 			and rownum <= #{pageIndex} * #{countPerPage} ORDER BY purno desc)
+ 			and rownum <= #{pageIndex} * #{countPerPage})
         	where rn > (#{pageIndex}-1) * #{countPerPage}
  		]]>
 		and mno=#{mno}

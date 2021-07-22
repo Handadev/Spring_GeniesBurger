@@ -11290,7 +11290,7 @@ opacity
 }
 
 .product:hover .pricing {
-	opacity: 0;
+	/* opacity: 0; */
 }
 
 .product:hover .text .bottom-area {
@@ -11536,7 +11536,6 @@ opacity
 }
 
 .table tbody tr td.product-name h3 {
-	font-size: 16px;
 }
 
 .table tbody tr td.total, .table tbody tr td.price {

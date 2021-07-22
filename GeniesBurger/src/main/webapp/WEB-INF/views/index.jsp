@@ -8,6 +8,10 @@
 	width: 80%;
 }
 
+.product_div {
+	cursor: pointer;
+}
+
 .modal {
 	text-align: center;
 }
@@ -92,8 +96,12 @@
 	cursor: pointer;
 }
 
+.checkbox.row:first-child {
+	margin-top: 15px;
+}
+
 .checkbox.row:last-child {
-	margin-bottom: 5px;
+	margin-bottom: 30px;
 }
 
 .checkText {
@@ -103,7 +111,7 @@
 .check_price {
 	position: absolute;
 	font-size: 25px;
-    top: 10px;
+    top: -11px;
     right: 9%;
 }
 
@@ -122,13 +130,13 @@
 
 .check_label {
 	position: absolute;
-	top: 10px;
+	top: -12px;
 	left: 45%;
 }
 
 .extra_img { /* 추가 재료 이미지 */
 	position: absolute;
-	top: -5px;
+	top: -25px;
     left: 13%;
 }
 

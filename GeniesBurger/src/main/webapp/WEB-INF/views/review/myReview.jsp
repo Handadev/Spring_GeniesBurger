@@ -36,6 +36,9 @@ img{
 				</c:if>
 				</a>
 				<div class="media-body">
+					<div>
+						<span style="font-size: 20px;">상품명 : ${rvo.title }</span>
+					</div>
 					<div id="userComment">
 					&nbsp;&nbsp;<b>${rvo.email }&nbsp;&nbsp;</b><span style="font-weight:lighter;">${rvo.rdate }</span><br>&nbsp;&nbsp;${rvo.rcontent }
 					</div>
