@@ -160,7 +160,7 @@
             <img src="/resources/icons/to_go.jpg" style="width:200px; height:200px;" class="modal-img" />
             <p><b>포장주문</b></p>
             </div>
-             <a href="/cart/payment?mno=${ses.mno }" class="btn-lg btn-dark checkBtn" style="width:100px;">확인</a>
+             <a class="btn btn-dark checkBtn" style="color: white; ">확인</a>
             <!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
           </div>
         </div>
@@ -170,18 +170,27 @@
   
 <!-- Modal 이미지 겹치기 스크립트 -->
 <script>
+let check = false;
 $(document).on("click", "#background1", function() {
    let html = "<div style='position: relative; top: 50px; left:50px;'><img src='/resources/icons/check.png' style='width:150px'/></div>";
    $("#check1").html(html);
    $("#check2").html("");
+   check = true;
 });
 
 $(document).on("click", "#background2", function() {
    let html = "<div style='position: relative; top: 50px; left:50px;'><img src='/resources/icons/check.png' style='width:150px'/></div>";
    $("#check2").html(html);
    $("#check1").html("");
+   check = true;
 });
-
+$(document).on("click",".checkBtn",function() {
+	   if(check == true) {
+	      $(".checkBtn").attr("href", '/cart/payment?mno='+${ses.mno });
+	   } else {
+	      alert("하나를 선택해주세요!");
+	   }
+	});
 </script>
 
 <!-- 삭제 스크립트 -->
@@ -275,20 +284,3 @@ function downqty_cart(downqty, downqty2) {
 </script>
 
 <jsp:include page="../common/footer.jsp" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
