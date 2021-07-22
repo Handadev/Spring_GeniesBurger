@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="ReviewMapper">
 	<insert id="add" parameterType="rvo">
-		insert into tbl_review (rno, pno, purno, email, rcontent) values(seq_review_rno.nextval, #{pno}, #{purno}, #{email}, #{rcontent})
+		insert into tbl_review (rno, pno, purno, email, rcontent, title) values(seq_review_rno.nextval, #{pno}, #{purno}, #{email}, #{rcontent}, #{title})
 	</insert>
 	<insert id="acReg" parameterType="hashmap">
 		insert into tbl_admincomment (acno, rno, adcomment) values(SEQ_ADMINCOMMENT_ACNO.nextval, #{rno}, #{adcomment})
@@ -13,7 +13,7 @@
 	<![CDATA[
 		SELECT *
 		FROM (select /*+INDEX_DESC(tbl_review pk_rno)*/
-		rownum AS rn, rno, pno, email, rcontent, TO_CHAR(rdate,'YYYY-MM-DD') as rdate, ruuid, rsavedir, rfname, rftype 
+		rownum AS rn, rno, pno, email, rcontent, title, TO_CHAR(rdate,'YYYY-MM-DD') as rdate, ruuid, rsavedir, rfname, rftype 
 		FROM TBL_REVIEW WHERE rownum <= #{pageIndex} * #{countPerPage})
        	where rn > (#{pageIndex}-1) * #{countPerPage}	
        	]]>
@@ -28,7 +28,7 @@
 		<![CDATA[
 		SELECT *
 		FROM (select /*+INDEX_DESC(tbl_review pk_rno)*/
-		rownum AS rn, rno, pno, email, rcontent, TO_CHAR(rdate,'YYYY-MM-DD') as rdate, ruuid, rsavedir, rfname, rftype 
+		rownum AS rn, rno, pno, email, rcontent, title, TO_CHAR(rdate,'YYYY-MM-DD') as rdate, ruuid, rsavedir, rfname, rftype 
 		FROM TBL_REVIEW WHERE rownum <= #{pageIndex} * #{countPerPage} AND email = #{email})
        	where rn > (#{pageIndex}-1) * #{countPerPage}
        	]]>
