@@ -27,9 +27,9 @@ public class AddExtraDAO implements AddExtraDAORule {
 		sql.insert(NS+"reg", aevo);
 	}
 	
-	@Override
-	public int delete(int mno) {
-		return sql.delete(NS+"del", mno);
+	@Override // 주문 성공시 해당 add_extra 삭제 
+	public int delete(int cartno) {
+		return sql.delete(NS+"del", cartno);
 	}
 
 	@Override // 주문 취소시 add_extra 테이블에 정보가 있으면 지우기 위해 cartno없는 정보 가져옴

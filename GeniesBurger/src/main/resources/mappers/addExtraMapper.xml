@@ -26,12 +26,14 @@
   		select * from tbl_add_extra where mno = #{mno} and pno =#{pno} and cartno = #{cartno}
   	</select>
 
+	<!-- 주문 성공시 해당 add_extra 삭제 -->
   	<delete id="del" parameterType="int">
-  		delete from tbl_add_extra where mno = #{mno}
+  		delete from tbl_add_extra where cartno = #{cartno}
   	</delete>
 	
+	<!-- 주문 취소한 제품 AE만 지우기 -->
 	<delete id="delPno" parameterType="hashmap">
-		delete from tbl_add_extra where mno = #{mno} and pno = #{pno}
+		delete from tbl_add_extra where mno = #{mno} and pno = #{pno} and cartno is null
 	</delete> 
 	
 	<!-- 최근 추가된 cartno mno pno 받아와서 tbl_AE cartno 컬럼 수정하기-->

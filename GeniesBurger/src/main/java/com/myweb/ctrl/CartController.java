@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import com.myweb.domain.MemberPageVO;
 import com.myweb.domain.ProductStockVO;
 import com.myweb.domain.PurchaseVO;
 import com.myweb.handler.MemberPagingHandler;
+import com.myweb.service.add_extra.AddExtraServiceRule;
 import com.myweb.service.cart.CartServiceRule;
 import com.myweb.service.coupon.CouponServiceRule;
 import com.myweb.service.product.ProductServiceRule;
@@ -56,6 +58,9 @@ public class CartController {
 	
 	@Inject
 	private ProductServiceRule psv;
+	
+	@Inject
+	private AddExtraServiceRule aesv;
 
 	// 주문완료
 	@GetMapping("/complete")
@@ -130,6 +135,7 @@ public class CartController {
 	}
 
 	// 카트 => 주문내역
+	@Transactional
 	@ResponseBody
 	@PostMapping(value = "/mno/", produces = MediaType.TEXT_PLAIN_VALUE)
 	public String removeWithMno(@RequestParam("mno") int mno, @RequestParam(value = "list[]") List<Integer> list) {
@@ -145,12 +151,13 @@ public class CartController {
 				PurchaseVO purvo = new PurchaseVO(cartvo.get(i).getMno(), cartvo.get(i).getCartno(),
 						cartvo.get(i).getPno(), cartvo.get(i).getTitle(), list.get(i),
 						cartvo.get(i).getQuantity());
-				// 주문내역에 cartvo에서 받아온 상품들 추가 
-				isUp = pursv.register(purvo);
+				isUp = pursv.register(purvo); // 주문내역에 cartvo에서 받아온 상품들 추가 
 				isUp *= isUp;
 				int pno = cartvo.get(i).getPno();
 				int qty = cartvo.get(i).getQuantity();
-				isUp *= psv.updateProductQty(pno, qty);
+				int cartno = cartvo.get(i).getCartno();
+				isUp *= psv.updateProductQty(pno, qty); // 주문된 상품에서 판매량 올리기 
+				isUp *= aesv.remove(cartno);
 				// 재고 관련 for문
 				List<ProductStockVO> productStockList = pssv.getList(pno);
 				for (int t = 0; t < productStockList.size(); t++) {
