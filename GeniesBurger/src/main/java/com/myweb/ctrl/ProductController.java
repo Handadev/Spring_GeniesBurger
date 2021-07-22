@@ -1,13 +1,19 @@
 package com.myweb.ctrl;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,6 +54,14 @@ public class ProductController {
 		model.addAttribute("single_list", psv.getList(pvo));
 	}
 	
+	@ResponseBody // 상품등록시 연동상품을 설정하면 연동상품에 연결되어있는 stocklist 리턴
+	@GetMapping(value = "/getRelateStock/{pno}",
+				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
+							MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<List<ProductStockVO>> getRelateStock (@PathVariable("pno") int pno) {
+		return new ResponseEntity<List<ProductStockVO>> (pssv.getList(pno), HttpStatus.OK);
+	}
+	
 	@PostMapping("/register")
 	public String register(ProductStockVO psvo, RedirectAttributes reAttr
 						,@RequestParam(name="files", required=false) MultipartFile[] files, ProductVO pvo) {
@@ -77,8 +91,9 @@ public class ProductController {
 	}
 	
 	@GetMapping("/modify")
-	public void modify(@RequestParam("pno") int pno, Model model) {
+	public void modify(@RequestParam("pno") int pno, Model model, ProductVO pvo) {
 		model.addAttribute("pvo", psv.detail(pno));
+		model.addAttribute("single_list", psv.getList(pvo));
 	}
 	
 	@PostMapping("/modify")

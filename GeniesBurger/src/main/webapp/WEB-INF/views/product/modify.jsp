@@ -27,6 +27,7 @@
 					<option value="6" <c:out value="${pvo.category eq 6 ? 'selected' : '' }"/>>올데이할인 버거 라지 세트</option>
 					<option value="7" <c:out value="${pvo.category eq 7 ? 'selected' : '' }"/>>사이드</option>
 					<option value="8" <c:out value="${pvo.category eq 8 ? 'selected' : '' }"/>>음료</option>
+					<option value="9" <c:out value="${pvo.category eq 9 ? 'selected' : '' }"/>>햄버거 추가 재료</option>
 				</select>
 			</div>
 			
@@ -36,6 +37,23 @@
 					name="pno" readonly>
 			</div>
 			
+			<div class="form-group">
+			<input type="hidden" id="relatePno" value="${pvo.relate_pno }">
+				<label for="title">연동된 단품:</label> 
+				<select name="relate_pno" id="relateSel" class="form-control">
+					<option value="0">연동할 상품명 선택</option>
+					<c:forEach items="${single_list }" var="pvo">
+						<option value="${pvo.pno }">
+							<c:choose>
+								<c:when test="${pvo.category eq 1}">버거 단품</c:when>
+								<c:otherwise>올데이세일 단품</c:otherwise>
+							</c:choose>
+						 - ${pvo.title }
+						</option>
+					</c:forEach>
+				</select>
+			</div>
+						
 			<div class="form-group">
 				<label for="title">상품명:</label> <input type="text"
 					class="form-control" id="title" value="${pvo.title }"
@@ -153,7 +171,6 @@
 		}
 	}
 	
-	/* 실무에서는 유효성 검사까지 해야함 */
 	$(document).on("change", "#files", function() {
 		$("button[type=submit]").attr("disabled", false);
 		let formObj = $("#files");
@@ -176,6 +193,10 @@
 				fileZone.append(li);
 		}
 	});
+	
+	/* 기존에 연동된 상품pno 가져와서 select에 적용 */
+	let relate_pno_val = $("#relatePno").val();
+	$("#relateSel").val(relate_pno_val).attr("selected", "selected");
 </script>
 
 

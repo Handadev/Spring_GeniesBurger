@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="form-group">
-				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno" id="box"
+				<label for="title">세트 구성을 위한 단품 연동:</label> <select name="relate_pno" id="relateSel"
 					class="form-control">
 					<option value="0">연동할 상품명 선택</option>
 					<c:forEach items="${single_list }" var="pvo">
@@ -79,8 +79,13 @@
 					class="btn-lg btn-outline-info btn-block col-sm-6" id="fileTrigger">사진
 					업로드</button>
 			</div>
+			
 			<div class="form-group">
 				<ul class="list-group" id="fileZone"></ul>
+			</div>
+			
+			<div class="form-group">
+				<ul class="list-group" id="relateStockZone"></ul>
 			</div>
 			
 			<div class="form-group">
@@ -186,11 +191,31 @@
 		
 	});
 	
-	
-	$("#box").change(function() {
-		let valval = $(this).val();
+	/* 단품 연동 select에 값이 들어가면 해당 pno 값과 연동되어있는 stock - sname이 출력됨*/
+	$("#relateSel").change(function() {
+		let relate_pno = $(this).val();
 		
+		$.getJSON("/product/getRelateStock/"+relate_pno+".json", function(result) {
+			console.log(result);
+			print_relate_stock(result);
+		}).fail(function(err){
+			console.log(err);
+		})
 	});
+	
+	function print_relate_stock(list) {
+		let html ='';
+		let relateStockZone = $("#relateStockZone");
+		relateStockZone.html("");
+		if (list.length != 0) {
+			html += '<label for="price">선택한 단품과 연동되어있는 재고:</label>';
+			for (let psvo of list) {
+				html += '<input type="text" class="form-control" placeholder="'+psvo.sname+'" name="sname" value="'+psvo.sname+'" readonly>';
+			}
+		}
+		
+		relateStockZone.append(html);
+	}
 </script>
 
 <jsp:include page="../common/footer.jsp" />
