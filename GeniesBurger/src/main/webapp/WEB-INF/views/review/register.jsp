@@ -22,9 +22,13 @@
 <div class="container" style="height: 500px;" >
 	<div class="row justify-content-center">
 		<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
-		<p id="title">나의 리뷰<p>
+			<div>
+				<span id="title"></span>
+			</div>
 			<input type="hidden" name="pno" value=""> 
-			<input type="hidden" name="purno" value=""> <input type="hidden" name="email" value="${ses.email }">
+			<input type="hidden" name="purno" value="">
+			<input type="hidden" name="email" value="${ses.email }">
+			<input type="hidden" name="title" value="">
 			
 			<div class="form-group">
 				<textarea class="form-control" id="content" name="rcontent" style="width: 400px; margin-top:30px; resize: none; " placeholder="내용을 입력해주세요" rows="7"></textarea>
@@ -43,19 +47,23 @@
 </div >
 <script src="/resources/js/jquery.min.js"></script>
 <script>
+let title = localStorage.getItem('title');
+$("#title").text(title);
+
 $(document).on("click", "#fileTrigger", function() {
 	$("#files").click();
 });
 $(document).on("click","#subBtn", function(){
-	let title = $("#title").val();
 	let content = $("#content").val();
-	if(title==''||content==''){
+	if(content==''){
 		alert("내용을 입력하세요~");
 	} else{
 		let pno = localStorage.getItem('pno');
 		let purno = localStorage.getItem('purno');
 		$("input[name=pno]").val(pno);
 		$("input[name=purno]").val(purno);
+		$("input[name=title]").val(title);
+		console.log(title);
 		$("#regForm").submit();
 	}
 });

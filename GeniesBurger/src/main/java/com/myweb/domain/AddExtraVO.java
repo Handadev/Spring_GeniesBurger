@@ -13,17 +13,8 @@ public class AddExtraVO {
 	
 	public AddExtraVO() {
 	}
-	
-	
-	// 재료 추가
-	public AddExtraVO(int mno, int pno, int price, String sname) {
-		this.mno = mno;
-		this.pno = pno;
-		this.price = price;
-		this.sname = sname;
-	}
 
-	// 사이드, 음료 추가
+	// 사이드, 음료 추가, 재료 추가
 	public AddExtraVO(int mno, int pno, String title, int price) {
 		this.mno = mno;
 		this.pno = pno;

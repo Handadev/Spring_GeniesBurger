@@ -11291,7 +11291,7 @@ opacity
 }
 
 .product:hover .pricing {
-	opacity: 0;
+	/* opacity: 0; */
 }
 
 .product:hover .text .bottom-area {

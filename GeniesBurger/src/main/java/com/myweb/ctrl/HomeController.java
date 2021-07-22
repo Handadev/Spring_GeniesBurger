@@ -75,7 +75,6 @@ public class HomeController {
 	}
 	
 	
-	
 	@ResponseBody // 단품 혹은 세트 골랐을 때 사이즈업을 위해서 세트 / 라지세트 가져옴
 	@GetMapping(value = "/select/{pno}/{category}",
 				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,
@@ -108,7 +107,7 @@ public class HomeController {
 						@RequestParam("mno") int mno,
 						@RequestParam("pno") int pno) {
 		for (int i = 0; i < titleList.size(); i++) {
-			aesv.register(new AddExtraVO(mno, pno, priceList.get(i), titleList.get(i)));
+			aesv.register(new AddExtraVO(mno, pno, titleList.get(i), priceList.get(i)));
 		}
 	}
 

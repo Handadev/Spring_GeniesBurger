@@ -22,7 +22,7 @@
 		</select>
 		<div class="form-group mt-3">
 			    <label for="enddate">유효기간</label>
-			    <input type="date" class="form-control" id="enddate" name="enddate">
+			    <input type="date" class="form-control" id="enddate" name="enddate" style="width: 250px; ">
 			  </div>
 		<div class="form-group mt-3">
 			<button type="button" id="issueSbmBtn" class="btn btn-primary">발급</button>

@@ -74,10 +74,12 @@
 </section>
 <script>
 $(document).on("click",".revBtn",function(){
+   let title = $(this).closest("tr").find("td").eq("0").text();
    let pno = $(this).closest("tr").prev("input").prev("input").val();
    let purno = $(this).closest("tr").prev("input").val();
-   localStorage.setItem("pno", pno);
+ 	localStorage.setItem("pno", pno);
    localStorage.setItem("purno", purno);
+   localStorage.setItem("title", title);
    location.href="/review/register";
 });
 </script>

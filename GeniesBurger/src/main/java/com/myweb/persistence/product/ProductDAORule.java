@@ -20,6 +20,7 @@ public interface ProductDAORule {
 	public List<ProductVO> selectBeverageList(); // 5번 모달 음료 리스트 출력
 	public int updateQty(int pno, int qty); // cart ctrl 주문시 재품 판매량 높이기
 	public ProductVO selectOne(int pno); // detail
+	public int selectPno(String title); // 상품 결제시 AE에 있는 title을 가지고 pno를 출력해서 재고에서 빼야함
 	public int update(ProductVO pvo); 
 	public int delete(int pno);
 	public int selectOne(); // 사진추가를 위한 현재 pno

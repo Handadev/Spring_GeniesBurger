@@ -8,17 +8,12 @@
 		<nav class="sidebar-nav">
 			<ul id="sidebarnav">
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/dash_index" aria-expanded="false"><i data-feather="home"
+					href="/sales/sales_detail" aria-expanded="false"><i data-feather="home"
 						class="feather-icon"></i><span class="hide-menu">Dashboard</span></a></li>
 						
-				<!-- 매출/재고 관리 시작 -->
+				<!-- 재고 관리 시작 -->
 				<li class="list-divider"></li>
-				<li class="nav-small-cap"><span class="hide-menu">매출 /
-						재고 관리</span></li>
-				<li class="sidebar-item"><a class="sidebar-link"
-					href="/sales/sales_detail" aria-expanded="false"><i
-						data-feather="tag" class="feather-icon"></i><span
-						class="hide-menu">매출 상세</span></a></li>
+				<li class="nav-small-cap"><span class="hide-menu">재고 관리</span></li>
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
 					href="/stockOrder/dateList" aria-expanded="false"><i
 						data-feather="sidebar" class="feather-icon"></i><span
