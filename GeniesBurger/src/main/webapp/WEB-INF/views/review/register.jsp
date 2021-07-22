@@ -2,7 +2,24 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="../common/header.jsp" />
-<div class="container" style="height: 1000px;" >
+<style>
+#content{
+	border-radius:10px;		
+}
+#content:focus{
+	outline-color: red;
+	border-radius:10px;
+}
+.btn{
+	border-radius:10px;
+}
+#title{
+	margin-top:30px;
+	font-size:2.5em;
+	text-align: center;
+}
+</style>
+<div class="container" style="height: 500px;" >
 	<div class="row justify-content-center">
 		<form action="/review/register" method="post" enctype="multipart/form-data" id="regForm">
 			<div>
@@ -14,20 +31,20 @@
 			<input type="hidden" name="title" value="">
 			
 			<div class="form-group">
-				<textarea class="form-control" id="content" name="rcontent" style="width: 400px; margin-top:30px; resize: none; " placeholder="내용을 입력해주세요" rows="5"></textarea>
+				<textarea class="form-control" id="content" name="rcontent" style="width: 400px; margin-top:30px; resize: none; " placeholder="내용을 입력해주세요" rows="7"></textarea>
 			</div>
 
 			<div class="form-group">
 				<input type="file" class="form-control" id="files" name="files"	style="display: none;">
-				<button type="button" class="btn-sm btn-info btn-block" id="fileTrigger" style="width: 400px;">사진업로드</button>
+				<button type="button" class="btn btn-info btn-block" id="fileTrigger" style="width: 400px;">사진업로드</button>
 				<ul class="list-group" id="fileZone"></ul>
 			</div>
 			<div class="form-group">
 			</div>
-			<button type="button" class="btn-sm btn-danger" id="subBtn" style="width:400px;">리뷰작성</button>
+			<button type="button" class="btn btn-danger" id="subBtn" style="width:400px;">리뷰작성</button>
 		</form>
 	</div>
-</div>
+</div >
 <script src="/resources/js/jquery.min.js"></script>
 <script>
 let title = localStorage.getItem('title');

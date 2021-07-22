@@ -37,7 +37,7 @@ img{
 			<div class="media">
 				<a class="align-self-center" href="#">
 				<c:if test="${rvo.rftype eq 1 }">
-					<img src="/upload/${rvo.rsavedir }/${rvo.ruuid}_th_${rvo.rfname}">
+					<img src="/upload/${rvo.rsavedir }/${rvo.ruuid}_th_${rvo.rfname}" style="width:160px; height:100px;"/>
 				</c:if>
 				</a>
 				<div class="media-body">
@@ -56,8 +56,8 @@ img{
 								<span>&nbsp;&nbsp;${cvo.adcomment }</span>
 							</div>
 							<c:if test="${ses.email eq 'admin@admin.com' }">
-							<button type="button" class="btn btn-danger float-right adDel" style="margin-top: 20px;">삭제</button>
-							<button type="button" class="btn btn-success float-right adUp" style="margin-top: 20px; margin-right: 10px;">수정</button>
+							<button type="button" class="btn-sm btn-danger float-right adDel" style="margin-top: 20px;">삭제</button>
+							<button type="button" class="btn-sm btn-success float-right adUp" style="margin-top: 20px; margin-right: 10px;">수정</button>
 							<input type="hidden" value="${rvo.rno }">
 							<input type="hidden" value="${cvo.acno }">
 							</c:if>
@@ -66,7 +66,7 @@ img{
 					<c:if test="${ses.email eq 'admin@admin.com' && rvo.clist.size() == 0 }">
 							<input type="hidden" value="${rvo.rno }">
 							<textarea id="textarea" disabled></textarea>
-							<button type="button" class="btn btn-success adWrite float-right">댓글 작성</button>
+							<button type="button" class="btn-sm btn-success adWrite float-right">댓글 작성</button>
 					</c:if>
 				</div>
 			</div>
@@ -80,10 +80,10 @@ img{
 var div;
 $(document).on("click",".adWrite",function() {
 	$(this).prev("textarea").attr("disabled",false);
-	$(this).attr("class","btn btn-danger float-right cancel");
+	$(this).attr("class","btn-sm btn-danger float-right cancel");
 	$(this).attr("style","margin-right: 20px;");
 	$(this).text("취소");
-	$(this).before("<button type='button' class='btn btn-success adReg float-right'>작성 완료</button>");
+	$(this).before("<button type='button' class='btn-sm btn-success adReg float-right'>작성 완료</button>");
 });
 
 $(document).on("click",".cancel",function() {
@@ -123,7 +123,7 @@ $(document).on("click",".adUp",function() {
 	$(this).attr("class","btn btn-success float-right adRealUp");
 	$(this).attr("style","margin-top: 20px; margin-right: 10px;");
 	$(this).text("수정완료");
-	$(this).prev("button").attr("class","btn btn-danger float-right upCancel");
+	$(this).prev("button").attr("class","btn-sm btn-danger float-right upCancel");
 	$(this).prev("button").attr("style","margin-top: 20px;");
 	$(this).prev("button").text("취소");
 	
@@ -135,7 +135,7 @@ $(document).on("click",".upCancel", function() {
 	$(this).attr("class","btn btn-danger float-right adDel");
 	$(this).attr("style","margin-top: 20px;");
 	$(this).text("삭제");
-	$(this).next("button").attr("class","btn btn-success float-right adUp");
+	$(this).next("button").attr("class","btn-sm btn-success float-right adUp");
 	$(this).next("button").attr("style","margin-top: 20px; margin-right: 10px;");
 	$(this).next("button").text("수정");
 });
