@@ -126,6 +126,11 @@ public class ProductService implements ProductServiceRule {
 		}
 		return pvo;
 	}
+	
+	@Override // 상품 결제시 AE에 있는 title을 가지고 pno를 출력해서 재고에서 빼야함
+	public int getPno(String title) {
+		return pdao.selectPno(title);
+	}
 
 	@Override
 	public int modify(ProductVO pvo) {
@@ -162,8 +167,6 @@ public class ProductService implements ProductServiceRule {
 	public List<StockVO> getList() {
 		return pdao.selectList();
 	}
-
-
 
 
 }

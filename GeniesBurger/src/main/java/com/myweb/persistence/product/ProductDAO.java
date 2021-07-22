@@ -89,6 +89,11 @@ public class ProductDAO implements ProductDAORule {
 		return sql.selectOne(NS+"detail", pno);
 	}
 
+	@Override // 상품 결제시 AE에 있는 title을 가지고 pno를 출력해서 재고에서 빼야함
+	public int selectPno(String title) {
+		return sql.selectOne(NS+"getPno", title);
+	}
+
 	@Override
 	public int update(ProductVO pvo) {
 		return sql.update(NS+"mod", pvo);
@@ -118,5 +123,6 @@ public class ProductDAO implements ProductDAORule {
 	public List<StockVO> selectList() {
 		return sql.selectList(NS+"stocklist");
 	}
+
 
 }

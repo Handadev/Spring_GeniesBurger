@@ -48,9 +48,12 @@ public class CartService implements CartServiceRule {
 		return list;
 	}
 
+	@Transactional
 	@Override
 	public int remove(int cartno) {
-		return cartdao.delete(cartno);
+		return cartdao.delete(cartno) > 0 &&
+				aedao.deleteFromCart(cartno) > 0 ?
+				1 : 0;
 	}
 	
 	@Override

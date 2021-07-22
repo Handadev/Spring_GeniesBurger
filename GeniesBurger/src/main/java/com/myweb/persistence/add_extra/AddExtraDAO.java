@@ -40,7 +40,7 @@ public class AddExtraDAO implements AddExtraDAORule {
 		return sql.selectList(NS+"list", map);
 	}
 	
-	@Override // 카트리스트 출력시 cartno와 연동되는 add_extra 정보 가져옴
+	@Override // 카트리스트,payment,결제완료에서 cartvo와 연동되는 add_extra 정보 가져옴
 	public List<AddExtraVO> selectAddExtraList(CartVO cartvo) {
 		return sql.selectList(NS+"addExtraCartList", cartvo);
 	}
@@ -51,6 +51,11 @@ public class AddExtraDAO implements AddExtraDAORule {
 		map.put("mno", mno);
 		map.put("pno", pno);
 		sql.delete(NS+"delPno", map);
+	}
+	
+	@Override // 카트에서 상품 삭제시 해당 AE지우기
+	public int deleteFromCart(int cartno) {
+		return sql.delete(NS+"delFromCart", cartno);
 	}
 
 	@Override // 최근 추가된 cartno mno pno 받아와서 tbl_AE cartno 컬럼 수정하기
@@ -66,8 +71,5 @@ public class AddExtraDAO implements AddExtraDAORule {
 		map.put("num", num);
 		return sql.update(NS+"updateQty", map);
 	}
-
-	
-
 
 }
