@@ -56,6 +56,9 @@
 	-webkit-box-shadow: 5px 6px 3px -7px rgba(0, 0, 0, 0.83);
 	box-shadow: 5px 6px 3px -7px rgba(0, 0, 0, 0.83);
 }
+.redFont{
+	color:#e31212;
+}
 </style>
 
 <section class="ftco-section ftco-cart"
@@ -74,10 +77,10 @@
 							<thead class="thead-primary">
 								<!-- 결론! 장바구니가 비어있어도 cartList : not null -->
 								<tr class="text-center">
-									<th>&nbsp;</th>
 									<th>상품</th>
-									<th>수량</th>
+									<th>사이드 메뉴</th>
 									<th>가격</th>
+									<th>수량</th>
 									<th>&nbsp;</th>
 								</tr>
 							</thead>
@@ -86,13 +89,25 @@
 									<tr class="text-center">
 										<td class="image-prod"><img class="img"
 											src="/upload/${cartList.savedir }/${cartList.puuid}_${cartList.fname}"
-											alt="display none" style="width: 160px;"></td>
-										<td class="product-name">
+											alt="display none" style="width: 240px; height:180px;">
 											<h2>${cartList.title }</h2> 
+											<h3>₩<fmt:formatNumber value="${cartList.quantity * (cartList.price) }" pattern="#,###" /></h3>
+											</td>
+										<td class="product-name">
 											<c:forEach items="${cartList.aelist }" var="aevo">
 												<h5>${aevo.title }</h5>
 												<h5>${aevo.sname }</h5>
 											</c:forEach>
+										</td>
+										<c:set var="unitTotalPrice" value="0" />
+										<c:forEach items="${cartList.aelist }" var="aevo">
+											<c:set var="unitTotalPrice" value="${unitTotalPrice + (aevo.price * aevo.quantity)}" />
+											<c:set var="unitTotalPrice2" value="${unitTotalPrice2 + (aevo.price * aevo.quantity)}" />
+										</c:forEach>
+										<td class="price">
+										<c:forEach items="${cartList.aelist }" var="aevo">
+										<h5>₩<fmt:formatNumber value="${cartList.quantity * (aevo.price) }" pattern="#,###" /></h5>
+										</c:forEach>
 										</td>
 										<td class="quantity">
 											<div class="btn-center-div">
@@ -107,14 +122,6 @@
 													data-upqty="${cartList.cartno }" data-up="1">△</button>
 											</div>
 										</td>
-										<c:set var="unitTotalPrice" value="0" />
-										<c:forEach items="${cartList.aelist }" var="aevo">
-											<c:set var="unitTotalPrice" value="${unitTotalPrice + (aevo.price * aevo.quantity)}" />
-											<c:set var="unitTotalPrice2" value="${unitTotalPrice2 + (aevo.price * aevo.quantity)}" />
-										</c:forEach>
-										<td class="price"><h2>
-												₩<fmt:formatNumber value="${cartList.quantity * (unitTotalPrice + cartList.price) }" pattern="#,###" /></h2>
-										</td>
 										<td class="product-remove">
 											<button type="button"
 												class="btn-sm btn-danger removeBtn detailBtn"
@@ -122,9 +129,7 @@
 											</button>
 										</td>
 									</tr>
-									<script>
-                                       $(".ftco-cart").css("background-color", "white");
-                                    </script>
+									<tr>
 								</c:forEach>
 							</tbody>
 						</table>
@@ -181,14 +186,19 @@
 							<b>포장주문</b>
 						</p>
 					</div>
+					<div>
 					<a href="/cart/payment?mno=${ses.mno }"
-						class="btn-lg btn-dark checkBtn" style="width: 100px;">확인</a>
-					<!-- <button type="button" class="btn btn-dark checkBtn">확인</button> -->
+						class="btn btn-dark checkBtn" style="width: 400px; border-radius:5px;">확인</a>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+<script>
+$(".ftco-cart").css("background-color", "white");
+</script>
 
 <!-- Modal 이미지 겹치기 스크립트 -->
 <script>

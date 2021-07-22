@@ -14,13 +14,12 @@
 
 			<div class="form-group">
 				<input type="file" class="form-control" id="files" name="files"	style="display: none;">
-				<button type="button" class="btn btn-outline-info btn-block" id="fileTrigger" style="width: 400px">사진업로드</button>
-			</div>
-
-			<div class="form-group">
+				<button type="button" class="btn-sm btn-info btn-block" id="fileTrigger" style="width: 400px;">사진업로드</button>
 				<ul class="list-group" id="fileZone"></ul>
 			</div>
-			<button type="button" class="btn btn-primary" id="subBtn">리뷰작성</button>
+			<div class="form-group">
+			</div>
+			<button type="button" class="btn-sm btn-danger" id="subBtn" style="width:400px;">리뷰작성</button>
 		</form>
 	</div>
 </div>
