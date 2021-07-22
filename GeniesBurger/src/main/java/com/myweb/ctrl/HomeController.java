@@ -107,7 +107,7 @@ public class HomeController {
 						@RequestParam("mno") int mno,
 						@RequestParam("pno") int pno) {
 		for (int i = 0; i < titleList.size(); i++) {
-			aesv.register(new AddExtraVO(mno, pno, priceList.get(i), titleList.get(i)));
+			aesv.register(new AddExtraVO(mno, pno, titleList.get(i), priceList.get(i)));
 		}
 	}
 

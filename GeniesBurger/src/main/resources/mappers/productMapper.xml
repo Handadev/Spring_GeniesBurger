@@ -147,14 +147,21 @@
   		select * from tbl_product where category = 8 and cansale = 0
   	</select>
   	
+  	<select id="detail" parameterType="int" resultType="pvo">
+  		select * from tbl_product where pno = #{pno}
+  	</select>
+  	
+  	<!-- 상품 결제시 AE에 있는 title을 가지고 pno를 출력해서 재고에서 빼야함 -->
+  	<select id="getPno" parameterType="String" resultType="int">
+  		select pno from tbl_product where title = #{title}
+  	</select>
+  	
+  	<!-- 결제 완료시 상품 결제수량 상승 -->
   	<update id="salesUp" parameterType="hashmap">
   		update tbl_product set
   		sales = sales + #{sales} where pno = #{pno}
   	</update>
   	
-  	<select id="detail" parameterType="int" resultType="pvo">
-  		select * from tbl_product where pno = #{pno}
-  	</select>
   	
   	<update id="mod" parameterType="pvo">
   		update tbl_product set 
