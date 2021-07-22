@@ -3,9 +3,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <jsp:include page="../common/header.jsp" />
-
+<style>
+td {
+	padding: 10px !important;
+}
+</style>
 <div class="container-fluid border pcontainer">
-	<div class="container col-sm-9">
+	<div class="container col-sm-6">
 		<div class="container col-sm-6">
 			<c:if test="${pvo.flist.size() > 0 }">
 				<tr>
