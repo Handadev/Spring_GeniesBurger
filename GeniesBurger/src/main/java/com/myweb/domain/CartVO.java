@@ -14,7 +14,6 @@ public class CartVO {
 	private String fname;
 	private List<AddExtraVO> aelist;
 	
-
 	public String getPuuid() {
 		return puuid;
 	}

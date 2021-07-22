@@ -56,7 +56,7 @@ p {
 	<form action="/member/login" method="post">
 		<div class="form-group">
 			<input type="email" class="form-control" placeholder="아이디(이메일)"
-				id="email" name="email" value="tester1@tester.com">
+				id="email" name="email" value="admin@admin.com">
 				<img id="clear" src="/resources/icons/input_clear_button.png">
 				<input type="password" class="form-control" placeholder="비밀번호" id="pwd"
 				name="pwd" value="1111">
