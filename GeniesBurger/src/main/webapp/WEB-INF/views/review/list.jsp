@@ -31,8 +31,7 @@ img{
 	margin-top: 20px;
 }
 </style>
-<div class="container">
-	<div>리뷰!</div>
+<div class="container" style="margin-top: 40px;">
 	<c:forEach items="${list }" var="rvo">
 		<div class="card shadow radius">
 			<div class="media">

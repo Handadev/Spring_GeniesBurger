@@ -180,6 +180,7 @@ public class CartController {
 		return isUp2 > 0 ? "redirect:/" : "/cart/complete";
 	}
 
+	// 카트 리스트
 	@GetMapping("/cart")
 	public void list(@RequestParam("mno") int mno, Model model) {
 		List<CartVO> list = cartsv.getList(mno);

@@ -140,7 +140,8 @@ drop table tbl_review;
 create table tbl_review(
 rno number(10),
 pno number(10) not null,
-email varchar2(100) not null,
+purno number(11) NOT NULL,
+email varchar2(100) NOT NULL,
 rcontent varchar2(2000) not null,
 rdate date default sysdate not null,
 ruuid varchar2(2000),

@@ -50,7 +50,7 @@
                               <td>${purchaseListMember.regdate }</td>
                               <c:choose>
                               <c:when test="${purchaseListMember.rlist.size() == 0}">
-                                 <td><button type="button" class="revBtn btn btn-success">리뷰작성</button></td>
+                                 <td><button type="button" class="revBtn btn-sm btn-danger" style="width:50px;">작성</button></td>
                               </c:when>
                               <c:otherwise>
                                  <td>리뷰 작성 완료</td>

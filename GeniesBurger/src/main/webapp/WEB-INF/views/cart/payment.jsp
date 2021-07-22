@@ -13,15 +13,17 @@
 }
 
 .box {
-	box-shadow: 1px 1px 1px 1px;
 	border: none;
+	-webkit-box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83); 
+	box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 	width: 850px;
 	margin: auto;
 }
 
 .box2 {
-	box-shadow: 1px 1px 1px 1px;
 	border: none;
+	-webkit-box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83); 
+	box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 	height: 250px;
 	width: 850px;
 	margin: auto;
