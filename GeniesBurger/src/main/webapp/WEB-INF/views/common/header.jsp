@@ -79,16 +79,14 @@
 					<c:if test="${ses.email eq 'admin@admin.com' }">
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="dropdown04"
-					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Shop</a>
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Product</a>
 					<div class="dropdown-menu" aria-labelledby="dropdown04">
 						<c:choose>
 							<c:when test="${ses.email eq 'admin@admin.com' }">
 								<a class="dropdown-item" href="/product/register">상품추가</a>
 							</c:when>
 						</c:choose>
-						<a class="dropdown-item" href="/product/list">상품리스트</a> <a
-							class="dropdown-item" href="product-single.html">Single
-							Product</a> <a class="dropdown-item" href="checkout.html">Checkout</a>
+						<a class="dropdown-item" href="/product/list">상품리스트</a> 
 					</div></li>
 					</c:if>
 				<li class="nav-item"><a href="/review/list" class="nav-link">Review</a></li>

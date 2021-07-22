@@ -75,7 +75,6 @@ public class HomeController {
 	}
 	
 	
-	
 	@ResponseBody // 단품 혹은 세트 골랐을 때 사이즈업을 위해서 세트 / 라지세트 가져옴
 	@GetMapping(value = "/select/{pno}/{category}",
 				produces = {MediaType.APPLICATION_ATOM_XML_VALUE,

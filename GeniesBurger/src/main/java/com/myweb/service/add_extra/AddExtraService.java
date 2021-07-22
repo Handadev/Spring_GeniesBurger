@@ -26,8 +26,8 @@ public class AddExtraService implements AddExtraServiceRule {
 	}
 
 	@Override
-	public int remove(int mno) {
-		return aedao.delete(mno);
+	public int remove(int cartno) {
+		return aedao.delete(cartno);
 	}
 
 	@Override // 주문 취소시 add_extra 테이블에 정보가 있으면 지우기 위해 cartno없는 정보 가져옴
