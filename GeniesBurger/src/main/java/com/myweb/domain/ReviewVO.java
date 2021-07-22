@@ -7,7 +7,7 @@ public class ReviewVO {
 	private int pno;
 	private int purno;
 	private String email;
-	private String rtitle;
+	private String title;
 	private String rcontent;
 	private String rdate;
 	private String ruuid;
@@ -56,12 +56,12 @@ public class ReviewVO {
 		this.pno = pno;
 	}
 
-	public String getRtitle() {
-		return rtitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setRtitle(String rtitle) {
-		this.rtitle = rtitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public String getRcontent() {
