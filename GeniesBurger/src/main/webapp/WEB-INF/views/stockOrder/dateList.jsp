@@ -5,7 +5,7 @@
 <jsp:include page="../adminCommon/header.jsp" />
 <jsp:include page="../adminCommon/nav.jsp" />
 <jsp:include page="../adminCommon/sidebar.jsp" />
-	<div class="container">
+	<div class="container" style="margin-top: 50px; ">
 	<h2 class="float-left">재고 주문 내역</h2>
 		<a href="/stockOrder/register" class="btn btn-primary float-right">주문하기</a>
 	<div class="form-group float-left ml-3">

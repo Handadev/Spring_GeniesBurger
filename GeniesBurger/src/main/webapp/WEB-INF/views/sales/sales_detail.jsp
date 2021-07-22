@@ -5,28 +5,42 @@
 <jsp:include page="../adminCommon/nav.jsp" />
 <jsp:include page="../adminCommon/sidebar.jsp" />
 
-<!-- ============================================================== -->
-<!-- Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-<div class="page-breadcrumb">
-	<div class="row">
-		<div class="col-7 align-self-center">
-			<h3
-				class="page-title text-truncate text-dark font-weight-medium mb-1">
-				매출 상세</h3>
-			<div class="d-flex align-items-center"></div>
-		</div>
-
-	</div>
-</div>
-<!-- ============================================================== -->
-<!-- End Bread crumb and right sidebar toggle -->
-<!-- ============================================================== -->
-
-<!-- ============================================================== -->
 <!-- Container fluid  -->
 <!-- ============================================================== -->
 <div class="container-fluid">
+<div class="card-group">
+		<div class="card border-right">
+			<div class="card-body">
+				<div class="d-flex d-lg-flex d-md-block align-items-center">
+					<div>
+						<h2 class="text-dark mb-1 w-100 text-truncate font-weight-medium" id="yesterday">
+							0
+						</h2>
+						<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">어제 매출</h6>
+					</div>
+					<div class="ml-auto mt-md-3 mt-lg-0">
+						<span class="opacity-7 text-muted"><span style="font-size: 1.5em; ">￦</span></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="card border-right">
+			<div class="card-body">
+				<div class="d-flex d-lg-flex d-md-block align-items-center">
+					<div>
+						<div class="d-inline-flex align-items-center">
+							<h2 class="text-dark mb-1 font-weight-medium" id="today">0</h2>
+							<span class="badge bg-primary font-12 text-white font-weight-medium badge-pill ml-2 d-lg-block d-md-none" id="increase">+18.33%</span>
+						</div>
+						<h6 class="text-muted font-weight-normal mb-0 w-100 text-truncate">오늘 매출</h6>
+					</div>
+					<div class="ml-auto mt-md-3 mt-lg-0">
+						<span class="opacity-7 text-muted"><span style="font-size: 1.5em; ">￦</span></span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- ============================================================== -->
 	<!-- Start Page Content -->
 	<!-- ============================================================== -->
@@ -110,6 +124,22 @@
 	dateSlist.push("${sales}");
 	</c:forEach>
 	
+	$("#today").text(dateSlist[0].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	$("#yesterday").text(dateSlist[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","));
+	
+	increase();
+	
+	function increase() {
+		let today = dateSlist[0];
+		let yesterday = dateSlist[1];
+		console.log(today);
+		console.log(yesterday);
+		let increase = ((today-yesterday)/yesterday) * 100;
+		console.log(increase);
+	
+		$("#increase").text(increase.toFixed(2) + "%");
+	}
+	
 	let monthSlist = new Array();
 	<c:forEach items="${monthSalesList}" var="sales">
 	monthSlist.push("${sales}");
@@ -130,7 +160,8 @@
 	weekSalesList.push("${week}");
 	</c:forEach>
 	console.log(weekSalesList);
-
+	
+	
 </script>
 <script>
 	let today = new Date();

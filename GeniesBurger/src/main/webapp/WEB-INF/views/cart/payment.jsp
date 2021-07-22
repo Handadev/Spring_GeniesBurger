@@ -249,7 +249,7 @@ $("#selectCp").on("click", function() {
 		let couponVal = $("#coupon option:selected").attr("value");
 		let p = $("#"+ i).text(); // 할인 전 금액
 		p = p.replace(",", "");
-		arr2.push(p);
+		// arr2.push(p);
 		console.log("***할인전 금액 : " + p);
 		let dc = Math.floor(p * (couponVal*(0.01))); // 할인 금액
 		let fp = p - dc; // 할인된 금액

@@ -9,25 +9,26 @@
 	<c:when test="${ses.email eq 'admin@admin.com' }">
 	<div class="container">
 	<h2 class="float-left">쿠폰 리스트</h2>
-		<a href="/coupon/issueList" class="btn btn-primary float-right ml-3">발급 현황</a>
-		<a href="/coupon/register" class="btn btn-primary float-right">쿠폰 등록</a>
+		<a href="/coupon/issueList" class="btn btn-danger float-right ml-3">발급 현황</a>
+		<a href="/coupon/issue" class="btn btn-primary float-right ml-3">쿠폰 발급</a>
+		<a href="/coupon/register" class="btn btn-primary float-right">신규 쿠폰 등록</a>
 		<div class="form-group float-left ml-3">
-	<form action="/coupon/list" class="form-inline">
-		<select class="form-control" name="range">
-			<option value="nd" <c:out value="${cpghdl.cpgvo.range eq 'nd' ? 'selected' : '' }"/>>
-			전체</option>
-			<option value="no" <c:out value="${cpghdl.cpgvo.range eq 'no' ? 'selected' : '' }"/>>
-			쿠폰 번호</option>
-			<option value="na" <c:out value="${cpghdl.cpgvo.range eq 'na' ? 'selected' : '' }"/>>
-		       쿠폰명</option>
-			<option value="d" <c:out value="${cpghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
-			할인율</option>
-		</select>
-		<input class="form-control" type="text" placeholder="검색어 입력" name="keyword"
-		value='<c:out value="${cpghdl.cpgvo.keyword }"/>'>
-		<button type="submit" class="btn btn-success ml-3">검색</button>
-	</form>
-</div>
+		<form action="/coupon/list" class="form-inline">
+			<select class="form-control" name="range">
+				<option value="nd" <c:out value="${cpghdl.cpgvo.range eq 'nd' ? 'selected' : '' }"/>>
+				전체</option>
+				<option value="no" <c:out value="${cpghdl.cpgvo.range eq 'no' ? 'selected' : '' }"/>>
+				쿠폰 번호</option>
+				<option value="na" <c:out value="${cpghdl.cpgvo.range eq 'na' ? 'selected' : '' }"/>>
+			       쿠폰명</option>
+				<option value="d" <c:out value="${cpghdl.cpgvo.range eq 'd' ? 'selected' : '' }"/>>
+				할인율</option>
+			</select>
+			<input class="form-control" type="text" placeholder="검색어 입력" name="keyword"
+			value='<c:out value="${cpghdl.cpgvo.keyword }"/>'>
+			<button type="submit" class="btn btn-success ml-3">검색</button>
+		</form>
+		</div>
 	  <table class="table table-hover">
 	    <thead>
 	      <tr>

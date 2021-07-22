@@ -4,7 +4,7 @@
 <jsp:include page="../adminCommon/header.jsp" />
 <jsp:include page="../adminCommon/nav.jsp" />
 <jsp:include page="../adminCommon/sidebar.jsp" />
-	<div class="container">
+	<div class="container" style="margin-top: 50px; ">
 		<h2>재고 주문</h2>
 			<form action="/stockOrder/register" id="registForm" method="post">
 			  <div class="form-group">
