@@ -47,6 +47,7 @@ p {
 	width: 700px;
 	top: -190px;
 	left: 60%;
+	z-index: 1;
 }
 .box {
 	margin-top: 20px;
@@ -83,6 +84,12 @@ p {
      color: white;
      font-size: 1.5em;
 }
+.login_reg_btn:focus{
+	border:none;
+	outline: none;
+	position: relative
+	z-index: 2;
+}
 </style>
 
 <div class="container container-login">
@@ -97,8 +104,8 @@ p {
 				name="pwd" value="1111">
 				<img id="eye" src="/resources/icons/dead_eye.png">
 		</div>
-		<button type="button" id="registerBtn" onclick="location.href='/member/register'">회원가입</button>
-		<button type="submit" id="submitBtn">로그인</button>
+		<button type="button" class="login_reg_btn" id="registerBtn" onclick="location.href='/member/register'">회원가입</button>
+		<button type="submit" class="login_reg_btn" id="submitBtn">로그인</button>
 	</form>
 	<div class="box">
 		<a href="/member/findID" id="findID">아이디 찾기&nbsp;&nbsp;|</a>

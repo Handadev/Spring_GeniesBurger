@@ -61,8 +61,7 @@
 }
 </style>
 
-<section class="ftco-section ftco-cart"
-	style="background-color: #F1EAE5;">
+<section class="ftco-section ftco-cart" style="background-color: #F1EAE5;">
 	<c:choose>
 		<c:when
 			test="${cartList[0].title eq null || cartList[0].title eq  '' }">
@@ -150,6 +149,9 @@
 					</div>
 				</div>
 			</div>
+<script>
+$(".ftco-cart").css("background-color", "white");
+</script>
 		</c:otherwise>
 	</c:choose>
 </section>
@@ -188,9 +190,6 @@
     </div>
   </div>
 
-<script>
-$(".ftco-cart").css("background-color", "white");
-</script>
 
 <!-- Modal 이미지 겹치기 스크립트 -->
 <script>
