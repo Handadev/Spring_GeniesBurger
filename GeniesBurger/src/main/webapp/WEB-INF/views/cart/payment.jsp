@@ -132,10 +132,6 @@ a {
 
 	<c:set var="total" value="0" />
 	<c:forEach items="${list }" var="cvo">
-	<c:forEach items="${list.aelist }" var="aevo">
-												<h5>??? : ${aevo.title }</h5>
-												<h5>${aevo.sname }</h5>
-											</c:forEach>
 <div class="container p-3 my-3 box">
 		<div class="menu_wrap">
 			<p class="title">${cvo.title }</p>
