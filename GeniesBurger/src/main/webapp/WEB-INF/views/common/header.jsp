@@ -94,7 +94,7 @@
 							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMIN</a>
 							<div class="dropdown-menu" aria-labelledby="dropdown04">
 								<a class="dropdown-item" href="/member/detail?mno=${ses.mno }">
-									MY PAGE</a> <a class="dropdown-item" href="/dash_index">ADMIN
+									MY PAGE</a> <a class="dropdown-item" href="/sales/sales_detail">ADMIN
 									PAGE</a> <a class="dropdown-item" href="/member/list">MEMBER
 									LIST</a> <a class="dropdown-item" href="/cart/purchaseList">PURCHASE
 									PAGE</a>
