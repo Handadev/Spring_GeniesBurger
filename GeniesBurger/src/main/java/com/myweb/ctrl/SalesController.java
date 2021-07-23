@@ -34,17 +34,15 @@ public class SalesController {
 		Calendar cal = Calendar.getInstance();
     
      // 연매출
-		Calendar ycal = Calendar.getInstance();
-		ycal.setTime(new Date());
 		SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
 		List<Integer> ySalesList = new ArrayList<Integer>();
 		
 		for (int i = 0; i < 5; i++) {
-			ycal.add(Calendar.YEAR, -i);
-			String yearString = yyyy.format(ycal.getTime());
+			cal.setTime(new Date());
+			cal.add(Calendar.YEAR, -i);
+			String yearString = yyyy.format(cal.getTime());
 			int yearSales = pursv.getYearSales(yearString);
 			ySalesList.add(yearSales);
-			ycal.add(Calendar.YEAR, +i);
       }
 		 model.addAttribute("yearSalesList", ySalesList);
 
