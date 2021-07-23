@@ -33,12 +33,12 @@
 					<div class="navbar-brand">
 						<!-- Logo icon -->
 						<a href="/sales/sales_detail"> <b class="logo-icon"> <!-- Dark Logo icon -->
-								<img src="/resources/icons/logo.png" style="width: 70px; height: 70px;"  alt="homepage"
+								<img src="/resources/admin/assets/images/genies_logo.png" style="width: 70px; height: 70px;"  alt="homepage"
 								class="dark-logo" /> <!-- Light Logo icon --> <img
-								src="/resources/admin/assets/images/logo-icon.png" alt="homepage"
+								src="/resources/admin/assets/images/genies_logo.png" alt="homepage"
 								class="light-logo" />
 						</b> <!--End Logo icon --> <!-- Logo text --> <span class="logo-text">
-								<!-- dark Logo text --> <img src="/resources/admin/assets/images/logo-text.png"
+								<!-- dark Logo text --> <img src="/resources/admin/assets/images/genies_logo_text.png"
 								alt="homepage" class="dark-logo" />
 						</span>
 						</a>
