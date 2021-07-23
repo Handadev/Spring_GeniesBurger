@@ -32,19 +32,6 @@
 						class="hide-menu">입고 현황</span></a></li>
 				<!-- 매출/재고 관리 끝 -->
 				
-				<!-- 메뉴관리 시작 -->
-				<li class="list-divider"></li>
-				<li class="nav-small-cap"><span class="hide-menu">메뉴 관리</span></li>
-				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/product/list" aria-expanded="false"><i
-						data-feather="sidebar" class="feather-icon"></i><span
-						class="hide-menu">메뉴 품절</span></a></li>
-				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/product/list" aria-expanded="false"><i
-						data-feather="sidebar" class="feather-icon"></i><span
-						class="hide-menu">메뉴 수정</span></a></li>
-				<!-- 메뉴관리 끝 -->
-
 				<!-- 쿠폰관리 시작 -->
 				<li class="list-divider"></li>
 				<li class="nav-small-cap"><span class="hide-menu">쿠폰관리</span></li>
@@ -68,11 +55,6 @@
 
 				<!-- 회원관리 시작 -->
 				<li class="list-divider"></li>
-				<li class="nav-small-cap"><span class="hide-menu">회원관리</span></li>
-				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
-					href="/member/list" aria-expanded="false"><i
-						data-feather="edit-3" class="feather-icon"></i><span
-						class="hide-menu">회원목록</span></a></li>
 				<li class="sidebar-item"><a class="sidebar-link sidebar-link"
 					href="/member/logout" aria-expanded="false"><i
 						data-feather="log-out" class="feather-icon"></i><span
