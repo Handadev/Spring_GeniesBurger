@@ -119,6 +119,50 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <script>
+
+function monthCul(month) {
+	   
+	   switch(month) {
+	      case 0:
+	         month=12;
+	         break;
+	      case -1:
+	         month=11;
+	         break;
+	      case -2:
+	         month=10;
+	         break;
+	      case -3:
+	         month=9;
+	         break;
+	      case -4:
+	         month=8;
+	         break;
+	      case -5:
+	         month=7;
+	         break;
+	      case -6:
+	         month=6;
+	         break;
+	      case -7:
+	         month=5;
+	         break;
+	      case -8:
+	         month=4;
+	         break;
+	      case -9:
+	         month=3;
+	         break;
+	      case -10:
+	         month=2;
+	         break;
+	      case -11:
+	         month=1;
+	         break;
+	   }
+	   return month;
+	}
+	
 	let dateSlist = new Array();
 	<c:forEach items="${dateSalesList}" var="sales">
 	dateSlist.push("${sales}");
@@ -161,7 +205,6 @@
 	</c:forEach>
 	console.log(weekSalesList);
 	
-	
 </script>
 <script>
 	let today = new Date();
@@ -170,13 +213,22 @@
 	let date = today.getDate(); // 날짜
 	let day = today.getDay(); // 요일
 
+	function dateCul(num) {
+		const getDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() - num).toLocaleDateString(); // 오늘 날짜에서 num일 전
+	    console.log(getDate);
+	    let date = getDate.substr(9, 2); // getDate => 2021. 7. 17. => 17
+	    console.log(date);
+	    date = date.replace(".", ""); // 일이 한자리 일 땐 7.으로 출력되기때문에  getDate => 7. => 7
+		return date;
+	}
+	
 	//일 매출
 	new Chart(document.getElementById("line-chart1"),
 			{
 				type : 'line',
 				data : {
-					labels : [ (date - 6) + '일', (date - 5) + '일', (date - 4) + '일', (date - 3) + '일',
-							(date - 2) + '일', (date - 1) + '일', date + '일' ],
+					labels : [ dateCul(6) + '일', dateCul(5) + '일', dateCul(4) + '일', dateCul(3) + '일',
+						dateCul(2) + '일', dateCul(1) + '일', dateCul(0) + '일' ],
 					datasets : [ {
 						data : [ dateSlist[6], dateSlist[5], dateSlist[4],
 								dateSlist[3], dateSlist[2], dateSlist[1],
@@ -205,27 +257,27 @@
 
 	//월 매출
 	new Chart(document.getElementById("line-chart2"), {
-		type : 'line',
-		data : {
-			labels : [ (month - 11) + '월', (month - 10) + '월', (month - 9) + '월', (month - 8) + '월', (month - 7) + '월', (month - 6) + '월', (month - 5) + '월', (month - 4) + '월', (month - 4) + '월', (month - 2) + '월', (month - 1) + '월', month + '월' ],
-			datasets : [ {
-				data : [ monthSlist[11], monthSlist[10], monthSlist[9], monthSlist[8], monthSlist[7], monthSlist[6], monthSlist[5], monthSlist[4], monthSlist[3], monthSlist[2], monthSlist[1], monthSlist[0] ],
-				label : "월 매출(원)",
-				borderColor : "#5f76e8",
-				fill : false
-			} ]
-		},
-		options: {
-			  scales: {
-					yAxes: [{
-						ticks: {
-							beginAtZero: true,
-							fontSize : 14
-						}
-					}]
-				}
-			}
-	});
+      type : 'line',
+      data : {
+         labels : [ monthCul(month-11) + '월',  monthCul(month-10) + '월',  monthCul(month-9) + '월', monthCul(month-8)+ '월',  monthCul(month-7) + '월',  monthCul(month-6) + '월',  monthCul(month-5) + '월',  monthCul(month-4) + '월',  monthCul(month-3) + '월',  monthCul(month-2) + '월',  monthCul(month-1) + '월', month + '월' ],
+         datasets : [ {
+            data : [ monthSlist[11], monthSlist[10], monthSlist[9], monthSlist[8], monthSlist[7], monthSlist[6], monthSlist[5], monthSlist[4], monthSlist[3], monthSlist[2], monthSlist[1], monthSlist[0] ],
+            label : "월 매출(원)",
+            borderColor : "#5f76e8",
+            fill : false
+         } ]
+      },
+      options: {
+           scales: {
+               yAxes: [{
+                  ticks: {
+                     beginAtZero: true,
+                     fontSize : 14
+                  }
+               }]
+            }
+         }
+  	 });
 	
 	//이번 달 메뉴 별 판매량 Top5
 	new Chart(document.getElementById("bar-chart-horizontal"), {
