@@ -49,11 +49,6 @@ public class ReviewController {
 		return "redirect:/review/list";
 	}
 
-	@GetMapping("/register")
-	public void register() {
-		
-	}
-
 	@GetMapping("/list")
 	public void list(Model model, ReviewPageVO rpgvo) {
 		model.addAttribute("list", rsv.ReviewList(rpgvo));

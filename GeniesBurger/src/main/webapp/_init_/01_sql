@@ -21,8 +21,12 @@ name varchar2(20) not null,
 mobile varchar2(20) not null,
 address varchar2(100) not null,
 birthday date not null,
-point number(11) default null,
 regdate date default sysdate
+question varchar2(100) not null,
+answer varchar2(100) not null,
+auth varchar2(10) default 'MEM',
+enabled number(1) default 1,
+failCnt number(1) default 0,
 );
 
 alter table tbl_member add constraint pk_member
@@ -169,7 +173,9 @@ drop table tbl_review;
 create table tbl_review(
 rno number(10),
 pno number(10) not null,
-email varchar2(100) not null,
+purno number(11) NOT NULL,
+email varchar2(100) NOT NULL,
+title varchar2(100) NOT NULL,
 rcontent varchar2(2000) not null,
 rdate date default sysdate not null,
 ruuid varchar2(2000),
@@ -237,16 +243,18 @@ START WITH 1
 INCREMENT BY 1
 nocycle nocache;
 
---------------------소비자 버거 추가 재료-----------------------
-DROP TABLE tbl_add_extra;
+--------------------상품 주문시 재료 추가-----------------------
+DROP TABLE TBL_ADD_EXTRA;
+DROP SEQUENCE seq_add_extra_aeno;
 
 CREATE TABLE tbl_add_extra (
-aeno NUMBER(11),
+aeno number(11),
 mno number(11),
 pno number(11),
-sno number(11),
-sname varchar2(100),
-qty number(11),
+price number(11),
+title varchar2(100),
+quantity number(11) default 1,
+cartno number(11),
 constraint pk_extra primary key(aeno)
 );
 
@@ -254,6 +262,7 @@ create sequence seq_add_extra_aeno
 start with 1
 increment by 1
 nocycle nocache;
+
 -----------------------상품 주문내역-------------------------
 DROP SEQUENCE seq_purchase_purno;
 DROP TABLE tbl_purchase;
