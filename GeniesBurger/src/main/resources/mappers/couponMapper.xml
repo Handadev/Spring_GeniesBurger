@@ -139,7 +139,7 @@
      </select>
      <!-- 나의 쿠폰 리스트 -->
      <select id="myCpList" parameterType="int" resultType="cplvo">
-        SELECT cpl.cplno, cpl.cpno, cp.cpname, cpl.mno, m.email, discount
+        SELECT cpl.cplno, cpl.cpno, cp.cpname, cpl.mno, m.email, discount, enddate
       FROM TBL_COUPONLIST cpl INNER JOIN TBL_COUPON cp
       ON cpl.CPNO = cp.CPNO
       JOIN TBL_MEMBER m 
