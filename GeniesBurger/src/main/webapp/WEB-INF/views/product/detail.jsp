@@ -69,6 +69,14 @@ td {
 				<td>${pvo.sales }</td>
 			</tr>
 			<tr>
+				<td>연동된 재고</td>
+				<td>
+					<c:forEach items="${stock_list }" var="svo">
+						${svo.sname } /
+					</c:forEach>
+				</td>
+			</tr>
+			<tr>
 				<td>판매중여부</td>
 				<td>
 				<c:choose>

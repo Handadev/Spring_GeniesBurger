@@ -88,6 +88,7 @@ public class ProductController {
 	@GetMapping("/detail")
 	public void detail(@RequestParam("pno") int pno, Model model) {
 		model.addAttribute("pvo", psv.detail(pno));
+		model.addAttribute("stock_list", pssv.getList(pno));
 	}
 	
 	@GetMapping("/modify")

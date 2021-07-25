@@ -6,7 +6,7 @@
 		insert into tbl_review (rno, pno, purno, email, rcontent, title) values(seq_review_rno.nextval, #{pno}, #{purno}, #{email}, #{rcontent}, #{title})
 	</insert>
 	<insert id="acReg" parameterType="hashmap">
-		insert into tbl_admincomment (acno, rno, adcomment) values(SEQ_ADMINCOMMENT_ACNO.nextval, #{rno}, #{adcomment})
+		insert into tbl_admincomment (acno, rno, adcomment) values(seq_adcomment_acno.nextval, #{rno}, #{adcomment})
 	</insert>
 	
 	<select id="list" parameterType="rpgvo" resultType="rvo">
