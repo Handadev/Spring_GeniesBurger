@@ -9,7 +9,7 @@ public class ProductPageVO {
 	private int countPerPage; // 한 페이지에 몇 개의 글을 보여줄 것인지
 	
 	public ProductPageVO() {
-		this(1,12);
+		this(1,10);
 	}
 	
 	//페이징handdler

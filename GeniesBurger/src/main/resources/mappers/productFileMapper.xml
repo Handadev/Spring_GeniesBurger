@@ -7,7 +7,7 @@
  	</sql>
   	<insert id="reg" parameterType="pfvo">
   		insert into tbl_productfile values
-  		(#{fuuid}, #{savedir}, #{fname}, #{pno})
+  		(#{puuid}, #{savedir}, #{fname}, #{pno})
   	</insert>
   	
  	<select id="list" parameterType="int" resultType="pfvo">
@@ -20,5 +20,9 @@
  	
  	<delete id="del" parameterType="int">
  		delete <include refid="bc"/>
+ 	</delete>
+ 	
+ 	<delete id="delfile" parameterType="String">
+ 		delete from tbl_productfile where puuid = #{puuid}
  	</delete>
   </mapper>

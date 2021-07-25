@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.myweb.domain.ProductFileVO;
-import com.myweb.persistence.productfiles.ProductFileDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 import net.coobird.thumbnailator.Thumbnails;
 
@@ -26,7 +26,7 @@ public class ProductFileProcessor {
 	private ProductFileDAORule pfdao;
 	
 	public int upload_file(MultipartFile[] files, int pno) {
-		final String UP_DIR = "D:\\_javaweb\\spring\\workspace\\upload";
+		final String UP_DIR = "C:\\_javaweb\\_spring\\workspace\\upload\\";
 		
 		// 파일을 많이 올리면 올릴 수록 관리측으로 좋지 않기 때문에 폴더를 나눈다
 		// ex upload/2012/06/28/uuid_fname.jpg -> 이미지라면 썸네일도 만들어야함 : uuid_th_fname.jpg
@@ -46,7 +46,7 @@ public class ProductFileProcessor {
 			pfvo.setFname(originalFileName);
 			// 암호화하는 것은 java 것을 그대로 쓰거나, 회사에서 사용하는 라이브러니나 알고리즘을 땡겨와서 사용하면 됨
 			UUID uuid = UUID.randomUUID();
-			pfvo.setFuuid(uuid.toString());
+			pfvo.setPuuid(uuid.toString());
 			
 			String fullFileName = uuid.toString() + "_" + originalFileName;
 			File storeFile = new File(folder, fullFileName); // 파일객체이름 생성
@@ -56,7 +56,7 @@ public class ProductFileProcessor {
 				
 				if(isImageFile(storeFile)) {
 					File thumbnail = new File(folder, uuid.toString() + "_th_" + originalFileName);
-					Thumbnails.of(storeFile).size(100, 100).toFile(thumbnail); // Thumbnailator 라이브러리
+					Thumbnails.of(storeFile).size(250, 250).toFile(thumbnail); // Thumbnailator 라이브러리
 				}
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
@@ -81,8 +81,8 @@ public class ProductFileProcessor {
 		return false;
 	}
 
-	public int deleteFile(int pno) {
-		return pfdao.delete(pno);
+	public int deleteFile(String puuid) {
+		return pfdao.delete(puuid);
 	}
 	
 	

@@ -15,19 +15,19 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.myweb.domain.ProductFileVO;
-import com.myweb.persistence.productfiles.ProductFileDAORule;
+import com.myweb.persistence.productfile.ProductFileDAORule;
 
 @Component
 public class ProductFileSweeper {
 	private static Logger logger = LoggerFactory.getLogger(ProductFileSweeper.class);
-	private final String BASE_PATH = "D:\\_javaweb\\spring\\workspace\\upload\\";
+	private final String BASE_PATH = "C:\\_javaweb\\_spring\\workspace\\upload\\";
 	
 	@Inject
 	private ProductFileDAORule pfdao;
 	
 	// db 확인하고 실제 파일 위치 확인하고 db에 존재하지 않는 파일은 싹다 지움
 	// 초 - 분 - 시 - 일 - 월 - 요일 - 연도(옵션) * = 매/일.월.요일
-	@Scheduled(cron = "45 50 17 * * *")
+	@Scheduled(cron = "59 59 23 * * *")
 	public void fileSweep() throws Exception{
 		logger.info(">>>>> FileSweeper > fileSweep() 시작");
 		logger.info(">>>>> fileSweep() 시작 시간" + LocalDateTime.now());
@@ -37,10 +37,10 @@ public class ProductFileSweeper {
 		
 		List<ProductFileVO> dbFileList = pfdao.selectList(); 
 		for (ProductFileVO fvo : dbFileList) {
-			String file_path = fvo.getSavedir()+"\\"+fvo.getFuuid()+"_";
+			String file_path = fvo.getSavedir()+"\\"+fvo.getPuuid()+"_";
 			String file_name = fvo.getFname();
 			currFiles.add(BASE_PATH+file_path+file_name);
-			currFiles.add(BASE_PATH+file_path+"th_"+file_name);
+			currFiles.add(BASE_PATH+file_path+"_th_"+file_name);
 			
 		}
 		for (String files : currFiles) {
