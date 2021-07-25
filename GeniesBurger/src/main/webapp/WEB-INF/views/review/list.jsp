@@ -30,8 +30,18 @@ img{
 	height: 100px;
 	margin-top: 20px;
 }
+body{
+background-color: #F1EAE5;
+}
 </style>
 <div class="container" style="margin-top: 40px;">
+	<c:choose>
+		<c:when
+			test="${list[0].title eq null || list[0].title eq  '' }">
+			<img src="/resources/icons/no_review_list_logo.png"
+				style="width: 350px; display: block; margin: auto; margin-top: 50px;">
+		</c:when>
+		<c:otherwise>
 	<c:forEach items="${list }" var="rvo">
 		<div class="card shadow radius">
 			<div class="media">
@@ -72,6 +82,8 @@ img{
 			</div>
 		</div>
 	</c:forEach>
+	</c:otherwise>
+	</c:choose>
 <jsp:include page="reviewFooter.jsp"></jsp:include>
 </div>
 
