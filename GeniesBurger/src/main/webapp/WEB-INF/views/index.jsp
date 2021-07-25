@@ -466,6 +466,9 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 			} else {
 				/* 아니오 */
 			}
+		} else {
+			$("#side_modal").modal("hide");
+			$("#beverage_modal").modal("hide");
 		}
 	}
 	
