@@ -35,9 +35,9 @@
    </select>
    <select id="list" resultType="mvo">
       <![CDATA[
- 		select rn, mno, email, name, mobile, address, birthday, point 
+ 		select rn, mno, email, name, mobile, address, birthday 
  		from(select /*INDEX_DESC(tbl_member pk_member)*/
- 			rownum as rn, mno, email, name, mobile, address, birthday, point
+ 			rownum as rn, mno, email, name, mobile, address, birthday
  			from tbl_member where rownum > 0
  		]]>
  			<include refid="search"></include>
