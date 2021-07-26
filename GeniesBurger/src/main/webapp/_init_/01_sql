@@ -261,4 +261,4 @@ constraint pk_extra primary key(aeno)
 create sequence seq_add_extra_aeno
 start with 1
 increment by 1
-nocycle nocache;
+nocycle nocache;                     

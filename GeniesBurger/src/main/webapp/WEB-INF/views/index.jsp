@@ -559,9 +559,10 @@ box-shadow: 5px 6px 3px -7px rgba(0,0,0,0.83);
 		let suggestZoneFooter = $("#suggestZoneFooter");
 		suggestZone.html("");
 		suggestZoneFooter.html("");
+		console.log("사이즈업 카테고리 = "+obj.category);
 		let html = '';
 		console.log("obj 잘 뽑힘? = "+obj.category);
-		 if (obj.category == 3 || obj.category == 5) {
+		 if (obj.category == 3 || obj.category == 6) {
 			html += '<span id="price">700원</span>';
 			html += '<span id="title">만 추가하시면<br>';
 			html += '사이드와 음료를 라지 사이즈로<br>';
