@@ -193,6 +193,7 @@ public class CartController {
 					}
 				}
 				isUp *= aesv.remove(cartno);
+				isUp *= cartsv.remove(cartno);
 			}
 		}
 		if (isUp > 0 && isUp3 > 0) {

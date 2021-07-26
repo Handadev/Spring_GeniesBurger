@@ -230,10 +230,8 @@ $(document).on("click",".checkBtn",function() {
          url : "/cart/" + cartno,
          type : "delete"
       }).done(function(result) {
-         alert("카트 삭제 성공");
          location.reload();
       }).fail(function(err) {
-         alert("카트 삭제 실패");
          location.reload();
       });
    }
@@ -269,10 +267,8 @@ function downqty_cart(downqty, downqty2) {
          downqty_key : downqty2
       }
    }).done(function(result) {
-      alert("수량 감소 성공");
       location.reload();
    }).fail(function(err) {
-      alert("수량 감소 실패");
       location.reload();
    });
 }
@@ -296,10 +292,8 @@ function downqty_cart(downqty, downqty2) {
             upqty_key : upqty2
          }
       }).done(function(result) {
-         alert("수량 증가 성공");
          location.reload();
       }).fail(function(err) {
-         alert("수량 증가 실패");
          location.reload();
       });
    }
