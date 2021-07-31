@@ -60,7 +60,6 @@ public class StockController {
 		return view;
 	}
 	
-	
 	@GetMapping("/stock_regList")
 	public ModelAndView regList(StockReceivingPageVO srpgvo) {
 		ModelAndView view = new ModelAndView();
