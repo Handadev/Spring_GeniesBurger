@@ -174,23 +174,26 @@ public class CartController {
 				}
 				// add_extra에서 사용된 상품을 재고에서 삭제하는 for문
 				List<AddExtraVO> addExtraList = aesv.getAddExtraList(cartvo.get(i));
-				for (int j = 0; j < addExtraList.size(); j++) {
-					int extraPno = psv.getPno(addExtraList.get(j).getTitle());
-					productStockList = pssv.getList(extraPno);
-					for (int t = 0; t < productStockList.size(); t++) {
-						for (int k = 0; k < qty; k++) {
-							String sname = productStockList.get(t).getSname();
-							int sno = ssv.getUpsqSno(sname);
-							isUp3 = ssv.modifyStockQty(sno);
-							int stock_qty = ssv.checkStockQty(sno);
-							if (stock_qty == 0) {
-								ssv.remove(sno);
+				if (addExtraList.size() != 0) {
+					for (int j = 0; j < addExtraList.size(); j++) {
+						int extraPno = psv.getPno(addExtraList.get(j).getTitle());
+						productStockList = pssv.getList(extraPno);
+						for (int t = 0; t < productStockList.size(); t++) {
+							for (int k = 0; k < qty; k++) {
+								String sname = productStockList.get(t).getSname();
+								int sno = ssv.getUpsqSno(sname);
+								isUp3 = ssv.modifyStockQty(sno);
+								int stock_qty = ssv.checkStockQty(sno);
+								if (stock_qty == 0) {
+									ssv.remove(sno);
+								}
 							}
+							isUp3 *= isUp3;
 						}
-						isUp3 *= isUp3;
 					}
 				}
 				isUp *= aesv.remove(cartno);
+				isUp *= cartsv.remove(cartno);
 			}
 		}
 		if (isUp > 0 && isUp3 > 0) {

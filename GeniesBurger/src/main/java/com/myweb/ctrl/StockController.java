@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myweb.domain.StockReceivingPageVO;
 import com.myweb.domain.StockVO;
-import com.myweb.handler.StockOrderPagingHandler;
 import com.myweb.handler.StockReceivingPagingHandler;
 import com.myweb.service.stock.StockServiceRule;
 
@@ -64,7 +62,6 @@ public class StockController {
 	
 	@GetMapping("/stock_regList")
 	public ModelAndView regList(StockReceivingPageVO srpgvo) {
-		logger.info("srpgvo.getStock_regdate()!!!!!!!!!!!!!!!!!!!!!" + srpgvo.getStock_regdate());
 		ModelAndView view = new ModelAndView();
 		view.addObject("dateList", ssv.getRegList(srpgvo));
 		int totalCount = ssv.getTotalRegCount(srpgvo);
